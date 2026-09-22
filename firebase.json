@@ -1,0 +1,96 @@
+{
+  "hosting": {
+    "public": ".",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**",
+      "backup/**",
+      "supabase/**",
+      "bump-version.py",
+      "*.md"
+    ],
+    "cleanUrls": true,
+    "trailingSlash": false,
+    "redirects": [
+      {
+        "source": "/matrimonial",
+        "destination": "/matrimony",
+        "type": 302
+      },
+      {
+        "source": "/matrimonial.html",
+        "destination": "/matrimony",
+        "type": 302
+      },
+      {
+        "source": "/matrimonial-register",
+        "destination": "/matrimony",
+        "type": 302
+      },
+      {
+        "source": "/matrimonial-register.html",
+        "destination": "/matrimony",
+        "type": 302
+      },
+      {
+        "source": "/matrimonial-profile",
+        "destination": "/matrimony",
+        "type": 302
+      },
+      {
+        "source": "/matrimonial-profile.html",
+        "destination": "/matrimony",
+        "type": 302
+      },
+      {
+        "source": "/legal-help",
+        "destination": "/lawyer",
+        "type": 302
+      },
+      {
+        "source": "/legal-help.html",
+        "destination": "/lawyer",
+        "type": 302
+      }
+    ],
+    "headers": [
+      {
+        "source": "**/*.@(html)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-cache, must-revalidate"
+          }
+        ]
+      },
+      {
+        "source": "version.json",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-cache, must-revalidate"
+          }
+        ]
+      },
+      {
+        "source": "**/*.@(js|css)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-cache, must-revalidate"
+          }
+        ]
+      },
+      {
+        "source": "**/*.@(png|jpg|jpeg|gif|svg|webp|ico|woff|woff2|ttf)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=31536000"
+          }
+        ]
+      }
+    ]
+  }
+}

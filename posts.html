@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>পোস্ট — টাঙ্গাইল জেলা</title>
+<meta name="description" content="টাঙ্গাইল জেলার মানুষ যেকোনো ঘটনা লিখে ছবি বা ভিডিওসহ পোস্ট করতে পারেন — লাইক, কমেন্ট ও শেয়ার করার সুবিধাসহ উন্মুক্ত পোস্ট ফিড।">
+<meta property="og:title" content="পোস্ট — টাঙ্গাইল জেলা">
+<meta property="og:description" content="টাঙ্গাইল জেলার মানুষের পোস্ট করা ঘটনা, ছবি ও ভিডিও একসাথে দেখুন।">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0E6B3A">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="css/style.css?v=20260922203957">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+<header class="site-header app-header">
+  <div class="header-inner">
+    <button class="menu-toggle icon-btn" id="menuToggle" data-i18n-aria="menu.open" aria-label="মেনু খুলুন"><i class="fa-solid fa-bars" aria-hidden="true"></i></button>
+    <div class="brand-block">
+      <a href="index.html" class="brand app-brand">টাঙ্গাইল <span class="brand-accent">জেলা</span></a>
+    </div>
+    <div class="header-actions">
+      <a href="notifications.html" class="icon-btn" data-i18n-aria="menu.notifications" aria-label="বিজ্ঞপ্তি"><i class="fa-solid fa-bell" aria-hidden="true"></i></a>
+      <div class="more-menu-wrap">
+        <button type="button" class="icon-btn" id="moreMenuToggle" data-i18n-aria="menu.more" aria-label="আরও"><i class="fa-solid fa-ellipsis-vertical" aria-hidden="true"></i></button>
+        <div class="more-menu" id="moreMenu">
+          <a href="about.html" data-i18n="nav.about">পরিচিতি</a>
+          <div class="more-menu-section-title" data-i18n="menu.language">ভাষা</div>
+          <div class="lang-switcher">
+            <button type="button" class="lang-option" data-lang-choice="bn">বাংলা</button>
+            <button type="button" class="lang-option" data-lang-choice="en">English</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html" data-i18n="nav.home">হোম</a>
+      <a href="about.html" data-i18n="nav.about">পরিচিতি</a>
+      <a href="add-listing.html" data-i18n="nav.addListing">তথ্য যোগ করুন</a>
+      <a href="faq.html" data-i18n="nav.faq">সাধারণ প্রশ্ন</a>
+      <a href="contact.html" data-i18n="nav.contact">যোগাযোগ</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="breadcrumb">
+      <a href="index.html" data-i18n="nav.home">হোম</a><span>/</span><span>পোস্ট</span>
+    </div>
+
+    <div class="post-page-title">
+      <i class="fa-solid fa-comments" aria-hidden="true"></i>
+      <h1>পোস্ট</h1>
+    </div>
+
+    <div class="post-composer-hint" id="composerHint">
+      <div class="post-avatar"><i class="fa-solid fa-pen" aria-hidden="true"></i></div>
+      <div class="post-composer-text">
+        <span class="hint-title">আপনার এলাকায় কিছু ঘটেছে?</span>
+        <span class="hint-text">লিখে ফেলুন, ছবি দিন — সবাই জানুক</span>
+      </div>
+    </div>
+
+    <section class="post-feed" id="postFeed">
+      <p class="post-empty">লোড হচ্ছে…</p>
+    </section>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <h4>টাঙ্গাইল জেলা</h4>
+      <p>টাঙ্গাইল জেলার বাসিন্দা, নতুন আগন্তুক ও ব্যবসায়ীদের জন্য তৈরি একটি স্থানীয় সেবা প্ল্যাটফর্ম।</p>
+    </div>
+    <div>
+      <h4>পেজ</h4>
+      <ul class="footer-links">
+        <li><a href="index.html">হোম</a></li>
+        <li><a href="about.html">পরিচিতি</a></li>
+        <li><a href="add-listing.html">তথ্য যোগ করুন</a></li>
+        <li><a href="faq.html">সাধারণ প্রশ্ন</a></li>
+        <li><a href="contact.html">যোগাযোগ</a></li>
+        <li><a href="sitemap.html">সাইটম্যাপ</a></li>
+        <li><a href="privacy-policy.html">প্রাইভেসি পলিসি</a></li>
+        <li><a href="terms.html">শর্তাবলী</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">© ২০২৬ টাঙ্গাইল জেলা। সর্বস্বত্ব সংরক্ষিত।</div>
+</footer>
+
+
+
+<!-- নতুন পোস্ট করার মোডাল ফর্ম -->
+<div class="modal-overlay" id="postModal">
+  <div class="modal-box icon-modal-box">
+    <h2>নতুন পোস্ট</h2>
+    <form class="contact-form icon-form" id="postForm">
+      <div class="icon-field">
+        <i class="fa-solid fa-user field-icon" aria-hidden="true"></i>
+        <label for="postAuthorName" class="sr-only">আপনার নাম (ঐচ্ছিক)</label>
+        <input type="text" id="postAuthorName" placeholder="আপনার নাম (ঐচ্ছিক) — না দিলে 'অতিথি' দেখাবে">
+      </div>
+      <div class="icon-field">
+        <i class="fa-solid fa-file-lines field-icon" aria-hidden="true"></i>
+        <label for="postContent" class="sr-only">কী ঘটেছে লিখুন</label>
+        <textarea id="postContent" placeholder="আপনার এলাকার ঘটনা, খবর বা অভিজ্ঞতা লিখুন…" required></textarea>
+      </div>
+      <div>
+        <label for="postMedia">ছবি বা ভিডিও যোগ করুন (ঐচ্ছিক)</label>
+        <input type="file" id="postMedia" accept="image/*,video/*">
+        <div class="media-preview-wrap" id="mediaPreviewWrap">
+          <button type="button" class="media-preview-remove" id="mediaPreviewRemove" aria-label="মুছুন">×</button>
+          <img id="mediaPreviewImg" style="display:none" alt="প্রিভিউ">
+          <video id="mediaPreviewVideo" style="display:none" controls></video>
+        </div>
+        <div class="upload-progress-wrap" id="uploadProgressWrap" hidden>
+          <div class="upload-progress-track"><div class="upload-progress-bar" id="uploadProgressBar" style="width:0%"></div></div>
+          <span class="upload-progress-text" id="uploadProgressText">০%</span>
+        </div>
+      </div>
+      <p class="auth-msg" id="postFormMsg"></p>
+      <div class="modal-actions">
+        <button type="button" class="modal-cancel" id="postCancelBtn">বাতিল করুন</button>
+        <button type="submit" class="modal-submit" id="postSubmitBtn">পোস্ট করুন</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- পোস্ট রিপোর্ট করার মোডাল -->
+<div class="modal-overlay" id="reportModal">
+  <div class="modal-box icon-modal-box">
+    <h2>পোস্ট রিপোর্ট করুন</h2>
+    <form class="contact-form icon-form" id="reportForm">
+      <div>
+        <label>কারণ বাছাই করুন</label>
+        <div class="report-reason-options">
+          <label><input type="radio" name="reportReason" value="স্প্যাম" checked> স্প্যাম</label>
+          <label><input type="radio" name="reportReason" value="অশ্লীল বা আপত্তিকর কনটেন্ট"> অশ্লীল বা আপত্তিকর কনটেন্ট</label>
+          <label><input type="radio" name="reportReason" value="মিথ্যা তথ্য"> মিথ্যা তথ্য</label>
+          <label><input type="radio" name="reportReason" value="হয়রানি বা ঘৃণামূলক বক্তব্য"> হয়রানি বা ঘৃণামূলক বক্তব্য</label>
+          <label><input type="radio" name="reportReason" value="অন্যান্য"> অন্যান্য</label>
+        </div>
+      </div>
+      <div class="icon-field">
+        <i class="fa-solid fa-file-lines field-icon" aria-hidden="true"></i>
+        <label for="reportDetail" class="sr-only">বিস্তারিত (ঐচ্ছিক)</label>
+        <textarea id="reportDetail" placeholder="বিস্তারিত (ঐচ্ছিক) — আরও কিছু জানাতে চাইলে লিখুন…"></textarea>
+      </div>
+      <p class="auth-msg" id="reportFormMsg"></p>
+      <div class="modal-actions">
+        <button type="button" class="modal-cancel" id="reportCancelBtn">বাতিল করুন</button>
+        <button type="submit" class="modal-submit" id="reportSubmitBtn">রিপোর্ট পাঠান</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="post-toast" id="postToast"></div>
+
+<div class="media-lightbox" id="mediaLightbox">
+  <button type="button" class="media-lightbox-close" id="mediaLightboxClose" aria-label="বন্ধ করুন"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+  <img id="mediaLightboxImg" src="" alt="পূর্ণ আকারের ছবি">
+</div>
+
+<nav class="bottom-nav">
+  <a href="index.html"><span class="bn-icon"><i class="fa-solid fa-house" aria-hidden="true"></i></span><span data-i18n="bottomnav.home">Home</span></a>
+  <a href="members.html"><span class="bn-icon"><i class="fa-solid fa-users" aria-hidden="true"></i></span><span data-i18n="bottomnav.members">Members</span></a>
+  <a href="posts.html" class="active"><span class="bn-icon"><i class="fa-solid fa-plus" aria-hidden="true"></i></span><span data-i18n="bottomnav.post">Post</span></a>
+  <a href="profile.html"><span class="bn-icon"><i class="fa-solid fa-user" aria-hidden="true"></i></span><span data-i18n="bottomnav.profile">Profile</span></a>
+</nav>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="js/supabase-config.js?v=20260922203957"></script>
+<script src="js/nav-avatar.js?v=20260922203957"></script>
+<script src="js/call.js?v=20260922203957"></script>
+<script src="js/i18n.js?v=20260922203957"></script>
+<script src="js/script.js?v=20260922203957"></script>
+<script>
+(function () {
+  var client = window.supabase.createClient(window.TANGAIL_SUPABASE.url, window.TANGAIL_SUPABASE.key);
+  var feedEl = document.getElementById('postFeed');
+  var toastEl = document.getElementById('postToast');
+
+  // ---------- ডিভাইস আইডি (লগইন ছাড়াই লাইক ট্র্যাক করার জন্য, একই ব্রাউজারে সংরক্ষিত থাকবে) ----------
+  function getDeviceId() {
+    var key = 'tangail_device_id';
+    var id = localStorage.getItem(key);
+    if (!id) {
+      id = 'dev-' + Date.now() + '-' + Math.random().toString(36).slice(2, 12);
+      localStorage.setItem(key, id);
+    }
+    return id;
+  }
+  var deviceId = getDeviceId();
+
+  function likedPostIds() {
+    try { return JSON.parse(localStorage.getItem('tangail_liked_posts') || '[]'); }
+    catch (e) { return []; }
+  }
+  function setLikedPostIds(arr) {
+    localStorage.setItem('tangail_liked_posts', JSON.stringify(arr));
+  }
+
+  function showToast(text) {
+    toastEl.textContent = text;
+    toastEl.classList.add('show');
+    setTimeout(function () { toastEl.classList.remove('show'); }, 1800);
+  }
+
+  // ---------- ছবি ট্যাপ করলে পূর্ণ আকারে দেখার লাইটবক্স ----------
+  var lightboxEl = document.getElementById('mediaLightbox');
+  var lightboxImgEl = document.getElementById('mediaLightboxImg');
+  var lightboxCloseBtn = document.getElementById('mediaLightboxClose');
+
+  function openLightbox(fullSrc) {
+    if (!fullSrc) return;
+    lightboxImgEl.src = fullSrc;
+    lightboxEl.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    lightboxEl.classList.remove('open');
+    lightboxImgEl.src = '';
+    document.body.style.overflow = '';
+  }
+  lightboxCloseBtn.addEventListener('click', closeLightbox);
+  lightboxEl.addEventListener('click', function (e) {
+    if (e.target === lightboxEl) closeLightbox();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeLightbox();
+  });
+
+  function escapeHtml(str) {
+    return String(str || '').replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  function timeAgo(iso) {
+    var then = new Date(iso).getTime();
+    var now = Date.now();
+    var diff = Math.max(0, Math.floor((now - then) / 1000));
+    if (diff < 60) return 'এইমাত্র';
+    if (diff < 3600) return Math.floor(diff / 60) + ' মিনিট আগে';
+    if (diff < 86400) return Math.floor(diff / 3600) + ' ঘণ্টা আগে';
+    if (diff < 2592000) return Math.floor(diff / 86400) + ' দিন আগে';
+    var d = new Date(iso);
+    return d.getDate() + '/' + (d.getMonth() + 1) + '/' + d.getFullYear();
+  }
+
+  function reportedPostIds() {
+    try { return JSON.parse(localStorage.getItem('tangail_reported_posts') || '[]'); }
+    catch (e) { return []; }
+  }
+  function setReportedPostIds(arr) {
+    localStorage.setItem('tangail_reported_posts', JSON.stringify(arr));
+  }
+
+  // ---------- লগইন করা ইউজারের সেশন (কমেন্টে প্রোফাইল ছবি দেখানোর জন্য) ----------
+  var currentUser = null;
+  client.auth.getSession().then(function (res) {
+    currentUser = res.data && res.data.session && res.data.session.user;
+  });
+  client.auth.onAuthStateChange(function (event, session) {
+    currentUser = session && session.user;
+  });
+
+  var allPosts = [];
+  var likedSet = {};
+  likedPostIds().forEach(function (id) { likedSet[id] = true; });
+  var reportedSet = {};
+  reportedPostIds().forEach(function (id) { reportedSet[id] = true; });
+
+  function mediaHtml(post) {
+    if (!post.media_url) return '';
+    if (post.media_type === 'video') {
+      return '<div class="post-media"><video src="' + escapeHtml(post.media_url) + '" controls playsinline preload="metadata"></video></div>';
+    }
+    return '<div class="post-media"><div class="post-media-img-wrap" data-full-src="' + escapeHtml(post.media_url) + '">' +
+      '<img src="' + escapeHtml(post.media_url) + '" loading="lazy" alt="পোস্টের ছবি"></div></div>';
+  }
+
+  function postAvatarHtml(post) {
+    if (post.avatar_url) {
+      return '<img class="post-avatar post-avatar-img" src="' + escapeHtml(post.avatar_url) + '" alt="" loading="lazy">';
+    }
+    var initial = (post.author_name || 'অ').trim().charAt(0).toUpperCase();
+    return '<div class="post-avatar">' + escapeHtml(initial) + '</div>';
+  }
+
+  function postCardHtml(post) {
+    var liked = !!likedSet[post.id];
+    var reported = !!reportedSet[post.id];
+    return '' +
+      '<article class="post-card" data-post-id="' + post.id + '">' +
+        mediaHtml(post) +
+        '<div class="post-card-body">' +
+          '<div class="post-card-head">' +
+            postAvatarHtml(post) +
+            '<div class="post-headtext">' +
+              '<div class="post-author">' + escapeHtml(post.author_name || 'অতিথি') + '</div>' +
+              '<div class="post-time">' + timeAgo(post.created_at) + '</div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="post-content">' + escapeHtml(post.content) + '</div>' +
+          ((post.content || '').length > 120 ? '<div class="post-readmore">বিস্তারিত দেখুন</div>' : '') +
+        '</div>' +
+        '<div class="post-counts">' +
+          '<span class="like-count-text"><i class="fa-solid fa-thumbs-up" aria-hidden="true"></i> ' + (post.like_count || 0) + '</span>' +
+          '<span><span class="comment-count-text">' + (post.comment_count || 0) + '</span> কমেন্ট · <span class="share-count-text">' + (post.share_count || 0) + '</span> শেয়ার</span>' +
+        '</div>' +
+        '<div class="post-actions">' +
+          '<button type="button" class="like-btn' + (liked ? ' liked' : '') + '"><i class="fa-' + (liked ? 'solid' : 'regular') + ' fa-thumbs-up" aria-hidden="true"></i> লাইক</button>' +
+          '<button type="button" class="comment-toggle-btn"><i class="fa-regular fa-comment" aria-hidden="true"></i> কমেন্ট</button>' +
+          '<button type="button" class="share-btn"><i class="fa-solid fa-share" aria-hidden="true"></i> শেয়ার</button>' +
+          '<button type="button" class="report-btn' + (reported ? ' reported' : '') + '"' + (reported ? ' disabled' : '') + '><i class="fa-regular fa-flag" aria-hidden="true"></i> ' + (reported ? 'রিপোর্ট করা হয়েছে' : 'রিপোর্ট') + '</button>' +
+        '</div>' +
+      '</article>';
+  }
+
+  function renderFeed(posts) {
+    if (!posts.length) {
+      feedEl.innerHTML = '<div class="post-empty"><div class="post-empty-icon"><i class="fa-solid fa-comments" aria-hidden="true"></i></div>এখনো কোনো পোস্ট নেই।<br>উপরের বক্সে ট্যাপ করে প্রথম পোস্টটি করুন।</div>';
+      return;
+    }
+    feedEl.innerHTML = posts.map(postCardHtml).join('');
+  }
+
+  function loadPosts() {
+    feedEl.innerHTML = '<p class="post-empty">লোড হচ্ছে…</p>';
+    client.from('posts').select('*').eq('status', 'approved').order('created_at', { ascending: false })
+      .then(function (res) {
+        if (res.error) {
+          feedEl.innerHTML = '<p class="post-empty">পোস্ট লোড করতে সমস্যা হয়েছে। একটু পর আবার চেষ্টা করুন।</p>';
+          return;
+        }
+        allPosts = res.data || [];
+        renderFeed(allPosts);
+        scrollToSharedPost();
+      });
+  }
+
+  // ---------- শেয়ার করা লিংকে (#post-<id>) সরাসরি ঢুকলে সেই পোস্টে স্ক্রল করে হাইলাইট করা ----------
+  function scrollToSharedPost() {
+    var hash = window.location.hash || '';
+    if (hash.indexOf('#post-') !== 0) return;
+    var postId = hash.slice(6);
+    var card = feedEl.querySelector('[data-post-id="' + postId + '"]');
+    if (!card) return;
+    setTimeout(function () {
+      card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      card.classList.add('highlight');
+      setTimeout(function () { card.classList.remove('highlight'); }, 2600);
+    }, 150);
+  }
+
+  window.addEventListener('hashchange', scrollToSharedPost);
+
+  loadPosts();
+
+  // ---------- ফিডে ক্লিক ইভেন্ট (লাইক / পূর্ণ পোস্ট ভিউতে যাওয়া / শেয়ার / রিপোর্ট) — ইভেন্ট ডেলিগেশন ----------
+  feedEl.addEventListener('click', function (e) {
+    var mediaWrap = e.target.closest('.post-media-img-wrap');
+    if (mediaWrap) { openLightbox(mediaWrap.getAttribute('data-full-src')); return; }
+
+    var card = e.target.closest('.post-card');
+    if (!card) return;
+    var postId = card.getAttribute('data-post-id');
+
+    // ---------- "বিস্তারিত দেখুন" / "সংক্ষিপ্ত করুন" — এই পোস্টের ভেতরেই টেক্সট বড়/ছোট হবে, আলাদা পেজে যাবে না ----------
+    var readmoreBtn = e.target.closest('.post-readmore');
+    if (readmoreBtn) {
+      var contentEl = card.querySelector('.post-content');
+      var isExpanded = contentEl.classList.toggle('expanded');
+      readmoreBtn.textContent = isExpanded ? 'সংক্ষিপ্ত করুন' : 'বিস্তারিত দেখুন';
+      return;
+    }
+
+    var likeBtn = e.target.closest('.like-btn');
+    if (likeBtn) { handleLike(postId, card, likeBtn); return; }
+
+    var shareBtn = e.target.closest('.share-btn');
+    if (shareBtn) { handleShare(postId, card); return; }
+
+    var reportBtn = e.target.closest('.report-btn');
+    if (reportBtn && !reportBtn.disabled) { openReportModal(postId); return; }
+
+    // অন্য যেকোনো জায়গায় ট্যাপ করলে (হেড, লেখা, কাউন্ট, কমেন্ট বাটন সহ) — পূর্ণ পোস্ট ভিউ পেজে চলে যাবে
+    window.location.href = 'post-view.html?id=' + postId;
+  });
+
+  function handleLike(postId, card, btn) {
+    var alreadyLiked = !!likedSet[postId];
+    btn.disabled = true;
+    if (alreadyLiked) {
+      client.rpc('unlike_post', { p_post_id: postId, p_device_id: deviceId }).then(function (res) {
+        btn.disabled = false;
+        if (res.error) return;
+        delete likedSet[postId];
+        setLikedPostIds(Object.keys(likedSet));
+        btn.classList.remove('liked');
+        var btnIcon = btn.querySelector('i');
+        btnIcon.classList.remove('fa-solid');
+        btnIcon.classList.add('fa-regular');
+        var countEl = card.querySelector('.like-count-text');
+        var n = Math.max(0, parseInt(countEl.textContent.replace(/\D/g, ''), 10) - 1);
+        countEl.innerHTML = '<i class="fa-solid fa-thumbs-up" aria-hidden="true"></i> ' + n;
+      });
+    } else {
+      client.from('post_likes').insert({ post_id: postId, device_id: deviceId }).then(function (res) {
+        btn.disabled = false;
+        if (res.error) return;
+        likedSet[postId] = true;
+        setLikedPostIds(Object.keys(likedSet));
+        btn.classList.add('liked');
+        var btnIcon = btn.querySelector('i');
+        btnIcon.classList.remove('fa-regular');
+        btnIcon.classList.add('fa-solid');
+        var countEl = card.querySelector('.like-count-text');
+        var n = parseInt(countEl.textContent.replace(/\D/g, ''), 10) + 1;
+        countEl.innerHTML = '<i class="fa-solid fa-thumbs-up" aria-hidden="true"></i> ' + n;
+      });
+    }
+  }
+
+  function handleShare(postId, card) {
+    var url = window.location.origin + '/post-view.html?id=' + postId;
+    var text = card.querySelector('.post-content').textContent.slice(0, 100);
+    var doCount = function () {
+      client.from('posts').select('share_count').eq('id', postId).single().then(function (res) {
+        var current = (res.data && res.data.share_count) || 0;
+        client.from('posts').update({ share_count: current + 1 }).eq('id', postId).then(function () {
+          var countEl = card.querySelector('.share-count-text');
+          countEl.textContent = parseInt(countEl.textContent, 10) + 1;
+        });
+      });
+    };
+    if (navigator.share) {
+      navigator.share({ title: 'টাঙ্গাইল জেলা পোস্ট', text: text, url: url }).then(doCount).catch(function () {});
+    } else if (navigator.clipboard) {
+      navigator.clipboard.writeText(url).then(function () {
+        showToast('লিংক কপি হয়েছে!');
+        doCount();
+      });
+    } else {
+      showToast(url);
+    }
+  }
+
+  // ---------- পোস্ট রিপোর্ট করার মোডাল ----------
+  var reportModal = document.getElementById('reportModal');
+  var reportForm = document.getElementById('reportForm');
+  var reportMsg = document.getElementById('reportFormMsg');
+  var reportSubmitBtn = document.getElementById('reportSubmitBtn');
+  var reportDetailInput = document.getElementById('reportDetail');
+  var reportCancelBtn = document.getElementById('reportCancelBtn');
+  var currentReportPostId = null;
+
+  function setReportMsg(text, ok) {
+    reportMsg.textContent = text || '';
+    reportMsg.className = 'auth-msg' + (ok ? ' ok' : '');
+  }
+
+  function openReportModal(postId) {
+    currentReportPostId = postId;
+    reportForm.reset();
+    setReportMsg('');
+    reportModal.classList.add('open');
+  }
+  function closeReportModal() {
+    reportModal.classList.remove('open');
+    currentReportPostId = null;
+  }
+
+  reportCancelBtn.addEventListener('click', closeReportModal);
+  reportModal.addEventListener('click', function (e) { if (e.target === reportModal) closeReportModal(); });
+
+  reportForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (!currentReportPostId) return;
+    var postId = currentReportPostId;
+    var reasonInput = reportForm.querySelector('input[name="reportReason"]:checked');
+    var reason = reasonInput ? reasonInput.value : 'অন্যান্য';
+    var detail = reportDetailInput.value.trim();
+    if (detail) reason = reason + ' — ' + detail;
+
+    reportSubmitBtn.disabled = true;
+    setReportMsg('পাঠানো হচ্ছে…', true);
+    client.from('post_reports').insert({ post_id: postId, reason: reason, device_id: deviceId }).then(function (res) {
+      reportSubmitBtn.disabled = false;
+      if (res.error) { setReportMsg('রিপোর্ট পাঠাতে সমস্যা হয়েছে, একটু পর আবার চেষ্টা করুন।'); return; }
+      reportedSet[postId] = true;
+      setReportedPostIds(Object.keys(reportedSet));
+      var card = feedEl.querySelector('[data-post-id="' + postId + '"]');
+      if (card) {
+        var btn = card.querySelector('.report-btn');
+        if (btn) {
+          btn.disabled = true;
+          btn.classList.add('reported');
+          btn.innerHTML = '<i class="fa-regular fa-flag" aria-hidden="true"></i> রিপোর্ট করা হয়েছে';
+        }
+      }
+      closeReportModal();
+      showToast('রিপোর্ট জমা হয়েছে, ধন্যবাদ।');
+    });
+  });
+
+  // ---------- নতুন পোস্ট করার মোডাল ----------
+  var composerHint = document.getElementById('composerHint');
+  var modal = document.getElementById('postModal');
+  var form = document.getElementById('postForm');
+  var msg = document.getElementById('postFormMsg');
+  var submitBtn = document.getElementById('postSubmitBtn');
+  var mediaInput = document.getElementById('postMedia');
+  var mediaPreviewWrap = document.getElementById('mediaPreviewWrap');
+  var mediaPreviewImg = document.getElementById('mediaPreviewImg');
+  var mediaPreviewVideo = document.getElementById('mediaPreviewVideo');
+  var mediaPreviewRemove = document.getElementById('mediaPreviewRemove');
+  var uploadProgressWrap = document.getElementById('uploadProgressWrap');
+  var uploadProgressBar = document.getElementById('uploadProgressBar');
+  var uploadProgressText = document.getElementById('uploadProgressText');
+
+  function showProgress(pct) {
+    uploadProgressWrap.hidden = false;
+    uploadProgressBar.style.width = pct + '%';
+    uploadProgressText.textContent = pct + '%';
+  }
+  function hideProgress() {
+    uploadProgressWrap.hidden = true;
+    uploadProgressBar.style.width = '0%';
+    uploadProgressText.textContent = '০%';
+  }
+
+  function setMsg(text, ok) {
+    msg.textContent = text || '';
+    msg.className = 'auth-msg' + (ok ? ' ok' : '');
+  }
+
+  function openModal() { setMsg(''); modal.classList.add('open'); }
+  function closeModal() { modal.classList.remove('open'); }
+
+  composerHint.addEventListener('click', openModal);
+  document.getElementById('postCancelBtn').addEventListener('click', closeModal);
+  modal.addEventListener('click', function (e) { if (e.target === modal) closeModal(); });
+
+  function resetMediaPreview() {
+    mediaInput.value = '';
+    mediaPreviewWrap.style.display = 'none';
+    mediaPreviewImg.style.display = 'none';
+    mediaPreviewImg.src = '';
+    mediaPreviewVideo.style.display = 'none';
+    mediaPreviewVideo.src = '';
+    hideProgress();
+  }
+
+  var MAX_VIDEO_SECONDS = 30;
+  var MAX_IMAGE_BYTES = 15 * 1024 * 1024; // আপলোড-পূর্ব সেফটি-ক্যাপ — আপলোডের আগে অটো-কমপ্রেস হয়ে অনেক ছোট হয়ে যায়
+  var MAX_VIDEO_BYTES = 8 * 1024 * 1024;  // কোনো কমপ্রেশন নেই — এটাই আসল স্টোরেজ/ব্যান্ডউইথ সাইজ
+
+  // ---------- ভিডিওর দৈর্ঘ্য (সেকেন্ড) যাচাই করা ----------
+  function getVideoDuration(file) {
+    return new Promise(function (resolve, reject) {
+      var objectUrl = URL.createObjectURL(file);
+      var probe = document.createElement('video');
+      probe.preload = 'metadata';
+      probe.onloadedmetadata = function () {
+        var dur = probe.duration;
+        URL.revokeObjectURL(objectUrl);
+        if (!isFinite(dur) || isNaN(dur)) { reject(new Error('দৈর্ঘ্য যাচাই করা যায়নি')); return; }
+        resolve(dur);
+      };
+      probe.onerror = function () {
+        URL.revokeObjectURL(objectUrl);
+        reject(new Error('ভিডিও ফাইলটি পড়া যায়নি'));
+      };
+      probe.src = objectUrl;
+    });
+  }
+
+  function showMediaPreview(file, url) {
+    var isImage = file.type.startsWith('image/');
+    if (isImage) {
+      mediaPreviewImg.src = url;
+      mediaPreviewImg.style.display = 'block';
+      mediaPreviewVideo.style.display = 'none';
+    } else {
+      mediaPreviewVideo.src = url;
+      mediaPreviewVideo.style.display = 'block';
+      mediaPreviewImg.style.display = 'none';
+    }
+    mediaPreviewWrap.style.display = 'block';
+  }
+
+  mediaInput.addEventListener('change', function () {
+    var file = mediaInput.files && mediaInput.files[0];
+    if (!file) { resetMediaPreview(); return; }
+    var isImage = file.type.startsWith('image/');
+    var isVideo = file.type.startsWith('video/');
+    if (!isImage && !isVideo) {
+      setMsg('শুধুমাত্র ছবি অথবা ভিডিও ফাইল যোগ করা যাবে।');
+      resetMediaPreview();
+      return;
+    }
+    if (isImage && file.size > MAX_IMAGE_BYTES) {
+      setMsg('ছবির সাইজ ১৫ এমবি-র বেশি হওয়া যাবে না।');
+      resetMediaPreview();
+      return;
+    }
+    if (isVideo && file.size > MAX_VIDEO_BYTES) {
+      setMsg('ভিডিওর সাইজ ৮ এমবি-র বেশি হওয়া যাবে না।');
+      resetMediaPreview();
+      return;
+    }
+    setMsg('');
+    var url = URL.createObjectURL(file);
+
+    if (isVideo) {
+      setMsg('ভিডিওর দৈর্ঘ্য যাচাই করা হচ্ছে…', true);
+      getVideoDuration(file).then(function (dur) {
+        if (dur > MAX_VIDEO_SECONDS) {
+          setMsg('ভিডিও সর্বোচ্চ ' + MAX_VIDEO_SECONDS + ' সেকেন্ডের হতে পারবে। এই ভিডিওটি ' + Math.round(dur) + ' সেকেন্ডের।');
+          resetMediaPreview();
+          return;
+        }
+        setMsg('');
+        showMediaPreview(file, url);
+      }).catch(function (err) {
+        setMsg((err && err.message) || 'ভিডিও যাচাই করতে সমস্যা হয়েছে।');
+        resetMediaPreview();
+      });
+      return;
+    }
+
+    showMediaPreview(file, url);
+  });
+
+  mediaPreviewRemove.addEventListener('click', resetMediaPreview);
+
+  // ---------- বড় ছবি ছোট করে কম্প্রেস করা (ভিডিও ও অ্যানিমেটেড GIF অপরিবর্তিত থাকে) ----------
+  function compressImageFile(file) {
+    return new Promise(function (resolve) {
+      if (!file.type.startsWith('image/') || file.type === 'image/gif') { resolve(file); return; }
+      var objectUrl = URL.createObjectURL(file);
+      var img = new Image();
+      img.onload = function () {
+        URL.revokeObjectURL(objectUrl);
+        var maxDim = 1600;
+        var w = img.width, h = img.height;
+        // ইতিমধ্যে ছোট ও হালকা ছবি হলে কম্প্রেস করার দরকার নেই
+        if (w <= maxDim && h <= maxDim && file.size <= 700 * 1024) { resolve(file); return; }
+        var scale = Math.min(1, maxDim / Math.max(w, h));
+        var canvas = document.createElement('canvas');
+        canvas.width = Math.max(1, Math.round(w * scale));
+        canvas.height = Math.max(1, Math.round(h * scale));
+        var ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        canvas.toBlob(function (blob) {
+          if (!blob) { resolve(file); return; }
+          var newName = file.name.replace(/\.\w+$/, '') + '.jpg';
+          var compressed = new File([blob], newName, { type: 'image/jpeg' });
+          resolve(compressed.size < file.size ? compressed : file);
+        }, 'image/jpeg', 0.82);
+      };
+      img.onerror = function () { URL.revokeObjectURL(objectUrl); resolve(file); };
+      img.src = objectUrl;
+    });
+  }
+
+  // ---------- Supabase Storage-এ সরাসরি XHR দিয়ে আপলোড (প্রোগ্রেস % ট্র্যাক করার জন্য) ----------
+  function uploadPostMedia(file, onProgress) {
+    var safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
+    var path = Date.now() + '-' + safeName;
+    var mediaType = file.type.startsWith('video/') ? 'video' : 'image';
+    return new Promise(function (resolve, reject) {
+      var xhr = new XMLHttpRequest();
+      var endpoint = window.TANGAIL_SUPABASE.url + '/storage/v1/object/post-media/' + path;
+      xhr.open('POST', endpoint, true);
+      xhr.setRequestHeader('apikey', window.TANGAIL_SUPABASE.key);
+      xhr.setRequestHeader('Authorization', 'Bearer ' + window.TANGAIL_SUPABASE.key);
+      xhr.setRequestHeader('Content-Type', file.type || 'application/octet-stream');
+      xhr.setRequestHeader('x-upsert', 'false');
+      if (xhr.upload && onProgress) {
+        xhr.upload.onprogress = function (e) {
+          if (e.lengthComputable) onProgress(Math.round((e.loaded / e.total) * 100));
+        };
+      }
+      xhr.onload = function () {
+        if (xhr.status >= 200 && xhr.status < 300) {
+          onProgress && onProgress(100);
+          resolve({ url: client.storage.from('post-media').getPublicUrl(path).data.publicUrl, type: mediaType });
+        } else {
+          reject(new Error('আপলোড ব্যর্থ (' + xhr.status + ')'));
+        }
+      };
+      xhr.onerror = function () { reject(new Error('নেটওয়ার্ক সমস্যা হয়েছে')); };
+      xhr.send(file);
+    });
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var authorName = document.getElementById('postAuthorName').value.trim();
+    var content = document.getElementById('postContent').value.trim();
+    var mediaFile = mediaInput.files && mediaInput.files[0];
+
+    if (!content) { setMsg('কী ঘটেছে তা লিখুন।'); return; }
+
+    var isVideoFile = mediaFile && mediaFile.type.startsWith('video/');
+    var durationCheck = isVideoFile ? getVideoDuration(mediaFile) : Promise.resolve(null);
+
+    submitBtn.disabled = true;
+    durationCheck.then(function (dur) {
+      if (dur !== null && dur > MAX_VIDEO_SECONDS) {
+        submitBtn.disabled = false;
+        setMsg('ভিডিও সর্বোচ্চ ' + MAX_VIDEO_SECONDS + ' সেকেন্ডের হতে পারবে। এই ভিডিওটি ' + Math.round(dur) + ' সেকেন্ডের।');
+        return Promise.reject(new Error('__handled__'));
+      }
+    }).catch(function (err) {
+      if (err && err.message === '__handled__') { return Promise.reject(err); }
+      submitBtn.disabled = false;
+      setMsg((err && err.message) || 'ভিডিও যাচাই করতে সমস্যা হয়েছে।');
+      return Promise.reject(new Error('__handled__'));
+    }).then(function () {
+    var mediaPromise;
+    if (mediaFile) {
+      setMsg('ফাইল প্রস্তুত করা হচ্ছে…', true);
+      showProgress(0);
+      mediaPromise = compressImageFile(mediaFile).then(function (processedFile) {
+        return uploadPostMedia(processedFile, function (pct) {
+          setMsg('ফাইল আপলোড হচ্ছে… ' + pct + '%', true);
+          showProgress(pct);
+        });
+      });
+    } else {
+      mediaPromise = Promise.resolve(null);
+    }
+
+    var isPendingSubmit = false;
+    mediaPromise.then(function (media) {
+      hideProgress();
+      setMsg('পোস্ট করা হচ্ছে…', true);
+      isPendingSubmit = !!(media && media.type === 'video');
+      var meta = currentUser && currentUser.user_metadata;
+      return client.from('posts').insert({
+        user_id: currentUser ? currentUser.id : null,
+        author_name: authorName || (meta && meta.full_name) || 'অতিথি',
+        avatar_url: (meta && meta.avatar_url) || null,
+        content: content,
+        media_url: media ? media.url : null,
+        media_type: media ? media.type : null,
+        status: isPendingSubmit ? 'pending' : 'approved'
+      }).select();
+    }).then(function (res) {
+      submitBtn.disabled = false;
+      if (res.error) {
+        console.error('posts insert error:', res.error);
+        var detail = res.error.message || res.error.code || '';
+        setMsg('পোস্ট করতে সমস্যা হয়েছে, একটু পর আবার চেষ্টা করুন।' + (detail ? ' (' + detail + ')' : ''));
+        return;
+      }
+      // দ্রষ্টব্য: 'pending' পোস্ট RLS অনুযায়ী তৎক্ষণাৎ ফিরতি ডেটায় নাও আসতে পারে (শুধু 'approved' পোস্ট পাবলিকলি পড়া যায়) — তাই status আগে থেকেই ট্র্যাক করা হচ্ছে
+      var added = res.data && res.data[0];
+      if (isPendingSubmit) {
+        setMsg('আপনার ভিডিওসহ পোস্ট জমা হয়েছে — এডমিনের অনুমোদনের পর ফিডে প্রকাশিত হবে।', true);
+      } else {
+        setMsg('আপনার পোস্ট প্রকাশিত হয়েছে!', true);
+        if (added) {
+          allPosts.unshift(added);
+          renderFeed(allPosts);
+        }
+      }
+      form.reset();
+      resetMediaPreview();
+      setTimeout(closeModal, 1400);
+    }).catch(function (err) {
+      submitBtn.disabled = false;
+      hideProgress();
+      setMsg((err && err.message) || 'আপলোড করতে সমস্যা হয়েছে, একটু পর আবার চেষ্টা করুন।');
+    });
+    }).catch(function (err) {
+      // ভিডিও দৈর্ঘ্য যাচাইয়ে ব্যর্থ হলে এখানে চুপচাপ থেমে যাওয়া — মেসেজ ইতিমধ্যে দেখানো হয়ে গেছে
+      if (!err || err.message !== '__handled__') { console.error(err); }
+    });
+  });
+})();
+</script>
+<script src="js/auto-update.js?v=20260922203957"></script>
+<script src="js/floating-buttons.js?v=20260922203957"></script>
+</body>
+</html>

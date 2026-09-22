@@ -1,0 +1,35 @@
+[
+  {
+    "id": "b1",
+    "enabled": true,
+    "badge": "বিশেষ বিজ্ঞপ্তি",
+    "title": "টাঙ্গাইল জেলা অ্যাপ",
+    "subtitle": "আপনার সকল স্থানীয় সেবা, এক জায়গায় — ডাক্তার, রক্তদাতা, পরিবহন ও আরও অনেক কিছু।",
+    "buttonText": "জরুরি ৯৯৯",
+    "buttonLink": "tel:999",
+    "image": "",
+    "bg": "maroon"
+  },
+  {
+    "id": "b2",
+    "enabled": true,
+    "badge": "",
+    "title": "তথ্য যোগ করুন",
+    "subtitle": "আপনার ব্যবসা, সেবা বা প্রতিষ্ঠানের তথ্য যুক্ত করে টাঙ্গাইলবাসীকে সাহায্য করুন।",
+    "buttonText": "তথ্য যোগ করুন",
+    "buttonLink": "add-listing.html",
+    "image": "",
+    "bg": "gold"
+  },
+  {
+    "id": "b3",
+    "enabled": true,
+    "badge": "",
+    "title": "টাঙ্গাইল শাড়ি ও তাঁতপণ্য",
+    "subtitle": "বিখ্যাত টাঙ্গাইল তাঁতের গ্যালারি ও কারিগরদের তালিকা দেখুন।",
+    "buttonText": "দেখুন",
+    "buttonLink": "handloom.html",
+    "image": "",
+    "bg": "indigo"
+  }
+]

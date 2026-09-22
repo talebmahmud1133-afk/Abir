@@ -1,0 +1,337 @@
+/* =========================================================
+   কেনাবেচা (Buy & Sell) মডিউল — ডেডিকেটেড স্টাইলশিট
+   এই ফাইলের স্টাইল শুধুমাত্র buy-sell.html, market-item.html
+   ও market-post.html পেজে প্রযোজ্য। অন্য কোনো পেজে এটি লিংক
+   করা নেই, তাই সাইটের বাকি অংশ প্রভাবিত হয় না।
+   ========================================================= */
+
+/* ---------- পোস্ট করুন (সাবমিট) বাটন: বাম পাশের ফ্লোটিং বাটন ও নিচের
+   ন্যাভিগেশন বারের আড়ালে চলে যাচ্ছিল বলে ডান পাশে সরিয়ে ও উপরে তুলে দেওয়া হলো ---------- */
+#mpSubmitBtn{
+  justify-self: end;
+  margin-bottom: 130px;
+}
+
+/* ---------- টপবার: ব্যাক বাটন + টাইটেল + পোস্ট করুন বাটন ---------- */
+.bs-topbar{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 14px 0 12px;
+}
+.bs-topbar-left{ display: flex; align-items: center; gap: 12px; }
+.bs-topbar-left span{
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--ink);
+  font-family: 'Tiro Bangla', serif;
+}
+.bs-post-btn{
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--maroon);
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: var(--shadow-sm);
+  transition: background .15s, box-shadow .15s;
+}
+.bs-post-btn:hover{ background: var(--maroon-dark); box-shadow: var(--shadow-md); }
+.bs-post-btn i{ font-size: 0.78rem; }
+
+/* ---------- ক্যাটাগরি বার: হরাইজন্টাল স্ক্রল চিপ ---------- */
+.bs-cat-bar{
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 4px 2px 16px;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.bs-cat-bar::-webkit-scrollbar{ display: none; }
+.bs-cat-chip{
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  min-width: 74px;
+  padding: 10px 12px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  color: var(--ink);
+  font-size: 0.74rem;
+  font-weight: 600;
+  transition: background .15s, color .15s, border-color .15s, transform .1s;
+}
+.bs-cat-chip:active{ transform: scale(0.97); }
+.bs-cat-chip .bs-cat-icon{
+  width: 30px; height: 30px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.05rem;
+  color: var(--maroon);
+}
+.bs-cat-chip.active{
+  background: var(--maroon);
+  border-color: var(--maroon);
+  color: #fff;
+}
+.bs-cat-chip.active .bs-cat-icon{ color: #fff; }
+
+/* ---------- প্রোডাক্ট গ্রিড ---------- */
+/* .wrap-এর ২৪px পাশের প্যাডিং যাতে গ্যাপ তৈরি না করে — style.css-এর .ts-list/.cat-grid-এর
+   মতো একই 100vw + left:50% + translateX(-50%) ফুল-ব্লিড কৌশল, একই 10px পাশের প্যাডিং */
+.bs-grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  padding: 12px 10px 30px;
+  width: 100vw;
+  max-width: 100vw;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  box-sizing: border-box;
+  background: var(--cream-deep);
+}
+@media (min-width: 640px){ .bs-grid{ grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 960px){ .bs-grid{ grid-template-columns: repeat(4, 1fr); gap: 16px; } }
+
+.bs-card{
+  background: #fff;
+  border: 1px solid rgba(34,48,58,0.14);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(20,50,45,0.07), var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow .15s, transform .15s;
+}
+.bs-card:hover{ box-shadow: var(--shadow-md); transform: translateY(-2px); }
+
+.bs-card-img-wrap{
+  aspect-ratio: 1 / 1;
+  background: var(--cream);
+  overflow: hidden;
+  position: relative;
+  display: block;
+  text-decoration: none;
+}
+.bs-card-img-wrap img{ width: 100%; height: 100%; object-fit: cover; display: block; }
+.bs-card-img-wrap .bs-no-img{
+  display: flex; align-items: center; justify-content: center;
+  height: 100%; color: var(--ink-soft); font-size: 2rem;
+}
+
+.bs-card-body{
+  padding: 10px 10px 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  text-decoration: none;
+  color: inherit;
+}
+.bs-card-title{
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 2.3em;
+}
+.bs-card-price{ font-size: 0.98rem; font-weight: 700; color: var(--maroon-dark); }
+.bs-card-meta{
+  font-size: 0.7rem;
+  color: var(--ink-soft);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.bs-card-meta i{ font-size: 0.68rem; width: 12px; }
+
+.bs-card-actions{ display: flex; gap: 6px; padding: 8px 10px 10px; margin-top: auto; }
+.bs-card-actions a{
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 7px 4px;
+  border-radius: 8px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+.bs-call-btn{ background: var(--maroon); color: #fff; }
+.bs-call-btn:hover{ background: var(--maroon-dark); }
+.bs-wa-btn{ background: #0E6B3A; color: #fff; }
+.bs-wa-btn:hover{ background: #084F2A; }
+
+/* ---------- লোডিং / এম্পটি স্টেট ---------- */
+.bs-state-msg{
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 50px 16px;
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+}
+.bs-state-msg i{ font-size: 2rem; display: block; margin-bottom: 10px; color: var(--line); }
+
+.bs-loadmore-wrap{ text-align: center; padding: 6px 0 24px; }
+.bs-loadmore-btn{
+  background: #fff;
+  border: 1px solid var(--maroon);
+  color: var(--maroon);
+  border-radius: 999px;
+  padding: 10px 22px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.bs-loadmore-btn:hover{ background: var(--maroon); color: #fff; }
+.bs-loadmore-btn:disabled{ opacity: 0.6; cursor: not-allowed; }
+
+/* ---------- স্কেলিটন কার্ড ---------- */
+.bs-skel{ background: #fff; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm); }
+.bs-skel-img{ aspect-ratio: 1/1; background: linear-gradient(90deg, var(--cream) 25%, var(--cream-deep) 37%, var(--cream) 63%); background-size: 400% 100%; animation: bsShimmer 1.4s ease infinite; }
+.bs-skel-line{ height: 10px; margin: 10px 10px 0; border-radius: 6px; background: linear-gradient(90deg, var(--cream) 25%, var(--cream-deep) 37%, var(--cream) 63%); background-size: 400% 100%; animation: bsShimmer 1.4s ease infinite; }
+.bs-skel-line.short{ width: 55%; margin-bottom: 10px; }
+@keyframes bsShimmer{ 0%{ background-position: 100% 0; } 100%{ background-position: 0 0; } }
+
+/* =========================================================
+   প্রোডাক্ট বিস্তারিত পেজ (market-item.html)
+   ========================================================= */
+.bs-detail-slider{
+  position: relative;
+  aspect-ratio: 1 / 1;
+  max-height: 420px;
+  background: var(--cream);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin: 4px 0 14px;
+}
+.bs-detail-track{
+  display: flex;
+  height: 100%;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.bs-detail-track::-webkit-scrollbar{ display: none; }
+.bs-detail-track img{
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  scroll-snap-align: start;
+}
+.bs-detail-track .bs-no-img{
+  flex: 0 0 100%;
+  display: flex; align-items: center; justify-content: center;
+  height: 100%; color: var(--ink-soft); font-size: 3rem;
+}
+.bs-detail-counter{
+  position: absolute;
+  bottom: 10px; right: 10px;
+  background: rgba(0,0,0,0.55);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 999px;
+}
+.bs-detail-title{ font-size: 1.15rem; font-weight: 700; color: var(--ink); margin: 0 0 4px; font-family: 'Tiro Bangla', serif; }
+.bs-detail-price{ font-size: 1.35rem; font-weight: 800; color: var(--maroon-dark); margin-bottom: 10px; }
+.bs-detail-meta-row{ display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 16px; }
+.bs-detail-meta-row span{ font-size: 0.82rem; color: var(--ink-soft); display: flex; align-items: center; gap: 6px; }
+.bs-detail-meta-row i{ color: var(--maroon); }
+.bs-detail-section-title{ font-size: 0.95rem; font-weight: 700; color: var(--ink); margin: 18px 0 6px; }
+.bs-detail-desc{ font-size: 0.9rem; color: var(--ink); line-height: 1.7; white-space: pre-wrap; }
+
+.bs-sticky-actions{
+  position: sticky;
+  bottom: 0;
+  left: 0; right: 0;
+  display: flex;
+  gap: 10px;
+  background: #fff;
+  padding: 12px 0 16px;
+  margin-top: 20px;
+  border-top: 1px solid var(--line);
+  z-index: 5;
+}
+.bs-sticky-actions a{
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 10px;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+/* =========================================================
+   পোস্ট করার পেজ (market-post.html)
+   ========================================================= */
+.bs-img-picker{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 6px;
+}
+.bs-img-slot{
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border: 2px dashed var(--line);
+  border-radius: 10px;
+  background: var(--cream);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  color: var(--ink-soft);
+  font-size: 0.68rem;
+  cursor: pointer;
+  overflow: hidden;
+  text-align: center;
+}
+.bs-img-slot i{ font-size: 1.3rem; }
+.bs-img-slot img{ position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.bs-img-slot .bs-img-remove{
+  position: absolute;
+  top: 4px; right: 4px;
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.75rem;
+  z-index: 2;
+}
+.bs-img-hint{ font-size: 0.76rem; color: var(--ink-soft); margin: 0 0 16px; }
+
+.bs-upload-progress-wrap{ display: flex; align-items: center; gap: 10px; margin: -4px 0 10px; }
+.bs-upload-progress{ flex: 1; height: 4px; border-radius: 3px; background: var(--cream-deep); overflow: hidden; }
+.bs-upload-progress-bar{ height: 100%; background: var(--maroon); width: 0%; transition: width .2s; }
+.bs-upload-progress-text{ font-size: 0.76rem; color: var(--ink-soft); font-weight: 600; min-width: 34px; text-align: right; }

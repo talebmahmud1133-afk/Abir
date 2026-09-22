@@ -1,0 +1,1264 @@
+/* ==========================================================================
+   আইনজীবী পেজ — dedicated styles (lawyer.html) — পাত্র-পাত্রীর (matrimony.css) কপি, গাঢ় নীল থিমে
+   Uses the site's shared design tokens from css/style.css (--gold, --cream, --ink,
+   --shadow-*, --radius, --line) so it matches the rest of the site.
+   Sections: back-only app bar + illustrated hero + toolbar · cards (person / agent layouts) ·
+   call sheet · detail page · form sheet · footer strip · empty state · focus ring · reduced-motion.
+   ========================================================================== */
+
+/* ---------- Page shell (this page has its own back-only app bar + footer strip) ---------- */
+body.lw-page{ padding-bottom: 24px; }
+body.lw-page .global-fab-stack{ bottom: 20px; }
+.lw-wrap{
+  max-width: 1240px;
+  padding: 0 16px 8px;
+}
+@media (min-width: 640px){ .lw-wrap{ padding-left: 24px; padding-right: 24px; } }
+
+/* keyboard focus: dark navy ring, clearly visible on white cards and coloured buttons */
+.lw-page a:focus-visible,
+.lw-page button:focus-visible{
+  outline: 3px solid #10193A;
+  outline-offset: 2px;
+}
+
+/* ---------- Top app bar (back only) + hero ---------- */
+.lw-hero{
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: linear-gradient(180deg, #2C4373 0%, #23386B 52%, #10193A 100%);
+  border-radius: 0 0 26px 26px;
+  margin-bottom: 16px;
+}
+.lw-hero-art{
+  position: absolute;
+  right: 0; bottom: 0;
+  width: min(100%, 460px);
+  height: auto;                 /* keeps the viewBox aspect ratio: never cropped */
+  z-index: 0;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 12%);
+          mask-image: linear-gradient(90deg, transparent 0, #000 12%);
+}
+.lw-hero-inner{
+  position: relative;
+  z-index: 2;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 14px 16px calc(6px + 0.21 * min(100vw, 460px));
+}
+/* পুরনো ভাসমান "cr-back / cr-back-float" পিল সরিয়ে সাইটের স্ট্যান্ডার্ড sticky
+   টপবার (.post-detail-topbar.list-back-topbar, css/style.css) ব্যবহার হচ্ছে —
+   lawyer.html-এ দেখো, এই ফাইলে আর নতুন করে স্টাইল করার দরকার নেই। */
+
+.lw-hero-body{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 18px;
+}
+.lw-hero-pin{ flex: 0 0 auto; width: 40px; height: auto; }
+.lw-hero-text h1{
+  margin: 0;
+  font-family: 'Hind Siliguri', sans-serif;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.3;
+}
+.lw-t1{ display: block; font-size: clamp(1.3rem, 1rem + 1.6vw, 2rem); }
+.lw-t2{ display: block; font-size: clamp(1.95rem, 1.2rem + 3.2vw, 3.1rem); }
+.lw-hero-text p{
+  margin: 4px 0 0;
+  font-size: clamp(0.88rem, 0.8rem + 0.5vw, 1.1rem);
+  font-weight: 600;
+  color: #dbe5fb;
+  line-height: 1.5;
+}
+
+@media (min-width: 640px){
+  .lw-hero-pin{ width: 50px; }
+}
+@media (min-width: 768px){
+  /* side-by-side: text left, illustration right */
+  .lw-hero-inner{ padding: 18px 24px 34px; }
+  .lw-hero-art{ width: 500px; }
+}
+@media (min-width: 1024px){
+  .lw-hero-inner{ padding-bottom: 44px; }
+  .lw-hero-art{ width: auto; height: 100%; }
+  .lw-hero-pin{ width: 58px; }
+}
+
+/* ---------- Toolbar: upazila selector + info chips ---------- */
+.lw-toolbar{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+@media (min-width: 900px){
+  .lw-toolbar{ flex-direction: row; align-items: stretch; gap: 12px; }
+  .lw-filter-bar{ flex: 1 1 46%; }
+  .lw-info-bar{ flex: 1 1 54%; }
+}
+
+.lw-filter-bar{
+  background: #fff;
+  border: 1px solid rgba(30,47,92,0.22);
+  border-radius: 14px;
+  box-shadow: var(--shadow-sm);
+  padding: 10px 12px;               /* উপরের লেবেল বাদ — সমান প্যাডিং */
+  position: relative;
+}
+.lw-filter-label{
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+  margin: 0 2px 6px;
+}
+.lw-select-wrap{ position: relative; }
+.lw-select-wrap i.lw-select-pin{
+  position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+  color: #1E2F5C; font-size: 1rem; pointer-events: none;
+}
+.lw-select-wrap i.lw-select-caret{
+  position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+  color: var(--ink-soft); font-size: 0.85rem; pointer-events: none;
+}
+#lawyerUpazilaSelect{
+  width: 100%;
+  min-height: 45px;
+  appearance: none;
+  -webkit-appearance: none;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ink);
+  background: #f4f7fd;
+  border: 1px solid rgba(30,47,92,0.22);
+  border-radius: 10px;
+  padding: 9px 38px 9px 40px;
+  cursor: pointer;
+  transition: border-color .15s, box-shadow .15s;
+}
+#lawyerUpazilaSelect:hover{ border-color: #1E2F5C; }
+#lawyerUpazilaSelect:focus-visible{
+  outline: 3px solid #10193A;
+  outline-offset: 2px;
+  border-color: #1E2F5C;
+}
+
+/* ---------- Info bar ---------- */
+.lw-info-bar{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.lw-info-chip{
+  flex: 1 1 220px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  border: 1px solid rgba(30,47,92,0.22);
+  border-radius: 14px;
+  box-shadow: var(--shadow-sm);
+  padding: 10px 14px;
+  min-height: 48px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.4;
+}
+.lw-chip-ic{
+  flex: 0 0 auto;
+  width: 32px; height: 32px;
+  border-radius: 9px;
+  background: #1E2F5C;
+  color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.9rem;
+}
+.lw-info-chip b{ font-weight: 700; color: #10193A; }
+
+/* ---------- সাব-ক্যাটাগরি চিপ বার (Phase 5) ---------- */
+.lw-cats{ margin-bottom: 10px; }
+.lw-cats-scroll{
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 12px;                        /* চিপগুলোর মাঝের ফাঁক (আগে 8px) */
+  overflow-x: auto;                 /* phones: swipe left / right */
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+  padding: 2px 2px 6px;
+  overscroll-behavior-x: contain;
+}
+.lw-cats-scroll::-webkit-scrollbar{ display: none; }
+.lw-cat{
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  min-height: 44px;                 /* touch target */
+  padding: 8px 18px;
+  border: 1px solid rgba(30,47,92,0.35);
+  border-radius: 999px;
+  background: #fff;
+  color: #10193A;
+  font-family: inherit;
+  font-size: 0.92rem;
+  font-weight: 700;
+  line-height: 1.2;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color .15s, color .15s, border-color .15s;
+}
+.lw-cat:hover{ border-color: #1E2F5C; background: #eef3fc; }
+.lw-cat.is-active{ background: #1E2F5C; border-color: #1E2F5C; color: #fff; }
+.lw-cat.is-active:hover{ background: #253F73; }
+@media (min-width: 768px){
+  /* tablet / desktop: chips wrap onto a second row instead of hiding off-screen */
+  .lw-cats-scroll{ flex-wrap: wrap; overflow-x: visible; scroll-snap-type: none; padding-bottom: 2px; }
+}
+
+/* ---------- Card grid ---------- */
+.lw-grid{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+@media (min-width: 640px){
+  .lw-grid{ grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1024px){
+  .lw-grid{ grid-template-columns: repeat(3, 1fr); }
+}
+@media (min-width: 1320px){
+  .lw-grid{ grid-template-columns: repeat(4, 1fr); }
+}
+
+.lw-card{
+  background: #fff;
+  border: 1px solid rgba(30,47,92,0.16);
+  border-radius: var(--lw-radius, 16px);
+  box-shadow: 0 3px 16px rgba(20,50,45,0.04);   /* আরও সফট শ্যাডো: বড় blur, কম opacity */
+  padding: var(--lw-pad);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+  transition: box-shadow .15s;
+}
+.lw-card:hover{ box-shadow: 0 8px 24px rgba(20,50,45,0.07); }
+
+.lw-card-main{ display: flex; align-items: flex-start; gap: 12px; }
+.lw-card-body{ flex: 1 1 auto; min-width: 0; }
+
+/* অফিসের ছবি: কার্ডের বাম কিনারা ও উপরের কিনারা থেকে শুরু হয়ে নিচে Google Map বাটনের ঠিক উপর পর্যন্ত
+   পুরো বাম পাশ জুড়ে বসে (বামে/উপরে কোনো ফাঁকা নেই)। ছবি না থাকলে রঙিন আদ্যক্ষর একই জায়গা নেয়।
+   ছবির চওড়া বদলাতে চাইলে শুধু --lw-photo-size এর মান বদলান (যেমন 104px / 116px / 128px) */
+.lw-card{ --lw-photo-size: 116px; --lw-pad: 17px; --lw-radius: 16px; overflow: hidden; }   /* --lw-pad: কার্ডের চারপাশের প্যাডিং (আগে 14px) */
+.lw-logo{
+  position: relative;
+  flex: 0 0 auto;
+  align-self: stretch;                /* ছবি উপর থেকে নিচে Google Map বাটনের ঠিক উপর পর্যন্ত নামে */
+  width: var(--lw-photo-size);
+  min-height: var(--lw-photo-size);
+  margin: calc(-1 * var(--lw-pad)) 0 0 calc(-1 * var(--lw-pad));   /* কার্ডের প্যাডিং ভেদ করে বাম ও উপরের কিনারায় লাগে */
+  /* চার কোণই কার্ডের radius-এর সাথে মেলানো (কার্ডের ১px বর্ডার বাদ দিয়ে উপরের-বাম কোণ ১px কম) */
+  border-radius: calc(var(--lw-radius) - 1px) var(--lw-radius) var(--lw-radius) var(--lw-radius);
+  overflow: hidden;
+  background: #fff;
+  border: 0;
+}
+.lw-logo.has-img{ padding: 0; }
+.lw-logo img{
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+  display: block;
+}
+.lw-logo-fallback{
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2.6rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+}
+@media (max-width: 340px){
+  .lw-card{ --lw-photo-size: 96px; }
+  .lw-logo-fallback{ font-size: 2rem; }
+}
+
+.lw-card-head{
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+.lw-card-name{
+  margin: 0;
+  font-family: 'Hind Siliguri', sans-serif;
+  font-size: 1.07rem;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+.lw-status{
+  flex: 0 0 auto;
+  font-size: 0.74rem;
+  font-weight: 700;
+  line-height: 1.2;
+  padding: 4px 11px;
+  border-radius: 999px;
+  color: #fff;
+  white-space: nowrap;
+}
+.lw-status.is-open{
+  background: #1E2F5C;
+  font-size: 0.68rem;
+  padding: 3px 9px;
+  border: 1px solid #10193A;
+  box-shadow: 0 1px 3px rgba(30,47,92,0.35);
+}
+.lw-status.is-closed{ background: #b42318; }
+
+.lw-card-meta{
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--ink);
+}
+.lw-card-meta li{ display: flex; align-items: flex-start; gap: 5px; min-width: 0; }
+.lw-card-meta li > span{ min-width: 0; overflow-wrap: anywhere; }
+.lw-card-meta i{ color: #1E2F5C; font-size: 0.82rem; flex: 0 0 auto; width: 16px; height: 1.32rem; display: flex; align-items: center; justify-content: center; }   /* আইকন প্রথম লাইনের ঠিক মাঝে */
+.lw-lbl{ color: var(--ink-soft); }
+
+.lw-card-actions{
+  display: flex;
+  gap: 10px;
+  margin-top: auto;
+}
+.lw-card-actions a,
+.lw-card-actions button.lw-btn-call{
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-sizing: border-box;
+  height: 46px;                     /* দুই বাটনের উচ্চতা হুবহু সমান (লেখা ভাঙলেও বদলাবে না) */
+  text-decoration: none;
+  font-family: inherit;
+  font-size: 0.92rem;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+  color: #fff;
+  border-radius: 10px;
+  padding: 0 12px;
+  transition: background-color .15s, transform .12s;
+}
+.lw-card-actions a i,
+.lw-card-actions button.lw-btn-call i{ flex: 0 0 auto; width: 1em; text-align: center; line-height: 1; font-size: 0.95rem; }
+.lw-card-actions a span,
+.lw-card-actions button.lw-btn-call span{ display: block; line-height: 1.2; padding-top: 1px; overflow: hidden; text-overflow: ellipsis; }
+.lw-card-actions a:active,
+.lw-card-actions button.lw-btn-call:active{ transform: scale(0.97); }
+.lw-btn-map{ background: #1E2F5C; }
+.lw-btn-map:hover{ background: #253F73; }
+.lw-btn-call{ background: #1E2F5C; }
+.lw-btn-call:hover{ background: #253F73; }
+.lw-btn-whatsapp{ background: #25b358; }
+.lw-btn-whatsapp:hover{ background: #1f9a4b; }
+
+/* ---------- Empty state ---------- */
+.lw-empty{
+  grid-column: 1 / -1;          /* span the whole grid, whatever the column count */
+  text-align: center;
+  background: #fff;
+  border: 1px dashed rgba(30,47,92,0.35);
+  border-radius: 16px;
+  padding: 32px 16px 28px;
+  color: var(--ink-soft);
+}
+.lw-empty i{ font-size: 1.8rem; color: #1E2F5C; margin-bottom: 8px; display: block; }
+.lw-empty p{ margin: 0 auto 16px; max-width: 32em; font-size: 0.95rem; line-height: 1.6; }
+.lw-empty-btn{
+  min-height: 46px;
+  padding: 10px 22px;
+  border: none;
+  border-radius: 10px;
+  background: #1E2F5C;
+  color: #fff;
+  font-family: inherit;
+  font-size: 0.92rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color .15s;
+}
+.lw-empty-btn:hover{ background: #253F73; }
+
+/* ---------- Footer strip ---------- */
+.lw-footer-strip{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px 16px;
+  margin-top: 20px;
+  padding: 6px 8px 6px 16px;
+  background: #fff;
+  border: 1px solid rgba(30,47,92,0.16);
+  border-radius: 14px;
+  box-shadow: var(--shadow-sm);
+  font-size: 0.86rem;
+  color: var(--ink);
+}
+.lw-foot-updated{ display: inline-flex; align-items: center; gap: 8px; padding: 8px 0; line-height: 1.4; }
+.lw-foot-updated i{ color: #1E2F5C; }
+.lw-foot-updated b{ font-weight: 700; color: #10193A; }
+.lw-report{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;             /* large touch target */
+  padding: 0 12px;
+  border-radius: 10px;
+  color: var(--ink);
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: background-color .15s;
+}
+.lw-report i{ color: #c2410c; }
+.lw-report:hover{ background: #ecf1fb; }
+@media (max-width: 380px){
+  .lw-footer-strip{ padding-left: 12px; }
+}
+
+/* ---------- Floating "+" and add-office bottom sheet (Phase 6) ---------- */
+.lw-fab{
+  position: fixed;
+  right: 19px;
+  bottom: calc(19px + env(safe-area-inset-bottom, 0px));   /* কিনারা থেকে আরও ৭px দূরে (আগে 12px / 12px) */
+  z-index: 60;
+  width: 54px; height: 54px;
+  border: none;
+  border-radius: 50%;
+  background: #1E2F5C;
+  color: #fff;
+  font-size: 1.4rem;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 8px 22px rgba(30,47,92,0.45);
+  cursor: pointer;
+  transition: background-color .15s, transform .15s;
+}
+.lw-fab:hover{ background: #253F73; }
+.lw-fab:active{ transform: scale(0.94); }
+@media (min-width: 1024px){ .lw-fab{ right: 31px; bottom: 29px; } }
+body.lw-lock{ overflow: hidden; }
+
+.lw-sheet-backdrop{
+  position: fixed; inset: 0;
+  z-index: 100;
+  background: rgba(10,30,50,0.5);
+  display: flex;
+  align-items: flex-end;            /* phones: sheet rises from the bottom */
+  justify-content: center;
+  opacity: 0;
+  transition: opacity .2s;
+}
+.lw-sheet-backdrop[hidden]{ display: none; }
+.lw-sheet-backdrop.is-open{ opacity: 1; }
+.lw-sheet{
+  width: 100%;
+  max-width: 560px;
+  max-height: 92vh;
+  max-height: 92dvh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: #fff;
+  border-radius: 20px 20px 0 0;
+  padding: 8px 16px calc(18px + env(safe-area-inset-bottom, 0px));
+  box-shadow: 0 -10px 40px rgba(0,0,0,0.25);
+  transform: translateY(40px);
+  transition: transform .22s ease-out;
+}
+.lw-sheet-backdrop.is-open .lw-sheet{ transform: translateY(0); }
+.lw-sheet-grip{ width: 44px; height: 5px; border-radius: 3px; background: #cfd9e2; margin: 4px auto 10px; }
+@media (min-width: 768px){
+  .lw-sheet-backdrop{ align-items: center; padding: 24px; }
+  .lw-sheet{ border-radius: 20px; padding: 22px 26px 24px; max-height: 90vh; max-height: 90dvh; }
+  .lw-sheet-grip{ display: none; }
+}
+.lw-sheet-head h2{ margin: 0 0 4px; font-family: 'Hind Siliguri', sans-serif; font-size: 1.2rem; color: #10193A; line-height: 1.35; }
+.lw-sheet-head p{ margin: 0 0 14px; font-size: 0.88rem; color: var(--ink-soft); line-height: 1.5; }
+
+.lw-field{ margin-bottom: 12px; }
+.lw-field label{ display: block; font-size: 0.86rem; font-weight: 600; color: var(--ink); margin: 0 2px 5px; }
+.lw-req{ color: #b42318; }
+.lw-opt{ font-weight: 500; color: var(--ink-soft); }
+.lw-field input[type="text"], .lw-field input[type="tel"], .lw-field input[type="url"], .lw-field select{
+  width: 100%;
+  min-height: 46px;
+  padding: 10px 12px;
+  border: 1.5px solid rgba(30,47,92,0.35);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 16px;                  /* stops iOS zoom-on-focus */
+  box-sizing: border-box;
+}
+.lw-field input:focus-visible, .lw-field select:focus-visible{ outline: 3px solid #10193A; outline-offset: 1px; border-color: #1E2F5C; }
+.lw-field [aria-invalid="true"]{ border-color: #b42318; }
+.lw-field input[type="number"], .lw-field textarea{
+  width: 100%;
+  padding: 10px 12px;
+  border: 1.5px solid rgba(30,47,92,0.35);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 16px;                  /* stops iOS zoom-on-focus */
+  box-sizing: border-box;
+}
+.lw-field input[type="number"]{ min-height: 46px; }
+.lw-field textarea{ min-height: 84px; resize: vertical; }
+.lw-field input[type="number"]:focus-visible, .lw-field textarea:focus-visible{ outline: 3px solid #10193A; outline-offset: 1px; border-color: #1E2F5C; }
+.lw-field-check{ margin-bottom: 12px; }
+.lw-field-check label{ display: flex; align-items: flex-start; gap: 10px; font-size: 0.86rem; font-weight: 600; color: var(--ink); cursor: pointer; line-height: 1.45; }
+.lw-field-check input[type="checkbox"]{ width: 20px; height: 20px; flex: 0 0 auto; margin-top: 1px; accent-color: #1E2F5C; }
+.lw-field-check.is-invalid label{ color: #b42318; }
+.lw-hint{ margin: -6px 2px 12px; font-size: 0.8rem; color: var(--ink-soft); }
+.lw-file{ width: 100%; font-size: 0.9rem; font-family: inherit; box-sizing: border-box; }
+.lw-photo-preview{ margin-top: 8px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.lw-photo-preview[hidden]{ display: none; }
+.lw-photo-preview img{ display: block; width: 104px; height: 104px; border-radius: 16px; object-fit: cover; border: 1px solid rgba(30,47,92,0.25); }
+.lw-photo-edit{
+  display: inline-flex; align-items: center; gap: 8px;
+  min-height: 44px; padding: 8px 14px;
+  border: 1.5px solid rgba(30,47,92,0.45); border-radius: 10px;
+  background: #fff; color: #10193A;
+  font-family: inherit; font-size: 0.92rem; font-weight: 700; cursor: pointer;
+}
+.lw-photo-edit:hover{ background: #eef3fc; }
+.lw-hp{ position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+.lw-form-msg{ margin: 0 0 12px; padding: 10px 12px; border-radius: 10px; background: #fdecea; color: #8a1c12; font-size: 0.9rem; font-weight: 600; line-height: 1.5; }
+.lw-form-msg[hidden], .lw-sheet-done[hidden]{ display: none; }
+.lw-sheet-actions{ display: flex; gap: 10px; margin-top: 4px; }
+.lw-btn-cancel, .lw-btn-submit{
+  flex: 1 1 0;
+  min-height: 48px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 0.98rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color .15s;
+}
+.lw-btn-cancel{ background: #fff; color: #10193A; border: 1.5px solid rgba(30,47,92,0.45); }
+.lw-btn-cancel:hover{ background: #eef3fc; }
+.lw-btn-submit{ background: #1E2F5C; color: #fff; border: none; }
+.lw-btn-submit:hover{ background: #253F73; }
+.lw-btn-submit:disabled, .lw-btn-cancel:disabled{ opacity: 0.65; cursor: default; }
+.lw-sheet-done{ text-align: center; padding: 18px 4px 6px; }
+.lw-sheet-done i{ font-size: 2.4rem; color: #1E2F5C; }
+.lw-sheet-done h3{ margin: 10px 0 6px; font-family: 'Hind Siliguri', sans-serif; font-size: 1.15rem; color: #10193A; }
+.lw-sheet-done p{ margin: 0 0 16px; color: var(--ink-soft); font-size: 0.92rem; line-height: 1.6; }
+.lw-sheet-done .lw-btn-submit{ width: 100%; flex: none; }
+
+/* ---------- ছবি বসানোর (crop) ধাপ: জুম ইন/আউট + টেনে সরানো ---------- */
+.lw-crop-backdrop{ z-index: 110; }               /* "+" শিটের (১০০) উপরে */
+.lw-crop-viewport{
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  aspect-ratio: 4 / 5;                            /* কার্ডের ছবির টাইলের অনুপাতে (লম্বাটে) */
+  margin: 0 auto 14px;
+  overflow: hidden;
+  border-radius: 16px;
+  background: #10202b;
+  touch-action: none;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.lw-crop-viewport.dragging{ cursor: grabbing; }
+.lw-crop-viewport img{
+  position: absolute; top: 0; left: 0;
+  transform-origin: 0 0;
+  max-width: none; max-height: none;
+  user-select: none; -webkit-user-drag: none;
+  pointer-events: none;
+}
+.lw-crop-zoom{ display: flex; align-items: center; gap: 10px; margin: 0 auto 14px; max-width: 320px; }
+.lw-crop-zoom input[type="range"]{ flex: 1; min-width: 0; }
+.lw-crop-zbtn{
+  flex: 0 0 auto; width: 44px; height: 44px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 0; border-radius: 50%;
+  background: #e4ebef; color: #10193A; font-size: 1.05rem; cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.lw-crop-zbtn:active{ background: #d3dde3; }
+.lw-crop .lw-sheet-head p{ margin-bottom: 12px; }
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce){
+  .lw-page *, .lw-page *::before, .lw-page *::after{
+    transition: none !important;
+    animation: none !important;
+  }
+  .lw-card-actions a:active, .lw-back:active, .lw-fab:active{ transform: none; }
+  .lw-sheet{ transform: none; }
+}
+
+/* keep the last card / footer clear of the floating "+" (Phase 6) */
+.lw-wrap{ padding-bottom: 88px; }
+
+/* ---------- অ্যাডমিন থেকে যোগ করা ব্যানার স্লাইডার থাকলে ডিফল্ট হিরো লুকানো ---------- */
+body.has-cat-banners .lw-hero{ display: none; }
+
+/* ---------- "ফিরে যান" এখন lawyer.html-এর একদম উপরে সাইটের স্ট্যান্ডার্ড sticky
+   টপবার হিসেবে বসে (.post-detail-topbar.list-back-topbar, css/style.css-এ
+   সংজ্ঞায়িত) — ব্যানার/হিরোর উপরে ভাসমান পিল হিসেবে নয়, বরং তার উপরে আলাদা,
+   সবসময়-দৃশ্যমান একটা বার হিসেবে। এখানে আর অতিরিক্ত পজিশনিং দরকার নেই। ---------- */
+.lw-top-area{ position: relative; }
+
+/* ---------- অ্যাডমিন থেকে আপলোড করা ব্যানার ছবি ----------
+   ছবি পুরো ব্যানার জায়গা ভরে বসবে (cover) — উপরে/নিচে কোনো ফাঁকা বা ব্লার অংশ থাকবে না।
+   ব্যানারের অনুপাত সব স্ক্রিনে ২১:৯ (চওড়া ছবির জন্য সবচেয়ে মানানসই); বেশি লম্বা/অন্য
+   অনুপাতের ছবি হলে শুধু কিনারার সামান্য অংশ ছাঁটা যাবে। */
+body[data-banner-category="legal-help"] .banner-slide.has-image{
+  position: relative;
+  overflow: hidden;
+  background-image: none;
+  background-color: #1E2F5C;
+  aspect-ratio: 21 / 9;
+}
+body[data-banner-category="legal-help"] .banner-slide.has-image::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--banner-img);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: 1;
+}
+body[data-banner-category="legal-help"] .banner-slide.has-image .banner-inner{
+  position: relative;
+  z-index: 2;
+  text-shadow: 0 1px 5px rgba(0,0,0,0.6);
+}
+
+
+/* ---------- মোবাইলে ব্যাক-বার + ব্যানার স্থির (স্ক্রল করলেও উপরেই থাকবে) ----------
+   ব্যাক-বার (.list-back-topbar) আগে থেকেই sticky top:0। এখন ব্যানারও তার ঠিক নিচে sticky —
+   উচ্চতা --lw-topbar-h থেকে আসে (lawyer.html-এর ছোট স্ক্রিপ্ট বারের প্রকৃত উচ্চতা মেপে বসায়)।
+   ডেস্কটপে ব্যানার ২১:৯ full-width হওয়ায় খুব বড়, তাই শুধু ≤700px স্ক্রিনে প্রযোজ্য। */
+@media (max-width: 700px){
+  /* .lw-top-area শুধু ব্যানার+হিরো ধরে রাখে (উচ্চতা ~ব্যানারের সমান), তাই sticky এর "ভেসে থাকার"
+     জায়গা পেত না। display:contents দিয়ে এর বক্স সরানো হলো — ফলে ব্যানারের প্যারেন্ট হয় <main>
+     (পুরো পেজ জুড়ে লম্বা) এবং স্ক্রল করলেও ব্যানার আটকে থাকে। */
+  body[data-banner-category="legal-help"] .lw-top-area{ display: contents; }
+  body[data-banner-category="legal-help"] #catBannerWrap{
+    position: sticky;
+    top: var(--lw-topbar-h, 53px);
+    z-index: 40;
+    background: var(--cream, #f1f5f8);
+    padding-bottom: 4px;
+  }
+}
+
+/* ---------- মোবাইলে কার্ডের বাম পাশ "উপজেলা নির্বাচন করুন" বক্সের লাইনে (বর্ডারসহ), ডান পাশ কিনারা পর্যন্ত ----------
+   ডানে পেজের ১৬px/২৪px ফাঁক ভেদ করে কিনারা পর্যন্ত (ব্যানারের লাইনে), বামে স্বাভাবিক ফাঁক ও বর্ডার।
+   বাম কোণ গোল (কার্ডের radius), ডান কোণ সোজা। ছবির বাম কোণ কার্ডের সাথে মিলেই থাকে। */
+@media (max-width: 700px){
+  .lw-grid{ margin-right: -16px; gap: 12px; }
+  .lw-card{ border-radius: var(--lw-radius) 0 0 var(--lw-radius); border-right: 0; }
+}
+@media (min-width: 640px) and (max-width: 700px){
+  .lw-grid{ margin-right: -24px; }
+}
+
+/* ==========================================================================
+   আইনজীবী নিজস্ব সংযোজন — কুরিয়ার থেকে আলাদা অংশ
+   ========================================================================== */
+
+/* সক্রিয় চিপ নিজের সাব-ক্যাটাগরির রঙে (--acc); "সব" চিপ ও ডিফল্ট: গাঢ় নীল */
+.lw-cat[style*="--acc"]{ border-color: var(--acc); color: var(--acc); }
+.lw-cat[style*="--acc"]:hover{ background: #fff; box-shadow: inset 0 0 0 1px var(--acc); }
+.lw-cat.is-active[style*="--acc"]{ background: var(--acc); border-color: var(--acc); color: #fff; }
+.lw-cat.is-active[style*="--acc"]:hover{ background: var(--acc); filter: brightness(.94); }
+
+/* "বর্তমানে দেখা হচ্ছে" স্ট্যাটাস ব্যান্ড (aria-live) */
+.lw-band{
+  display: flex; align-items: flex-start; gap: 9px;
+  margin: 2px 0 12px;
+  padding: 9px 14px;
+  background: #eef3fc;
+  border: 1px solid rgba(30,47,92,0.22);
+  border-radius: 12px;
+  font-size: 0.9rem; font-weight: 600; line-height: 1.45;
+  color: var(--ink);
+}
+.lw-band i{ color: #1E2F5C; margin-top: 0.28rem; flex: 0 0 auto; }
+.lw-band b{ color: #10193A; font-weight: 700; }
+
+/* নিরাপত্তা নোট */
+.lw-safe{
+  display: flex; align-items: flex-start; gap: 9px;
+  margin: 0 0 14px;
+  padding: 9px 14px;
+  background: #fff8e6;
+  border: 1px solid rgba(183,121,31,0.35);
+  border-radius: 12px;
+  font-size: 0.84rem; line-height: 1.55;
+  color: #5c3b06;
+}
+.lw-safe i{ color: #8a5a0b; margin-top: 0.22rem; flex: 0 0 auto; }
+
+/* কার্ড: উপরের রঙিন সাব-ক্যাটাগরি রেখা */
+.lw-card{ border-top: 3px solid var(--acc, #1E2F5C); }
+.lw-card-name{ font-size: 1.05rem; }
+.lw-tags{ display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.lw-tag, .lw-demo{
+  display: inline-flex; align-items: center;
+  font-size: 0.74rem; font-weight: 700; line-height: 1.2;
+  padding: 3px 10px; border-radius: 999px;
+  white-space: nowrap;
+}
+.lw-demo{ background: #eceff2; color: #4a5560; }
+.lw-clamp{
+  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+.lw-logo-fallback i{ font-size: 2.2rem; }
+.lw-card-meta i{ color: var(--acc, #1E2F5C); }
+
+/* কার্ডের নিচের অংশ: হোয়াটসঅ্যাপ + কল বাটন (থাকলে পাশাপাশি) বা নোট */
+.lw-card-actions .lw-btn-call{ background: #0B6B8C; }
+.lw-card-actions .lw-btn-call:hover{ background: #0A5570; }
+.lw-card-actions .lw-btn-whatsapp{ background: #25b358; }
+.lw-card-actions .lw-btn-whatsapp:hover{ background: #1f9a4b; }
+/* ম্যাপ + হোয়াটসঅ্যাপ + কল — তিন বাটন একসারিতে: ছোট স্ক্রিনে হোয়াটসঅ্যাপে শুধু আইকন (লেখা কাটা পড়ে না; aria-label আগের মতোই) */
+@media (max-width: 519px){
+  .lw-card-actions .lw-btn-map ~ .lw-btn-whatsapp{ flex: 0 0 56px; position: relative; padding: 0; }
+  .lw-card-actions .lw-btn-map ~ .lw-btn-whatsapp span{
+    position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden;
+    clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+  }
+  .lw-card-actions .lw-btn-map ~ .lw-btn-whatsapp i{ font-size: 1.25rem; width: auto; }
+}
+.lw-nophone{
+  margin: 0; width: 100%;
+  display: flex; align-items: center; gap: 8px;
+  min-height: 46px; padding: 0 12px;
+  background: #f1f5f8; border-radius: 10px;
+  font-size: 0.84rem; font-weight: 600; color: #4a5560; line-height: 1.35;
+}
+.lw-nophone i{ color: #6b7783; }
+
+/* হিরো: আইনজীবী থিম (গাঢ় নীল) */
+.lw-hero-pin{ width: 40px; }
+
+/* মোবাইলে দুটো ইনফো চিপ পাশাপাশি (জায়গা বাঁচাতে) */
+.lw-info-chip{ flex: 1 1 150px; padding: 8px 10px; gap: 8px; font-size: 0.84rem; }
+@media (min-width: 640px){ .lw-info-chip{ flex-basis: 220px; padding: 10px 14px; font-size: 0.9rem; } }
+
+
+/* ---------- ছবিতে ক্লিক করলে পুরো ছবি (লাইটবক্স) + জুম (ধাপ ২) ---------- */
+/* ---------- ছবিতে ক্লিক করলে পুরো ছবি (লাইটবক্স) + জুম ---------- */
+.lw-logo.has-img{ cursor: zoom-in; -webkit-tap-highlight-color: transparent; }
+.lw-logo.has-img:focus-visible{ outline: 3px solid #1E2F5C; outline-offset: -3px; }
+html.lw-lb-open, html.lw-lb-open body{ overflow: hidden; overscroll-behavior: none; }
+
+.lw-lb{
+  position: fixed; inset: 0;
+  z-index: 300;                       /* "+" শিট (১০০) ও ক্রপ (১১০) এর উপরে */
+  display: flex; flex-direction: column;
+  background: #070a10;
+  color: #fff;
+  animation: lwLbIn .18s ease-out;
+}
+.lw-lb[hidden]{ display: none; }
+@keyframes lwLbIn{ from{ opacity: 0; } to{ opacity: 1; } }
+.lw-lb-bar{
+  flex: 0 0 auto;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 10px 12px 6px 16px;
+  padding-top: max(10px, env(safe-area-inset-top));
+}
+.lw-lb-title{
+  font-family: 'Hind Siliguri', sans-serif;
+  font-size: 1rem; font-weight: 700;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  min-width: 0;
+}
+.lw-lb-btn{
+  flex: 0 0 auto;
+  width: 44px; height: 44px;
+  border: 0; border-radius: 50%;
+  background: rgba(255,255,255,0.16);
+  color: #fff; font-size: 1.05rem;
+  display: inline-flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.lw-lb-btn:hover{ background: rgba(255,255,255,0.28); }
+.lw-lb-btn:active{ background: rgba(255,255,255,0.36); }
+.lw-lb-stage{
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+  touch-action: none;                 /* পিঞ্চ/পান আমরা নিজেরা সামলাই, ব্রাউজারের পেজ-জুম নয় */
+  user-select: none; -webkit-user-select: none;
+  cursor: zoom-in;
+}
+.lw-lb.is-zoomed .lw-lb-stage{ cursor: grab; }
+.lw-lb.is-dragging .lw-lb-stage{ cursor: grabbing; }
+.lw-lb-img{
+  max-width: 100%; max-height: 100%;
+  width: auto; height: auto;
+  object-fit: contain;
+  display: block;
+  transform-origin: center center;
+  will-change: transform;
+  opacity: 0;
+  transition: opacity .18s ease;
+  -webkit-user-drag: none;
+}
+.lw-lb.is-loaded .lw-lb-img{ opacity: 1; }
+.lw-lb:not(.is-loaded) .lw-lb-stage::after{
+  content: ""; position: absolute; width: 34px; height: 34px;
+  border: 3px solid rgba(255,255,255,0.3); border-top-color: #fff; border-radius: 50%;
+  animation: crLbSpin .8s linear infinite;
+}
+@keyframes crLbSpin{ to{ transform: rotate(360deg); } }
+.lw-lb-controls{
+  flex: 0 0 auto;
+  display: flex; align-items: center; justify-content: center; gap: 12px;
+  padding: 8px 12px 6px;
+}
+.lw-lb-zoom{
+  min-width: 68px; height: 44px; padding: 0 12px;
+  border: 0; border-radius: 22px;
+  background: rgba(255,255,255,0.16); color: #fff;
+  font-family: 'Hind Siliguri', sans-serif; font-size: 0.95rem; font-weight: 700;
+  cursor: pointer; -webkit-tap-highlight-color: transparent;
+}
+.lw-lb-zoom:hover{ background: rgba(255,255,255,0.28); }
+.lw-lb-hint{
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 0 16px max(12px, env(safe-area-inset-bottom));
+  text-align: center;
+  font-size: 0.78rem; opacity: 0.65;
+}
+.lw-lb.is-zoomed .lw-lb-hint{ visibility: hidden; }
+@media (prefers-reduced-motion: reduce){
+  .lw-lb, .lw-lb-img{ animation: none; transition: none; }
+}
+
+/* উপরের ব্যানারের ছবিতেও ক্লিক করলে পুরো ছবি খোলে */
+body[data-banner-category="legal-help"] .banner-slide.has-image{ cursor: zoom-in; -webkit-tap-highlight-color: transparent; }
+.lw-lb-link{
+  flex: 0 0 auto;
+  max-width: 44%;
+  margin-left: auto;
+  padding: 9px 16px;
+  border-radius: 22px;
+  background: #1E2F5C; color: #fff;
+  font-family: 'Hind Siliguri', sans-serif; font-size: 0.86rem; font-weight: 700;
+  text-decoration: none;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.lw-lb-link[hidden]{ display: none; }
+.lw-lb-link:active{ background: #253F73; }
+
+
+
+/* ==========================================================================
+   ধাপ ২ — চিপ অনুযায়ী আলাদা কার্ড লেআউট
+   person   : বাম কিনারায় ছবি-টাইল (দেওয়ানী / ফৌজদারী / পারিবারিক / ভূমি ও সম্পত্তি)
+   agent    : নোটারি / দলিল লেখক / আইনি সহায়তা — গোল লোগো, কম্প্যাক্ট
+   ========================================================================== */
+.lw-facts{ display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.lw-fact{
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 0.82rem; font-weight: 700; line-height: 1.2;
+  padding: 4px 10px; border-radius: 8px;
+  background: #f1f5f8; color: var(--ink);
+}
+.lw-fact i{ color: var(--acc, #1E2F5C); font-size: 0.8rem; }
+
+/* agent + guardian: বড় ছবি-টাইল নেই, তাই কার্ডের ভেতরের প্যাডিং স্বাভাবিক */
+.lw-card--agent .lw-card-main,
+.lw-card--guardian .lw-card-main{ gap: 12px; }
+.lw-avatar{
+  flex: 0 0 auto;
+  width: 60px; height: 60px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem;
+  position: relative; overflow: hidden;
+}
+.lw-avatar.lw-logo{ align-self: flex-start; min-height: 0; margin: 0; border-radius: 50%; }
+.lw-avatar.lw-logo img{ border-radius: 50%; }
+.lw-card--agent .lw-card-actions,
+.lw-card--guardian .lw-card-actions{ margin-top: 2px; }
+
+.lw-quote{
+  margin: 10px 0 0;
+  padding: 9px 12px;
+  border-left: 3px solid var(--acc, #1E2F5C);
+  background: #f4f7fc;
+  border-radius: 0 10px 10px 0;
+  font-size: 0.92rem; font-weight: 600; line-height: 1.55;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+
+/* person কার্ডে ছবি ক্লিকযোগ্য: ফোকাস রিং */
+.lw-card .lw-logo.has-img:focus-visible{ outline: 3px solid #10193A; outline-offset: -3px; }
+
+/* কল করুন বাটন এখন <button>: ব্রাউজারের ডিফল্ট স্টাইল রিসেট */
+.lw-card-actions button.lw-btn-call{
+  border: 0; margin: 0; cursor: pointer;
+  -webkit-appearance: none; appearance: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.lw-card-actions button.lw-btn-call:focus-visible{ outline: 3px solid #10193A; outline-offset: 2px; }
+
+/* ---------- কল-শিট ("কল করুন" চাপলে নিচ থেকে উঠে আসে) ---------- */
+html.lw-call-open, html.lw-call-open body{ overflow: hidden; overscroll-behavior: none; }
+.lw-call{
+  position: fixed; inset: 0;
+  z-index: 400;                       /* লাইটবক্স (৩০০) ও "+" শিটের উপরে */
+  display: flex; align-items: flex-end; justify-content: center;
+}
+.lw-call[hidden]{ display: none; }
+.lw-call-backdrop{
+  position: absolute; inset: 0;
+  background: rgba(10, 20, 28, 0.55);
+  opacity: 0; transition: opacity .18s ease;
+}
+.lw-call.is-open .lw-call-backdrop{ opacity: 1; }
+.lw-call-sheet{
+  position: relative;
+  width: 100%; max-width: 480px;
+  box-sizing: border-box;
+  background: #fff;
+  border-radius: 20px 20px 0 0;
+  padding: 10px 20px 20px;
+  padding-bottom: max(20px, env(safe-area-inset-bottom));
+  font-family: 'Hind Siliguri', sans-serif;
+  text-align: center;
+  box-shadow: 0 -10px 30px rgba(0,0,0,.18);
+  transform: translateY(100%);
+  transition: transform .2s ease-out;
+}
+.lw-call.is-open .lw-call-sheet{ transform: translateY(0); }
+.lw-call-grab{ width: 42px; height: 4px; border-radius: 4px; background: #d3dbe0; margin: 0 auto 10px; }
+.lw-call-x{
+  position: absolute; top: 10px; right: 12px;
+  width: 36px; height: 36px; border: 0; border-radius: 50%;
+  background: #f1f5f8; color: var(--ink, #22303a);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 1rem;
+}
+.lw-call-hint{ margin: 6px 0 2px; font-size: 0.85rem; color: var(--ink-soft, #5b6b73); font-weight: 600; }
+.lw-call-name{
+  margin: 0; font-size: 1.2rem; font-weight: 800; color: var(--ink, #22303a);
+  overflow-wrap: anywhere; padding: 0 40px;
+}
+.lw-call-num{
+  margin: 8px 0 16px;
+  font-size: 1.55rem; font-weight: 800; letter-spacing: .5px;
+  color: #0B6B8C;
+  font-variant-numeric: tabular-nums;
+}
+.lw-call-go, .lw-call-copy{
+  display: flex; align-items: center; justify-content: center; gap: 9px;
+  box-sizing: border-box; width: 100%; height: 50px;
+  border-radius: 12px; border: 0;
+  font-family: inherit; font-size: 1rem; font-weight: 700; line-height: 1;
+  text-decoration: none; cursor: pointer;
+  transition: background-color .15s, transform .12s;
+}
+.lw-call-go{ background: #0B6B8C; color: #fff; }
+.lw-call-go:hover{ background: #0A5570; }
+.lw-call-copy{ background: #eef3f6; color: var(--ink, #22303a); margin-top: 10px; }
+.lw-call-copy:hover{ background: #e2eaef; }
+.lw-call-copy.is-done{ background: #e3f6ea; color: #0F7A52; }   /* কপি সফল: সবুজ (সাফল্যের রং) */
+.lw-call-go:active, .lw-call-copy:active{ transform: scale(0.98); }
+.lw-call-go:focus-visible, .lw-call-copy:focus-visible, .lw-call-x:focus-visible{ outline: 3px solid #10193A; outline-offset: 2px; }
+@media (min-width: 640px){
+  .lw-call{ align-items: center; }
+  .lw-call-sheet{ border-radius: 20px; transform: translateY(24px); opacity: 0; transition: transform .2s ease-out, opacity .2s; }
+  .lw-call.is-open .lw-call-sheet{ transform: none; opacity: 1; }
+  .lw-call-grab{ display: none; }
+}
+@media (prefers-reduced-motion: reduce){
+  .lw-call-sheet, .lw-call-backdrop{ transition: none; }
+}
+
+/* ---------- আরও ছবি (ঐচ্ছিক): ফর্মে ৪টি স্লট ---------- */
+.lw-xfield{ margin-bottom: 14px; }
+.lw-xlabel{ display: block; font-size: 0.86rem; font-weight: 600; color: var(--ink); margin: 0 2px 4px; }
+.lw-xhint{ margin: 0 2px 8px; font-size: 0.8rem; color: var(--ink-soft); line-height: 1.45; }
+.lw-xgrid{ display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.lw-xslot{ position: relative; aspect-ratio: 1 / 1; border-radius: 12px; overflow: hidden; }
+.lw-xadd{
+  width: 100%; height: 100%; box-sizing: border-box;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+  border: 1.5px dashed rgba(30,47,92,0.5); border-radius: 12px;
+  background: #f4f7fd; color: #1E2F5C;
+  font-family: inherit; font-size: 0.72rem; font-weight: 700; line-height: 1.2;
+  cursor: pointer; -webkit-tap-highlight-color: transparent;
+}
+.lw-xadd i{ font-size: 1rem; }
+.lw-xadd:hover{ background: #e8eefa; }
+.lw-xadd:focus-visible, .lw-xrm:focus-visible{ outline: 3px solid #10193A; outline-offset: 2px; }
+.lw-xslot.has-photo .lw-xadd{ display: none; }
+.lw-xthumb{
+  display: block; width: 100%; height: 100%; object-fit: cover;
+  border-radius: 12px; border: 1px solid rgba(30,47,92,0.25); box-sizing: border-box;
+}
+.lw-xthumb[hidden], .lw-xrm[hidden]{ display: none; }
+.lw-xrm{
+  position: absolute; top: 4px; right: 4px;
+  width: 26px; height: 26px; padding: 0;
+  display: flex; align-items: center; justify-content: center;
+  border: 0; border-radius: 50%;
+  background: rgba(0,0,0,0.68); color: #fff; font-size: 0.78rem;
+  cursor: pointer;
+}
+
+/* ---------- কার্ডের ছবিতে "আরও ছবি আছে" ব্যাজ ---------- */
+.lw-photo-count{
+  position: absolute; right: 6px; bottom: 6px;
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 2px 8px; border-radius: 999px;
+  background: rgba(0,0,0,0.65); color: #fff;
+  font-family: 'Hind Siliguri', sans-serif; font-size: 0.74rem; font-weight: 700; line-height: 1.4;
+  pointer-events: none;
+}
+.lw-photo-count i{ font-size: 0.72rem; }
+
+/* ---------- লাইটবক্স গ্যালারি: ◀ ▶ বাটন, ক্রমিক নম্বর, থাম্বনেইল ---------- */
+.lw-lb-count{
+  flex: 0 0 auto;
+  font-family: 'Hind Siliguri', sans-serif; font-size: 0.86rem; font-weight: 700;
+  padding: 2px 10px; border-radius: 999px; background: rgba(255,255,255,0.16);
+}
+.lw-lb-count[hidden], .lw-lb-nav[hidden], .lw-lb-thumbs[hidden]{ display: none; }
+.lw-lb-nav{
+  position: absolute; top: 50%; transform: translateY(-50%);
+  z-index: 2;
+  width: 44px; height: 44px; padding: 0;
+  display: flex; align-items: center; justify-content: center;
+  border: 0; border-radius: 50%;
+  background: rgba(255,255,255,0.16); color: #fff; font-size: 1.05rem;
+  cursor: pointer; -webkit-tap-highlight-color: transparent;
+}
+.lw-lb-nav:hover{ background: rgba(255,255,255,0.28); }
+.lw-lb-prev{ left: 8px; }
+.lw-lb-next{ right: 8px; }
+.lw-lb.is-zoomed .lw-lb-nav{ display: none; }
+.lw-lb-thumbs{
+  flex: 0 0 auto;
+  display: flex; gap: 8px; justify-content: center;
+  padding: 8px 12px 2px;
+  overflow-x: auto;
+}
+.lw-lb-thumbs button{
+  flex: 0 0 auto; width: 52px; height: 52px; padding: 0;
+  border: 2px solid transparent; border-radius: 8px; overflow: hidden;
+  background: #1d232c; opacity: 0.6; cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.lw-lb-thumbs button.is-active{ border-color: #fff; opacity: 1; }
+.lw-lb-thumbs img{ display: block; width: 100%; height: 100%; object-fit: cover; }
+.lw-lb.is-zoomed .lw-lb-thumbs{ visibility: hidden; }
+
+/* ---------- "ভেরিফাইড" ব্যাজ (অ্যাডমিন যাচাইকৃত) — সোনালি ---------- */
+.lw-verified{
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 3px 10px; border-radius: 999px;
+  background: linear-gradient(135deg, #fbe08a 0%, #f0b429 55%, #d99a0b 100%);
+  color: #3d2b00;                                   /* সোনালি ব্যাকগ্রাউন্ডে গাঢ় বাদামি লেখা — WCAG AA কনট্রাস্ট */
+  border: 1px solid #c58f00;
+  font-size: 0.78rem; font-weight: 700; line-height: 1.3;
+  box-shadow: 0 1px 4px rgba(197,143,0,0.4), inset 0 1px 0 rgba(255,255,255,0.45);
+  white-space: nowrap;
+}
+.lw-verified i{ font-size: 0.85rem; color: #6b4a00; }
+.lw-sr{ position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.lw-card.is-verified{ box-shadow: 0 0 0 1.5px rgba(217,154,11,0.55), var(--shadow-sm, 0 2px 8px rgba(0,0,0,.06)); }
+
+/* ---------- ব্যানারের উপরের ফাঁকা জায়গা বাদ: ব্যাক-বারের ঠিক নিচেই ব্যানার ----------
+   css/style.css-এর `body[data-banner-category="legal-help"] #catBannerWrap { margin: 14px 0 6px }`
+   (মোবাইলে 10px 0 4px) উপরে ১০–১৪px ফাঁক রাখছিল; এখানে শুধু উপরের মার্জিন ০ করা হলো (নিচের মার্জিন অপরিবর্তিত)। */
+body[data-banner-category="legal-help"] #catBannerWrap{ margin-top: 0; }
+/* উপরের ফাঁক না থাকায় উপরের কোণ সোজা (ব্যাক-বারের সাথে লেগে থাকে), নিচের কোণ গোলই থাকে */
+body[data-banner-category="legal-help"] #catBannerSlider{ border-radius: 0 0 18px 18px; }
+@media (max-width: 700px){
+  body[data-banner-category="legal-help"] #catBannerSlider{ border-radius: 0 0 14px 14px; }
+}
+
+/* ==========================================================================
+   কার্ডের লেখা ক্লিকযোগ্য + "বিস্তারিত পেজ" (কার্ডের লেখায় ক্লিক করলে খোলে)
+   ========================================================================== */
+.lw-card-body[data-lw-open]{ cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.lw-card-body[data-lw-open]:focus-visible{ outline: 3px solid #10193A; outline-offset: 3px; border-radius: 8px; }
+.lw-more{
+  display: inline-flex; align-items: center; gap: 5px;
+  margin: 8px 0 10px;
+  font-size: 0.86rem; font-weight: 700; line-height: 1.2;
+  color: var(--acc, #1E2F5C);
+}
+.lw-more i{ font-size: 0.7rem; }
+
+html.lw-detail-open, html.lw-detail-open body{ overflow: hidden; overscroll-behavior: none; }
+.lw-detail{
+  position: fixed; inset: 0;
+  z-index: 200;                       /* "+" শিট (১০০) এর উপরে; লাইটবক্স (৩০০) ও কল-শিট (৪০০) এর নিচে */
+  display: flex; flex-direction: column;
+  overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain;
+  background: var(--cream, #f1f5f8);
+  font-family: 'Hind Siliguri', sans-serif;
+  animation: lwDetailIn .2s ease-out;
+}
+.lw-detail[hidden]{ display: none; }
+@keyframes lwDetailIn{ from{ opacity: 0; transform: translateY(14px); } to{ opacity: 1; transform: none; } }
+
+.lw-detail-bar{
+  position: sticky; top: 0; z-index: 3;
+  flex: 0 0 auto;
+  display: flex; align-items: center; gap: 12px;
+  padding: 8px 16px;
+  padding-top: max(8px, env(safe-area-inset-top));
+  background: #fff;
+  border-bottom: 1px solid var(--line, rgba(34,48,58,0.12));
+}
+.lw-detail-back{
+  flex: 0 0 auto;
+  width: 44px; height: 44px; padding: 0;
+  display: flex; align-items: center; justify-content: center;
+  border: 0; border-radius: 50%;
+  background: #f1f5f8; color: var(--ink, #22303a); font-size: 1.05rem;
+  cursor: pointer; -webkit-tap-highlight-color: transparent;
+}
+.lw-detail-back:hover{ background: #e6ecf0; }
+.lw-detail-title{ font-size: 1.05rem; font-weight: 700; color: var(--ink, #22303a); }
+
+.lw-detail-inner{
+  flex: 1 0 auto;
+  width: 100%; max-width: 640px; margin: 0 auto; box-sizing: border-box;
+  padding-bottom: 20px;
+}
+
+/* উপরে বড় ছবি */
+.lw-dhero{
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  max-height: 54vh;
+  overflow: hidden;
+  background: #dfe7ec;
+  border-radius: 0 0 22px 22px;
+}
+.lw-dhero img{ display: block; width: 100%; height: 100%; object-fit: cover; }
+.lw-dhero.lw-dph{ cursor: zoom-in; -webkit-tap-highlight-color: transparent; }
+.lw-dhero .lw-photo-count{ right: 12px; bottom: 12px; font-size: 0.82rem; padding: 3px 10px; }
+.lw-dhero--none{
+  aspect-ratio: auto; height: 150px;
+  display: flex; align-items: center; justify-content: center;
+}
+.lw-dhero--none i{ font-size: 3.4rem; }
+.lw-dph:focus-visible{ outline: 3px solid #10193A; outline-offset: -3px; }
+
+.lw-dthumbs{
+  display: flex; gap: 8px;
+  padding: 12px 16px 2px;
+  overflow-x: auto; -webkit-overflow-scrolling: touch;
+}
+.lw-dthumb{
+  flex: 0 0 auto; width: 64px; height: 64px;
+  border-radius: 10px; overflow: hidden;
+  border: 2px solid #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.18);
+  cursor: pointer; background: #dfe7ec;
+  -webkit-tap-highlight-color: transparent;
+}
+.lw-dthumb img{ display: block; width: 100%; height: 100%; object-fit: cover; }
+
+.lw-dhead{ padding: 14px 16px 4px; }
+.lw-dname{ margin: 0; font-size: 1.45rem; font-weight: 800; line-height: 1.3; color: var(--ink, #22303a); overflow-wrap: anywhere; }
+.lw-dhead .lw-tags{ margin-top: 8px; }
+
+/* বিস্তারিত তথ্য */
+.lw-dsec{
+  margin: 12px 16px 0;
+  padding: 6px 14px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 1px 8px rgba(20,40,60,0.06);
+}
+.lw-dsec .lw-quote{ margin: 8px 0; }
+.lw-dsec-title{ margin: 8px 0 2px; font-size: 0.95rem; font-weight: 800; color: var(--ink, #22303a); }
+.lw-drow{
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--line, rgba(34,48,58,0.1));
+}
+.lw-drow:last-child{ border-bottom: 0; }
+.lw-dico{
+  flex: 0 0 auto; width: 34px; height: 34px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 10px;
+  background: #edf2fa; color: var(--acc, #1E2F5C); font-size: 0.95rem;
+}
+.lw-dtxt{ display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.lw-dlbl{ font-size: 0.8rem; font-weight: 600; color: var(--ink-soft, #5b6b73); }
+.lw-dval{ font-size: 1rem; font-weight: 600; line-height: 1.55; color: var(--ink, #22303a); white-space: pre-line; overflow-wrap: anywhere; }
+
+/* নিচে আটকে থাকা যোগাযোগ বাটন */
+.lw-detail-actions{
+  position: sticky; bottom: 0; z-index: 3;
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 10px 16px;
+  padding-bottom: max(10px, env(safe-area-inset-bottom));
+  background: #fff;
+  border-top: 1px solid var(--line, rgba(34,48,58,0.12));
+  box-shadow: 0 -4px 14px rgba(20,40,60,0.06);
+}
+.lw-detail-actions:empty{ display: none; }
+.lw-detail-actions .lw-nophone{ width: 100%; }
+
+@media (min-width: 700px){
+  .lw-detail-inner{ padding-top: 14px; }
+  .lw-dhero{ border-radius: 22px; max-height: 54vh; }
+  .lw-detail-actions{ padding-left: max(16px, calc(50% - 320px)); padding-right: max(16px, calc(50% - 320px)); }
+}
+@media (prefers-reduced-motion: reduce){
+  .lw-detail{ animation: none; }
+}

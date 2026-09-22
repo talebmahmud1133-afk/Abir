@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<!-- পুরনো পাত্র-পাত্রী লেয়ার বাদ: এই পেজ আর ব্যবহার হয় না, নতুন কুরিয়ার-স্টাইল পেজ matrimony.html-এ পাঠানো হয় (ফাইল মোছা হয়নি; ফেরাতে এই দুই লাইন সরান) -->
+<meta http-equiv="refresh" content="0;url=matrimony.html">
+<script>location.replace('matrimony.html');</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>আমার প্রোফাইল যোগ করুন — পাত্র-পাত্রী — টাঙ্গাইল জেলা</title>
+<meta name="description" content="পাত্র-পাত্রী বিভাগে নিজের প্রোফাইল যোগ করুন — টাঙ্গাইল জেলা।">
+<meta name="theme-color" content="#0E6B3A">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="css/style.css?v=20260922203957">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  .matri-reg-photo{display:flex;align-items:center;gap:14px;margin-bottom:4px;}
+  .matri-reg-photo-preview{width:84px;height:84px;border-radius:50%;overflow:hidden;background:#f1e7d8;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid var(--line);}
+  .matri-reg-photo-preview img{width:100%;height:100%;object-fit:cover;}
+  .matri-reg-photo-preview i{font-size:1.6rem;color:#9a8c78;}
+  .matri-reg-photo-btn{border:1px solid var(--line);background:#fff;padding:9px 16px;border-radius:var(--radius);font-family:inherit;font-size:0.92rem;cursor:pointer;}
+  .matri-reg-status{margin:0 0 18px;padding:12px 14px;border-radius:var(--radius);font-size:0.92rem;background:#eaf6ee;color:#1f7a3d;border:1px solid #c9e9d3;}
+  .matri-reg-status.pending-note{background:#fdf2e3;color:#8a5a12;border-color:#f3ddb0;}
+  .matri-reg-hint{font-size:0.82rem;color:var(--ink-soft);margin-top:-8px;}
+  .matri-reg-delete{margin-top:6px;background:none;border:none;color:#b3261e;text-decoration:underline;font-size:0.88rem;cursor:pointer;padding:0;justify-self:start;}
+</style>
+</head>
+<body data-banner-category="matrimonial">
+
+<header class="site-header app-header">
+  <div class="header-inner">
+    <button class="menu-toggle icon-btn" id="menuToggle" data-i18n-aria="menu.open" aria-label="মেনু খুলুন"><i class="fa-solid fa-bars" aria-hidden="true"></i></button>
+    <div class="brand-block">
+      <a href="index.html" class="brand app-brand">টাঙ্গাইল <span class="brand-accent">জেলা</span></a>
+    </div>
+    <div class="header-actions">
+      <a href="notifications.html" class="icon-btn" data-i18n-aria="menu.notifications" aria-label="বিজ্ঞপ্তি"><i class="fa-solid fa-bell" aria-hidden="true"></i></a>
+      <div class="more-menu-wrap">
+        <button type="button" class="icon-btn" id="moreMenuToggle" data-i18n-aria="menu.more" aria-label="আরও"><i class="fa-solid fa-ellipsis-vertical" aria-hidden="true"></i></button>
+        <div class="more-menu" id="moreMenu">
+          <a href="about.html" data-i18n="nav.about">পরিচিতি</a>
+          <div class="more-menu-section-title" data-i18n="menu.language">ভাষা</div>
+          <div class="lang-switcher">
+            <button type="button" class="lang-option" data-lang-choice="bn">বাংলা</button>
+            <button type="button" class="lang-option" data-lang-choice="en">English</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html" data-i18n="nav.home">হোম</a>
+      <a href="matrimonial.html">পাত্র-পাত্রী</a>
+      <a href="faq.html" data-i18n="nav.faq">সাধারণ প্রশ্ন</a>
+      <a href="contact.html" data-i18n="nav.contact">যোগাযোগ</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="page-body">
+      <button type="button" class="post-detail-back matri-back" onclick="if(window.history.length>1){history.back();}else{window.location.href='matrimonial.html';}" aria-label="পেছনে যান"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i></button>
+
+      <p class="matri-reg-status" id="matriRegStatus" style="display:none;"></p>
+
+      <form class="contact-form icon-form" id="matriRegForm">
+        <div class="icon-field icon-field-select">
+          <i class="fa-solid fa-venus-mars field-icon" aria-hidden="true"></i>
+          <label for="matriGender" class="sr-only">আপনি কী হিসেবে প্রোফাইল দিচ্ছেন? *</label>
+          <select id="matriGender" name="matriGender" required>
+            <option value="">আপনি কী হিসেবে প্রোফাইল দিচ্ছেন? *</option>
+            <option value="male">পাত্র (ছেলে)</option>
+            <option value="female">পাত্রী (মেয়ে)</option>
+          </select>
+        </div>
+
+        <div>
+          <label>প্রোফাইল ছবি (ঐচ্ছিক)</label>
+          <div class="matri-reg-photo">
+            <div class="matri-reg-photo-preview" id="matriPhotoPreview"><i class="fa-solid fa-user" aria-hidden="true"></i></div>
+            <button type="button" class="matri-reg-photo-btn" id="matriPhotoBtn">ছবি বাছাই করুন</button>
+            <input type="file" id="matriPhotoInput" accept="image/*" style="display:none;">
+          </div>
+          <p class="matri-reg-hint">সর্বোচ্চ ৩ এমবি, স্পষ্ট মুখের ছবি দিন।</p>
+        </div>
+
+        <div class="icon-field">
+          <i class="fa-solid fa-user field-icon" aria-hidden="true"></i>
+          <label for="matriFullName" class="sr-only">পূর্ণ নাম *</label>
+          <input type="text" id="matriFullName" placeholder="পূর্ণ নাম *">
+        </div>
+
+        <div class="icon-field">
+          <i class="fa-solid fa-cake-candles field-icon" aria-hidden="true"></i>
+          <label for="matriAge" class="sr-only">বয়স (বছর) *</label>
+          <input type="number" id="matriAge" min="18" max="80" placeholder="বয়স (বছর) *">
+        </div>
+
+        <div class="icon-field icon-field-select">
+          <i class="fa-solid fa-place-of-worship field-icon" aria-hidden="true"></i>
+          <label for="matriReligion" class="sr-only">ধর্ম</label>
+          <select id="matriReligion">
+            <option value="">ধর্ম নির্বাচন করুন</option>
+            <option value="ইসলাম">ইসলাম</option>
+            <option value="হিন্দু">হিন্দু</option>
+            <option value="খ্রিস্টান">খ্রিস্টান</option>
+            <option value="বৌদ্ধ">বৌদ্ধ</option>
+            <option value="অন্যান্য">অন্যান্য</option>
+          </select>
+        </div>
+
+        <div class="icon-field">
+          <i class="fa-solid fa-graduation-cap field-icon" aria-hidden="true"></i>
+          <label for="matriEducation" class="sr-only">শিক্ষাগত যোগ্যতা</label>
+          <input type="text" id="matriEducation" placeholder="শিক্ষাগত যোগ্যতা">
+        </div>
+
+        <div class="icon-field">
+          <i class="fa-solid fa-briefcase field-icon" aria-hidden="true"></i>
+          <label for="matriOccupation" class="sr-only">পেশা</label>
+          <input type="text" id="matriOccupation" placeholder="পেশা">
+        </div>
+
+        <div class="icon-field">
+          <i class="fa-solid fa-building-shield field-icon" aria-hidden="true"></i>
+          <label for="matriThana" class="sr-only">থানা *</label>
+          <input type="text" id="matriThana" placeholder="থানা *">
+        </div>
+
+        <div class="icon-field">
+          <i class="fa-solid fa-location-dot field-icon" aria-hidden="true"></i>
+          <label for="matriDistrict" class="sr-only">জেলা</label>
+          <input type="text" id="matriDistrict" value="টাঙ্গাইল">
+        </div>
+
+        <div>
+          <div class="icon-field">
+            <i class="fa-solid fa-mobile-screen field-icon" aria-hidden="true"></i>
+            <label for="matriPhone" class="sr-only">মোবাইল নাম্বার *</label>
+            <input type="tel" id="matriPhone" inputmode="numeric" placeholder="মোবাইল নাম্বার *">
+          </div>
+          <p class="matri-reg-hint">এই নাম্বার পাবলিকভাবে দেখানো হবে না — শুধু যোগাযোগ অনুরোধের মাধ্যমে শেয়ার হবে।</p>
+        </div>
+
+        <div class="icon-field">
+          <i class="fa-solid fa-file-lines field-icon" aria-hidden="true"></i>
+          <label for="matriAbout" class="sr-only">নিজের সম্পর্কে</label>
+          <textarea id="matriAbout" placeholder="নিজের সম্পর্কে সংক্ষেপে লিখুন"></textarea>
+        </div>
+
+        <div class="icon-field">
+          <i class="fa-solid fa-people-roof field-icon" aria-hidden="true"></i>
+          <label for="matriFamilyInfo" class="sr-only">পারিবারিক তথ্য</label>
+          <textarea id="matriFamilyInfo" placeholder="বাবা-মা, ভাইবোন সংক্রান্ত সংক্ষিপ্ত তথ্য"></textarea>
+        </div>
+
+        <button type="submit" id="matriRegSubmitBtn">জমা দিন</button>
+        <p class="auth-msg" id="matriRegMsg" style="margin-top:10px;"></p>
+      </form>
+
+      <button type="button" class="matri-reg-delete" id="matriRegDeleteBtn" style="display:none;">আমার প্রোফাইলটি মুছে ফেলুন</button>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <h4>টাঙ্গাইল জেলা</h4>
+      <p>টাঙ্গাইল জেলার বাসিন্দা, নতুন আগন্তুক ও ব্যবসায়ীদের জন্য তৈরি একটি স্থানীয় সেবা প্ল্যাটফর্ম।</p>
+    </div>
+    <div>
+      <h4>পেজ</h4>
+      <ul class="footer-links">
+        <li><a href="index.html">হোম</a></li>
+        <li><a href="matrimonial.html">পাত্র-পাত্রী</a></li>
+        <li><a href="faq.html">সাধারণ প্রশ্ন</a></li>
+        <li><a href="contact.html">যোগাযোগ</a></li>
+        <li><a href="privacy-policy.html">প্রাইভেসি পলিসি</a></li>
+        <li><a href="terms.html">শর্তাবলী</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">© ২০২৬ টাঙ্গাইল জেলা। সর্বস্বত্ব সংরক্ষিত।</div>
+</footer>
+
+<nav class="bottom-nav">
+  <a href="index.html"><span class="bn-icon"><i class="fa-solid fa-house" aria-hidden="true"></i></span><span data-i18n="bottomnav.home">Home</span></a>
+  <a href="members.html"><span class="bn-icon"><i class="fa-solid fa-users" aria-hidden="true"></i></span><span data-i18n="bottomnav.members">Members</span></a>
+  <a href="posts.html"><span class="bn-icon"><i class="fa-solid fa-plus" aria-hidden="true"></i></span><span data-i18n="bottomnav.post">Post</span></a>
+  <a href="profile.html"><span class="bn-icon"><i class="fa-solid fa-user" aria-hidden="true"></i></span><span data-i18n="bottomnav.profile">Profile</span></a>
+</nav>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="js/supabase-config.js?v=20260922203957"></script>
+<script src="js/nav-avatar.js?v=20260922203957"></script>
+<script src="js/call.js?v=20260922203957"></script>
+<script src="js/i18n.js?v=20260922203957"></script>
+<script src="js/script.js?v=20260922203957"></script>
+<script>
+(function () {
+  var client = window.supabase.createClient(window.TANGAIL_SUPABASE.url, window.TANGAIL_SUPABASE.key);
+
+  var titleEl = document.getElementById('matriRegTitle');
+  var statusEl = document.getElementById('matriRegStatus');
+  var form = document.getElementById('matriRegForm');
+  var genderSel = document.getElementById('matriGender');
+  var photoPreview = document.getElementById('matriPhotoPreview');
+  var photoBtn = document.getElementById('matriPhotoBtn');
+  var photoInput = document.getElementById('matriPhotoInput');
+  var nameInput = document.getElementById('matriFullName');
+  var ageInput = document.getElementById('matriAge');
+  var religionSel = document.getElementById('matriReligion');
+  var educationInput = document.getElementById('matriEducation');
+  var occupationInput = document.getElementById('matriOccupation');
+  var thanaInput = document.getElementById('matriThana');
+  var districtInput = document.getElementById('matriDistrict');
+  var phoneInput = document.getElementById('matriPhone');
+  var aboutInput = document.getElementById('matriAbout');
+  var familyInput = document.getElementById('matriFamilyInfo');
+  var submitBtn = document.getElementById('matriRegSubmitBtn');
+  var msg = document.getElementById('matriRegMsg');
+  var deleteBtn = document.getElementById('matriRegDeleteBtn');
+
+  var currentUser = null;
+  var existingProfile = null; // থাকলে এডিট মোড
+  var pendingPhotoFile = null;
+  var pendingPhotoDataUrl = null;
+
+  function setMsg(text, ok) {
+    msg.textContent = text || '';
+    msg.className = 'auth-msg' + (ok ? ' ok' : '');
+  }
+
+  function fillForm(p) {
+    genderSel.value = p.gender || '';
+    nameInput.value = p.full_name || '';
+    ageInput.value = p.age || '';
+    religionSel.value = p.religion || '';
+    educationInput.value = p.education || '';
+    occupationInput.value = p.occupation || '';
+    thanaInput.value = p.thana || '';
+    districtInput.value = p.district || 'টাঙ্গাইল';
+    phoneInput.value = p.phone || '';
+    aboutInput.value = p.about || '';
+    familyInput.value = p.family_info || '';
+    if (p.photo_url) {
+      photoPreview.innerHTML = '<img src="' + p.photo_url + '" alt="">';
+    }
+  }
+
+  function enterEditMode(p) {
+    existingProfile = p;
+    if (titleEl) { titleEl.textContent = 'আমার প্রোফাইল সম্পাদনা করুন'; }
+    submitBtn.textContent = 'আপডেট করুন';
+    deleteBtn.style.display = 'block';
+    fillForm(p);
+    statusEl.style.display = 'block';
+    if (p.status === 'approved') {
+      statusEl.className = 'matri-reg-status';
+      statusEl.textContent = 'আপনার প্রোফাইলটি বর্তমানে পাত্র-পাত্রী তালিকায় প্রকাশিত আছে।';
+    } else {
+      statusEl.className = 'matri-reg-status pending-note';
+      statusEl.textContent = 'আপনার প্রোফাইলটি বর্তমানে প্রকাশিত নেই (' + p.status + ')।';
+    }
+  }
+
+  // লগইন করা না থাকলে লগইন পেজে পাঠানো হবে, লগইনের পর এই পেজেই ফিরে আসবে
+  client.auth.getSession().then(function (res) {
+    var session = res.data && res.data.session;
+    if (!session) {
+      window.location.href = 'login.html?next=matrimonial-register.html';
+      return;
+    }
+    currentUser = session.user;
+
+    client.from('matrimonial_profiles').select('*').eq('user_id', currentUser.id).maybeSingle().then(function (r) {
+      if (r.data) enterEditMode(r.data);
+    });
+  });
+
+  // ---- ছবি বাছাই ----
+  photoBtn.addEventListener('click', function () { photoInput.click(); });
+
+  photoInput.addEventListener('change', function () {
+    var file = photoInput.files && photoInput.files[0];
+    if (!file) return;
+    if (!file.type.startsWith('image/')) {
+      setMsg('শুধুমাত্র ছবি ফাইল (jpg, png ইত্যাদি) আপলোড করুন।');
+      photoInput.value = '';
+      return;
+    }
+    if (file.size > 3 * 1024 * 1024) {
+      setMsg('ছবির সাইজ ৩ এমবি-র বেশি হওয়া যাবে না।');
+      photoInput.value = '';
+      return;
+    }
+    pendingPhotoFile = file;
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      pendingPhotoDataUrl = e.target.result;
+      photoPreview.innerHTML = '<img src="' + pendingPhotoDataUrl + '" alt="">';
+    };
+    reader.readAsDataURL(file);
+  });
+
+  function uploadPhoto(file) {
+    var safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
+    var path = currentUser.id + '/' + Date.now() + '-' + safeName;
+    return client.storage.from('matrimonial-photos').upload(path, file, { cacheControl: '3600', upsert: false })
+      .then(function (res) {
+        if (res.error) { throw res.error; }
+        return client.storage.from('matrimonial-photos').getPublicUrl(path).data.publicUrl;
+      });
+  }
+
+  // ---- ফর্ম সাবমিট ----
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (!currentUser) { setMsg('লগইন যাচাই করা হচ্ছে, একটু অপেক্ষা করুন।'); return; }
+
+    var gender = genderSel.value;
+    var name = nameInput.value.trim();
+    var age = parseInt(ageInput.value, 10);
+    var thana = thanaInput.value.trim();
+    var district = districtInput.value.trim();
+    var phone = phoneInput.value.trim();
+
+    if (!gender) { setMsg('পাত্র/পাত্রী নির্বাচন করুন।'); return; }
+    if (!name) { setMsg('পূর্ণ নাম লিখুন।'); return; }
+    if (!age || age < 18 || age > 80) { setMsg('সঠিক বয়স দিন (১৮-৮০)।'); return; }
+    if (!thana) { setMsg('থানার নাম লিখুন।'); return; }
+    if (!district) { setMsg('জেলার নাম লিখুন।'); return; }
+    if (!phone || phone.replace(/\D/g, '').length < 11) { setMsg('সঠিক ১১ ডিজিটের মোবাইল নাম্বার দিন।'); return; }
+
+    submitBtn.disabled = true;
+    setMsg('জমা দেওয়া হচ্ছে…', true);
+
+    var photoStep = pendingPhotoFile ? uploadPhoto(pendingPhotoFile) : Promise.resolve(existingProfile ? existingProfile.photo_url : null);
+
+    photoStep.then(function (photoUrl) {
+      var payload = {
+        gender: gender,
+        full_name: name,
+        age: age,
+        religion: religionSel.value || null,
+        education: educationInput.value.trim() || null,
+        occupation: occupationInput.value.trim() || null,
+        thana: thana,
+        district: district,
+        phone: phone.replace(/\D/g, ''),
+        about: aboutInput.value.trim() || null,
+        family_info: familyInput.value.trim() || null
+      };
+      if (photoUrl) payload.photo_url = photoUrl;
+
+      if (existingProfile) {
+        return client.from('matrimonial_profiles').update(payload).eq('id', existingProfile.id).select().maybeSingle();
+      }
+      payload.user_id = currentUser.id;
+      payload.status = 'approved';
+      return client.from('matrimonial_profiles').insert(payload).select().maybeSingle();
+    }).then(function (res) {
+      submitBtn.disabled = false;
+      pendingPhotoFile = null;
+      if (res.error) {
+        if (String(res.error.code) === '23505') {
+          setMsg('আপনার ইতিমধ্যে একটি প্রোফাইল আছে। পেজ রিফ্রেশ করে সেটি সম্পাদনা করুন।');
+        } else {
+          setMsg('জমা দিতে সমস্যা হয়েছে: ' + (res.error.message || 'আবার চেষ্টা করুন।'));
+        }
+        return;
+      }
+      if (res.data) enterEditMode(res.data);
+      setMsg('ধন্যবাদ! আপনার প্রোফাইল সফলভাবে প্রকাশিত হয়েছে।', true);
+    }).catch(function (err) {
+      submitBtn.disabled = false;
+      setMsg('ছবি আপলোড করা যায়নি: ' + (err && err.message ? err.message : 'আবার চেষ্টা করুন।'));
+    });
+  });
+
+  // ---- প্রোফাইল ডিলিট ----
+  deleteBtn.addEventListener('click', function () {
+    if (!existingProfile) return;
+    if (!window.confirm('আপনি কি নিশ্চিতভাবে আপনার প্রোফাইলটি মুছে ফেলতে চান?')) return;
+    deleteBtn.disabled = true;
+    client.from('matrimonial_profiles').delete().eq('id', existingProfile.id).then(function (res) {
+      deleteBtn.disabled = false;
+      if (res.error) { setMsg('মুছে ফেলা যায়নি: ' + res.error.message); return; }
+      window.location.href = 'matrimonial.html';
+    });
+  });
+})();
+</script>
+<script src="js/auto-update.js?v=20260922203957"></script>
+<script src="js/floating-buttons.js?v=20260922203957"></script>
+</body>
+</html>

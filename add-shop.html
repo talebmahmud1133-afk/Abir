@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>দোকান যুক্ত করুন — টাঙ্গাইল জেলা</title>
+<meta name="description" content="আপনার দোকান বা ব্যবসা প্রতিষ্ঠানের তথ্য টাঙ্গাইল জেলার দোকান ডিরেক্টরিতে যুক্ত করুন।">
+<meta property="og:title" content="দোকান যুক্ত করুন — টাঙ্গাইল জেলা">
+<meta property="og:description" content="আপনার দোকান বা ব্যবসা প্রতিষ্ঠানের তথ্য টাঙ্গাইল জেলার দোকান ডিরেক্টরিতে যুক্ত করুন।">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0E6B3A">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="css/style.css?v=20260922203957">
+<link rel="stylesheet" href="css/shop.css?v=20260922203957">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+<header class="site-header app-header">
+  <div class="header-inner">
+    <button class="menu-toggle icon-btn" id="menuToggle" data-i18n-aria="menu.open" aria-label="মেনু খুলুন"><i class="fa-solid fa-bars" aria-hidden="true"></i></button>
+    <div class="brand-block">
+      <a href="index.html" class="brand app-brand">টাঙ্গাইল <span class="brand-accent">জেলা</span></a>
+    </div>
+    <div class="header-actions">
+      <a href="notifications.html" class="icon-btn" data-i18n-aria="menu.notifications" aria-label="বিজ্ঞপ্তি"><i class="fa-solid fa-bell" aria-hidden="true"></i></a>
+      <div class="more-menu-wrap">
+        <button type="button" class="icon-btn" id="moreMenuToggle" data-i18n-aria="menu.more" aria-label="আরও"><i class="fa-solid fa-ellipsis-vertical" aria-hidden="true"></i></button>
+        <div class="more-menu" id="moreMenu">
+          <a href="about.html" data-i18n="nav.about">পরিচিতি</a>
+          <div class="more-menu-section-title" data-i18n="menu.language">ভাষা</div>
+          <div class="lang-switcher">
+            <button type="button" class="lang-option" data-lang-choice="bn">বাংলা</button>
+            <button type="button" class="lang-option" data-lang-choice="en">English</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html" data-i18n="nav.home">হোম</a>
+      <a href="about.html" data-i18n="nav.about">পরিচিতি</a>
+      <a href="add-listing.html" data-i18n="nav.addListing">তথ্য যোগ করুন</a>
+      <a href="faq.html" data-i18n="nav.faq">সাধারণ প্রশ্ন</a>
+      <a href="contact.html" data-i18n="nav.contact">যোগাযোগ</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <div class="wrap">
+
+    <div class="post-detail-topbar list-back-topbar">
+      <button type="button" class="post-detail-back" onclick="if(window.history.length>1){history.back();}else{window.location.href='business-directory.html';}" aria-label="পেছনে যান"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i></button>
+      <span>দোকান যুক্ত করুন</span>
+    </div>
+
+    <section class="shop-form-section">
+      <h1>আপনার দোকান যুক্ত করুন</h1>
+      <p>ফর্মটি পূরণ করে জমা দিন। যাচাইয়ের পর অ্যাডমিন অনুমোদন দিলেই আপনার দোকান দোকান ডিরেক্টরিতে প্রকাশ হবে।</p>
+
+      <form id="shopForm">
+        <div class="shop-img-picker" id="shopImgPicker">
+          <div class="shop-img-slot" data-idx="0"><i class="fa-solid fa-image" aria-hidden="true"></i><span>প্রোফাইল ছবি</span></div>
+          <div class="shop-img-slot" data-idx="1" style="width:192px"><i class="fa-solid fa-panorama" aria-hidden="true"></i><span>ব্যানার</span></div>
+        </div>
+        <p class="shop-img-hint">প্রোফাইল ছবি ও ব্যানার (ঐচ্ছিক) — ছবি বেছে নিয়ে জুম ইন/আউট করে ও টেনে ইচ্ছামতো বসাতে পারবেন। JPG/PNG, সর্বোচ্চ ৮MB।</p>
+        <input type="file" id="shopFileInput" accept="image/*" style="display:none">
+
+        <div class="shop-form-progress" id="shopProgressWrap" hidden>
+          <div class="shop-form-progress-bar-wrap"><div class="shop-form-progress-bar" id="shopProgressBar"></div></div>
+          <div class="shop-form-progress-text" id="shopProgressText">0%</div>
+        </div>
+
+        <div class="shop-form-group">
+          <label for="shopName">দোকানের নাম <span class="req">*</span></label>
+          <input type="text" id="shopName" placeholder="দোকানের নাম লিখুন">
+        </div>
+
+        <div class="shop-form-row cols-2">
+          <div class="shop-form-group">
+            <label for="shopCategory">ক্যাটাগরি নির্বাচন করুন <span class="req">*</span></label>
+            <select id="shopCategory"></select>
+          </div>
+          <div class="shop-form-group">
+            <label for="shopUpazila">উপজেলা <span class="req">*</span></label>
+            <select id="shopUpazila"></select>
+          </div>
+        </div>
+
+        <div class="shop-form-row cols-2">
+          <div class="shop-form-group">
+            <label for="shopOwner">মালিকের নাম</label>
+            <input type="text" id="shopOwner" placeholder="মালিকের নাম লিখুন">
+          </div>
+          <div class="shop-form-group">
+            <label for="shopPhone">মোবাইল নম্বর <span class="req">*</span></label>
+            <input type="tel" id="shopPhone" inputmode="numeric" placeholder="মোবাইল নম্বর লিখুন">
+          </div>
+        </div>
+
+        <div class="shop-form-group">
+          <label for="shopWhatsapp">WhatsApp নম্বর</label>
+          <input type="tel" id="shopWhatsapp" inputmode="numeric" placeholder="WhatsApp নম্বর লিখুন (না থাকলে খালি রাখুন)">
+        </div>
+
+        <div class="shop-form-group">
+          <label for="shopAddress">ঠিকানা <span class="req">*</span></label>
+          <input type="text" id="shopAddress" placeholder="সম্পূর্ণ ঠিকানা লিখুন">
+        </div>
+
+        <div class="shop-form-row cols-2">
+          <div class="shop-form-group">
+            <label for="shopMaps">গুগল ম্যাপ লিংক</label>
+            <input type="url" id="shopMaps" placeholder="https://maps.google.com/...">
+          </div>
+          <div class="shop-form-group">
+            <label for="shopWebsite">ওয়েবসাইট</label>
+            <input type="url" id="shopWebsite" placeholder="https://...">
+          </div>
+        </div>
+
+        <div class="shop-form-group">
+          <label for="shopFacebook">ফেসবুক পেজ</label>
+          <input type="url" id="shopFacebook" placeholder="https://facebook.com/...">
+        </div>
+
+        <div class="shop-form-group">
+          <label for="shopHours">খোলার সময়</label>
+          <input type="text" id="shopHours" placeholder="যেমনঃ সকাল ৯টা – রাত ৯টা (শুক্রবার বন্ধ)">
+        </div>
+
+        <div class="shop-form-group">
+          <label for="shopDescription">দোকানের বিবরণ <span class="req">*</span></label>
+          <textarea id="shopDescription" placeholder="আপনার দোকান সম্পর্কে কিছু লিখুন"></textarea>
+        </div>
+
+        <button type="submit" class="shop-form-submit" id="shopSubmitBtn">জমা দিন</button>
+        <p class="auth-msg" id="shopMsg" style="margin-top:12px;"></p>
+      </form>
+
+      <div class="notice" style="margin-top:20px">
+        জমা দেওয়ার পর আপনার দোকান <strong>পেন্ডিং</strong> অবস্থায় থাকবে। অ্যাডমিন যাচাই করে অনুমোদন দিলে তা সবার জন্য দোকান ডিরেক্টরিতে দেখানো শুরু হবে।
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <h4>টাঙ্গাইল জেলা</h4>
+      <p>টাঙ্গাইল জেলার বাসিন্দা, নতুন আগন্তুক ও ব্যবসায়ীদের জন্য তৈরি একটি স্থানীয় সেবা প্ল্যাটফর্ম।</p>
+    </div>
+    <div>
+      <h4>পেজ</h4>
+      <ul class="footer-links">
+        <li><a href="index.html">হোম</a></li>
+        <li><a href="about.html">পরিচিতি</a></li>
+        <li><a href="add-listing.html">তথ্য যোগ করুন</a></li>
+        <li><a href="faq.html">সাধারণ প্রশ্ন</a></li>
+        <li><a href="contact.html">যোগাযোগ</a></li>
+        <li><a href="sitemap.html">সাইটম্যাপ</a></li>
+        <li><a href="privacy-policy.html">প্রাইভেসি পলিসি</a></li>
+        <li><a href="terms.html">শর্তাবলী</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">© ২০২৬ টাঙ্গাইল জেলা। সর্বস্বত্ব সংরক্ষিত।</div>
+</footer>
+
+
+<nav class="bottom-nav">
+  <a href="index.html"><span class="bn-icon"><i class="fa-solid fa-house" aria-hidden="true"></i></span><span data-i18n="bottomnav.home">Home</span></a>
+  <a href="members.html"><span class="bn-icon"><i class="fa-solid fa-users" aria-hidden="true"></i></span><span data-i18n="bottomnav.members">Members</span></a>
+  <a href="posts.html"><span class="bn-icon"><i class="fa-solid fa-plus" aria-hidden="true"></i></span><span data-i18n="bottomnav.post">Post</span></a>
+  <a href="profile.html"><span class="bn-icon"><i class="fa-solid fa-user" aria-hidden="true"></i></span><span data-i18n="bottomnav.profile">Profile</span></a>
+</nav>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="js/supabase-config.js?v=20260922203957"></script>
+<script src="js/nav-avatar.js?v=20260922203957"></script>
+<script src="js/call.js?v=20260922203957"></script>
+<script src="js/i18n.js?v=20260922203957"></script>
+<script src="js/shop-data.js?v=20260922203957"></script>
+<script src="js/script.js?v=20260922203957"></script>
+<script src="js/image-cropper.js?v=20260922203957"></script>
+<script src="js/add-shop.js?v=20260922203957"></script>
+<script src="js/auto-update.js?v=20260922203957"></script>
+<script src="js/floating-buttons.js?v=20260922203957"></script>
+</body>
+</html>

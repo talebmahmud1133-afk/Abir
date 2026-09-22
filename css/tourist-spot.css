@@ -1,0 +1,229 @@
+/* tourist-spot.css
+   Dedicated styles for the দর্শনীয় স্থান (Tourist Spot) feature only.
+   Kept out of style.css on purpose so no other page/category is touched.
+   Reuses the site's existing CSS variables (--maroon = brand green, --gold = accent blue, etc).
+*/
+
+/* ---------- shared ---------- */
+.ts-page{ padding-bottom: 24px; }
+.ts-topbar{ display:flex; align-items:center; gap:12px; padding:14px 0 12px; }
+.ts-topbar .ts-back{
+  width:38px; height:38px; border-radius:50%; border:none; background:#fff;
+  box-shadow: var(--shadow-sm); display:flex; align-items:center; justify-content:center;
+  color: var(--ink); font-size:1rem; cursor:pointer; flex-shrink:0;
+}
+.ts-topbar h1{ margin:0; font-size:1.08rem; font-weight:700; color:var(--ink); font-family:'Tiro Bangla', serif; flex:1; }
+.ts-topbar .ts-filter-toggle{
+  width:38px; height:38px; border-radius:50%; border:none; background:#fff;
+  box-shadow: var(--shadow-sm); display:flex; align-items:center; justify-content:center;
+  color: var(--maroon); font-size:1rem; cursor:pointer;
+}
+
+/* ---------- filter chips ---------- */
+.ts-chip-row{
+  display:flex; gap:8px; overflow-x:auto; padding:2px 2px 14px; scrollbar-width:none;
+}
+.ts-chip-row::-webkit-scrollbar{ display:none; }
+.ts-chip{
+  flex-shrink:0; padding:9px 18px; border-radius:999px; border:1px solid var(--line);
+  background:#fff; color:var(--ink-soft); font-size:0.88rem; font-weight:600; cursor:pointer;
+  transition: all 0.15s ease; white-space:nowrap;
+}
+.ts-chip.active{ background:var(--maroon); border-color:var(--maroon); color:#fff; box-shadow:var(--shadow-sm); }
+.ts-chip:active{ transform: scale(0.96); }
+
+/* ---------- list cards ---------- */
+/* .wrap-এর ২৪px পাশের প্যাডিং এই লিস্টের জন্য গ্যাপ তৈরি না করে — ফোনের এক
+   কিনারা থেকে আরেক কিনারা পর্যন্ত ফুল-ব্লিড, সাইটের অন্য জায়গায় (নোটিশ বার,
+   cat-grid, matrimonial ট্যাববার) ব্যবহৃত একই 100vw + left:50% +
+   translateX(-50%) কৌশল */
+.ts-list{
+  display:flex; flex-direction:column; gap:16px;
+  width: 100vw; max-width: 100vw; position: relative;
+  left: 50%; transform: translateX(-50%);
+  padding: 14px 10px; box-sizing: border-box;
+  background: var(--cream-deep);
+}
+.ts-card{
+  background:#fff; border-radius:18px; overflow:hidden; box-shadow: 0 2px 5px rgba(20,50,45,0.08), var(--shadow-md);
+  text-decoration:none; color:inherit; display:block; border:1px solid rgba(20,50,45,0.14);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.ts-card:active{ transform: scale(0.985); }
+.ts-card-img{ position:relative; width:100%; aspect-ratio: 16/10; overflow:hidden; background:var(--cream); }
+.ts-card-img img{ width:100%; height:100%; object-fit:cover; display:block; }
+.ts-card-badge{
+  position:absolute; top:10px; left:10px; background:rgba(14,107,58,0.94); color:#fff;
+  font-size:0.72rem; font-weight:700; padding:4px 10px; border-radius:999px;
+}
+.ts-card-body{ padding:14px 16px 16px; }
+.ts-card-body h3{ margin:0 0 4px; font-size:1.05rem; font-weight:700; color:var(--ink); font-family:'Tiro Bangla', serif; }
+.ts-card-loc{ display:flex; align-items:center; gap:6px; color:var(--ink-soft); font-size:0.86rem; margin-bottom:6px; }
+.ts-card-loc i{ color:var(--maroon); font-size:0.8rem; }
+.ts-rating{ display:flex; align-items:center; gap:5px; font-size:0.85rem; color:var(--ink-soft); margin-bottom:10px; }
+.ts-rating i{ color:#C9962E; }
+.ts-rating b{ color:var(--ink); }
+.ts-card-desc{ font-size:0.85rem; color:var(--ink-soft); line-height:1.5; margin:0 0 12px; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+.ts-btn{
+  display:flex; align-items:center; justify-content:center; gap:8px; width:100%;
+  background: linear-gradient(135deg, var(--maroon), var(--maroon-dark)); color:#fff; border:none;
+  border-radius:12px; padding:12px 16px; font-size:0.95rem; font-weight:700; cursor:pointer;
+  box-shadow: 0 6px 16px rgba(14,107,58,0.28); transition: transform 0.12s ease;
+}
+.ts-btn:active{ transform: scale(0.97); }
+.ts-btn.ts-btn-sm{ padding:9px 14px; font-size:0.88rem; }
+.ts-empty{ text-align:center; padding:40px 16px; color:var(--ink-soft); }
+
+/* ---------- detail page ---------- */
+.ts-hero{ position:relative; margin: 0 -16px 0; border-radius:0 0 22px 22px; overflow:hidden; }
+.ts-hero img{ width:100%; aspect-ratio:4/3; object-fit:cover; display:block; }
+.ts-hero-actions{ position:absolute; top:14px; left:16px; right:16px; display:flex; justify-content:space-between; }
+.ts-hero-actions .ts-back{ background:rgba(255,255,255,0.92); }
+.ts-hero-actions .ts-icon-group{ display:flex; gap:10px; }
+.ts-icon-btn{
+  width:38px; height:38px; border-radius:50%; border:none; background:rgba(255,255,255,0.92);
+  display:flex; align-items:center; justify-content:center; color:var(--ink); font-size:1rem; cursor:pointer;
+  box-shadow: var(--shadow-sm);
+}
+.ts-icon-btn.active{ color:#A83D5E; }
+.ts-hero-count{
+  position:absolute; bottom:12px; right:14px; background:rgba(0,0,0,0.55); color:#fff;
+  font-size:0.75rem; padding:3px 10px; border-radius:999px;
+}
+.ts-gallery-strip{ display:flex; gap:8px; padding:12px 0; overflow-x:auto; scrollbar-width:none; }
+.ts-gallery-strip::-webkit-scrollbar{ display:none; }
+.ts-gallery-strip img{ width:78px; height:78px; object-fit:cover; border-radius:12px; flex-shrink:0; cursor:pointer; border:2px solid transparent; }
+.ts-gallery-strip img.active{ border-color:var(--maroon); }
+
+.ts-detail-head{ padding: 6px 0 4px; }
+.ts-detail-head .ts-badge{
+  display:inline-block; background: var(--gold-soft); color:#0B5D7A; font-weight:700;
+  font-size:0.75rem; padding:4px 12px; border-radius:999px; margin-bottom:8px;
+}
+.ts-detail-head h2{ margin:0 0 6px; font-size:1.3rem; font-weight:700; color:var(--ink); font-family:'Tiro Bangla', serif; }
+
+.ts-info-chips{ display:flex; gap:10px; margin:14px 0; flex-wrap:wrap; }
+.ts-info-chip{
+  flex:1; min-width:140px; background:var(--cream); border-radius:14px; padding:10px 14px;
+  display:flex; align-items:flex-start; gap:10px;
+}
+.ts-info-chip i{ color:var(--maroon); font-size:1.05rem; margin-top:2px; }
+.ts-info-chip .lbl{ font-size:0.72rem; color:var(--ink-soft); margin-bottom:2px; }
+.ts-info-chip .val{ font-size:0.86rem; font-weight:700; color:var(--ink); }
+
+.ts-tabs{ display:flex; gap:4px; border-bottom:1px solid var(--line); margin:18px 0 14px; overflow-x:auto; scrollbar-width:none; }
+.ts-tabs::-webkit-scrollbar{ display:none; }
+.ts-tab{
+  flex-shrink:0; background:none; border:none; padding:10px 14px; font-size:0.9rem; font-weight:700;
+  color:var(--ink-soft); cursor:pointer; border-bottom:2.5px solid transparent; margin-bottom:-1px;
+}
+.ts-tab.active{ color:var(--maroon); border-bottom-color:var(--maroon); }
+.ts-tabpanel{ display:none; }
+.ts-tabpanel.active{ display:block; animation: tsFade 0.2s ease; }
+@keyframes tsFade{ from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:none;} }
+
+.ts-desc{ font-size:0.92rem; line-height:1.75; color:var(--ink-soft); margin:0 0 6px; }
+
+.ts-transport-item{ display:flex; gap:14px; padding:14px 0; border-bottom:1px solid var(--line); }
+.ts-transport-item:last-child{ border-bottom:none; }
+.ts-transport-icon{
+  width:42px; height:42px; border-radius:12px; background:var(--cream); color:var(--maroon);
+  display:flex; align-items:center; justify-content:center; font-size:1.05rem; flex-shrink:0;
+}
+.ts-transport-item h4{ margin:0 0 4px; font-size:0.92rem; font-weight:700; color:var(--ink); }
+.ts-transport-item p{ margin:0; font-size:0.85rem; color:var(--ink-soft); line-height:1.6; }
+.ts-tip{ display:flex; gap:10px; background: var(--gold-soft); border-radius:14px; padding:14px; margin-top:8px; }
+.ts-tip i{ color:var(--gold); margin-top:2px; }
+.ts-tip p{ margin:0; font-size:0.84rem; color:var(--ink); line-height:1.6; }
+
+.ts-facility-grid{ display:grid; grid-template-columns: 1fr 1fr; gap:10px; }
+.ts-facility{ display:flex; align-items:center; gap:10px; background:var(--cream); border-radius:14px; padding:12px; }
+.ts-facility-icon{ width:38px; height:38px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:0.95rem; color:#fff; flex-shrink:0; }
+.ts-facility h4{ margin:0; font-size:0.85rem; font-weight:700; color:var(--ink); }
+.ts-facility span{ font-size:0.75rem; color:var(--ink-soft); }
+
+.ts-actions-row{ display:flex; gap:10px; margin:18px 0; }
+.ts-action-btn{
+  flex:1; display:flex; flex-direction:column; align-items:center; gap:6px; background:#fff;
+  border:1px solid var(--line); border-radius:14px; padding:12px 8px; cursor:pointer; color:var(--ink);
+  font-size:0.78rem; font-weight:600; box-shadow: var(--shadow-sm);
+}
+.ts-action-btn i{ font-size:1.05rem; color:var(--maroon); }
+.ts-action-btn.active i{ color:#A83D5E; }
+
+/* ---------- location permission modal ---------- */
+.ts-modal-overlay{
+  position:fixed; inset:0; background:rgba(15,30,25,0.55); z-index:999; display:none;
+  align-items:center; justify-content:center; padding:24px; backdrop-filter: blur(2px);
+}
+.ts-modal-overlay.open{ display:flex; }
+.ts-modal{
+  background:#fff; border-radius:20px; padding:28px 24px; max-width:360px; width:100%; text-align:center;
+  box-shadow: var(--shadow-lg); animation: tsPop 0.22s ease;
+}
+@keyframes tsPop{ from{ transform:scale(0.92); opacity:0;} to{ transform:scale(1); opacity:1;} }
+.ts-modal-icon{
+  width:64px; height:64px; border-radius:50%; background: var(--gold-soft); color:var(--maroon);
+  display:flex; align-items:center; justify-content:center; font-size:1.6rem; margin:0 auto 16px;
+}
+.ts-modal h3{ margin:0 0 10px; font-size:1.05rem; color:var(--ink); font-family:'Tiro Bangla', serif; }
+.ts-modal p{ margin:0 0 20px; font-size:0.86rem; color:var(--ink-soft); line-height:1.6; }
+.ts-modal .ts-btn{ margin-bottom:10px; }
+.ts-modal .ts-btn-ghost{
+  background:var(--cream); color:var(--ink); box-shadow:none;
+}
+
+/* ---------- toast ---------- */
+.ts-toast{
+  position:fixed; left:50%; bottom:90px; transform:translateX(-50%) translateY(20px); z-index:1000;
+  background:var(--ink); color:#fff; padding:11px 18px; border-radius:999px; font-size:0.85rem;
+  opacity:0; pointer-events:none; transition: all 0.25s ease; box-shadow: var(--shadow-md); white-space:nowrap;
+}
+.ts-toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
+
+/* ---------- lightbox ---------- */
+.ts-lightbox{
+  position:fixed; inset:0; background:rgba(0,0,0,0.92); z-index:998; display:none;
+  align-items:center; justify-content:center; padding:20px;
+}
+.ts-lightbox.open{ display:flex; }
+.ts-lightbox img{ max-width:100%; max-height:80vh; border-radius:12px; }
+.ts-lightbox .ts-back{ position:absolute; top:18px; left:18px; }
+
+@media (min-width: 720px){
+  .ts-hero{ margin:0; border-radius:22px; }
+}
+
+/* ---------- reviews tab ---------- */
+.ts-review-form{ background:var(--cream); border-radius:16px; padding:16px; margin-bottom:16px; }
+.ts-review-form h4{ margin:0 0 10px; font-size:0.92rem; font-weight:700; color:var(--ink); }
+.ts-star-picker{ display:flex; gap:8px; font-size:1.4rem; color:#C9962E; margin-bottom:12px; }
+.ts-star-picker i{ cursor:pointer; transition: transform 0.1s ease; }
+.ts-star-picker i:active{ transform: scale(1.15); }
+.ts-review-form input[type="text"],
+.ts-review-form textarea{
+  width:100%; border:1px solid var(--line); border-radius:12px; padding:10px 14px; font-size:0.88rem;
+  color:var(--ink); font-family:inherit; margin-bottom:10px; background:#fff; box-sizing:border-box; resize:vertical;
+}
+.ts-input-icon-wrap{ position: relative; }
+.ts-input-icon-wrap .ts-field-icon{
+  position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+  color: var(--maroon); font-size: 14px; pointer-events: none; z-index: 1;
+}
+.ts-input-icon-wrap .ts-field-icon.ts-field-icon-top{ top: 18px; transform: none; }
+.ts-input-icon-wrap input[type="text"],
+.ts-input-icon-wrap textarea{ padding-left: 40px; }
+.ts-review-submit{
+  background: linear-gradient(135deg, var(--maroon), var(--maroon-dark)); color:#fff; border:none;
+  border-radius:12px; padding:11px 18px; font-size:0.9rem; font-weight:700; cursor:pointer; width:100%;
+}
+.ts-review-submit:active{ transform: scale(0.98); }
+.ts-review-msg{ margin:8px 0 0; font-size:0.8rem; color:var(--ink-soft); min-height:1em; }
+.ts-review-list{ display:flex; flex-direction:column; gap:12px; }
+.ts-review-empty{ text-align:center; color:var(--ink-soft); font-size:0.86rem; padding:20px 0; margin:0; }
+.ts-review-card{ background:#fff; border:1px solid var(--line); border-radius:14px; padding:12px 14px; }
+.ts-review-head{ display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:6px; }
+.ts-review-head b{ font-size:0.88rem; color:var(--ink); }
+.ts-review-stars{ font-size:0.78rem; color:#C9962E; white-space:nowrap; }
+.ts-review-text{ margin:0 0 6px; font-size:0.85rem; color:var(--ink-soft); line-height:1.6; }
+.ts-review-time{ font-size:0.72rem; color:var(--ink-soft); opacity:0.8; }

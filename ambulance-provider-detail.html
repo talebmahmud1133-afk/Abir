@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="ambdPageTitle">প্রোভাইডার প্রোফাইল — টাঙ্গাইল অ্যাম্বুলেন্স সার্ভিস</title>
+<meta name="description" content="যাচাইকৃত অ্যাম্বুলেন্স সার্ভিস প্রোভাইডারের বিস্তারিত তথ্য — অভিজ্ঞতা, সম্পন্ন কাজ, দূরত্ব ও নিরাপদ যোগাযোগ।">
+<meta name="robots" content="noindex, follow">
+<meta property="og:title" content="প্রোভাইডার প্রোফাইল — টাঙ্গাইল অ্যাম্বুলেন্স সার্ভিস">
+<meta property="og:description" content="যাচাইকৃত অ্যাম্বুলেন্স সার্ভিস প্রোভাইডারের বিস্তারিত তথ্য।">
+<meta property="og:image" content="assets/favicon.svg">
+<meta property="og:type" content="profile">
+<meta name="theme-color" content="#e11d2e">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="css/style.css?v=20260922203957">
+<link rel="stylesheet" href="css/ambulance.css?v=20260922203957">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body class="amb-app">
+
+<header class="site-header app-header">
+  <div class="header-inner">
+    <button class="menu-toggle icon-btn" id="menuToggle" aria-label="মেনু খুলুন"><i class="fa-solid fa-bars" aria-hidden="true"></i></button>
+    <div class="brand-block">
+      <a href="index.html" class="brand app-brand">টাঙ্গাইল <span class="brand-accent">জেলা</span></a>
+    </div>
+    <div class="header-actions">
+      <a href="notifications.html" class="icon-btn" aria-label="বিজ্ঞপ্তি"><i class="fa-solid fa-bell" aria-hidden="true"></i></a>
+      <div class="more-menu-wrap">
+        <button type="button" class="icon-btn" id="moreMenuToggle" aria-label="আরও"><i class="fa-solid fa-ellipsis-vertical" aria-hidden="true"></i></button>
+        <div class="more-menu" id="moreMenu">
+          <a href="about.html">পরিচিতি</a>
+          <div class="more-menu-section-title">ভাষা</div>
+          <div class="lang-switcher">
+            <button type="button" class="lang-option" data-lang-choice="bn">বাংলা</button>
+            <button type="button" class="lang-option" data-lang-choice="en">English</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html">হোম</a>
+      <a href="about.html">পরিচিতি</a>
+      <a href="add-listing.html">তথ্য যোগ করুন</a>
+      <a href="faq.html">সাধারণ প্রশ্ন</a>
+      <a href="contact.html">যোগাযোগ</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="sticky-top-stack">
+      <div class="ambd-topbar">
+        <button type="button" class="ambd-back" id="ambdBack" aria-label="পেছনে যান"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i></button>
+        <span class="ambd-topbar-title">প্রোভাইডার প্রোফাইল</span>
+        <div class="ambd-nav-controls" id="ambdNavControls" style="display:none">
+          <button type="button" class="ambd-nav-btn" id="ambdPrevBtn" aria-label="পূর্ববর্তী প্রোভাইডার"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
+          <span class="ambd-nav-counter" id="ambdNavCounter" aria-live="polite">— / —</span>
+          <button type="button" class="ambd-nav-btn" id="ambdNextBtn" aria-label="পরবর্তী প্রোভাইডার"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== লোডিং স্টেট ===== -->
+    <div class="ambd-state" id="ambdLoading">
+      <span class="amb-spinner"></span>
+      প্রোফাইল লোড হচ্ছে…
+    </div>
+
+    <!-- ===== নট-ফাউন্ড স্টেট ===== -->
+    <div class="ambd-state" id="ambdNotFound" style="display:none">
+      <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
+      এই প্রোফাইলটি পাওয়া যায়নি অথবা এখনো অনুমোদিত হয়নি।<br>
+      <a href="ambulance.html">← প্রোভাইডার তালিকায় ফিরে যান</a>
+    </div>
+
+    <!-- ===== প্রোফাইল কনটেন্ট ===== -->
+    <div class="ambd-page" id="ambdContent" style="display:none">
+
+      <div class="ambd-header-wrap">
+        <div class="ambd-cover"></div>
+        <div class="ambd-photo" id="ambdPhoto">?</div>
+        <div class="ambd-basic">
+          <div class="ambd-name-row">
+            <span class="ambd-name" id="ambdName">—</span>
+            <button type="button" class="ambd-fav-btn" id="ambdFavBtn" aria-label="পছন্দের তালিকায় যোগ/বাদ দিন" title="পছন্দের তালিকায় যোগ/বাদ দিন"><i class="fa-solid fa-heart" aria-hidden="true"></i></button>
+          </div>
+          <div class="ambd-rating" id="ambdRating"></div>
+          <div class="ambd-tag" id="ambdTag"></div>
+        </div>
+      </div>
+
+      <div class="ambd-section">
+        <div class="ambd-grid-2col">
+          <div>
+
+            <!-- ===== কন্টাক্ট রিকোয়েস্ট (মোবাইলে উপরে) ===== -->
+            <div class="ambd-contact-card">
+              <div class="ambd-contact-locked" id="ambdContactLocked">
+                <i class="fa-solid fa-lock" aria-hidden="true"></i>
+                <p>নিরাপত্তার জন্য ফোন নম্বর লুকানো আছে। যোগাযোগ করতে নিচের বাটনে ক্লিক করুন।</p>
+              </div>
+              <button type="button" class="ambd-contact-btn" id="ambdContactBtn">
+                <i class="fa-solid fa-phone" aria-hidden="true"></i> যোগাযোগের অনুরোধ করুন
+              </button>
+              <div class="ambd-contact-revealed" id="ambdContactRevealed">
+                <div class="ambd-phone-row">
+                  <span class="num" id="ambdPhoneNum">—</span>
+                  <i class="fa-solid fa-circle-check" style="color:#1f9a4b" aria-hidden="true"></i>
+                </div>
+                <div class="ambd-contact-actions">
+                  <a href="#" class="ambd-call-btn" id="ambdCallBtn"><i class="fa-solid fa-phone" aria-hidden="true"></i> কল করুন</a>
+                  <a href="#" class="ambd-whatsapp-btn" id="ambdWhatsappBtn" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> WhatsApp</a>
+                </div>
+              </div>
+              <p class="ambd-contact-note"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> জরুরি প্রয়োজনে সরাসরি <a href="tel:16366" style="color:var(--amb-red);font-weight:700">১৬৩৬৬</a> নম্বরে কল করুন।</p>
+            </div>
+
+            <!-- ===== মূল তথ্য ===== -->
+            <div class="ambd-info-card">
+              <h2 class="ambd-section-title"><i class="fa-solid fa-circle-info" aria-hidden="true"></i> মূল তথ্য</h2>
+              <div class="ambd-info-grid" id="ambdInfoGrid"></div>
+            </div>
+
+            <!-- ===== নিজের সম্পর্কে ===== -->
+            <div class="ambd-info-card" id="ambdAboutCard" style="display:none">
+              <h2 class="ambd-section-title"><i class="fa-solid fa-comment-dots" aria-hidden="true"></i> নিজের সম্পর্কে</h2>
+              <p class="ambd-about-text" id="ambdAbout"></p>
+            </div>
+
+            <div class="ambd-safety-note">
+              <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+              <span>নিরাপত্তার স্বার্থে: টাকা-পয়সা অগ্রিম লেনদেন থেকে বিরত থাকুন, যাত্রার আগে গাড়ির তথ্য যাচাই করুন এবং সন্দেহজনক আচরণ দেখলে রিপোর্ট করুন।</span>
+            </div>
+
+            <!-- ===== পরবর্তী প্রোফাইল (নিচে) ===== -->
+            <div class="ambd-bottom-next" id="ambdBottomNext" style="display:none">
+              <button type="button" class="ambd-bottom-next-btn" id="ambdBottomNextBtn">
+                পরবর্তী প্রোভাইডার দেখুন <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </button>
+            </div>
+            <div class="ambd-nav-end" id="ambdNavEnd" style="display:none">
+              <i class="fa-solid fa-circle-check" aria-hidden="true"></i> আপাতত এই তালিকার সবগুলো প্রোভাইডার দেখা হয়ে গেছে।
+              <a href="ambulance.html">তালিকায় ফিরে যান</a>
+            </div>
+          </div>
+
+          <!-- ===== সাইডবার (ডেস্কটপ) ===== -->
+          <div class="ambd-sidebar-contact">
+            <div class="ambd-info-card">
+              <h2 class="ambd-section-title"><i class="fa-solid fa-comments" aria-hidden="true"></i> যোগাযোগ করুন</h2>
+              <div class="ambd-contact-locked" id="ambdContactLockedSb">
+                <i class="fa-solid fa-lock" aria-hidden="true"></i>
+                <p>নিরাপত্তার জন্য ফোন নম্বর লুকানো আছে। যোগাযোগ করতে নিচের বাটনে ক্লিক করুন।</p>
+              </div>
+              <button type="button" class="ambd-contact-btn" id="ambdContactBtnSb">
+                <i class="fa-solid fa-phone" aria-hidden="true"></i> যোগাযোগের অনুরোধ করুন
+              </button>
+              <div class="ambd-contact-revealed" id="ambdContactRevealedSb">
+                <div class="ambd-phone-row">
+                  <span class="num" id="ambdPhoneNumSb">—</span>
+                  <i class="fa-solid fa-circle-check" style="color:#1f9a4b" aria-hidden="true"></i>
+                </div>
+                <div class="ambd-contact-actions">
+                  <a href="#" class="ambd-call-btn" id="ambdCallBtnSb"><i class="fa-solid fa-phone" aria-hidden="true"></i> কল করুন</a>
+                  <a href="#" class="ambd-whatsapp-btn" id="ambdWhatsappBtnSb" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> WhatsApp</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <h4>টাঙ্গাইল জেলা</h4>
+      <p>টাঙ্গাইল জেলার বাসিন্দা, নতুন আগন্তুক ও ব্যবসায়ীদের জন্য তৈরি একটি স্থানীয় সেবা প্ল্যাটফর্ম।</p>
+    </div>
+    <div>
+      <h4>পেজ</h4>
+      <ul class="footer-links">
+        <li><a href="index.html">হোম</a></li>
+        <li><a href="about.html">পরিচিতি</a></li>
+        <li><a href="add-listing.html">তথ্য যোগ করুন</a></li>
+        <li><a href="faq.html">সাধারণ প্রশ্ন</a></li>
+        <li><a href="contact.html">যোগাযোগ</a></li>
+        <li><a href="sitemap.html">সাইটম্যাপ</a></li>
+        <li><a href="privacy-policy.html">প্রাইভেসি পলিসি</a></li>
+        <li><a href="terms.html">শর্তাবলী</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">© ২০২৬ টাঙ্গাইল জেলা। সর্বস্বত্ব সংরক্ষিত।</div>
+</footer>
+
+<nav class="bottom-nav">
+  <a href="index.html"><span class="bn-icon"><i class="fa-solid fa-house" aria-hidden="true"></i></span><span>Home</span></a>
+  <a href="members.html"><span class="bn-icon"><i class="fa-solid fa-users" aria-hidden="true"></i></span><span>Members</span></a>
+  <a href="posts.html"><span class="bn-icon"><i class="fa-solid fa-plus" aria-hidden="true"></i></span><span>Post</span></a>
+  <a href="profile.html"><span class="bn-icon"><i class="fa-solid fa-user" aria-hidden="true"></i></span><span>Profile</span></a>
+</nav>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="js/supabase-config.js?v=20260922203957"></script>
+<script src="js/nav-avatar.js?v=20260922203957"></script>
+<script src="js/call.js?v=20260922203957"></script>
+<script src="js/sticky-header.js?v=20260922203957"></script>
+<script src="js/ambulance-provider-detail.js?v=20260922203957"></script>
+<script src="js/i18n.js?v=20260922203957"></script>
+<script src="js/script.js?v=20260922203957"></script>
+<script src="js/auto-update.js?v=20260922203957"></script>
+<script src="js/floating-buttons.js?v=20260922203957"></script>
+</body>
+</html>

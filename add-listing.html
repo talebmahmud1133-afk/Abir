@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>তথ্য যোগ করুন — টাঙ্গাইল জেলা</title>
+<meta name="description" content="আপনার সেবা বা প্রতিষ্ঠানের তথ্য টাঙ্গাইল জেলা তালিকায় যুক্ত করুন।">
+<meta property="og:title" content="তথ্য যোগ করুন — টাঙ্গাইল জেলা">
+<meta property="og:description" content="আপনার সেবা বা প্রতিষ্ঠানের তথ্য টাঙ্গাইল জেলা তালিকায় যুক্ত করুন।">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0E6B3A">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="css/style.css?v=20260922203957">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+<header class="site-header app-header">
+  <div class="header-inner">
+    <button class="menu-toggle icon-btn" id="menuToggle" data-i18n-aria="menu.open" aria-label="মেনু খুলুন"><i class="fa-solid fa-bars" aria-hidden="true"></i></button>
+    <div class="brand-block">
+      <a href="index.html" class="brand app-brand">টাঙ্গাইল <span class="brand-accent">জেলা</span></a>
+    </div>
+    <div class="header-actions">
+      <a href="notifications.html" class="icon-btn" data-i18n-aria="menu.notifications" aria-label="বিজ্ঞপ্তি"><i class="fa-solid fa-bell" aria-hidden="true"></i></a>
+      <div class="more-menu-wrap">
+        <button type="button" class="icon-btn" id="moreMenuToggle" data-i18n-aria="menu.more" aria-label="আরও"><i class="fa-solid fa-ellipsis-vertical" aria-hidden="true"></i></button>
+        <div class="more-menu" id="moreMenu">
+          <a href="about.html" data-i18n="nav.about">পরিচিতি</a>
+          <div class="more-menu-section-title" data-i18n="menu.language">ভাষা</div>
+          <div class="lang-switcher">
+            <button type="button" class="lang-option" data-lang-choice="bn">বাংলা</button>
+            <button type="button" class="lang-option" data-lang-choice="en">English</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html" data-i18n="nav.home">হোম</a>
+      <a href="about.html" data-i18n="nav.about">পরিচিতি</a>
+      <a href="add-listing.html" class="active" data-i18n="nav.addListing">তথ্য যোগ করুন</a>
+      <a href="faq.html" data-i18n="nav.faq">সাধারণ প্রশ্ন</a>
+      <a href="contact.html" data-i18n="nav.contact">যোগাযোগ</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <div class="wrap">
+    <div class="page-body">
+      <h1>তথ্য যোগ করুন</h1>
+      <p>নিচের ফর্মটি পূরণ করে আপনার তথ্য জমা দিন।</p>
+
+      <form class="contact-form icon-form" id="listingForm">
+        <div class="icon-field">
+          <i class="fa-solid fa-user field-icon" aria-hidden="true"></i>
+          <label for="listing-name" class="sr-only">নাম</label>
+          <input type="text" id="listing-name" name="listing-name" placeholder="নাম">
+        </div>
+        <div class="icon-field">
+          <i class="fa-solid fa-mobile-screen field-icon" aria-hidden="true"></i>
+          <label for="listing-phone" class="sr-only">মোবাইল</label>
+          <input type="tel" id="listing-phone" name="listing-phone" placeholder="মোবাইল" inputmode="numeric">
+        </div>
+        <div class="icon-field">
+          <i class="fa-solid fa-map-location-dot field-icon" aria-hidden="true"></i>
+          <label for="listing-village" class="sr-only">গ্রাম</label>
+          <input type="text" id="listing-village" name="listing-village" placeholder="গ্রাম">
+        </div>
+        <div class="icon-field">
+          <i class="fa-solid fa-map-location-dot field-icon" aria-hidden="true"></i>
+          <label for="listing-union" class="sr-only">ইউনিয়ন</label>
+          <input type="text" id="listing-union" name="listing-union" placeholder="ইউনিয়ন">
+        </div>
+        <div class="icon-field">
+          <i class="fa-solid fa-building-shield field-icon" aria-hidden="true"></i>
+          <label for="listing-thana" class="sr-only">থানা</label>
+          <input type="text" id="listing-thana" name="listing-thana" placeholder="থানা">
+        </div>
+        <div class="icon-field">
+          <i class="fa-solid fa-location-dot field-icon" aria-hidden="true"></i>
+          <label for="listing-district" class="sr-only">জেলা</label>
+          <input type="text" id="listing-district" name="listing-district" placeholder="জেলা" value="টাঙ্গাইল">
+        </div>
+        <button type="submit" id="listingSubmitBtn">জমা দিন</button>
+        <p class="auth-msg" id="listingMsg" style="margin-top:10px;"></p>
+      </form>
+
+      <div class="notice" style="margin-top:26px;">এই তথ্য আপনার প্রোফাইলে যুক্ত হবে এবং প্রোফাইল পেজে "আপডেট প্রোফাইল" অংশে দেখা যাবে।</div>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <h4>টাঙ্গাইল জেলা</h4>
+      <p>টাঙ্গাইল জেলার বাসিন্দা, নতুন আগন্তুক ও ব্যবসায়ীদের জন্য তৈরি একটি স্থানীয় সেবা প্ল্যাটফর্ম।</p>
+    </div>
+    <div>
+      <h4>পেজ</h4>
+      <ul class="footer-links">
+        <li><a href="index.html">হোম</a></li>
+        <li><a href="about.html">পরিচিতি</a></li>
+        <li><a href="add-listing.html">তথ্য যোগ করুন</a></li>
+        <li><a href="faq.html">সাধারণ প্রশ্ন</a></li>
+        <li><a href="contact.html">যোগাযোগ</a></li>
+        <li><a href="sitemap.html">সাইটম্যাপ</a></li>
+        <li><a href="privacy-policy.html">প্রাইভেসি পলিসি</a></li>
+        <li><a href="terms.html">শর্তাবলী</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">© ২০২৬ টাঙ্গাইল জেলা। সর্বস্বত্ব সংরক্ষিত।</div>
+</footer>
+
+
+
+<nav class="bottom-nav">
+  <a href="index.html"><span class="bn-icon"><i class="fa-solid fa-house" aria-hidden="true"></i></span><span data-i18n="bottomnav.home">Home</span></a>
+  <a href="members.html"><span class="bn-icon"><i class="fa-solid fa-users" aria-hidden="true"></i></span><span data-i18n="bottomnav.members">Members</span></a>
+  <a href="posts.html"><span class="bn-icon"><i class="fa-solid fa-plus" aria-hidden="true"></i></span><span data-i18n="bottomnav.post">Post</span></a>
+  <a href="profile.html"><span class="bn-icon"><i class="fa-solid fa-user" aria-hidden="true"></i></span><span data-i18n="bottomnav.profile">Profile</span></a>
+</nav>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="js/supabase-config.js?v=20260922203957"></script>
+<script src="js/nav-avatar.js?v=20260922203957"></script>
+<script src="js/call.js?v=20260922203957"></script>
+<script src="js/i18n.js?v=20260922203957"></script>
+<script src="js/script.js?v=20260922203957"></script>
+<script>
+(function () {
+  var client = window.supabase.createClient(window.TANGAIL_SUPABASE.url, window.TANGAIL_SUPABASE.key);
+
+  var form = document.getElementById('listingForm');
+  var nameInput = document.getElementById('listing-name');
+  var phoneInput = document.getElementById('listing-phone');
+  var villageInput = document.getElementById('listing-village');
+  var unionInput = document.getElementById('listing-union');
+  var thanaInput = document.getElementById('listing-thana');
+  var districtInput = document.getElementById('listing-district');
+  var submitBtn = document.getElementById('listingSubmitBtn');
+  var msg = document.getElementById('listingMsg');
+
+  var currentUser = null;
+
+  function setMsg(text, ok) {
+    msg.textContent = text || '';
+    msg.className = 'auth-msg' + (ok ? ' ok' : '');
+  }
+
+  // লগইন করা না থাকলে লগইন পেজে পাঠানো হবে — কারণ এই তথ্য নির্দিষ্ট ইউজারের প্রোফাইলের সাথে যুক্ত হয়
+  client.auth.getSession().then(function (res) {
+    var session = res.data && res.data.session;
+    if (!session) {
+      window.location.href = 'login.html';
+      return;
+    }
+    currentUser = session.user;
+
+    // আগে থেকে তথ্য জমা দেওয়া থাকলে ফর্মে প্রি-ফিল করা হবে
+    client.from('profiles').select('full_name, phone, village, union_name, thana, district').eq('id', currentUser.id).maybeSingle().then(function (r) {
+      if (r.data) {
+        if (r.data.full_name) nameInput.value = r.data.full_name;
+        if (r.data.phone) phoneInput.value = r.data.phone;
+        if (r.data.village) villageInput.value = r.data.village;
+        if (r.data.union_name) unionInput.value = r.data.union_name;
+        if (r.data.thana) thanaInput.value = r.data.thana;
+        if (r.data.district) districtInput.value = r.data.district;
+      }
+    });
+  });
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    if (!currentUser) { setMsg('লগইন যাচাই করা হচ্ছে, একটু অপেক্ষা করুন।'); return; }
+
+    var name = nameInput.value.trim();
+    var phone = phoneInput.value.trim();
+    var village = villageInput.value.trim();
+    var union = unionInput.value.trim();
+    var thana = thanaInput.value.trim();
+    var district = districtInput.value.trim();
+
+    if (!name) { setMsg('নাম লিখুন।'); return; }
+    if (!phone || phone.replace(/\D/g, '').length < 11) { setMsg('সঠিক ১১ ডিজিটের মোবাইল নাম্বার দিন।'); return; }
+    if (!village) { setMsg('গ্রামের নাম লিখুন।'); return; }
+    if (!union) { setMsg('ইউনিয়নের নাম লিখুন।'); return; }
+    if (!thana) { setMsg('থানার নাম লিখুন।'); return; }
+    if (!district) { setMsg('জেলার নাম লিখুন।'); return; }
+
+    submitBtn.disabled = true;
+    setMsg('তথ্য জমা দেওয়া হচ্ছে…', true);
+
+    client.from('profiles').update({
+      full_name: name,
+      phone: phone.replace(/\D/g, ''),
+      village: village,
+      union_name: union,
+      thana: thana,
+      district: district
+    }).eq('id', currentUser.id).then(function (res) {
+      submitBtn.disabled = false;
+      if (res.error) {
+        setMsg('জমা দিতে সমস্যা হয়েছে, একটু পর আবার চেষ্টা করুন।');
+        return;
+      }
+      setMsg('ধন্যবাদ! আপনার তথ্য প্রোফাইলে যুক্ত হয়েছে।', true);
+    });
+  });
+})();
+</script>
+<script src="js/auto-update.js?v=20260922203957"></script>
+<script src="js/floating-buttons.js?v=20260922203957"></script>
+</body>
+</html>

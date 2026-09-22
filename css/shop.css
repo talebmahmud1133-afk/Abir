@@ -1,0 +1,548 @@
+/* =========================================================
+   দোকান ডিরেক্টরি (Shop Directory) মডিউল — ডেডিকেটেড স্টাইলশিট
+   এই ফাইলের স্টাইল শুধুমাত্র business-directory.html ও
+   add-shop.html পেজে প্রযোজ্য। অন্য কোনো পেজে লিংক করা নেই,
+   তাই সাইটের বাকি অংশ প্রভাবিত হয় না।
+   ========================================================= */
+
+/* ---------- হিরো ব্যানার ---------- */
+.shop-hero{
+  position: relative;
+  /* ফোনের বাম-ডান প্রান্ত থেকে প্রান্ত পর্যন্ত (কোনো পাশের ফাঁকা নেই) — 100vw + left:50% কৌশল */
+  width: 100vw;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 6px 0 14px;
+  border-radius: 0;
+  overflow: hidden;
+  padding: 24px 20px;
+  background: linear-gradient(135deg, var(--maroon-dark) 0%, var(--maroon) 55%, #1f9463 100%);
+  isolation: isolate;
+}
+.shop-hero::before{
+  content: "";
+  position: absolute; inset: 0;
+  background-image:
+    radial-gradient(circle at 12% 20%, rgba(255,255,255,0.14) 0, transparent 40%),
+    radial-gradient(circle at 92% 82%, rgba(255,255,255,0.10) 0, transparent 45%);
+  pointer-events: none;
+}
+.shop-hero-icons{
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: flex-end;
+  gap: 14px; padding-right: 18px;
+  opacity: 0.14;
+  font-size: 2.4rem;
+  color: #fff;
+  pointer-events: none;
+}
+.shop-hero-badge{
+  position: relative;
+  display: inline-block;
+  margin: 0 0 10px;
+  background: rgba(255,255,255,0.16);
+  border: 1px solid rgba(255,255,255,0.35);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 5px 11px;
+  border-radius: 999px;
+  z-index: 1;
+}
+.shop-hero-badge i{ color: #ffd4d4; margin-right: 4px; }
+.shop-hero-content{ position: relative; z-index: 1; max-width: 520px; }
+.shop-hero-title{
+  color: #fff;
+  font-family: 'Tiro Bangla', serif;
+  font-size: 1.28rem;
+  font-weight: 700;
+  margin: 0 0 6px;
+  line-height: 1.35;
+}
+.shop-hero-sub{
+  color: rgba(255,255,255,0.9);
+  font-size: 0.82rem;
+  margin: 0;
+  display: flex; flex-wrap: wrap; gap: 6px 10px;
+}
+.shop-hero-sub span{ white-space: nowrap; }
+.shop-hero-sub span:not(:last-child)::after{ content: "•"; margin-left: 10px; opacity: 0.6; }
+
+/* ---------- অ্যাডমিন প্যানেল থেকে দেওয়া ব্যানার (সর্বোচ্চ ৫টি) ----------
+   js/category-banners.js "ব্যবসা ডিরেক্টরি" বিভাগের ব্যানার লোড করে #catBannerWrap-এ দেখায়।
+   স্লাইডার নিজেই ফুল-ব্লিড (বাম-ডানে ফাঁকা নেই)। ব্যানার থাকলে ডিফল্ট .shop-hero লুকানো থাকে। */
+body.has-cat-banners .shop-hero{ display: none; }
+body[data-banner-category="business-directory"] .banner-slider-wrap{ margin: 0 0 8px; }
+body[data-banner-category="business-directory"] .banner-slide{
+  padding: 24px 20px 26px;
+  min-height: 150px;
+  display: flex; align-items: center;
+}
+body[data-banner-category="business-directory"] .banner-slide.has-image{
+  aspect-ratio: 16 / 7;
+  min-height: 0;
+  align-items: flex-end;
+  padding: 14px 20px;
+}
+body[data-banner-category="business-directory"] .banner-inner{ max-width: 100%; margin: 0; text-align: left; width: 100%; }
+body[data-banner-category="business-directory"] .banner-slide.has-image .banner-inner{ text-align: left; }
+body[data-banner-category="business-directory"] .banner-badge{ font-size: 0.7rem; padding: 4px 11px; margin-bottom: 8px; }
+body[data-banner-category="business-directory"] .banner-slide h3{ font-size: 1.28rem; line-height: 1.35; margin: 0 0 6px; }
+body[data-banner-category="business-directory"] .banner-slide.has-image h3{ font-size: 1.1rem; }
+body[data-banner-category="business-directory"] .banner-slide p{ font-size: 0.85rem; line-height: 1.45; margin: 0 0 10px; opacity: 0.95; }
+body[data-banner-category="business-directory"] .banner-slide.has-image p{ font-size: 0.78rem; margin-bottom: 8px; }
+body[data-banner-category="business-directory"] .banner-btn{ font-size: 0.78rem; padding: 6px 14px; }
+body[data-banner-category="business-directory"] .banner-dots{ margin-top: 8px; }
+
+/* ---------- ক্যাটাগরি বার: হরাইজন্টাল স্ক্রল চিপ ---------- */
+.shop-cat-bar{
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 4px 2px 14px;
+  scrollbar-width: none;
+}
+.shop-cat-bar::-webkit-scrollbar{ display: none; }
+.shop-cat-chip{
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  width: 68px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 10px 6px 8px;
+  cursor: pointer;
+  font-size: 0.7rem;
+  color: var(--ink-soft);
+  font-weight: 600;
+  text-align: center;
+  line-height: 1.2;
+  transition: background .15s, border-color .15s, color .15s, transform .1s;
+}
+.shop-cat-chip:active{ transform: scale(0.96); }
+.shop-cat-chip .shop-cat-icon{
+  width: 30px; height: 30px;
+  border-radius: 9px;
+  background: var(--cream);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--maroon);
+  font-size: 0.95rem;
+}
+.shop-cat-chip.active{ background: var(--maroon); border-color: var(--maroon); color: #fff; }
+.shop-cat-chip.active .shop-cat-icon{ background: rgba(255,255,255,0.2); color: #fff; }
+
+/* ---------- টুলবার: গণনা ---------- */
+.shop-toolbar{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 2px 0 12px;
+  flex-wrap: wrap;
+}
+.shop-toolbar-count{
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--ink);
+  font-family: 'Tiro Bangla', serif;
+  display: flex; align-items: center; gap: 6px;
+}
+.shop-toolbar-count i{ color: var(--maroon); font-size: 0.85rem; }
+
+/* ---------- দোকান গ্রিড ও কার্ড ---------- */
+/* কার্ড লেআউট: উপরে ব্যানার → ব্যানারের নিচে ওভারল্যাপ করা গোল প্রোফাইল ছবি + নাম/ক্যাটাগরি → তথ্য → অ্যাকশন বাটন */
+.shop-grid{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  padding-bottom: 8px;
+}
+@media (min-width: 600px){ .shop-grid{ grid-template-columns: repeat(2, 1fr); gap: 16px; } }
+@media (min-width: 900px){ .shop-grid{ grid-template-columns: repeat(3, 1fr); } }
+
+
+.shop-card{
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  color: inherit;
+  transition: box-shadow .15s, transform .15s;
+}
+.shop-card:hover{ box-shadow: var(--shadow-md); transform: translateY(-2px); }
+
+/* ব্যানার */
+.shop-card-img{
+  position: relative;
+  aspect-ratio: 16 / 8;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+  color: rgba(255,255,255,0.92);
+}
+.shop-card-img::before{
+  content: "";
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(circle at 15% 25%, rgba(255,255,255,0.20) 0, transparent 38%),
+    radial-gradient(circle at 88% 85%, rgba(255,255,255,0.14) 0, transparent 42%);
+}
+.shop-card-bgicon{ position: relative; z-index: 1; font-size: 2.8rem; opacity: 0.9; }
+.shop-card-cover{
+  position: absolute; inset: 0; z-index: 2;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+/* ব্যাজ পড়ার সুবিধার জন্য ব্যানারের উপরে হালকা ছায়া */
+.shop-card-img::after{
+  content: "";
+  position: absolute; inset: 0; z-index: 3;
+  background: linear-gradient(180deg, rgba(0,0,0,0.30) 0, transparent 45%);
+  pointer-events: none;
+}
+.shop-verified{
+  position: absolute; top: 10px; left: 10px; z-index: 4;
+  background: rgba(255,255,255,0.95);
+  color: var(--maroon-dark);
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 4px 9px 4px 6px;
+  border-radius: 999px;
+  display: flex; align-items: center; gap: 4px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.18);
+}
+.shop-verified i{ color: #158F52; font-size: 0.75rem; }
+.shop-rating-chip{
+  position: absolute; top: 10px; right: 10px; z-index: 4;
+  background: rgba(255,255,255,0.95);
+  color: #b8860b;
+  font-size: 0.74rem;
+  font-weight: 700;
+  padding: 4px 9px;
+  border-radius: 999px;
+  display: flex; align-items: center; gap: 4px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.18);
+}
+.shop-rating-chip i{ font-size: 0.7rem; }
+.shop-rating-chip .count{ color: var(--ink-soft); font-weight: 500; }
+.shop-rating-chip.is-new{ color: var(--maroon-dark); }
+.shop-rating-chip.is-new i{ color: #158F52; }
+
+/* হেডার: গোল প্রোফাইল ছবি (ব্যানারে অর্ধেক ঢোকানো) + নাম + ক্যাটাগরি */
+.shop-card-head{
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 0 14px;
+}
+.shop-card-logo{
+  position: relative; z-index: 5;
+  flex: 0 0 auto;
+  width: 64px; height: 64px;
+  margin-top: -32px;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  background: #fff;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.22);
+  overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff;
+  font-size: 1.35rem;
+}
+.shop-card-logo img{
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  background: #fff;
+}
+.shop-card-headtext{ flex: 1; min-width: 0; padding-top: 8px; }
+.shop-card-title{
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0 0 5px;
+  line-height: 1.3;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.shop-card-cat{
+  display: inline-block;
+  max-width: 100%;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--maroon-dark);
+  background: rgba(14,107,58,0.10);
+  padding: 3px 10px;
+  border-radius: 999px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+/* তথ্য */
+.shop-card-body{ padding: 10px 14px 0; flex: 1; min-width: 0; }
+.shop-card-meta{
+  display: flex; align-items: center; gap: 8px;
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  margin-bottom: 6px;
+  min-width: 0;
+}
+.shop-card-meta i{ flex: 0 0 auto; width: 14px; text-align: center; font-size: 0.75rem; color: var(--maroon); }
+.shop-card-meta span{ overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* অ্যাকশন বাটন */
+.shop-card-actions{
+  display: flex;
+  gap: 8px;
+  padding: 10px 14px 14px;
+  margin-top: auto;
+}
+.shop-card-actions a{
+  flex: 1;
+  display: flex; align-items: center; justify-content: center;
+  gap: 6px;
+  height: 40px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  border-radius: 10px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.shop-call-btn{ background: var(--maroon); color: #fff; }
+.shop-call-btn:hover{ background: var(--maroon-dark); }
+.shop-map-btn{ background: #eaf1fb; color: #1a5bb8; }
+.shop-map-btn:hover{ background: #d9e7fa; }
+.shop-icon-btn{
+  flex: 0 0 40px !important;
+  width: 40px; padding: 0 !important;
+  font-size: 1.05rem !important;
+}
+.shop-wa-btn{ background: #e6f7ec; color: #158F52; }
+.shop-wa-btn:hover{ background: #d3f0dd; }
+.shop-web-btn{ background: var(--cream); color: var(--ink-soft); }
+.shop-web-btn:hover{ background: var(--cream-deep); }
+
+/* নাম ক্লিক করলে দোকানের নিজস্ব লিংকে যায় */
+.shop-card-title-link{ color: inherit; text-decoration: none; }
+.shop-card-title-link i{ font-size: 0.62em; margin-left: 6px; color: var(--maroon); vertical-align: middle; opacity: 0.85; }
+.shop-card-title-link:hover, .shop-card-title-link:active{ color: var(--maroon-dark); text-decoration: underline; }
+
+/* ব্যানার / প্রোফাইল ছবি ট্যাপ করলে ফুল-স্ক্রিন ভিউ */
+.shop-card-cover, .shop-card-logo img{ cursor: zoom-in; }
+body.shop-lightbox-open{ overflow: hidden; }
+.shop-lightbox{
+  position: fixed; inset: 0; z-index: 10000;
+  background: rgba(0,0,0,0.92);
+  display: none;
+  align-items: center; justify-content: center;
+  flex-direction: column;
+}
+.shop-lightbox.open{ display: flex; }
+.shop-lightbox-img{
+  max-width: 100%; max-height: 84vh;
+  object-fit: contain;
+  touch-action: pinch-zoom;
+}
+.shop-lightbox-close{
+  position: absolute; top: 14px; right: 14px;
+  width: 42px; height: 42px;
+  border: none; border-radius: 50%;
+  background: rgba(255,255,255,0.18);
+  color: #fff; font-size: 1.2rem;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+}
+.shop-lightbox-close:hover{ background: rgba(255,255,255,0.3); }
+.shop-lightbox-caption{
+  position: absolute; left: 16px; right: 16px; bottom: 18px;
+  text-align: center; color: rgba(255,255,255,0.85);
+  font-size: 0.85rem;
+}
+
+/* ক্যাটাগরি অনুযায়ী ব্যানার/লোগোর রঙ (ছবি না থাকলে আইকন + গ্র্যাডিয়েন্ট) */
+.shop-card-img.cat-sweets, .shop-card-logo.cat-sweets{ background: linear-gradient(135deg,#f6a54a,#e8722b); }
+.shop-card-img.cat-mobile, .shop-card-logo.cat-mobile{ background: linear-gradient(135deg,#5b8def,#2f5fce); }
+.shop-card-img.cat-cloth, .shop-card-logo.cat-cloth{ background: linear-gradient(135deg,#e069a6,#b83c7c); }
+.shop-card-img.cat-pharmacy, .shop-card-logo.cat-pharmacy{ background: linear-gradient(135deg,#3fb08f,#1c8065); }
+.shop-card-img.cat-restaurant, .shop-card-logo.cat-restaurant{ background: linear-gradient(135deg,#f2685a,#c9402f); }
+.shop-card-img.cat-jewelry, .shop-card-logo.cat-jewelry{ background: linear-gradient(135deg,#d4af37,#a9791a); }
+.shop-card-img.cat-shoes, .shop-card-logo.cat-shoes{ background: linear-gradient(135deg,#6c7a89,#3f4a57); }
+.shop-card-img.cat-super, .shop-card-logo.cat-super{ background: linear-gradient(135deg,#4fae4f,#2c7d2c); }
+.shop-card-img.cat-books, .shop-card-logo.cat-books{ background: linear-gradient(135deg,#8a6de0,#5c3fb0); }
+.shop-card-img.cat-computer, .shop-card-logo.cat-computer{ background: linear-gradient(135deg,#4aa3c9,#256a8c); }
+.shop-card-img.cat-bags, .shop-card-logo.cat-bags{ background: linear-gradient(135deg,#c98a4a,#8f5b25); }
+.shop-card-img.cat-motorparts, .shop-card-logo.cat-motorparts{ background: linear-gradient(135deg,#657a8b,#2f3e4c); }
+.shop-card-img.cat-other, .shop-card-logo.cat-other{ background: linear-gradient(135deg,#8a99a6,#5c6b78); }
+
+/* ---------- স্কেলিটন / এম্পটি / এরর স্টেট ---------- */
+.shop-skel{ background: #fff; border: 1px solid var(--line); border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-sm); padding-bottom: 14px; }
+.shop-skel-img{ aspect-ratio: 16 / 8; background: linear-gradient(90deg, var(--cream) 25%, var(--cream-deep) 37%, var(--cream) 63%); background-size: 400% 100%; animation: shopShimmer 1.4s ease infinite; }
+.shop-skel-logo{ width: 64px; height: 64px; margin: -32px 0 0 14px; border-radius: 50%; border: 3px solid #fff; background: linear-gradient(90deg, var(--cream) 25%, var(--cream-deep) 37%, var(--cream) 63%); background-size: 400% 100%; animation: shopShimmer 1.4s ease infinite; }
+.shop-skel-line{ height: 10px; margin: 12px 14px 0; border-radius: 6px; background: linear-gradient(90deg, var(--cream) 25%, var(--cream-deep) 37%, var(--cream) 63%); background-size: 400% 100%; animation: shopShimmer 1.4s ease infinite; }
+.shop-skel-line.short{ width: 55%; }
+@keyframes shopShimmer{ 0%{ background-position: 100% 0; } 100%{ background-position: -100% 0; } }
+
+.shop-state-msg{
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 40px 16px;
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+}
+.shop-state-msg i{ font-size: 2rem; display: block; margin-bottom: 10px; color: var(--line); }
+
+.shop-loadmore-wrap{ text-align: center; padding: 6px 0 24px; }
+.shop-loadmore-btn{
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--maroon-dark);
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 10px 22px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background .15s, color .15s;
+}
+.shop-loadmore-btn:hover{ background: var(--maroon); color: #fff; }
+.shop-loadmore-btn:disabled{ opacity: 0.6; cursor: not-allowed; }
+
+/* মোবাইলে কার্ড ফোনের বাম-ডান প্রান্ত থেকে প্রান্ত পর্যন্ত (কোনো পাশের ফাঁকা নেই) —
+   .wrap-এর ২৪px পাশের প্যাডিং ভেঙে বেরোতে সাইটের অন্যান্য লিস্টের মতোই 100vw + left:50% কৌশল */
+@media (max-width: 599px){
+  .shop-grid{
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    gap: 10px;
+  }
+  .shop-card, .shop-skel{
+    border-radius: 0;
+    border-left: 0;
+    border-right: 0;
+  }
+  .shop-card:hover{ transform: none; }
+}
+
+/* ---------- ফ্লোটিং "+" বাটন: দোকান যুক্ত করুন ---------- */
+.shop-fab{
+  position: fixed;
+  right: 16px;
+  bottom: 84px;
+  z-index: 43;
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  background: var(--maroon);
+  color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+  box-shadow: var(--shadow-lg);
+  text-decoration: none;
+  transition: background .15s, transform .15s;
+}
+.shop-fab:hover{ background: var(--maroon-dark); transform: translateY(-2px); }
+.shop-fab:active{ transform: scale(0.94); }
+@media (max-width: 640px){ .shop-fab{ bottom: 78px; } }
+
+/* =========================================================
+   দোকান যুক্ত করার ফর্ম (add-shop.html)
+   ========================================================= */
+.shop-form-section{ padding: 4px 0 24px; }
+.shop-form-section h1{
+  font-size: 1.15rem;
+  font-family: 'Tiro Bangla', serif;
+  color: var(--ink);
+  margin: 4px 0 4px;
+}
+.shop-form-section > p{ color: var(--ink-soft); font-size: 0.85rem; margin: 0 0 18px; }
+
+.shop-form-group{ margin-bottom: 14px; }
+.shop-form-group label{
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.shop-form-group label .req{ color: #c9402f; }
+.shop-form-group input[type="text"],
+.shop-form-group input[type="tel"],
+.shop-form-group input[type="url"],
+.shop-form-group select,
+.shop-form-group textarea{
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 11px 13px;
+  font-size: 0.88rem;
+  color: var(--ink);
+  background: #fff;
+  font-family: inherit;
+}
+.shop-form-group textarea{ resize: vertical; min-height: 90px; }
+.shop-form-group input:focus,
+.shop-form-group select:focus,
+.shop-form-group textarea:focus{ outline: none; border-color: var(--maroon); }
+.shop-form-row{ display: grid; grid-template-columns: 1fr; gap: 12px; }
+@media (min-width: 640px){ .shop-form-row.cols-2{ grid-template-columns: 1fr 1fr; } }
+
+.shop-img-picker{ display: flex; gap: 10px; margin-bottom: 6px; flex-wrap: wrap; }
+.shop-img-slot{
+  position: relative;
+  width: 96px; height: 96px;
+  border: 1.5px dashed var(--line);
+  border-radius: 12px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 4px;
+  color: var(--ink-soft);
+  font-size: 0.66rem;
+  text-align: center;
+  cursor: pointer;
+  overflow: hidden;
+  background: var(--cream);
+}
+.shop-img-slot i{ font-size: 1.2rem; }
+.shop-img-slot img{ position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.shop-img-slot .shop-img-remove{
+  position: absolute; top: 4px; right: 4px;
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.55);
+  color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.6rem;
+  z-index: 2;
+}
+.shop-img-slot .shop-img-adjust{
+  position: absolute; bottom: 4px; right: 4px;
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.7rem;
+  z-index: 2;
+}
+.shop-img-hint{ font-size: 0.74rem; color: var(--ink-soft); margin: 0 0 16px; }
+
+.shop-form-submit{
+  width: 100%;
+  background: var(--maroon);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 13px;
+  font-size: 0.94rem;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 6px;
+  transition: background .15s;
+}
+.shop-form-submit:hover{ background: var(--maroon-dark); }
+.shop-form-submit:disabled{ opacity: 0.6; cursor: not-allowed; }
+
+.shop-form-progress{ margin: 10px 0; display: flex; align-items: center; gap: 8px; }
+.shop-form-progress-bar-wrap{ flex: 1; height: 6px; border-radius: 4px; background: var(--cream-deep); overflow: hidden; }
+.shop-form-progress-bar{ height: 100%; width: 0%; background: var(--maroon); transition: width .2s; }
+.shop-form-progress-text{ font-size: 0.74rem; color: var(--ink-soft); font-weight: 600; min-width: 34px; text-align: right; }

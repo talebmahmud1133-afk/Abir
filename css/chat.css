@@ -1,0 +1,372 @@
+/* টাঙ্গাইল জেলা — চ্যাট পেজ (chat.html) — মেসেজিং সিস্টেম ধাপ ২ক
+   পূর্ণ-স্ক্রিন, মোবাইল-ফার্স্ট। রঙ/ফন্ট css/style.css-এর :root ভ্যারিয়েবল থেকে। */
+html:has(body.chat-body){ height: 100%; }
+body.chat-body{
+  height: 100%; margin: 0; padding: 0 !important; overflow: hidden; background: #fff;
+}
+.chat-app{
+  display: flex; flex-direction: column; height: 100vh; height: 100dvh;
+  max-width: 720px; margin: 0 auto; background: #fff; position: relative;
+  box-shadow: 0 0 0 1px var(--line);
+}
+[hidden]{ display: none !important; }
+
+/* ---- হেডার ---- */
+.chat-head{
+  flex: none; display: flex; align-items: center; gap: 4px; padding: 8px 10px;
+  padding-top: calc(8px + env(safe-area-inset-top, 0px));
+  background: #fff; border-bottom: 1px solid var(--line); min-height: 56px;
+}
+.chat-back{
+  flex: none; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;
+  border-radius: 50%; color: var(--maroon); font-size: 1.1rem; text-decoration: none;
+}
+.chat-back:active{ background: var(--cream); }
+.chat-peer{ flex: 1; min-width: 0; display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); }
+.chat-avatar{
+  flex: none; position: relative; width: 40px; height: 40px; border-radius: 50%;
+  background: var(--maroon); color: #fff; display: flex; align-items: center; justify-content: center;
+  font-family: 'Tiro Bangla', serif; font-size: 1.15rem; overflow: visible;
+}
+.chat-avatar img{ width: 100%; height: 100%; object-fit: cover; border-radius: 50%; display: block; }
+.chat-avatar .chat-dot{
+  position: absolute; right: -1px; bottom: -1px; width: 12px; height: 12px; border-radius: 50%;
+  background: #31a24c; border: 2px solid #fff;
+}
+.chat-peer-text{ min-width: 0; display: flex; flex-direction: column; line-height: 1.25; }
+.chat-peer-name{ font-weight: 700; font-size: 1rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.chat-verified{ color: #C9962E; font-size: 0.8rem; margin-left: 5px; }
+.chat-peer-status{ font-size: 0.78rem; color: var(--ink-soft); }
+.chat-peer-status.online{ color: #31a24c; font-weight: 600; }
+
+/* ---- হেডারের ⋮ মেনু (ধাপ ৫: মোছা/ব্লক) ---- */
+.chat-menu-wrap{ position: relative; flex: none; }
+.chat-menu-btn{
+  width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;
+  border-radius: 50%; border: none; background: none; color: var(--maroon); font-size: 1.05rem; cursor: pointer;
+}
+.chat-menu-btn:active{ background: var(--cream); }
+.chat-menu-panel{
+  position: absolute; top: 46px; right: 0; z-index: 30; width: max-content; max-width: calc(100vw - 20px);
+  background: #fff; border: 1px solid var(--line); border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.16); padding: 6px; display: flex; flex-direction: column; gap: 2px;
+}
+.chat-menu-panel[hidden]{ display: none; }
+.chat-menu-item{
+  display: flex; align-items: center; gap: 10px; width: 100%; text-align: left; white-space: nowrap;
+  padding: 10px 14px; border: none; background: none; border-radius: 8px;
+  font: inherit; font-size: 0.9rem; color: var(--ink); cursor: pointer;
+}
+.chat-menu-item i{ width: 16px; text-align: center; flex: none; }
+.chat-menu-item:active{ background: var(--cream); }
+.chat-menu-item-danger{ color: #c0392b; }
+
+/* ---- অবস্থা (লোডিং/এরর/পাওয়া যায়নি) ---- */
+.chat-state{
+  flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 10px; padding: 24px 20px; text-align: center; color: var(--ink-soft);
+}
+.chat-state i{ font-size: 2rem; color: var(--maroon); opacity: 0.85; }
+.chat-state p{ margin: 0; max-width: 320px; font-size: 0.98rem; }
+
+.chat-btn{
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  font: inherit; font-weight: 600; font-size: 0.92rem; padding: 8px 16px; border-radius: 999px;
+  border: 1px solid var(--line); background: #fff; color: var(--maroon); cursor: pointer; text-decoration: none;
+}
+.chat-btn-primary{ background: var(--maroon); color: #fff; border-color: var(--maroon); }
+.chat-btn-primary.is-pending{ background: #F7EFD9; color: #8A6414; border-color: rgba(201,150,46,0.65); }
+.chat-btn[disabled]{ opacity: 0.6; cursor: default; }
+
+/* ---- মূল অংশ ---- */
+.chat-main{ flex: 1; min-height: 0; display: flex; flex-direction: column; }
+
+/* ---- ব্যানার ---- */
+.chat-banner{
+  flex: none; display: flex; align-items: center; gap: 10px; padding: 10px 12px;
+  background: #fff8e6; border-bottom: 1px solid rgba(224,138,30,0.35); color: #6b4a00; font-size: 0.86rem; line-height: 1.4;
+}
+.chat-banner-text{ flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.chat-banner-text strong{ font-size: 0.9rem; }
+.chat-banner .chat-btn{ flex: none; padding: 7px 14px; }
+.chat-banner-msg{
+  flex: none; margin: 0; padding: 7px 12px; background: #fdecec; color: #b3261e;
+  font-size: 0.85rem; text-align: center; border-bottom: 1px solid rgba(192,57,43,0.18);
+}
+
+/* ---- মেসেজ তালিকা ---- */
+.chat-list-wrap{ flex: 1; min-height: 0; position: relative; display: flex; }
+.chat-list{
+  flex: 1; min-height: 0; overflow-y: auto; overflow-x: hidden; -webkit-overflow-scrolling: touch;
+  padding: 10px 10px 6px; background: #fff; display: flex; flex-direction: column; gap: 2px;
+  overscroll-behavior: contain;
+}
+.chat-newmsg{
+  position: absolute; left: 50%; bottom: 12px; transform: translateX(-50%); z-index: 2;
+  display: flex; align-items: center; gap: 6px; padding: 7px 14px; border-radius: 999px; border: 0;
+  background: var(--maroon); color: #fff; font: inherit; font-size: 0.85rem; font-weight: 600; cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.22);
+}
+.chat-newmsg:active{ opacity: 0.9; }
+.chat-older{ align-self: center; font-size: 0.8rem; color: var(--ink-soft); padding: 6px 10px; }
+.chat-empty{ margin: auto; text-align: center; color: var(--ink-soft); font-size: 0.95rem; padding: 20px; }
+.chat-day{ align-self: center; margin: 10px 0 6px; font-size: 0.74rem; color: var(--ink-soft); background: var(--cream); padding: 2px 10px; border-radius: 999px; }
+
+.chat-row{ display: flex; flex-direction: column; max-width: 100%; }
+.chat-row.mine{ align-items: flex-end; }
+.chat-row.theirs{ align-items: flex-start; }
+.chat-row + .chat-row.gap{ margin-top: 8px; }
+.chat-bubble{
+  max-width: 78%; padding: 7px 12px 5px; border-radius: 18px; font-size: 0.97rem; line-height: 1.45;
+  white-space: pre-wrap; overflow-wrap: anywhere; word-break: break-word;
+}
+.chat-row.mine .chat-bubble{ background: var(--maroon); color: #fff; border-bottom-right-radius: 5px; }
+.chat-row.theirs .chat-bubble{ background: #e9ebef; color: var(--ink); border-bottom-left-radius: 5px; }
+.chat-row.mine.sending .chat-bubble{ opacity: 0.65; }
+.chat-row.mine.failed .chat-bubble{ background: #f3c6c2; color: #7a1710; }
+.chat-meta{ display: flex; align-items: center; justify-content: flex-end; gap: 4px; margin-top: 2px; }
+.chat-time{ font-size: 0.68rem; opacity: 0.7; white-space: normal; text-align: right; }
+/* Seen Status টিক (v133): sent = একটা টিক, delivered = দুইটা টিক (হালকা ধূসর), seen = দুইটা টিক (উজ্জ্বল নীল) —
+   গাঢ় সবুজ বাবলে স্পষ্ট আলাদা বোঝার জন্য রঙ দুটোর মধ্যে যথেষ্ট বৈসাদৃশ্য রাখা হয়েছে (v133.1: রঙ/সাইজ উন্নত)। বাড়তি টেক্সট নেই। */
+.chat-ticks{ display: inline-flex; align-items: center; line-height: 1; }
+.chat-ticks i{ font-size: 0.82rem; }
+.chat-ticks-sent i, .chat-ticks-delivered i{ color: #D6DBE3; }
+.chat-ticks-seen i{ color: #4FC3F7; filter: drop-shadow(0 0 1px rgba(0,0,0,0.25)); }
+.chat-media-note{ font-style: italic; opacity: 0.85; }
+.chat-fail{ font-size: 0.75rem; color: #b3261e; margin: 2px 4px 0; display: flex; gap: 10px; }
+.chat-fail button{ font: inherit; background: none; border: 0; padding: 0; color: var(--maroon); font-weight: 600; cursor: pointer; text-decoration: underline; }
+
+/* ---- ইনপুট ---- */
+.chat-composer{
+  flex: none; display: flex; flex-direction: column; gap: 6px; padding: 8px 10px;
+  padding-bottom: calc(8px + env(safe-area-inset-bottom, 0px));
+  background: #fff; border-top: 1px solid var(--line);
+}
+.chat-composer-row{ display: flex; align-items: flex-end; gap: 6px; min-width: 0; }
+.chat-composer textarea{
+  flex: 1; min-width: 0; resize: none; font: inherit; font-size: 1rem; line-height: 1.4;
+  padding: 9px 14px; border-radius: 20px; border: 1px solid var(--line); background: var(--cream); color: var(--ink);
+  max-height: 120px; overflow-y: auto; outline: none;
+}
+.chat-composer textarea:focus{ border-color: var(--maroon); background: #fff; }
+.chat-composer textarea:disabled{ opacity: 0.6; cursor: not-allowed; }
+
+/* ---- ইমোজি ---- */
+.chat-emoji-wrap{ position: relative; flex: none; }
+.chat-emoji-btn, .chat-attach-btn{
+  width: 42px; height: 42px; border-radius: 50%; border: 0; background: transparent; cursor: pointer;
+  color: var(--ink-soft); font-size: 1.25rem; display: flex; align-items: center; justify-content: center;
+}
+.chat-emoji-btn:active, .chat-attach-btn:active{ background: var(--cream); }
+.chat-emoji-btn[disabled], .chat-attach-btn[disabled]{ opacity: 0.45; cursor: not-allowed; }
+.chat-attach-btn{ flex: none; }
+.chat-emoji-panel{
+  position: absolute; left: -48px; bottom: calc(100% + 8px); width: min(300px, 82vw); max-height: 220px;
+  overflow-y: auto; background: #fff; border: 1px solid var(--line); border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.18); padding: 8px; z-index: 3;
+  display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px;
+}
+.chat-emoji-panel button{
+  font-size: 1.35rem; line-height: 1; padding: 6px 0; border: 0; background: transparent; cursor: pointer;
+  border-radius: 8px;
+}
+.chat-emoji-panel button:active{ background: var(--cream); }
+.chat-send{
+  flex: none; width: 42px; height: 42px; border-radius: 50%; border: 0; cursor: pointer;
+  background: var(--maroon); color: #fff; font-size: 1rem; display: flex; align-items: center; justify-content: center;
+}
+.chat-send[disabled]{ background: #b7c4d8; cursor: default; }
+
+/* ---- ধাপ ৩: ছবি/ভিডিও ---- */
+.chat-preview{ display: flex; align-items: center; gap: 10px; min-width: 0; }
+.chat-preview-item{
+  position: relative; flex: none; width: 64px; height: 64px; border-radius: 10px; overflow: hidden;
+  background: #111; border: 1px solid var(--line);
+}
+.chat-preview-item img, .chat-preview-item video{ width: 100%; height: 100%; object-fit: cover; display: block; }
+.chat-preview-tag{
+  position: absolute; left: 3px; bottom: 3px; font-size: 0.66rem; line-height: 1; padding: 2px 5px; border-radius: 6px;
+  background: rgba(0,0,0,0.65); color: #fff;
+}
+.chat-preview-x{
+  position: absolute; right: 3px; top: 3px; width: 22px; height: 22px; padding: 0; border: 0; border-radius: 50%;
+  background: rgba(0,0,0,0.65); color: #fff; font-size: 0.72rem; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+}
+.chat-preview-info{ min-width: 0; font-size: 0.82rem; color: var(--ink-soft); overflow-wrap: anywhere; }
+.chat-preview-info.err{ color: #b3261e; }
+
+.chat-row .chat-bubble.has-media{ padding: 4px; }
+.chat-row .chat-bubble.has-media .chat-cap{ display: block; padding: 4px 8px 0; white-space: pre-wrap; overflow-wrap: anywhere; }
+.chat-row .chat-bubble.has-media .chat-meta{ padding: 0 8px 2px; }
+.chat-media{
+  position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden;
+  border-radius: 14px; background: #d9dce2; min-width: 150px; min-height: 120px; max-width: 100%;
+}
+.chat-row.mine .chat-media{ background: rgba(255,255,255,0.22); }
+.chat-media img, .chat-media video{
+  display: block; max-width: 100%; width: auto; height: auto; max-height: 300px; border-radius: 14px; background: #000;
+}
+.chat-media img{ cursor: zoom-in; background: transparent; }
+.chat-media video{ max-width: min(260px, 100%); }
+.chat-media.wait, .chat-media.broken{ width: 200px; height: 150px; color: var(--ink-soft); }
+.chat-row.mine .chat-media.wait, .chat-row.mine .chat-media.broken{ color: #fff; }
+.chat-media .chat-media-msg{ display: flex; flex-direction: column; align-items: center; gap: 6px; font-size: 0.8rem; text-align: center; padding: 8px; }
+.chat-media .chat-media-msg i{ font-size: 1.4rem; }
+.chat-media .chat-media-msg button{
+  font: inherit; font-size: 0.78rem; font-weight: 600; padding: 3px 10px; border-radius: 999px; cursor: pointer;
+  border: 1px solid currentColor; background: transparent; color: inherit;
+}
+.chat-media .chat-media-prog{
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  background: rgba(0,0,0,0.42); color: #fff; font-weight: 700; font-size: 0.95rem;
+}
+
+.chat-lightbox{
+  position: fixed; inset: 0; z-index: 50; background: rgba(0,0,0,0.92);
+  display: flex; align-items: center; justify-content: center; padding: 12px;
+}
+.chat-lightbox img{ max-width: 100%; max-height: 100%; object-fit: contain; cursor: zoom-out; }
+.chat-lightbox-x{
+  position: absolute; top: calc(10px + env(safe-area-inset-top, 0px)); right: 12px; width: 42px; height: 42px;
+  border-radius: 50%; border: 0; background: rgba(255,255,255,0.18); color: #fff; font-size: 1.2rem; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+}
+
+@media (min-width: 721px){
+  .chat-app{ height: calc(100dvh - 24px); margin-top: 12px; border-radius: 14px; overflow: hidden; }
+  body.chat-body{ background: var(--cream); }
+}
+
+/* ---- রিঅ্যাকশন (ধাপ ৪.১) ---- */
+.chat-bubble{ touch-action: manipulation; }   /* ডাবল-ট্যাপে জুম নয় — ডাবল-ক্লিক রিঅ্যাকশন খুলতে */
+@media (hover: none){
+  .chat-bubble.selectable{ -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; }   /* দীর্ঘ চাপে টেক্সট-সিলেকশন নয়, নির্বাচন + মেনু (টেক্সট নিতে "কপি") */
+}
+.chat-react-pop{
+  position: fixed; z-index: 60; display: flex; gap: 2px; padding: 6px 8px; border-radius: 999px; background: #fff;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.28); max-width: calc(100vw - 16px);
+}
+.chat-react-pop[hidden]{ display: none; }
+.chat-react-pop button{
+  flex: none; width: 40px; height: 40px; border: 0; border-radius: 50%; background: none; padding: 0;
+  font-size: 1.5rem; line-height: 1; cursor: pointer; transition: transform 0.12s;
+}
+.chat-react-pop button:hover, .chat-react-pop button:active{ transform: scale(1.22); }
+.chat-react-pop button.on{ background: #e7f0ff; }
+.chat-action-pop{
+  z-index: 60; min-width: 176px; max-height: min(320px, calc(100vh - 16px)); overflow-y: auto;
+}
+.chat-action-pop .chat-menu-item[hidden]{ display: none; }
+.chat-reacts{ display: flex; flex-wrap: wrap; gap: 4px; max-width: 78%; margin: -7px 8px 0; position: relative; z-index: 1; }
+.chat-row.mine .chat-reacts{ justify-content: flex-end; }
+.chat-chip{
+  display: inline-flex; align-items: center; gap: 3px; height: 22px; padding: 0 7px; border-radius: 999px;
+  border: 1.5px solid #fff; background: #f0f2f5; color: var(--ink); font: inherit; font-size: 0.78rem; line-height: 1;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.22); cursor: pointer;
+}
+.chat-chip.mine{ background: #e7f0ff; border-color: #b8d3ff; font-weight: 700; }
+.chat-chip:disabled{ cursor: default; }
+.chat-row:has(.chat-reacts) + .chat-row{ margin-top: 6px; }
+
+/* ---- Seen (ধাপ ৪.২) ---- */
+
+/* ---- মেসেজ অ্যাকশন: দীর্ঘ চাপে নির্বাচন → হেডারে ⋮ মেনু (কপি/রিপ্লাই/ফরওয়ার্ড/এডিট/ডিলিট) ---- */
+.chat-banner-msg.ok{ background: #e8f5ec; color: #1e6b3a; border-bottom-color: rgba(30,107,58,0.2); }
+.chat-selbar{ display: none; flex: 1; align-items: center; gap: 4px; min-width: 0; }
+.chat-head.selecting{ background: #eaf1ff; }
+.chat-head.selecting > .chat-back, .chat-head.selecting > .chat-peer, .chat-head.selecting > #chatMenuWrap{ display: none !important; }
+.chat-head.selecting > .chat-selbar{ display: flex; }
+.chat-selx{
+  flex: none; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;
+  border: none; border-radius: 50%; background: none; color: var(--maroon); font-size: 1.15rem; cursor: pointer;
+}
+.chat-selx:active{ background: rgba(0,0,0,0.07); }
+.chat-seltitle{ flex: 1; min-width: 0; font-weight: 700; font-size: 1rem; color: var(--ink); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.chat-menu-item[hidden]{ display: none; }
+.chat-row.selected{ background: rgba(59,130,246,0.16); box-shadow: -10px 0 0 rgba(59,130,246,0.16), 10px 0 0 rgba(59,130,246,0.16); }
+.chat-row.hl{ animation: chatHl 1.4s ease-out; }
+@keyframes chatHl{ 0%, 40%{ background: rgba(255,200,0,0.4); box-shadow: -10px 0 0 rgba(255,200,0,0.4), 10px 0 0 rgba(255,200,0,0.4); } 100%{ background: transparent; box-shadow: none; } }
+
+/* মুছে-ফেলা মেসেজ, ফরওয়ার্ড-চিহ্ন, "সম্পাদিত" */
+.chat-row .chat-bubble.deleted{
+  background: transparent; border: 1px dashed #c9cdd4; color: var(--ink-soft); font-style: italic; font-size: 0.9rem;
+}
+.chat-fwd{ display: block; margin-bottom: 2px; font-size: 0.74rem; font-style: italic; opacity: 0.8; }
+.chat-row .chat-bubble.has-media .chat-fwd{ padding: 2px 8px 2px; }
+
+/* রিপ্লাইয়ের উদ্ধৃতি (বাবলের ভেতরে) */
+.chat-quote{
+  display: block; margin: 0 0 4px; padding: 5px 9px; border-radius: 8px; border-left: 4px solid var(--maroon);
+  background: rgba(0,0,0,0.07); font-size: 0.85rem; line-height: 1.35; cursor: pointer; white-space: normal;
+  text-align: left; max-width: 100%;
+}
+.chat-row.mine .chat-quote{ background: rgba(255,255,255,0.2); border-left-color: rgba(255,255,255,0.85); }
+.chat-quote.dim{ cursor: default; font-style: italic; opacity: 0.85; }
+.chat-quote-who{ display: block; font-weight: 700; font-size: 0.78rem; }
+.chat-quote-txt{
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  overflow-wrap: anywhere; opacity: 0.92;
+}
+.chat-row .chat-bubble.has-media .chat-quote{ margin: 0 0 4px; }
+
+/* কম্পোজারের উপরে রিপ্লাই/এডিট বার */
+.chat-replybar{
+  display: flex; align-items: center; gap: 8px; min-width: 0; padding: 6px 6px 6px 10px;
+  background: var(--cream); border-left: 4px solid var(--maroon); border-radius: 10px;
+}
+.chat-replybar.edit{ border-left-color: #C9962E; }
+.chat-replybar-body{ flex: 1; min-width: 0; display: flex; flex-direction: column; line-height: 1.3; }
+.chat-replybar-who{ font-size: 0.78rem; font-weight: 700; color: var(--maroon); }
+.chat-replybar-snip{ font-size: 0.85rem; color: var(--ink-soft); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.chat-replybar-x{
+  flex: none; width: 30px; height: 30px; border: 0; border-radius: 50%; background: transparent;
+  color: var(--ink-soft); font-size: 0.95rem; cursor: pointer; display: flex; align-items: center; justify-content: center;
+}
+.chat-replybar-x:active{ background: rgba(0,0,0,0.07); }
+
+/* বটম-শিট (ডিলিট / ফরওয়ার্ড) */
+.chat-sheet{ position: fixed; inset: 0; z-index: 70; display: flex; align-items: flex-end; justify-content: center; }
+.chat-sheet-back{ position: absolute; inset: 0; background: rgba(0,0,0,0.45); }
+.chat-sheet-panel{
+  position: relative; width: 100%; max-width: 720px; max-height: 82vh; max-height: 82dvh; display: flex; flex-direction: column;
+  background: #fff; border-radius: 18px 18px 0 0; box-shadow: 0 -4px 20px rgba(0,0,0,0.22);
+  padding-bottom: env(safe-area-inset-bottom, 0px); overflow: hidden;
+}
+.chat-sheet-head{ flex: none; display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 12px 8px 8px 16px; }
+.chat-sheet-head strong{ font-size: 1.02rem; }
+.chat-sheet-x{
+  flex: none; width: 36px; height: 36px; border: 0; border-radius: 50%; background: transparent;
+  color: var(--ink-soft); font-size: 1.05rem; cursor: pointer;
+}
+.chat-sheet-body{ flex: 1; min-height: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+.chat-sheet-note{ margin: 0; padding: 0 16px 10px; font-size: 0.84rem; color: var(--ink-soft); line-height: 1.45; }
+.chat-sheet-btn{
+  display: block; width: 100%; padding: 14px 16px; border: 0; border-top: 1px solid var(--line); background: #fff;
+  font: inherit; font-size: 1rem; text-align: center; color: var(--ink); cursor: pointer;
+}
+.chat-sheet-btn:active{ background: var(--cream); }
+.chat-sheet-btn.danger{ color: #c0392b; font-weight: 700; }
+.chat-sheet-btn[disabled]{ opacity: 0.55; cursor: default; }
+@media (min-width: 721px){
+  .chat-sheet{ align-items: center; }
+  .chat-sheet-panel{ max-width: 420px; border-radius: 16px; }
+}
+.chat-fw-search{
+  display: block; width: calc(100% - 24px); margin: 0 12px 6px; padding: 9px 14px; border-radius: 20px;
+  border: 1px solid var(--line); background: var(--cream); font: inherit; font-size: 0.95rem; color: var(--ink); outline: none;
+}
+.chat-fw-search:focus{ border-color: var(--maroon); background: #fff; }
+.chat-fw-row{ display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding: 8px 14px; border-top: 1px solid var(--line); }
+.chat-fw-row .chat-avatar{ flex: none; }
+.chat-fw-who{ flex: 1; min-width: 0; display: flex; flex-direction: column; line-height: 1.25; }
+.chat-fw-name{ font-weight: 700; font-size: 0.95rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.chat-fw-sub{ font-size: 0.78rem; color: var(--ink-soft); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.chat-fw-btn{
+  flex: none; font: inherit; font-weight: 600; font-size: 0.85rem; padding: 6px 14px; border-radius: 999px;
+  border: 1px solid var(--maroon); background: var(--maroon); color: #fff; cursor: pointer;
+}
+.chat-fw-btn[disabled]{ opacity: 0.7; cursor: default; }
+.chat-fw-btn.done{ background: #fff; color: #1e6b3a; border-color: #1e6b3a; }
+.chat-fw-err{ flex-basis: 100%; margin: 0; font-size: 0.78rem; color: #b3261e; padding-left: 50px; }
+.chat-fw-empty{ margin: 0; padding: 22px 18px; text-align: center; color: var(--ink-soft); font-size: 0.92rem; }

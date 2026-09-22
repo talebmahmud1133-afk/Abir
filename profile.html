@@ -1,0 +1,1962 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>প্রোফাইল — টাঙ্গাইল জেলা</title>
+<meta name="description" content="আপনার টাঙ্গাইল জেলা একাউন্টের তথ্য দেখুন।">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0E6B3A">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="css/style.css?v=20260922203957">
+<link rel="stylesheet" href="css/inbox.css?v=20260922203957">
+<style>
+  /* ---- উপরের চিকন বার: ব্যাক বাটন + শিরোনাম + সেটিং আইকন ---- */
+  .profile-topbar{
+    position: sticky; top: 0; z-index: 60; display: flex; align-items: center; gap: 12px;
+    padding: 8px 16px; padding-top: calc(8px + env(safe-area-inset-top, 0px)); box-sizing: border-box;
+    background: var(--bg-page, #fff); border-bottom: 1px solid var(--line); color: var(--ink);
+  }
+  .profile-topbar-btn{
+    width: 36px; height: 36px; border: 0; border-radius: 50%; background: var(--cream); color: var(--ink);
+    display: inline-flex; align-items: center; justify-content: center; font-size: 1rem; cursor: pointer; padding: 0; text-decoration: none; flex: 0 0 auto;
+  }
+  .profile-topbar-btn:hover, .profile-topbar-btn:active{ background: var(--line); }
+  .profile-topbar-menu{
+    position: absolute; right: 12px; top: calc(100% - 2px); min-width: 230px; background: #fff; color: var(--ink);
+    border-radius: 14px; box-shadow: 0 8px 28px rgba(0,0,0,0.22); padding: 6px; z-index: 70;
+  }
+  .profile-topbar-menu[hidden]{ display: none; }
+  .profile-topbar-menu a{ display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 10px; font-size: 0.95rem; color: var(--ink); text-decoration: none; }
+  .profile-topbar-menu a:active, .profile-topbar-menu a:hover{ background: #eef2f1; }
+  .profile-topbar-menu button{ display: flex; align-items: center; gap: 12px; width: 100%; padding: 12px 14px; margin-top: 4px; border: 0; border-top: 1px solid #e3e8e7; border-radius: 10px; background: none; font: inherit; font-size: 0.95rem; color: #c0392b; text-align: left; cursor: pointer; }
+  .profile-topbar-menu button:active, .profile-topbar-menu button:hover{ background: #fdecea; }
+  .profile-topbar-menu button i{ width: 18px; text-align: center; color: #c0392b; }
+  .profile-topbar-menu a i{ width: 18px; text-align: center; color: var(--maroon); }
+  .profile-topbar-title{ flex: 1; min-width: 0; font-weight: 600; font-size: 1.05rem; color: var(--ink); font-family: 'Tiro Bangla', serif; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .profile-loading{ max-width: 480px; margin: 60px auto; text-align: center; color: var(--ink-soft); }
+  .profile-card{
+    width: 100%; max-width: none; margin: 0; background: #fff; border: 0;
+    border-radius: 0; padding: 0 16px 24px; text-align: center; box-sizing: border-box;
+  }
+  /* ব্যানার পুরো চওড়া; নিচের লেখা/বাটন বড় স্ক্রিনে মাঝখানে পড়ার সুবিধার জন্য সর্বোচ্চ ৫৬০px */
+  .profile-card > :not(.profile-cover){ max-width: 560px; margin-left: auto; margin-right: auto; }
+  /* ফেসবুকের মতো: ব্যানার একদম উপরে, পুরো চওড়া; হেডার/গ্যাপ নেই */
+  main > .wrap{ padding: 0; }
+
+  .profile-avatar-wrap{ position: relative; width: 140px; height: 140px; margin: 0 auto 12px; }
+  .profile-avatar{
+    width: 140px; height: 140px; border-radius: 50%; background: var(--maroon);
+    color: #fff; display: flex; align-items: center; justify-content: center;
+    font-family: 'Tiro Bangla', serif; font-size: 3.6rem; overflow: hidden;
+  }
+  .profile-avatar img{ width: 100%; height: 100%; object-fit: cover; display: block; }
+  .profile-avatar-edit{
+    position: absolute; right: 4px; bottom: 6px; width: 36px; height: 36px; border-radius: 50%;
+    background: var(--maroon); color: #fff; border: 2px solid #fff; display: flex; align-items: center;
+    justify-content: center; font-size: 0.95rem; cursor: pointer; padding: 0; z-index: 2;
+  }
+  .profile-avatar-edit:disabled{ opacity: 0.6; cursor: default; }
+  .profile-card h1{ font-size: 1.3rem; margin-bottom: 4px; }
+  .profile-info{ text-align: left; border-top: 1px solid var(--line); padding-top: 16px; margin-bottom: 22px; }
+  .profile-info div{ display: flex; justify-content: space-between; gap: 12px; padding: 8px 0; font-size: 0.92rem; border-bottom: 1px dashed var(--line); }
+  .profile-info div:last-child{ border-bottom: none; }
+  .profile-info span:first-child{ color: var(--ink-soft); }
+  .profile-info span:last-child{ font-weight: 600; text-align: right; }
+  .profile-actions{ display: flex; flex-direction: column; gap: 10px; }
+
+
+  /* ---- ধাপ ৩: কভার ফটো, ইউজারনেম, বায়ো, প্রোফাইল এডিট ---- */
+  .profile-cover{
+    position: relative; width: calc(100% + 32px); margin: 0 -16px; aspect-ratio: 2 / 1; max-height: 380px; overflow: hidden;
+    border-radius: 0;
+    background: linear-gradient(135deg, var(--maroon) 0%, var(--indigo) 100%);
+  }
+  .profile-cover > img.pf-cover-img{ position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+  .profile-cover-edit{
+    position: absolute; right: 10px; bottom: 10px; height: 32px; padding: 0 12px; border-radius: 999px;
+    background: rgba(0,0,0,0.55); color: #fff; border: 1px solid rgba(255,255,255,0.35);
+    display: inline-flex; align-items: center; gap: 6px; font-family: 'Hind Siliguri', sans-serif;
+    font-size: 0.8rem; cursor: pointer;
+  }
+  .profile-cover-edit:hover{ background: rgba(0,0,0,0.7); }
+  .profile-cover-edit:disabled{ opacity: 0.6; cursor: default; }
+  .profile-cover + .profile-avatar-wrap{ margin-top: -70px; z-index: 1; }
+  .profile-cover + .profile-avatar-wrap .profile-avatar{ border: 4px solid #fff; box-sizing: border-box; box-shadow: var(--shadow-sm); }
+  .profile-bio{ color: var(--ink); font-size: 0.93rem; line-height: 1.5; margin: 0 auto 8px; max-width: 360px; overflow-wrap: anywhere; }
+
+  /* ---- ফেসবুক-স্টাইল: বড় বোল্ড নাম, তিন সংখ্যার লাইন, ছোট চিপ-বাটন ---- */
+  .profile-card h1{ font-family: 'Hind Siliguri', sans-serif; font-size: 1.95rem; font-weight: 700; line-height: 1.25; color: var(--ink); margin: 6px 0 2px; overflow-wrap: anywhere; }
+  .profile-stats{ font-size: 1rem; font-weight: 700; color: var(--ink); margin: 6px 0 12px; }
+  .profile-stats b{ font-weight: 700; }
+  .profile-stats .dot{ color: var(--ink-soft); margin: 0 6px; }
+  .profile-card .profile-bio{ font-size: 1.05rem; line-height: 1.45; margin: 0 auto 14px; }
+  /* গেস্ট (লগইন ছাড়া) — লগইন করা ইউজারের মতোই একই ফরম্যাট, কিন্তু সব তথ্য খালি */
+  .profile-card.is-guest .profile-edit,
+  .profile-card.is-guest .auth-msg{ display: none !important; }
+  .profile-edit{ text-align: left; border-top: 1px solid var(--line); padding-top: 16px; margin-bottom: 18px; }
+  .profile-edit-label{ display: block; font-weight: 600; font-size: 0.9rem; margin-bottom: 6px; color: var(--ink); }
+  .profile-edit .auth-field{ margin-bottom: 6px; }
+  .profile-edit .auth-field textarea{
+    border: none; outline: none; flex: 1; min-width: 0; resize: vertical; min-height: 72px;
+    font-family: 'Hind Siliguri', sans-serif; font-size: 1rem; color: var(--ink); background: transparent;
+  }
+  .profile-edit-hint{ font-size: 0.8rem; color: var(--ink-soft); margin: 0 0 14px; min-height: 1.2em; }
+  .profile-edit-hint.is-ok{ color: #1f7a3d; }
+  .profile-edit-hint.is-bad{ color: #c0392b; }
+  .profile-edit-count{ text-align: right; font-size: 0.78rem; color: var(--ink-soft); margin: 0 0 14px; }
+  .profile-edit-actions{ display: flex; gap: 10px; }
+  .profile-edit-actions .auth-btn, .profile-edit-actions .auth-btn-outline{ margin: 0; flex: 1; }
+
+  /* ---- নতুন ডিজাইন: কভার + ব্যাজ, বাঁ-দিকের অবতার, ভেরিফাইড টিক, বাটন, ট্যাব, আইকনসহ তথ্য ---- */
+  .profile-card{ text-align: left; }
+  .profile-cover{ aspect-ratio: 5 / 2; }
+  .pf-brand{
+    position: absolute; top: 10px; right: 10px; z-index: 1; display: flex; align-items: center; gap: 6px;
+    background: rgba(255,255,255,0.95); padding: 5px 10px 5px 6px; border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.18); font-size: 0.72rem; font-weight: 700; line-height: 1.1; color: #0b4a22;
+  }
+  .pf-brand img{ width: 28px; height: 28px; object-fit: contain; display: block; border-radius: 7px; }
+  .profile-cover + .profile-avatar-wrap{ margin: -68px auto 10px; width: 136px; height: 136px; }
+  .profile-avatar-wrap .profile-avatar{ width: 136px; height: 136px; font-size: 3.4rem; }
+  .profile-avatar-wrap .profile-avatar-edit{ left: 0; right: auto; bottom: 4px; width: 38px; height: 38px; font-size: 0.95rem; }
+  .pf-online-dot{ position: absolute; right: 8px; bottom: 12px; width: 20px; height: 20px; border-radius: 50%; background: #22c55e; border: 3px solid #fff; box-sizing: border-box; z-index: 2; }
+  .pf-name-row{ display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; text-align: center; }
+  .profile-card .pf-name-row h1{ font-size: 1.6rem; margin: 0; text-align: center; }
+  .pf-verified{ display: inline-flex; align-items: center; color: var(--gold); font-size: 1.3rem; line-height: 1; }
+  .pf-verified[hidden]{ display: none; }
+  .pf-chip{ display: table; margin: 8px auto 6px; padding: 3px 12px; border-radius: 999px; background: #e7f0ff; color: var(--maroon-dark); border: 1px solid #cfe0ff; font-size: 0.8rem; font-weight: 600; }
+  .pf-meta{ display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 6px 14px; margin: 2px 0 8px; text-align: center; }
+  .pf-meta .profile-stats{ font-size: 0.9rem; margin: 0; }
+  .pf-online{ display: inline-flex; align-items: center; gap: 6px; color: #1f7a3d; font-size: 0.9rem; }
+  .pf-online i{ width: 9px; height: 9px; border-radius: 50%; background: #22c55e; display: inline-block; }
+  .profile-card .profile-bio{ margin: 0 0 10px; max-width: none; font-size: 0.98rem; text-align: center; }
+  .pf-actions{ display: flex; gap: 10px; margin: 12px 0 6px; }
+  .pf-btn{
+    flex: 1; height: 44px; border-radius: 10px; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    font-family: 'Hind Siliguri', sans-serif; font-size: 0.95rem; font-weight: 600; text-decoration: none; cursor: pointer; box-sizing: border-box;
+  }
+  .pf-btn.primary{ background: var(--maroon); color: #fff; border: 0; }
+  .pf-btn[data-pf-tab]{ position: relative; }
+  .pf-btn .pf-tab-badge{ top: -7px; left: auto; right: 10px; }
+  .pf-btn.primary.active{ box-shadow: inset 0 0 0 2px rgba(255,255,255,0.55); }
+  .pf-btn.outline.active{ background: #e8f3ec; }
+  .pf-btn.outline{ background: #fff; color: var(--maroon); border: 1.5px solid var(--maroon); }
+  .pf-tabs{ display: flex; margin: 14px 0 0; border-bottom: 1px solid var(--line); }
+  .pf-tab{
+    flex: 1; background: none; border: 0; border-bottom: 3px solid transparent; padding: 10px 2px 8px; display: flex; flex-direction: column; align-items: center; gap: 4px;
+    font-family: inherit; font-size: 0.82rem; font-weight: 700; color: #000; text-decoration: none; cursor: pointer;
+  }
+  .pf-tab i{ font-size: 1rem; }
+  .pf-tab.active{ color: var(--maroon); border-bottom-color: var(--maroon); font-weight: 700; background: #f3f8ff; }
+  .pf-panel[hidden]{ display: none; }
+  .pf-panel h3{ font-size: 1.05rem; margin: 16px 0 4px; color: var(--ink); }
+  .pf-row{ display: flex; align-items: center; gap: 12px; padding: 13px 0; border-bottom: 1px solid var(--line); font-size: 0.95rem; }
+  .pf-row:last-child{ border-bottom: 0; }
+
+  /* ---- "মোট পোস্ট" ট্যাব: মোট সংখ্যা + নিজের পোস্টের তালিকা ---- */
+  .pf-total{ display: flex; align-items: baseline; justify-content: center; gap: 10px; padding: 18px 0 6px; }
+  .pf-total-num{ font-size: 2.4rem; font-weight: 700; line-height: 1; color: var(--maroon); }
+  .pf-total-label{ font-size: 1rem; color: var(--ink-soft); font-weight: 600; }
+  .pf-posts-note{ text-align: center; font-size: 0.85rem; color: var(--ink-soft); margin: 0 0 6px; }
+  .pf-post-list{ display: flex; flex-direction: column; gap: 14px; margin-top: 12px; }
+  .pf-post-list .post-card{ cursor: default; }
+  .pf-post-list .post-card.is-link{ cursor: pointer; }
+  .pf-post-list .post-content{ display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  .pf-post-list .post-content.expanded{ display: block; -webkit-line-clamp: unset; overflow: visible; }
+  .pf-post-list .post-card-head{ position: relative; }
+  .pf-post-status{ margin-left: auto; align-self: flex-start; font-size: 0.72rem; font-weight: 600; padding: 2px 9px; border-radius: 999px; white-space: nowrap; background: #fdf2e3; color: #8a5a12; }
+  .pf-post-empty{ text-align: center; color: var(--ink-soft); padding: 28px 12px; font-size: 0.95rem; }
+  .pf-post-empty a{ color: var(--maroon); font-weight: 600; }
+  .pf-posts-more{ width: 100%; flex: none; margin: 14px 0 4px; }
+  .pf-posts-more[hidden]{ display: none; }
+
+  /* ---- "মেসেজ" ট্যাব ---- */
+  .pf-soon{ text-align: center; padding: 34px 12px 26px; color: var(--ink-soft); }
+  .pf-soon i{ font-size: 2.6rem; color: var(--maroon); opacity: 0.85; }
+  .pf-soon h3{ margin: 12px 0 4px; }
+  .pf-soon p{ margin: 0; font-size: 0.95rem; }
+
+  /* ---- "Add Friend" ট্যাব: সদস্য খোঁজা + Add Friend বাটন ---- */
+  .pf-fr-search{ position: relative; margin: 14px 0 8px; }
+  .pf-fr-search i{ position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--ink-soft); pointer-events: none; }
+  .pf-fr-search input{
+    width: 100%; box-sizing: border-box; height: 44px; border: 1px solid var(--line); border-radius: 10px; padding: 0 14px 0 40px;
+    font-family: 'Hind Siliguri', sans-serif; font-size: 1rem; background: #fff; color: var(--ink);
+  }
+  .pf-fr-search input:focus{ outline: none; border-color: var(--maroon); }
+  .pf-fr-list{ list-style: none; margin: 0; padding: 0; }
+  .pf-fr-item{ display: flex; align-items: center; gap: 10px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+  .pf-fr-item:last-child{ border-bottom: 0; }
+  .pf-fr-link{ display: flex; align-items: center; gap: 12px; flex: 1 1 auto; min-width: 0; text-decoration: none; color: inherit; }
+  .pf-fr-avatar{
+    width: 52px; height: 52px; border-radius: 50%; background: var(--maroon); color: #fff; flex: 0 0 auto; overflow: hidden;
+    display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 1.2rem;
+  }
+  .pf-fr-avatar img{ width: 100%; height: 100%; object-fit: cover; display: block; }
+  .pf-fr-body{ min-width: 0; }
+  .pf-fr-name{ display: flex; align-items: center; gap: 5px; font-weight: 600; color: var(--ink); }
+  .pf-fr-name span{ overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+  .pf-fr-name i{ color: var(--maroon); font-size: 0.9rem; flex: 0 0 auto; }
+  .pf-fr-user, .pf-fr-addr{ font-size: 0.82rem; color: var(--ink-soft); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .pf-fr-btn{
+    flex: 0 0 auto; height: 38px; padding: 0 14px; border-radius: 10px; border: 1.5px solid var(--maroon); background: var(--maroon); color: #fff;
+    font-family: 'Hind Siliguri', sans-serif; font-weight: 600; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 6px; cursor: pointer;
+  }
+  .pf-fr-btn.is-added{ background: #fff; color: var(--maroon-dark); }
+  .pf-fr-btn.is-pending{ background: #F7EFD9; color: #8A6414; border-color: rgba(201,150,46,0.65); }
+  .pf-fr-btn:disabled{ opacity: 0.6; cursor: default; }
+
+  /* ---- "ফ্রেন্ডস" — সব ট্যাবের নিচে (সবসময় দৃশ্যমান) ফেসবুকের মতো গোল ছবির গ্রিড ---- */
+  .pf-friends{ margin-top: 26px; }
+  .pf-friends-head{ display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 14px; }
+  .pf-friends .pf-friends-head h3{ margin: 0; font-size: 1.25rem; font-weight: 700; color: var(--ink); }
+  .pf-friends-all{ background: none; border: 0; padding: 4px 0; font-family: inherit; font-size: 0.95rem; font-weight: 600; color: var(--maroon); cursor: pointer; }
+  .pf-friends-grid{ display: flex; flex-wrap: nowrap; gap: 12px; padding-bottom: 18px; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; scroll-snap-type: x proximity; scrollbar-width: none; }
+  .pf-friends-grid::-webkit-scrollbar{ display: none; }
+  .pf-friends-grid .pf-friend{ flex: 0 0 76px; width: 76px; scroll-snap-align: start; }
+  .pf-friend{ display: flex; flex-direction: column; align-items: center; text-decoration: none; color: var(--ink); min-width: 0; }
+  .pf-friend-av{
+    position: relative; width: 100%; aspect-ratio: 1 / 1; border-radius: 50%; background: var(--maroon); color: #fff;
+    display: flex; align-items: center; justify-content: center; font-size: 1.6rem; font-weight: 600;
+    border: 1px solid var(--line); box-sizing: border-box;
+  }
+  .pf-friend-av img{ width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 50%; }
+  .pf-friend-on{ position: absolute; right: 2px; bottom: 4px; width: 16px; height: 16px; border-radius: 50%; background: #22c55e; border: 3px solid #fff; box-sizing: border-box; }
+  .pf-friend-name{
+    margin-top: 8px; width: 100%; text-align: center; font-weight: 600; font-size: 0.95rem; line-height: 1.25;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; overflow-wrap: anywhere;
+  }
+  .pf-friends-empty{ color: var(--ink-soft); font-size: 0.95rem; margin: 0 0 18px; }
+  .pf-friends-empty button{ background: none; border: 0; padding: 0; font: inherit; font-weight: 600; color: var(--maroon); cursor: pointer; }
+
+  /* ---- "ফেভারিট ক্যাটাগরি" — ফ্রেন্ডসের নিচে; হোম পেজের ♡ দিয়ে যোগ হয় (js/favorite-categories.js) ---- */
+  .pf-favs{ margin-top: 8px; padding-bottom: 8px; }
+  .pf-favs .pf-friends-head h3{ margin: 0; font-size: 1.25rem; font-weight: 700; color: var(--ink); }
+  .pf-fav-grid{ display: flex; flex-wrap: nowrap; gap: 10px; padding-bottom: 14px; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; scroll-snap-type: x proximity; scrollbar-width: none; }
+  .pf-fav-grid::-webkit-scrollbar{ display: none; }
+  .pf-fav-grid .cat-card{ flex: 0 0 82px; width: 82px; scroll-snap-align: start; }
+  .pf-fav-grid:empty{ display: none; }
+  .pf-fav-grid .cat-card{
+    display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; text-decoration: none;
+    background: #fff; border: 1px solid rgba(34,48,58,0.10); border-radius: 16px; padding: 14px 4px 10px;
+    aspect-ratio: 0.88 / 1; overflow: hidden; box-shadow: none;
+  }
+  .pf-fav-grid .cat-card:active{ border-color: var(--gold); }
+  .pf-fav-grid .cat-card .cat-icon{ width: auto; height: auto; background: none !important; font-size: 1.9rem; margin: 0 auto 8px; }
+  .pf-fav-grid .cat-card .cat-icon-fa{ font-size: 1.9rem; line-height: 1; display: block; }
+  .pf-fav-grid .cat-card h3{
+    font-size: 0.72rem; line-height: 1.2; font-weight: 700; color: #1a2530; margin: 0; width: 100%; padding: 0 2px;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; overflow-wrap: anywhere;
+  }
+  .pf-row > i{ width: 20px; text-align: center; color: var(--ink-soft); flex: 0 0 auto; }
+  .pf-row .k{ flex: 0 0 96px; color: var(--ink-soft); }
+  .pf-row .v{ flex: 1; min-width: 0; font-weight: 600; overflow-wrap: anywhere; }
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+<div class="profile-topbar">
+  <button type="button" class="profile-topbar-btn" id="topBackBtn" aria-label="পিছনে যান"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i></button>
+  <span class="profile-topbar-title">আমার প্রোফাইল</span>
+  <button type="button" class="profile-topbar-btn" id="topSettingsBtn" aria-label="সেটিংস" aria-haspopup="true" aria-expanded="false" aria-controls="topSettingsMenu"><i class="fa-solid fa-gear" aria-hidden="true"></i></button>
+  <div class="profile-topbar-menu" id="topSettingsMenu" role="menu" hidden>
+    <a href="profile-settings.html" id="menuPrivacy" role="menuitem"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> প্রাইভেসি সেটিংস</a>
+    <a href="privacy-policy.html" role="menuitem"><i class="fa-solid fa-user-shield" aria-hidden="true"></i> প্রাইভেসি পলিসি</a>
+    <a href="terms.html" role="menuitem"><i class="fa-solid fa-file-contract" aria-hidden="true"></i> শর্তাবলী</a>
+    <button type="button" id="logoutBtn" role="menuitem"><i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i> <span id="logoutLabel">লগআউট করুন</span></button>
+  </div>
+</div>
+
+<main>
+  <div class="wrap">
+
+    <div class="profile-loading" id="profileLoading">
+      <p>লোড হচ্ছে…</p>
+    </div>
+
+    <div class="profile-card" id="profileCard" hidden>
+      <div class="profile-cover" id="profileCover">
+        <span class="pf-brand" aria-hidden="true"><img src="assets/icons/icon-192.png" alt="" width="28" height="28"><span>টাঙ্গাইল<br>জেলা</span></span>
+        <button type="button" class="profile-cover-edit" id="coverEditBtn" aria-label="ব্যানার পরিবর্তন করুন">
+          <i class="fa-solid fa-camera" aria-hidden="true"></i><span>ব্যানার</span>
+        </button>
+        <input type="file" id="coverInput" accept="image/*" hidden>
+      </div>
+      <div class="profile-avatar-wrap">
+        <div class="profile-avatar" id="profileAvatar">?</div>
+        <span class="pf-online-dot" aria-hidden="true"></span>
+        <button type="button" class="profile-avatar-edit" id="avatarEditBtn" aria-label="ছবি পরিবর্তন করুন" title="ছবি পরিবর্তন করুন">
+          <i class="fa-solid fa-camera" aria-hidden="true"></i>
+        </button>
+        <input type="file" id="avatarInput" accept="image/*" hidden>
+      </div>
+
+      <div class="pf-name-row">
+        <h1 id="profileName">—</h1>
+        <span class="pf-verified" id="verifiedBadge" role="img" aria-label="ভেরিফাইড" title="ভেরিফাইড" hidden><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="11" fill="currentColor"/><path d="M7 12.5l3.4 3.4L17.2 9" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </div>
+      <span class="pf-chip">সদস্য</span>
+      <div class="pf-meta">
+        <p class="profile-stats" id="profileStats" hidden><span><b id="statFollowers">০</b> ফলোয়ার</span><span class="dot">·</span><span><b id="statFollowing">০</b> ফলোয়িং</span><span class="dot">·</span><span><b id="statPosts">০</b> পোস্ট</span></p>
+      </div>
+      <p class="profile-bio" id="profileBio" hidden></p>
+
+      <div class="pf-actions">
+        <button type="button" class="pf-btn primary" data-pf-tab="friends"><i class="fa-solid fa-users" aria-hidden="true"></i> ফ্রেন্ড লিস্ট</button>
+        <button type="button" class="pf-btn outline" data-pf-tab="messages"><i class="fa-solid fa-message" aria-hidden="true"></i> মেসেজ<span class="pf-tab-badge" id="pfMsgBadge" hidden></span></button>
+      </div>
+
+      <p class="auth-msg" id="socialMsg" role="status" aria-live="polite"></p>
+
+      <form class="profile-edit" id="editPanel" hidden novalidate>
+        <label class="profile-edit-label" for="editFullName">পূর্ণ নাম</label>
+        <div class="auth-field">
+          <span class="auth-icon" aria-hidden="true"><i class="fa-solid fa-user" aria-hidden="true"></i></span>
+          <input type="text" id="editFullName" autocomplete="name" placeholder="আপনার নাম লিখুন">
+        </div>
+
+        <label class="profile-edit-label" for="editPhone">মোবাইল</label>
+        <div class="auth-field">
+          <span class="auth-icon" aria-hidden="true"><i class="fa-solid fa-phone" aria-hidden="true"></i></span>
+          <input type="tel" id="editPhone" inputmode="numeric" autocomplete="tel" placeholder="যেমন: 017xxxxxxxx">
+        </div>
+
+        <label class="profile-edit-label" for="editVillage">গ্রাম</label>
+        <div class="auth-field">
+          <span class="auth-icon" aria-hidden="true"><i class="fa-solid fa-house" aria-hidden="true"></i></span>
+          <input type="text" id="editVillage" placeholder="গ্রামের নাম">
+        </div>
+
+        <label class="profile-edit-label" for="editUnion">ইউনিয়ন</label>
+        <div class="auth-field">
+          <span class="auth-icon" aria-hidden="true"><i class="fa-solid fa-building-columns" aria-hidden="true"></i></span>
+          <input type="text" id="editUnion" placeholder="ইউনিয়নের নাম">
+        </div>
+
+        <label class="profile-edit-label" for="editThana">থানা</label>
+        <div class="auth-field">
+          <span class="auth-icon" aria-hidden="true"><i class="fa-solid fa-location-dot" aria-hidden="true"></i></span>
+          <input type="text" id="editThana" placeholder="থানার নাম">
+        </div>
+
+        <label class="profile-edit-label" for="editDistrict">জেলা</label>
+        <div class="auth-field">
+          <span class="auth-icon" aria-hidden="true"><i class="fa-solid fa-map" aria-hidden="true"></i></span>
+          <input type="text" id="editDistrict" placeholder="জেলার নাম" value="টাঙ্গাইল">
+        </div>
+
+        <label class="profile-edit-label" for="editUsername">ইউজারনেম</label>
+        <div class="auth-field">
+          <span class="auth-icon" aria-hidden="true">@</span>
+          <input type="text" id="editUsername" maxlength="20" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="যেমন: abir_123">
+        </div>
+        <p class="profile-edit-hint" id="usernameHint" aria-live="polite">৩-২০ অক্ষর: ছোট হাতের ইংরেজি অক্ষর (a-z), সংখ্যা ও _ (আন্ডারস্কোর)</p>
+
+        <label class="profile-edit-label" for="editBio">বায়ো</label>
+        <div class="auth-field">
+          <textarea id="editBio" maxlength="160" rows="3" placeholder="নিজের সম্পর্কে সংক্ষেপে লিখুন"></textarea>
+        </div>
+        <p class="profile-edit-count" id="bioCount">০/১৬০</p>
+
+        <p class="auth-msg" id="editMsg" role="status" aria-live="polite"></p>
+        <div class="profile-edit-actions">
+          <button type="submit" class="auth-btn" id="saveProfileBtn">সংরক্ষণ করুন</button>
+          <button type="button" class="auth-btn-outline" id="cancelEditBtn">বাতিল</button>
+        </div>
+      </form>
+
+      <nav class="pf-tabs" aria-label="প্রোফাইল ট্যাব">
+        <button type="button" class="pf-tab active" data-pf-tab="info"><i class="fa-solid fa-user" aria-hidden="true"></i><span>তথ্য</span></button>
+        <button type="button" class="pf-tab" id="profileEditBtn"><i class="fa-solid fa-pen" aria-hidden="true"></i><span>তথ্য এডিট</span></button>
+        <button type="button" class="pf-tab" data-pf-tab="posts"><i class="fa-solid fa-newspaper" aria-hidden="true"></i><span>মোট পোস্ট</span></button>
+        <button type="button" class="pf-tab" id="profilePostBtn"><i class="fa-solid fa-plus" aria-hidden="true"></i><span>পোস্ট</span></button>
+      </nav>
+
+      <section class="pf-panel" id="updatedProfileSection" data-pf-panel="info">
+        <h3>ব্যক্তিগত তথ্য</h3>
+        <div class="pf-row"><i class="fa-solid fa-phone" aria-hidden="true"></i><span class="k">মোবাইল</span><span class="v" id="updPhoneVal">—</span></div>
+        <div class="pf-row"><i class="fa-solid fa-at" aria-hidden="true"></i><span class="k">ইউজারনেম</span><span class="v" id="profileUsernameVal">—</span></div>
+        <div class="pf-row"><i class="fa-solid fa-calendar-check" aria-hidden="true"></i><span class="k">সদস্য হয়েছেন</span><span class="v" id="profileJoined">—</span></div>
+
+        <h3>ঠিকানা</h3>
+        <div class="pf-row"><i class="fa-solid fa-house" aria-hidden="true"></i><span class="k">গ্রাম</span><span class="v" id="updVillageVal">—</span></div>
+        <div class="pf-row"><i class="fa-solid fa-building-columns" aria-hidden="true"></i><span class="k">ইউনিয়ন</span><span class="v" id="updUnionVal">—</span></div>
+        <div class="pf-row"><i class="fa-solid fa-location-dot" aria-hidden="true"></i><span class="k">থানা</span><span class="v" id="updThanaVal">—</span></div>
+        <div class="pf-row"><i class="fa-solid fa-map" aria-hidden="true"></i><span class="k">জেলা</span><span class="v" id="updDistrictVal">—</span></div>
+
+      </section>
+
+      <section class="pf-panel" data-pf-panel="messages" hidden>
+        <div class="ib-subtabs" role="group" aria-label="মেসেজ ফোল্ডার">
+          <button type="button" class="ib-subtab active" data-ib-folder="chat">চ্যাট<span class="ib-count" id="ibChatCount" hidden></span></button>
+          <button type="button" class="ib-subtab" data-ib-folder="requests">মেসেজ রিকোয়েস্ট<span class="ib-count" id="ibReqCount" hidden></span></button>
+        </div>
+        <p class="auth-msg" id="ibMsg" role="status" aria-live="polite"></p>
+        <ul class="ib-list" id="ibList"></ul>
+        <p class="ib-state" id="ibState" role="status">লোড হচ্ছে…</p>
+        <button type="button" class="pf-btn outline pf-posts-more" id="ibMore" hidden>আরও দেখুন</button>
+      </section>
+
+      <section class="pf-panel" data-pf-panel="posts" hidden>
+        <div class="pf-total">
+          <span class="pf-total-num" id="pfPostsTotal">০</span>
+          <span class="pf-total-label">মোট পোস্ট</span>
+        </div>
+        <p class="pf-posts-note" id="pfPostsNote" hidden></p>
+        <div class="pf-post-list" id="pfPostsList"></div>
+        <button type="button" class="pf-btn outline pf-posts-more" id="pfPostsMore" hidden>আরও দেখুন</button>
+      </section>
+
+      <section class="pf-panel" data-pf-panel="friends" hidden>
+        <div class="pf-fr-search" id="pfFriendSearchWrap">
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+          <input type="search" id="pfFriendSearch" placeholder="নাম বা ইউজারনেম দিয়ে খুঁজুন" autocomplete="off" aria-label="সদস্য খুঁজুন">
+        </div>
+        <p class="auth-msg" id="pfFriendMsg" role="status" aria-live="polite"></p>
+        <ul class="pf-fr-list" id="pfFriendList"></ul>
+        <p class="pf-post-empty" id="pfFriendState" hidden></p>
+        <button type="button" class="pf-btn outline pf-posts-more" id="pfFriendMore" hidden>আরও দেখুন</button>
+      </section>
+
+      <!-- ফ্রেন্ডস: কোনো ট্যাবের ভেতরে নয় — চারটি ট্যাবের যেকোনোটিতেই সবসময় নিচে দেখা যায় -->
+      <div class="pf-friends" id="pfFriendsBox">
+        <div class="pf-friends-head">
+          <h3>ফ্রেন্ডস</h3>
+          <button type="button" class="pf-friends-all" id="pfFriendsAll" hidden>সব দেখুন</button>
+        </div>
+        <div class="pf-friends-grid" id="pfFriendsGrid"></div>
+        <p class="pf-friends-empty" id="pfFriendsEmpty" hidden></p>
+      </div>
+
+      <!-- ফেভারিট ক্যাটাগরি: ফ্রেন্ডসের নিচে, কোনো ট্যাবের ভেতরে নয় — হোম পেজে ক্যাটাগরির ♡ চাপলে এখানে চলে আসে -->
+      <div class="pf-favs" id="pfFavBox">
+        <div class="pf-friends-head">
+          <h3>ফেভারিট ক্যাটাগরি</h3>
+        </div>
+        <div class="pf-fav-grid" id="pfFavGrid"></div>
+        <p class="pf-friends-empty" id="pfFavEmpty" hidden></p>
+      </div>
+
+      <p class="auth-msg" id="profileMsg"></p>
+    </div>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <h4>টাঙ্গাইল জেলা</h4>
+      <p>টাঙ্গাইল জেলার বাসিন্দা, নতুন আগন্তুক ও ব্যবসায়ীদের জন্য তৈরি একটি স্থানীয় সেবা প্ল্যাটফর্ম।</p>
+    </div>
+    <div>
+      <h4>পেজ</h4>
+      <ul class="footer-links">
+        <li><a href="index.html">হোম</a></li>
+        <li><a href="about.html">পরিচিতি</a></li>
+        <li><a href="add-listing.html">তথ্য যোগ করুন</a></li>
+        <li><a href="faq.html">সাধারণ প্রশ্ন</a></li>
+        <li><a href="contact.html">যোগাযোগ</a></li>
+        <li><a href="sitemap.html">সাইটম্যাপ</a></li>
+        <li><a href="privacy-policy.html">প্রাইভেসি পলিসি</a></li>
+        <li><a href="terms.html">শর্তাবলী</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">© ২০২৬ টাঙ্গাইল জেলা। সর্বস্বত্ব সংরক্ষিত।</div>
+</footer>
+
+
+
+<nav class="bottom-nav">
+  <a href="index.html"><span class="bn-icon"><i class="fa-solid fa-house" aria-hidden="true"></i></span><span data-i18n="bottomnav.home">Home</span></a>
+  <a href="members.html"><span class="bn-icon"><i class="fa-solid fa-users" aria-hidden="true"></i></span><span data-i18n="bottomnav.members">Members</span></a>
+  <a href="posts.html"><span class="bn-icon"><i class="fa-solid fa-plus" aria-hidden="true"></i></span><span data-i18n="bottomnav.post">Post</span></a>
+  <a href="profile.html" class="active"><span class="bn-icon"><i class="fa-solid fa-user" aria-hidden="true"></i></span><span data-i18n="bottomnav.profile">Profile</span></a>
+</nav>
+
+<!-- নতুন পোস্ট করার মোডাল ফর্ম -->
+<div class="modal-overlay" id="postModal">
+  <div class="modal-box icon-modal-box">
+    <h2>নতুন পোস্ট</h2>
+    <form class="contact-form icon-form" id="postForm">
+      <div class="icon-field">
+        <i class="fa-solid fa-user field-icon" aria-hidden="true"></i>
+        <label for="postAuthorName" class="sr-only">আপনার নাম (ঐচ্ছিক)</label>
+        <input type="text" id="postAuthorName" placeholder="আপনার নাম (ঐচ্ছিক) — না দিলে 'অতিথি' দেখাবে">
+      </div>
+      <div class="icon-field">
+        <i class="fa-solid fa-file-lines field-icon" aria-hidden="true"></i>
+        <label for="postContent" class="sr-only">কী ঘটেছে লিখুন</label>
+        <textarea id="postContent" placeholder="আপনার এলাকার ঘটনা, খবর বা অভিজ্ঞতা লিখুন…" required></textarea>
+      </div>
+      <div>
+        <label for="postMedia">ছবি বা ভিডিও যোগ করুন (ঐচ্ছিক)</label>
+        <input type="file" id="postMedia" accept="image/*,video/*">
+        <div class="media-preview-wrap" id="mediaPreviewWrap">
+          <button type="button" class="media-preview-remove" id="mediaPreviewRemove" aria-label="মুছুন">×</button>
+          <img id="mediaPreviewImg" style="display:none" alt="প্রিভিউ">
+          <video id="mediaPreviewVideo" style="display:none" controls></video>
+        </div>
+        <div class="upload-progress-wrap" id="uploadProgressWrap" hidden>
+          <div class="upload-progress-track"><div class="upload-progress-bar" id="uploadProgressBar" style="width:0%"></div></div>
+          <span class="upload-progress-text" id="uploadProgressText">০%</span>
+        </div>
+      </div>
+      <p class="auth-msg" id="postFormMsg"></p>
+      <div class="modal-actions">
+        <button type="button" class="modal-cancel" id="postCancelBtn">বাতিল করুন</button>
+        <button type="submit" class="modal-submit" id="postSubmitBtn">পোস্ট করুন</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="js/supabase-config.js?v=20260922203957"></script>
+<script src="js/nav-avatar.js?v=20260922203957"></script>
+<script src="js/call.js?v=20260922203957"></script>
+<script src="js/image-cropper.js?v=20260922203957"></script>
+<script>
+(function () {
+  var client = window.supabase.createClient(window.TANGAIL_SUPABASE.url, window.TANGAIL_SUPABASE.key);
+
+  var loadingEl = document.getElementById('profileLoading');
+  var cardEl = document.getElementById('profileCard');
+  var avatarEl = document.getElementById('profileAvatar');
+  var nameEl = document.getElementById('profileName');
+  var joinedEl = document.getElementById('profileJoined');
+  var msgEl = document.getElementById('profileMsg');
+  var logoutBtn = document.getElementById('logoutBtn');
+  var avatarEditBtn = document.getElementById('avatarEditBtn');
+  var avatarInput = document.getElementById('avatarInput');
+
+  function formatDate(iso) {
+    if (!iso) return '—';
+    var d = new Date(iso);
+    var months = ['জানু','ফেব্রু','মার্চ','এপ্রিল','মে','জুন','জুলাই','আগস্ট','সেপ্ট','অক্টো','নভে','ডিসে'];
+    return d.getDate() + ' ' + months[d.getMonth()] + ' ' + d.getFullYear();
+  }
+
+  var currentUser = null;
+
+  function renderAvatar(user) {
+    var avatarUrl = user.user_metadata && user.user_metadata.avatar_url;
+    if (avatarUrl) {
+      avatarEl.innerHTML = '';
+      var img = document.createElement('img');
+      img.src = avatarUrl;
+      img.alt = 'প্রোফাইল ছবি';
+      avatarEl.appendChild(img);
+      return;
+    }
+    var name = (user.user_metadata && user.user_metadata.full_name) || (user.email ? user.email.split('@')[0] : 'ব্যবহারকারী');
+    var initial = name.trim().charAt(0).toUpperCase();
+    if (initial) {
+      avatarEl.textContent = initial;
+    } else {
+      avatarEl.innerHTML = '<i class="fa-solid fa-user" aria-hidden="true"></i>';
+    }
+  }
+
+  function showProfile(user) {
+    currentUser = user;
+    var name = (user.user_metadata && user.user_metadata.full_name) || (user.email ? user.email.split('@')[0] : 'ব্যবহারকারী');
+    nameEl.textContent = name;
+    renderAvatar(user);
+    joinedEl.textContent = formatDate(user.created_at);
+    loadingEl.hidden = true;
+    cardEl.hidden = false;
+  }
+
+  // লগইন না থাকলে "গেস্ট" ভিউ: একই লেআউট, নাম "গেস্ট", আর কোনো তথ্য নেই
+  var isGuest = false;
+
+  // উপরের ডানের সেটিং আইকন — ক্লিকে প্রাইভেসি সেটিংস ও নিয়ম-কানুনের মেনু খোলে/বন্ধ হয়
+  var topSettingsBtn = document.getElementById('topSettingsBtn');
+  var topSettingsMenu = document.getElementById('topSettingsMenu');
+  function setMenu(open) {
+    topSettingsMenu.hidden = !open;
+    topSettingsBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+  topSettingsBtn.addEventListener('click', function (e) { e.stopPropagation(); setMenu(topSettingsMenu.hidden); });
+  document.addEventListener('click', function (e) {
+    if (!topSettingsMenu.hidden && !topSettingsMenu.contains(e.target)) { setMenu(false); }
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { setMenu(false); } });
+
+  // উপরের বারের ব্যাক বাটন — আগের পেজ থাকলে সেখানে, নাহলে হোমে
+  document.getElementById('topBackBtn').addEventListener('click', function () {
+    if (document.referrer && window.history.length > 1) { window.history.back(); }
+    else { window.location.href = 'index.html'; }
+  });
+
+  function showGuest() {
+    isGuest = true;
+    document.getElementById('menuPrivacy').setAttribute('href', 'login.html');   // গেস্টের প্রাইভেসি সেটিংস নেই — লগইনে যাবে
+    renderFriendsGuest();   // "Add Friend" ট্যাব: লগইনের বার্তা
+    nameEl.textContent = 'গেস্ট';
+    avatarEl.innerHTML = '<i class="fa-solid fa-user" aria-hidden="true"></i>';
+    cardEl.classList.add('is-guest');
+    // লগইন করা ইউজারের সব অংশ থাকে, তবে মান খালি: ০ ফলোয়ার/ফলোয়িং/পোস্ট, ফাঁকা তারিখ ও ঠিকানার ঘর
+    statsEl.hidden = false;
+    joinedEl.textContent = '';
+    ['updPhoneVal', 'profileUsernameVal', 'updVillageVal', 'updUnionVal', 'updThanaVal', 'updDistrictVal'].forEach(function (id) {
+      document.getElementById(id).textContent = '';
+    });
+    renderMyPosts(true);   // "মোট পোস্ট" ট্যাব: ০ + লগইনের বার্তা
+    renderMyFriends([], true);   // "ফ্রেন্ডস": খালি অবস্থা
+    document.getElementById('logoutLabel').textContent = 'লগইন করুন';
+    loadingEl.hidden = true;
+    cardEl.hidden = false;
+  }
+
+  // গেস্ট কোনো বাটন/লিংকে চাপলে (ছবি বদল, সম্পাদনা, সেটিংস) লগইন পেজে যাবে
+  cardEl.addEventListener('click', function (e) {
+    if (!isGuest) { return; }
+    var t = e.target.closest('#coverEditBtn, #avatarEditBtn, #profileEditBtn, #profilePostBtn');
+    if (!t) { return; }
+    e.preventDefault();
+    e.stopPropagation();
+    window.location.href = 'login.html';
+  }, true);
+
+  client.auth.getSession().then(function (res) {
+    var session = res.data && res.data.session;
+    if (!session) {
+      showGuest();
+      return;
+    }
+    showProfile(session.user);
+    loadSocialProfile(session.user.id);
+    loadStats(session.user.id);
+    loadMyPosts(session.user.id);
+    loadMyFriends();
+    loadUpdatedProfile(session.user.id);
+  });
+
+  var updPhoneVal = document.getElementById('updPhoneVal');
+  var updVillageVal = document.getElementById('updVillageVal');
+  var updUnionVal = document.getElementById('updUnionVal');
+  var updThanaVal = document.getElementById('updThanaVal');
+  var updDistrictVal = document.getElementById('updDistrictVal');
+
+  // এডিট ফর্মে প্রি-ফিল করার জন্য সর্বশেষ ব্যক্তিগত/ঠিকানা তথ্য এখানে রাখা হয়
+  var personalInfo = { full_name: '', phone: '', village: '', union_name: '', thana: '', district: '' };
+  var personalLoaded = false;
+
+  function loadUpdatedProfile(userId) {
+    client.from('profiles').select('full_name, village, union_name, thana, district, phone').eq('id', userId).maybeSingle().then(function (r) {
+      if (r.error || !r.data) { return; }
+      personalInfo.full_name = r.data.full_name || '';
+      personalInfo.phone = r.data.phone || '';
+      personalInfo.village = r.data.village || '';
+      personalInfo.union_name = r.data.union_name || '';
+      personalInfo.thana = r.data.thana || '';
+      personalInfo.district = r.data.district || '';
+      personalLoaded = true;
+      updPhoneVal.textContent = personalInfo.phone || '—';
+      updVillageVal.textContent = personalInfo.village || '—';
+      updUnionVal.textContent = personalInfo.union_name || '—';
+      updThanaVal.textContent = personalInfo.thana || '—';
+      updDistrictVal.textContent = personalInfo.district || '—';
+    });
+  }
+
+  // ---- ট্যাব: তথ্য (ব্যক্তিগত তথ্য + ঠিকানা) / মেসেজ / মোট পোস্ট / Add Friend ----
+  var pfTabBtns = document.querySelectorAll('[data-pf-tab]');
+  Array.prototype.forEach.call(pfTabBtns, function (btn) {
+    btn.addEventListener('click', function () {
+      var key = btn.getAttribute('data-pf-tab');
+      Array.prototype.forEach.call(pfTabBtns, function (b) { b.classList.toggle('active', b === btn); });
+      Array.prototype.forEach.call(document.querySelectorAll('[data-pf-panel]'), function (pn) { pn.hidden = pn.getAttribute('data-pf-panel') !== key; });
+      if (key === 'friends') { openFriends(); }
+    });
+  });
+
+  // ---- ধাপ ৩: ব্যানার + ইউজারনেম + বায়ো (profiles টেবিলের নতুন কলাম) ----
+  var coverEl = document.getElementById('profileCover');
+  var coverEditBtn = document.getElementById('coverEditBtn');
+  var coverInput = document.getElementById('coverInput');
+  var bioEl = document.getElementById('profileBio');
+  var socialMsgEl = document.getElementById('socialMsg');
+  var editPanel = document.getElementById('editPanel');
+  var editFullName = document.getElementById('editFullName');
+  var editPhone = document.getElementById('editPhone');
+  var editVillage = document.getElementById('editVillage');
+  var editUnion = document.getElementById('editUnion');
+  var editThana = document.getElementById('editThana');
+  var editDistrict = document.getElementById('editDistrict');
+  var editUsername = document.getElementById('editUsername');
+  var editBio = document.getElementById('editBio');
+  var usernameHint = document.getElementById('usernameHint');
+  var bioCount = document.getElementById('bioCount');
+  var editMsg = document.getElementById('editMsg');
+  var saveBtn = document.getElementById('saveProfileBtn');
+  var cancelBtn = document.getElementById('cancelEditBtn');
+
+  var USERNAME_RE = /^[a-z0-9_]{3,20}$/;
+  var BIO_MAX = 160;
+  var social = { username: '', bio: '', cover_url: '' };
+  var socialLoaded = false;
+  var usernameState = 'ok';      // ok | checking | bad | taken
+  var checkTimer = null;
+  var checkSeq = 0;
+
+  // ---- নিজের ফলোয়ার / ফলোয়িং সংখ্যা (follows RLS: নিজের সারি পড়া যায়); পোস্ট সংখ্যা আসে loadMyPosts() থেকে ----
+  var statsEl = document.getElementById('profileStats');
+  function countOf(query) {
+    return query.then(function (r) { return r.error ? null : (Number(r.count) || 0); }, function () { return null; });
+  }
+  function loadStats(userId) {
+    Promise.all([
+      countOf(client.from('follows').select('follower_id', { count: 'exact', head: true }).eq('following_id', userId)),
+      countOf(client.from('follows').select('follower_id', { count: 'exact', head: true }).eq('follower_id', userId))
+    ]).then(function (v) {
+      if (v[0] === null && v[1] === null) { return; }
+      document.getElementById('statFollowers').textContent = toBn(v[0] || 0);
+      document.getElementById('statFollowing').textContent = toBn(v[1] || 0);
+      statsEl.hidden = false;
+    });
+  }
+
+  // ---- "মোট পোস্ট" ট্যাব: এই একাউন্টের মোট পোস্ট সংখ্যা + নিজের সব পোস্টের তালিকা ----
+  // গণনা/তালিকায় থাকে: অনুমোদিত পোস্ট + অনুমোদনের অপেক্ষায় থাকা (ভিডিওসহ) পোস্ট। এডমিন লুকালে/বাদ দিলে আর দেখায় না।
+  // নিজের পোস্ট পড়ার জন্য RLS পলিসি "user can read own posts" (supabase/activity-policies.sql) লাগে।
+  var postsTotalEl = document.getElementById('pfPostsTotal');
+  var postsNoteEl = document.getElementById('pfPostsNote');
+  var postsListEl = document.getElementById('pfPostsList');
+  var postsMoreBtn = document.getElementById('pfPostsMore');
+  var POSTS_PAGE = 20;
+  var POST_STATUSES = ['approved', 'pending'];
+  var myPostsUserId = null;
+  var myPostsShown = 0;
+  var myPostsLoading = false;
+
+  function postTimeAgo(iso) {
+    var t = new Date(iso).getTime();
+    if (isNaN(t)) { return ''; }
+    var diff = Math.max(0, Math.floor((Date.now() - t) / 1000));
+    if (diff < 60) { return 'এইমাত্র'; }
+    if (diff < 3600) { return toBn(Math.floor(diff / 60)) + ' মিনিট আগে'; }
+    if (diff < 86400) { return toBn(Math.floor(diff / 3600)) + ' ঘণ্টা আগে'; }
+    if (diff < 2592000) { return toBn(Math.floor(diff / 86400)) + ' দিন আগে'; }
+    var d = new Date(t);
+    return toBn(d.getDate()) + '/' + toBn(d.getMonth() + 1) + '/' + toBn(d.getFullYear());
+  }
+
+  function el(tag, cls, text) {
+    var e = document.createElement(tag);
+    if (cls) { e.className = cls; }
+    if (text != null) { e.textContent = text; }
+    return e;
+  }
+
+  function myPostCard(post) {
+    var isApproved = post.status === 'approved';
+    var card = el('article', 'post-card' + (isApproved ? ' is-link' : ''));
+    card.setAttribute('data-post-id', post.id);
+
+    // ছবি / ভিডিও (শুধু https লিংক)
+    if (post.media_url && /^https:\/\//i.test(post.media_url)) {
+      var mediaWrap = el('div', 'post-media');
+      if (post.media_type === 'video') {
+        var v = document.createElement('video');
+        v.src = post.media_url;
+        v.controls = true;
+        v.setAttribute('playsinline', '');
+        v.preload = 'metadata';
+        mediaWrap.appendChild(v);
+      } else {
+        var imgWrap = el('div', 'post-media-img-wrap');
+        var img = document.createElement('img');
+        img.src = post.media_url;
+        img.loading = 'lazy';
+        img.alt = 'পোস্টের ছবি';
+        imgWrap.appendChild(img);
+        mediaWrap.appendChild(imgWrap);
+      }
+      card.appendChild(mediaWrap);
+    }
+
+    var body = el('div', 'post-card-body');
+    var head = el('div', 'post-card-head');
+    var meta = currentUser && currentUser.user_metadata;
+    var authorName = post.author_name || (meta && meta.full_name) || 'অতিথি';
+    var avatarUrl = post.avatar_url || (meta && meta.avatar_url);
+    if (avatarUrl && /^https:\/\//i.test(avatarUrl)) {
+      var av = document.createElement('img');
+      av.className = 'post-avatar post-avatar-img';
+      av.src = avatarUrl;
+      av.alt = '';
+      av.loading = 'lazy';
+      head.appendChild(av);
+    } else {
+      head.appendChild(el('div', 'post-avatar', authorName.trim().charAt(0).toUpperCase() || 'অ'));
+    }
+    var headText = el('div', 'post-headtext');
+    headText.appendChild(el('div', 'post-author', authorName));
+    headText.appendChild(el('div', 'post-time', postTimeAgo(post.created_at)));
+    head.appendChild(headText);
+    if (!isApproved) { head.appendChild(el('span', 'pf-post-status', 'অনুমোদনের অপেক্ষায়')); }
+    body.appendChild(head);
+
+    var content = el('div', 'post-content', post.content || '');
+    body.appendChild(content);
+    if ((post.content || '').length > 120) {
+      var more = el('div', 'post-readmore', 'বিস্তারিত দেখুন');
+      more.setAttribute('data-readmore', '1');
+      body.appendChild(more);
+    }
+    card.appendChild(body);
+
+    var counts = el('div', 'post-counts');
+    var likeSpan = el('span', 'like-count-text');
+    var likeIcon = document.createElement('i');
+    likeIcon.className = 'fa-solid fa-thumbs-up';
+    likeIcon.setAttribute('aria-hidden', 'true');
+    likeSpan.appendChild(likeIcon);
+    likeSpan.appendChild(document.createTextNode(' ' + toBn(post.like_count || 0)));
+    counts.appendChild(likeSpan);
+    counts.appendChild(el('span', null, toBn(post.comment_count || 0) + ' কমেন্ট · ' + toBn(post.share_count || 0) + ' শেয়ার'));
+    card.appendChild(counts);
+    return card;
+  }
+
+  // একই ফাংশন গেস্ট ও লগইন — গেস্টে (guest = true) শুধু ০ ও লগইনের বার্তা
+  function renderMyPosts(guest, posts, total, pending, append) {
+    postsTotalEl.textContent = toBn(total || 0);
+    if (!append) { postsListEl.innerHTML = ''; }
+    if (guest) {
+      var g = el('p', 'pf-post-empty');
+      g.appendChild(document.createTextNode('লগইন করলে আপনার করা পোস্টগুলো এখানে দেখা যাবে। '));
+      var gl = el('a', null, 'লগইন করুন');
+      gl.href = 'login.html';
+      g.appendChild(gl);
+      postsListEl.appendChild(g);
+      postsNoteEl.hidden = true;
+      postsMoreBtn.hidden = true;
+      return;
+    }
+    if (!append) {
+      if (pending > 0) {
+        postsNoteEl.textContent = 'এর মধ্যে ' + toBn(pending) + 'টি পোস্ট অনুমোদনের অপেক্ষায় আছে';
+        postsNoteEl.hidden = false;
+      } else {
+        postsNoteEl.hidden = true;
+      }
+    }
+    if (!total) {
+      var e = el('p', 'pf-post-empty');
+      e.appendChild(document.createTextNode('এখনো কোনো পোস্ট করা হয়নি। '));
+      var ea = el('a', null, 'প্রথম পোস্ট করুন');
+      ea.href = 'posts.html';
+      e.appendChild(ea);
+      postsListEl.appendChild(e);
+      postsMoreBtn.hidden = true;
+      return;
+    }
+    (posts || []).forEach(function (p) { postsListEl.appendChild(myPostCard(p)); });
+    myPostsShown += (posts || []).length;
+    postsMoreBtn.hidden = myPostsShown >= total;
+  }
+
+  function fetchMyPostsPage(from) {
+    return client.from('posts').select('*', { count: 'exact' })
+      .eq('user_id', myPostsUserId).in('status', POST_STATUSES)
+      .order('created_at', { ascending: false })
+      .range(from, from + POSTS_PAGE - 1);
+  }
+
+  function loadMyPosts(userId) {
+    myPostsUserId = userId;
+    myPostsShown = 0;
+    if (myPostsLoading) { return; }
+    myPostsLoading = true;
+    Promise.all([
+      fetchMyPostsPage(0),
+      countOf(client.from('posts').select('id', { count: 'exact', head: true }).eq('user_id', userId).eq('status', 'pending'))
+    ]).then(function (v) {
+      myPostsLoading = false;
+      var r = v[0];
+      if (r.error) {
+        postsListEl.innerHTML = '';
+        postsListEl.appendChild(el('p', 'pf-post-empty', 'পোস্ট লোড করতে সমস্যা হয়েছে। একটু পর আবার চেষ্টা করুন।'));
+        return;
+      }
+      var total = Number(r.count) || 0;
+      renderMyPosts(false, r.data, total, v[1] || 0, false);
+      // প্রোফাইলের উপরের "পোস্ট" সংখ্যাও এই মোটের সাথে মিলিয়ে দেওয়া হয়
+      document.getElementById('statPosts').textContent = toBn(total);
+      statsEl.hidden = false;
+    }, function () {
+      myPostsLoading = false;
+      postsListEl.innerHTML = '';
+      postsListEl.appendChild(el('p', 'pf-post-empty', 'পোস্ট লোড করতে সমস্যা হয়েছে। একটু পর আবার চেষ্টা করুন।'));
+    });
+  }
+
+  postsMoreBtn.addEventListener('click', function () {
+    if (!myPostsUserId || myPostsLoading) { return; }
+    myPostsLoading = true;
+    postsMoreBtn.disabled = true;
+    fetchMyPostsPage(myPostsShown).then(function (r) {
+      myPostsLoading = false;
+      postsMoreBtn.disabled = false;
+      if (r.error) { return; }
+      renderMyPosts(false, r.data, Number(r.count) || 0, 0, true);
+    }, function () { myPostsLoading = false; postsMoreBtn.disabled = false; });
+  });
+
+  // "বিস্তারিত দেখুন" (লেখা বড়/ছোট) + অনুমোদিত পোস্টে চাপলে পূর্ণ পোস্ট পেজে যাওয়া
+  postsListEl.addEventListener('click', function (e) {
+    var card = e.target.closest('.post-card');
+    if (!card) { return; }
+    var rm = e.target.closest('[data-readmore]');
+    if (rm) {
+      var c = card.querySelector('.post-content');
+      var expanded = c.classList.toggle('expanded');
+      rm.textContent = expanded ? 'সংক্ষিপ্ত করুন' : 'বিস্তারিত দেখুন';
+      return;
+    }
+    if (e.target.closest('video')) { return; }
+    if (card.classList.contains('is-link')) {
+      window.location.href = 'post-view.html?id=' + encodeURIComponent(card.getAttribute('data-post-id'));
+    }
+  });
+
+  // ---- "ফ্রেন্ডস" (সব ট্যাবের নিচে, সবসময় দৃশ্যমান): যাদের Add Friend করা হয়েছে, গোল ছবি + নাম; ট্যাপে তাদের পাবলিক প্রোফাইল ----
+  // ডেটা: RPC list_my_friends (supabase/friends-list.sql) — শুধু নিজের তালিকা, শুধু পাবলিক তথ্য।
+  var FRIENDS_PREVIEW = 100000; // এক লাইনে সব ফ্রেন্ড; ডানে-বামে স্ক্রল করে দেখা যায়
+  var myFriends = [];
+  var friendsExpanded = false;
+  var friendsGridEl = document.getElementById('pfFriendsGrid');
+  var friendsEmptyEl = document.getElementById('pfFriendsEmpty');
+  var friendsAllBtn = document.getElementById('pfFriendsAll');
+
+  function friendCard(f) {
+    var uname = String(f.username || '').toLowerCase();
+    if (!FR_USERNAME_RE.test(uname)) { return null; }
+    var displayName = f.full_name || ('@' + uname);
+    var a = el('a', 'pf-friend');
+    a.href = 'public-profile.html?u=' + encodeURIComponent(uname);
+    var av = el('div', 'pf-friend-av');
+    av.setAttribute('aria-hidden', 'true');
+    var initial = displayName.replace(/^@/, '').trim().charAt(0).toUpperCase() || '?';
+    if (/^https:\/\//i.test(f.avatar_url || '')) {
+      var img = document.createElement('img');
+      img.src = f.avatar_url; img.alt = ''; img.loading = 'lazy';
+      img.onerror = function () { img.remove(); av.insertBefore(document.createTextNode(initial), av.firstChild); };
+      av.appendChild(img);
+    } else {
+      av.appendChild(document.createTextNode(initial));
+    }
+    if (f.is_online) {
+      var dot = el('span', 'pf-friend-on');
+      dot.setAttribute('role', 'img');
+      dot.setAttribute('aria-label', 'অনলাইনে আছে');
+      av.appendChild(dot);
+    }
+    a.appendChild(av);
+    a.appendChild(el('div', 'pf-friend-name', displayName));
+    return a;
+  }
+
+  // list: ফ্রেন্ডদের অ্যারে; guest = true হলে শুধু খালি বার্তা; errorText থাকলে সেটাই দেখায়
+  function renderMyFriends(list, guest, errorText) {
+    myFriends = list || [];
+    friendsGridEl.innerHTML = '';
+    friendsEmptyEl.innerHTML = '';
+    if (errorText) {
+      friendsEmptyEl.textContent = errorText;
+      friendsEmptyEl.hidden = false;
+      friendsAllBtn.hidden = true;
+      return;
+    }
+    if (!myFriends.length) {
+      friendsEmptyEl.appendChild(document.createTextNode(guest ? 'এখনো কোনো ফ্রেন্ড নেই।' : 'এখনো কাউকে Add Friend করা হয়নি। '));
+      if (!guest) {
+        var go = el('button', null, 'সদস্য খুঁজুন');
+        go.type = 'button';
+        go.addEventListener('click', function () {
+          var tab = document.querySelector('[data-pf-tab="friends"]');
+          if (tab) { tab.click(); tab.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }
+        });
+        friendsEmptyEl.appendChild(go);
+      }
+      friendsEmptyEl.hidden = false;
+      friendsAllBtn.hidden = true;
+      return;
+    }
+    friendsEmptyEl.hidden = true;
+    (friendsExpanded ? myFriends : myFriends.slice(0, FRIENDS_PREVIEW)).forEach(function (f) {
+      var c = friendCard(f);
+      if (c) { friendsGridEl.appendChild(c); }
+    });
+    friendsAllBtn.hidden = true;
+    friendsAllBtn.textContent = friendsExpanded ? 'কম দেখুন' : 'সব দেখুন';
+  }
+
+  friendsAllBtn.addEventListener('click', function () {
+    friendsExpanded = !friendsExpanded;
+    renderMyFriends(myFriends, false);
+  });
+
+  function loadMyFriends() {
+    if (isGuest) { return; }
+    client.rpc('list_my_friends', { p_limit: 100 }).then(function (r) {
+      if (r.error) { throw r.error; }
+      renderMyFriends(r.data || [], false);
+    }).catch(function () {
+      renderMyFriends([], false, 'ফ্রেন্ড তালিকা এখন লোড করা যাচ্ছে না।');
+    });
+  }
+
+  // ---- "Add Friend" ট্যাব: পাবলিক সদস্যদের তালিকা (নাম/ইউজারনেমে খোঁজা যায়) + প্রতিটির পাশে Add Friend বাটন ----
+  // ডেটা: RPC list_public_members (শুধু পাবলিক প্রোফাইল, লগইন লাগে) — members.html যা ব্যবহার করে।
+  // Add Friend = ফ্রেন্ড রিকোয়েস্ট (follows টেবিল, status: pending → accepted; public-profile.js-এর মতোই)।
+  // অবস্থা আসে RPC get_follow_stats-এর viewer_status থেকে: none | pending_sent | pending_received | accepted।
+  // পাঠানো = follows-এ pending সারি insert; বাতিল/ফ্রেন্ড সরানো = সারি delete; গ্রহণ = RPC respond_friend_request।
+  // সদস্যের id লাগে — get_public_profile RPC থেকে ক্লিকের সময় আনা হয়।
+  var frSearchWrap = document.getElementById('pfFriendSearchWrap');
+  var frSearchEl = document.getElementById('pfFriendSearch');
+  var frMsgEl = document.getElementById('pfFriendMsg');
+  var frListEl = document.getElementById('pfFriendList');
+  var frStateEl = document.getElementById('pfFriendState');
+  var frMoreBtn = document.getElementById('pfFriendMore');
+  var FR_PAGE = 12;
+  var FR_USERNAME_RE = /^[a-z0-9_]{3,20}$/;
+  var frOpened = false, frTerm = '', frOffset = 0, frReq = 0, frLoading = false, frTimer = null;
+  var frMyUsername = null;
+  var frIds = {};   // username -> profile id (ক্যাশ)
+
+  function frSetMsg(text, ok) {
+    frMsgEl.textContent = text || '';
+    frMsgEl.className = 'auth-msg' + (ok ? ' ok' : '');
+  }
+
+  function frShowState(text, linkText, linkHref) {
+    frStateEl.innerHTML = '';
+    if (!text) { frStateEl.hidden = true; return; }
+    frStateEl.appendChild(document.createTextNode(text));
+    if (linkText) {
+      frStateEl.appendChild(document.createTextNode(' '));
+      var a = el('a', null, linkText);
+      a.href = linkHref;
+      frStateEl.appendChild(a);
+    }
+    frStateEl.hidden = false;
+  }
+
+  function renderFriendsGuest() {
+    frSearchWrap.hidden = true;
+    frMoreBtn.hidden = true;
+    frShowState('লগইন করলে সদস্যদের Add Friend করতে পারবেন।', 'লগইন করুন', 'login.html');
+  }
+
+  function frSetBtn(btn, state) {   // state: loading | none | pending_sent | pending_received | accepted
+    var icon = 'fa-user-plus', label = 'Add Friend';
+    if (state === 'accepted') { icon = 'fa-user-check'; label = 'Friend'; }
+    else if (state === 'pending_sent') { icon = 'fa-user-clock'; label = 'Friend Request'; }
+    else if (state === 'pending_received') { label = 'Accept Request'; }
+    if (state !== 'loading') { btn.setAttribute('data-state', state); }
+    btn.disabled = state === 'loading';
+    btn.classList.toggle('is-added', state === 'accepted');
+    btn.classList.toggle('is-pending', state === 'pending_sent');
+    btn.setAttribute('aria-pressed', (state === 'accepted' || state === 'pending_sent') ? 'true' : 'false');
+    btn.innerHTML = '';
+    var ic = document.createElement('i');
+    ic.className = 'fa-solid ' + icon;
+    ic.setAttribute('aria-hidden', 'true');
+    btn.appendChild(ic);
+    btn.appendChild(el('span', null, label));
+  }
+
+  function frCard(m) {
+    var uname = String(m.username || '').toLowerCase();
+    if (!FR_USERNAME_RE.test(uname)) { return null; }
+    var displayName = m.full_name || ('@' + uname);
+    var li = el('li', 'pf-fr-item');
+
+    var link = el('a', 'pf-fr-link');
+    link.href = 'public-profile.html?u=' + encodeURIComponent(uname);
+    var av = el('div', 'pf-fr-avatar');
+    av.setAttribute('aria-hidden', 'true');
+    var initial = displayName.replace(/^@/, '').trim().charAt(0).toUpperCase() || '?';
+    if (/^https:\/\//i.test(m.avatar_url || '')) {
+      var img = document.createElement('img');
+      img.src = m.avatar_url; img.alt = ''; img.loading = 'lazy';
+      img.onerror = function () { img.remove(); av.textContent = initial; };
+      av.appendChild(img);
+    } else {
+      av.textContent = initial;
+    }
+    link.appendChild(av);
+
+    var body = el('div', 'pf-fr-body');
+    var nameRow = el('div', 'pf-fr-name');
+    nameRow.appendChild(el('span', null, displayName));
+    if (m.is_verified) {
+      var vi = document.createElement('i');
+      vi.className = 'fa-solid fa-circle-check';
+      vi.setAttribute('role', 'img');
+      vi.setAttribute('aria-label', 'যাচাইকৃত সদস্য');
+      nameRow.appendChild(vi);
+    }
+    body.appendChild(nameRow);
+    body.appendChild(el('div', 'pf-fr-user', '@' + uname));
+    if (m.address_summary) { body.appendChild(el('div', 'pf-fr-addr', m.address_summary)); }
+    link.appendChild(body);
+    li.appendChild(link);
+
+    // মেসেজিং (ধাপ ২খ): সদস্যের সাথে সরাসরি চ্যাট পেজ — নিয়ম (ফ্রেন্ড/রিকোয়েস্ট) chat.html ও সার্ভার দেখে
+    var msgLink = el('a', 'pf-fr-msg');
+    msgLink.href = 'chat.html?u=' + encodeURIComponent(uname);
+    msgLink.setAttribute('aria-label', displayName + '-কে মেসেজ করুন');
+    var mi = document.createElement('i');
+    mi.className = 'fa-regular fa-message';
+    mi.setAttribute('aria-hidden', 'true');
+    msgLink.appendChild(mi);
+    msgLink.appendChild(el('span', null, 'মেসেজ'));
+    li.appendChild(msgLink);
+
+    var btn = el('button', 'pf-fr-btn');
+    btn.type = 'button';
+    btn.setAttribute('data-u', uname);
+    frSetBtn(btn, 'loading');
+    li.appendChild(btn);
+
+    // আগে থেকেই রিকোয়েস্ট/ফ্রেন্ড আছে কিনা
+    client.rpc('get_follow_stats', { p_username: uname }).then(function (r) {
+      var row = r.data && r.data[0];
+      frSetBtn(btn, (!r.error && row && row.viewer_status) ? row.viewer_status : 'none');
+    }, function () { frSetBtn(btn, 'none'); });
+    return li;
+  }
+
+  function frEnsureMyUsername() {
+    if (frMyUsername !== null) { return Promise.resolve(frMyUsername); }
+    if (social.username) { frMyUsername = social.username; return Promise.resolve(frMyUsername); }
+    return client.from('profiles').select('username').eq('id', currentUser.id).maybeSingle().then(function (r) {
+      frMyUsername = (r && r.data && r.data.username) || '';
+      return frMyUsername;
+    }, function () { return ''; });
+  }
+
+  function loadFriends(reset) {
+    if (!currentUser || isGuest) { return; }
+    if (frLoading && !reset) { return; }
+    var my = ++frReq;
+    frLoading = true;
+    if (reset) {
+      frOffset = 0; frListEl.innerHTML = ''; frMoreBtn.hidden = true;
+      frSetMsg('');
+      frShowState('লোড হচ্ছে…');
+    } else {
+      frMoreBtn.disabled = true;
+    }
+    frEnsureMyUsername().then(function (me) {
+      // PAGE+১ চাওয়া হয় — বাড়তি একজন এলে বোঝা যায় আরও আছে
+      return client.rpc('list_public_members', { p_search: frTerm || null, p_limit: FR_PAGE + 1, p_offset: frOffset }).then(function (r) {
+        if (my !== frReq) { return; }
+        if (r.error) { throw r.error; }
+        var rows = r.data || [];
+        var hasMore = rows.length > FR_PAGE;
+        if (hasMore) { rows = rows.slice(0, FR_PAGE); }
+        frOffset += rows.length;
+        rows.forEach(function (m) {
+          if (me && String(m.username || '').toLowerCase() === String(me).toLowerCase()) { return; }   // নিজেকে বাদ
+          var li = frCard(m);
+          if (li) { frListEl.appendChild(li); }
+        });
+        if (!frListEl.children.length) {
+          frShowState(frTerm ? 'এই নামে কাউকে পাওয়া যায়নি।' : 'এখনো আর কোনো সদস্যের প্রোফাইল পাবলিক নেই।');
+        } else {
+          frShowState('');
+        }
+        frMoreBtn.hidden = !hasMore;
+      });
+    }).catch(function () {
+      if (my !== frReq) { return; }
+      if (frListEl.children.length) { frMoreBtn.hidden = false; frSetMsg('আরও সদস্য লোড করা যায়নি — আবার চেষ্টা করুন।'); }
+      else { frShowState('সদস্যদের তালিকা লোড করা যায়নি। কিছুক্ষণ পর আবার চেষ্টা করুন।'); }
+    }).then(function () {
+      if (my === frReq) { frLoading = false; frMoreBtn.disabled = false; }
+    });
+  }
+
+  // ট্যাব প্রথমবার খুললেই তালিকা লোড হয় (সবার জন্য অকারণ RPC কল এড়াতে)
+  function openFriends() {
+    if (isGuest || frOpened) { return; }
+    frOpened = true;
+    loadFriends(true);
+  }
+
+  frSearchEl.addEventListener('input', function () {
+    clearTimeout(frTimer);
+    frTimer = setTimeout(function () {
+      var v = frSearchEl.value.trim();
+      if (v === frTerm) { return; }
+      frTerm = v;
+      loadFriends(true);
+    }, 350);
+  });
+  frMoreBtn.addEventListener('click', function () { loadFriends(false); });
+
+  // Add Friend / Friend বাটনে ক্লিক — ফলো/আনফলো (get_public_profile থেকে id এনে)
+  function frResolveId(uname) {
+    if (frIds[uname]) { return Promise.resolve(frIds[uname]); }
+    return client.rpc('get_public_profile', { p_username: uname }).then(function (r) {
+      var row = r.data && r.data[0];
+      if (r.error || !row) { return null; }
+      frIds[uname] = row.id;
+      return row.id;
+    });
+  }
+
+  frListEl.addEventListener('click', function (e) {
+    var btn = e.target.closest('.pf-fr-btn');
+    if (!btn || btn.disabled || !currentUser) { return; }
+    var uname = btn.getAttribute('data-u');
+    var prev = btn.getAttribute('data-state') || 'none';
+    if (prev === 'pending_sent' && !window.confirm('ফ্রেন্ড রিকোয়েস্ট বাতিল করবেন?')) { return; }
+    if (prev === 'accepted' && !window.confirm('ফ্রেন্ড তালিকা থেকে সরিয়ে দেবেন?')) { return; }
+    frSetBtn(btn, 'loading');
+    frSetMsg('');
+    var next = prev === 'none' ? null : (prev === 'pending_received' ? 'accepted' : 'none');   // 'none' হলে add_friend-এর রেজাল্ট দেখে নিচে ঠিক হয়
+    var okText = prev === 'none' ? null
+      : (prev === 'pending_received' ? 'আপনারা এখন ফ্রেন্ড।'
+      : (prev === 'pending_sent' ? 'ফ্রেন্ড রিকোয়েস্ট বাতিল করা হয়েছে।' : 'ফ্রেন্ড তালিকা থেকে সরানো হয়েছে।'));
+    frResolveId(uname).then(function (id) {
+      if (!id) { throw { code: 'notfound' }; }
+      if (id === currentUser.id) { throw { code: 'self' }; }
+      // add_friend RPC — আগে অন্তত একবার ফ্রেন্ড ছিল হলে সঙ্গে সঙ্গে accepted করে (নতুন রিকোয়েস্ট/নোটিফিকেশন ছাড়াই)
+      if (prev === 'none') { return client.rpc('add_friend', { p_username: uname }); }
+      if (prev === 'pending_received') { return client.rpc('respond_friend_request', { p_username: uname, p_accept: true }); }
+      return client.from('follows').delete().or(
+        'and(follower_id.eq.' + currentUser.id + ',following_id.eq.' + id + '),' +
+        'and(follower_id.eq.' + id + ',following_id.eq.' + currentUser.id + ')'
+      );
+    }).then(function (r) {
+      var err = r && r.error;
+      if (err) { throw err; }
+      if (prev === 'pending_received' && r && r.data === false) { throw { code: 'gone' }; }
+      if (prev === 'none') {   // add_friend রেজাল্ট: 'accepted' (আগে ফ্রেন্ড ছিল) বা 'pending_sent'
+        next = r && r.data === 'accepted' ? 'accepted' : 'pending_sent';
+        okText = next === 'accepted' ? 'আপনারা আবার ফ্রেন্ড হয়েছেন।' : 'ফ্রেন্ড রিকোয়েস্ট পাঠানো হয়েছে।';
+      }
+      frSetBtn(btn, next);
+      frSetMsg(okText, true);
+      loadStats(currentUser.id);   // উপরের ফলোয়ার/ফলোয়িং সংখ্যা আপডেট
+      loadMyFriends();             // নিচের "ফ্রেন্ডস" তালিকা আপডেট
+    }).catch(function (err) {
+      var code = err && err.code;
+      if (code === 'gone') {
+        frSetBtn(btn, 'none');
+        frSetMsg('রিকোয়েস্টটি আর নেই।');
+        return;
+      }
+      frSetBtn(btn, prev);
+      if (code === '42501' || code === 'notfound') { frSetMsg('এই সদস্যকে এখন ফ্রেন্ড রিকোয়েস্ট পাঠানো যাচ্ছে না (সম্ভবত প্রোফাইল পাবলিক নয়)।'); }
+      else if (code === 'self') { frSetMsg('নিজেকে ফ্রেন্ড রিকোয়েস্ট পাঠানো যায় না।'); }
+      else { frSetMsg('সম্পন্ন করা যায়নি — আবার চেষ্টা করুন।'); }
+    });
+  });
+
+  function toBn(n) { return String(n).replace(/\d/g, function (d) { return '০১২৩৪৫৬৭৮৯'.charAt(d); }); }
+
+  function setSocialMsg(text, ok) {
+    socialMsgEl.textContent = text || '';
+    socialMsgEl.className = 'auth-msg' + (ok ? ' ok' : '');
+  }
+  function setEditMsg(text, ok) {
+    editMsg.textContent = text || '';
+    editMsg.className = 'auth-msg' + (ok ? ' ok' : '');
+  }
+
+  function renderCover() {
+    var old = coverEl.querySelector('img.pf-cover-img');
+    if (old) old.remove();
+    if (/^https:\/\//i.test(social.cover_url || '')) {
+      var img = document.createElement('img');
+      img.className = 'pf-cover-img';
+      img.src = social.cover_url;
+      img.alt = 'ব্যানার';
+      img.onerror = function () { img.remove(); };
+      coverEl.insertBefore(img, coverEl.firstChild);
+    }
+  }
+
+  function renderSocial() {
+    document.getElementById('profileUsernameVal').textContent = social.username ? '@' + social.username : '—';
+    if (social.bio) {
+      bioEl.textContent = social.bio;
+      bioEl.hidden = false;
+    } else {
+      bioEl.hidden = true;
+    }
+    renderCover();
+  }
+
+  function loadSocialProfile(userId) {
+    client.from('profiles').select('username, bio, cover_url, avatar_url, is_verified').eq('id', userId).maybeSingle().then(function (r) {
+      if (r.error || !r.data) { return; }
+      // পাবলিক প্রোফাইল পেজ profiles.avatar_url পড়ে, কিন্তু আগে ছবি শুধু auth metadata-তে সেভ হতো —
+      // মেটাডাটায় ছবি থাকলে ও profiles-এ না থাকলে এখানে একবার সিঙ্ক করে দেওয়া হয়
+      var metaAvatar = currentUser && currentUser.user_metadata && currentUser.user_metadata.avatar_url;
+      if (metaAvatar && !r.data.avatar_url) {
+        client.from('profiles').update({ avatar_url: metaAvatar }).eq('id', userId).then(function () {});
+      }
+      social.username = r.data.username || '';
+      social.bio = r.data.bio || '';
+      social.cover_url = r.data.cover_url || '';
+      document.getElementById('verifiedBadge').hidden = !r.data.is_verified;   // অ্যাডমিন অনুমতি দিলে নামের ডানে ভেরিফাইড টিক
+      socialLoaded = true;
+      renderSocial();
+      // প্রাইভেসি সেটিংস পেজ থেকে "ইউজারনেম সেট করুন" লিংকে এলে সরাসরি এডিট ফর্ম খুলে দেওয়া
+      if (window.location.hash === '#edit') { openEdit(); }
+    });
+  }
+
+  // ---- এডিট ফর্ম খোলা/বন্ধ ----
+  function updateBioCount() {
+    bioCount.textContent = toBn(editBio.value.length) + '/' + toBn(BIO_MAX);
+  }
+
+  function setHint(text, cls) {
+    usernameHint.textContent = text;
+    usernameHint.className = 'profile-edit-hint' + (cls ? ' ' + cls : '');
+  }
+
+  function openEdit() {
+    if (!socialLoaded) { return; }
+    var fallbackName = (currentUser && currentUser.user_metadata && currentUser.user_metadata.full_name) || '';
+    editFullName.value = personalInfo.full_name || fallbackName;
+    editPhone.value = personalInfo.phone || '';
+    editVillage.value = personalInfo.village || '';
+    editUnion.value = personalInfo.union_name || '';
+    editThana.value = personalInfo.thana || '';
+    editDistrict.value = personalInfo.district || 'টাঙ্গাইল';
+    editUsername.value = social.username;
+    editBio.value = social.bio;
+    updateBioCount();
+    setEditMsg('');
+    setSocialMsg('');
+    usernameState = 'ok';
+    setHint('৩-২০ অক্ষর: ছোট হাতের ইংরেজি অক্ষর (a-z), সংখ্যা ও _ (আন্ডারস্কোর)', '');
+    editPanel.hidden = false;
+    editPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    editFullName.focus();
+  }
+
+  function closeEdit() {
+    editPanel.hidden = true;
+    clearTimeout(checkTimer);
+    checkSeq++;
+  }
+
+  cancelBtn.addEventListener('click', closeEdit);
+  document.getElementById('profileEditBtn').addEventListener('click', function () { if (!isGuest) { openEdit(); } });
+
+  editBio.addEventListener('input', updateBioCount);
+
+  // ---- ইউজারনেম রিয়েল-টাইম যাচাই (RPC is_username_available) ----
+  editUsername.addEventListener('input', function () {
+    var v = editUsername.value.toLowerCase();
+    if (v !== editUsername.value) { editUsername.value = v; }
+    clearTimeout(checkTimer);
+    var mySeq = ++checkSeq;
+    setEditMsg('');
+
+    if (v === social.username) {                 // অপরিবর্তিত — যাচাই লাগবে না
+      usernameState = 'ok';
+      setHint('এটাই আপনার বর্তমান ইউজারনেম।', '');
+      return;
+    }
+    if (!v) {
+      usernameState = social.username ? 'bad' : 'ok';
+      setHint(social.username ? 'ইউজারনেম খালি রাখা যাবে না।' : 'ইউজারনেম পরে সেট করলেও চলবে।', social.username ? 'is-bad' : '');
+      return;
+    }
+    if (!USERNAME_RE.test(v)) {
+      usernameState = 'bad';
+      setHint('৩-২০ অক্ষর হতে হবে; শুধু a-z, ০-৯ (0-9) ও _ ব্যবহার করা যাবে।', 'is-bad');
+      return;
+    }
+    usernameState = 'checking';
+    setHint('যাচাই করা হচ্ছে…', '');
+    checkTimer = setTimeout(function () {
+      client.rpc('is_username_available', { p_username: v }).then(function (r) {
+        if (mySeq !== checkSeq) { return; }       // পুরনো রিকোয়েস্টের উত্তর — বাদ
+        if (r.error) {
+          // নেটওয়ার্ক সমস্যা হলেও সেভ আটকাবো না — ডাটাবেজের ইউনিক ইনডেক্সই চূড়ান্ত রক্ষী
+          usernameState = 'ok';
+          setHint('উপলব্ধতা যাচাই করা যায়নি; সংরক্ষণের সময় আবার দেখা হবে।', '');
+          return;
+        }
+        if (r.data === true) {
+          usernameState = 'ok';
+          setHint('✓ এই ইউজারনেমটি পাওয়া যাচ্ছে।', 'is-ok');
+        } else {
+          usernameState = 'taken';
+          setHint('এই ইউজারনেমটি আগেই নেওয়া হয়ে গেছে।', 'is-bad');
+        }
+      });
+    }, 400);
+  });
+
+  // ---- সংরক্ষণ ----
+  editPanel.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (!currentUser) { return; }
+
+    var newFullName = editFullName.value.trim();
+    var newPhone = editPhone.value.trim();
+    var newVillage = editVillage.value.trim();
+    var newUnion = editUnion.value.trim();
+    var newThana = editThana.value.trim();
+    var newDistrict = editDistrict.value.trim();
+    var newUsername = editUsername.value.trim().toLowerCase();
+    var newBio = editBio.value.replace(/\s+/g, ' ').trim().slice(0, BIO_MAX);
+
+    if (!newFullName) { setEditMsg('নাম লিখুন।'); return; }
+    if (!newPhone || newPhone.replace(/\D/g, '').length < 11) { setEditMsg('সঠিক ১১ ডিজিটের মোবাইল নাম্বার দিন।'); return; }
+    if (!newVillage) { setEditMsg('গ্রামের নাম লিখুন।'); return; }
+    if (!newUnion) { setEditMsg('ইউনিয়নের নাম লিখুন।'); return; }
+    if (!newThana) { setEditMsg('থানার নাম লিখুন।'); return; }
+    if (!newDistrict) { setEditMsg('জেলার নাম লিখুন।'); return; }
+    if (usernameState === 'checking') { setEditMsg('ইউজারনেম যাচাই শেষ হওয়া পর্যন্ত একটু অপেক্ষা করুন।'); return; }
+    if (usernameState === 'bad' || usernameState === 'taken') { setEditMsg('ইউজারনেমটি ঠিক করে আবার চেষ্টা করুন।'); return; }
+    if (newUsername && !USERNAME_RE.test(newUsername)) { setEditMsg('ইউজারনেমের ফরম্যাট ঠিক নেই।'); return; }
+
+    var payload = {
+      full_name: newFullName,
+      phone: newPhone.replace(/\D/g, ''),
+      village: newVillage,
+      union_name: newUnion,
+      thana: newThana,
+      district: newDistrict,
+      bio: newBio
+    };
+    if (newUsername) { payload.username = newUsername; }
+
+    saveBtn.disabled = true;
+    setEditMsg('সংরক্ষণ হচ্ছে…', true);
+
+    client.from('profiles').update(payload).eq('id', currentUser.id)
+      .select('username, bio, cover_url, full_name, phone, village, union_name, thana, district').then(function (r) {
+      saveBtn.disabled = false;
+      if (r.error) {
+        if (r.error.code === '23505') {
+          usernameState = 'taken';
+          setHint('এই ইউজারনেমটি আগেই নেওয়া হয়ে গেছে।', 'is-bad');
+          setEditMsg('ইউজারনেমটি অন্য কেউ নিয়ে নিয়েছে — অন্য একটা বেছে নিন।');
+        } else if (r.error.code === '23514') {
+          setEditMsg('ইউজারনেমের ফরম্যাট ঠিক নেই (৩-২০ অক্ষর; a-z, 0-9, _)।');
+        } else {
+          setEditMsg('সংরক্ষণ করা যায়নি: ' + (r.error.message || 'অজানা সমস্যা'));
+        }
+        return;
+      }
+      if (!r.data || !r.data.length) {
+        setEditMsg('আপনার প্রোফাইল রেকর্ড খুঁজে পাওয়া যায়নি — একবার লগআউট করে আবার লগইন করে দেখুন।');
+        return;
+      }
+      var row = r.data[0];
+      social.username = row.username || '';
+      social.bio = row.bio || '';
+      personalInfo.full_name = row.full_name || '';
+      personalInfo.phone = row.phone || '';
+      personalInfo.village = row.village || '';
+      personalInfo.union_name = row.union_name || '';
+      personalInfo.thana = row.thana || '';
+      personalInfo.district = row.district || '';
+      updPhoneVal.textContent = personalInfo.phone || '—';
+      updVillageVal.textContent = personalInfo.village || '—';
+      updUnionVal.textContent = personalInfo.union_name || '—';
+      updThanaVal.textContent = personalInfo.thana || '—';
+      updDistrictVal.textContent = personalInfo.district || '—';
+      nameEl.textContent = personalInfo.full_name || nameEl.textContent;
+      renderSocial();
+      closeEdit();
+      setSocialMsg('প্রোফাইল সফলভাবে সংরক্ষণ হয়েছে।', true);
+      // auth ইউজার মেটাডেটায়ও নাম সিঙ্ক করা হয় (পোস্ট/কমেন্টের লেখক-নাম এখান থেকেই আসে) — ব্যর্থ হলেও প্রোফাইল সেভ হয়ে গেছে
+      client.auth.updateUser({ data: { full_name: personalInfo.full_name } }).catch(function () {});
+    });
+  });
+
+  // ---- ব্যানার আপলোড (২:১ অনুপাত; জুম ইন/আউট ও টেনে বসানোর ক্রপ এডিটর দিয়ে; একই "avatars" বাকেট, নিজের ফোল্ডারে) ----
+  var COVER_W = 1200;
+  function cropSource(source) {
+    return (typeof source === 'string') ? { url: source } : { file: source };
+  }
+
+  function runCoverFlow(source) {
+    coverEditBtn.disabled = true;
+    setSocialMsg('');
+    var oldCoverUrl = social.cover_url;
+    var newUrl = '';
+    var opts = cropSource(source);
+    opts.aspect = 2; opts.outWidth = COVER_W; opts.shape = 'rect'; opts.quality = 0.85;
+    opts.title = 'ব্যানার সাজান';
+
+    window.TZCropper.open(opts).then(function (prepared) {
+      setSocialMsg('ব্যানার আপলোড হচ্ছে…', true);
+      var path = currentUser.id + '/cover-' + Date.now() + '.jpg';
+      return client.storage.from('avatars').upload(path, prepared.blob, { cacheControl: '3600', upsert: false, contentType: 'image/jpeg' })
+        .then(function (res) {
+          if (res.error) { throw res.error; }
+          newUrl = client.storage.from('avatars').getPublicUrl(path).data.publicUrl;
+          return client.from('profiles').update({ cover_url: newUrl }).eq('id', currentUser.id).select('cover_url');
+        });
+    }).then(function (res) {
+      if (res.error) { throw res.error; }
+      if (!res.data || !res.data.length) { throw new Error('প্রোফাইল রেকর্ড খুঁজে পাওয়া যায়নি'); }
+      social.cover_url = res.data[0].cover_url || newUrl;
+      renderCover();
+      deleteOldAvatar(oldCoverUrl);   // একই বাকেট — পুরনো ব্যানার ফাইল মুছে ফেলা (ব্যর্থ হলেও সমস্যা নেই)
+      setSocialMsg('ব্যানার সফলভাবে পরিবর্তন হয়েছে।', true);
+    }).catch(function (err) {
+      if (err && err.cancelled) { setSocialMsg(''); return; }
+      setSocialMsg('ব্যানার আপলোড করা যায়নি: ' + (err && err.message ? err.message : 'অজানা সমস্যা'));
+    }).finally(function () {
+      coverEditBtn.disabled = false;
+      coverInput.value = '';
+    });
+  }
+
+  coverEditBtn.addEventListener('click', function () { coverInput.click(); });
+
+  coverInput.addEventListener('change', function () {
+    var file = coverInput.files && coverInput.files[0];
+    if (!file) { return; }
+    if (!file.type.startsWith('image/')) {
+      setSocialMsg('শুধুমাত্র ছবি ফাইল (jpg, png ইত্যাদি) আপলোড করুন।');
+      coverInput.value = '';
+      return;
+    }
+    if (file.size > 8 * 1024 * 1024) {
+      setSocialMsg('ছবির সাইজ ৮ এমবি-র বেশি হওয়া যাবে না।');
+      coverInput.value = '';
+      return;
+    }
+    runCoverFlow(file);
+  });
+
+  // অন্য ট্যাবে লগআউট/লগইন করলে এই পেজও সিঙ্ক থাকবে
+  client.auth.onAuthStateChange(function (event, session) {
+    if (isGuest) {
+      // গেস্ট অন্য ট্যাবে লগইন করলে এই পেজ রিফ্রেশ হয়ে নিজের প্রোফাইল দেখাবে
+      if (event === 'SIGNED_IN' && session) { window.location.reload(); }
+      return;
+    }
+    if (currentUser && (event === 'SIGNED_OUT' || !session)) {
+      window.location.href = 'login.html';
+    }
+  });
+
+  // প্রোফাইল ছবি আপলোড (গ্যালারি থেকে)
+  avatarEditBtn.addEventListener('click', function () {
+    avatarInput.click();
+  });
+
+  function uploadAvatarPhoto(file) {
+    var safeName = (file.name || 'avatar.jpg').replace(/[^a-zA-Z0-9._-]/g, '_');
+    var path = currentUser.id + '/' + Date.now() + '-' + safeName;
+    return client.storage.from('avatars').upload(path, file, { cacheControl: '3600', upsert: false, contentType: 'image/jpeg' })
+      .then(function (res) {
+        if (res.error) { throw res.error; }
+        return client.storage.from('avatars').getPublicUrl(path).data.publicUrl;
+      });
+  }
+
+  // প্রোফাইল ছবি: জুম ইন/আউট ও টেনে বসানোর ক্রপ এডিটর (বর্গাকার, গোল ফ্রেম) — ফলাফল ৪৮০×৪৮০ JPEG
+  var AVATAR_SIZE = 480;
+
+  // পাবলিক URL থেকে বাকেটের ভেতরের পাথ বের করা (পুরনো ছবি ডিলিট করার জন্য)
+  function avatarPathFromPublicUrl(url) {
+    if (!url) return null;
+    var marker = '/avatars/';
+    var idx = url.indexOf(marker);
+    if (idx === -1) return null;
+    return url.slice(idx + marker.length).split('?')[0];
+  }
+
+  function deleteOldAvatar(oldUrl) {
+    var oldPath = avatarPathFromPublicUrl(oldUrl);
+    if (!oldPath) return;
+    // ব্যর্থ হলেও সমস্যা নেই — নতুন ছবি ঠিকই সেভ হয়ে গেছে, শুধু পুরনো ফাইলটা বাকেটে থেকে যাবে
+    client.storage.from('avatars').remove([oldPath]);
+  }
+
+  function currentAvatarUrl() {
+    return (currentUser && currentUser.user_metadata && currentUser.user_metadata.avatar_url) || '';
+  }
+
+  function runAvatarFlow(source) {
+    avatarEditBtn.disabled = true;
+    msgEl.textContent = '';
+    var oldAvatarUrl = currentAvatarUrl();
+    var opts = cropSource(source);
+    opts.aspect = 1; opts.outWidth = AVATAR_SIZE; opts.shape = 'circle'; opts.quality = 0.86;
+    opts.title = 'প্রোফাইল ছবি সাজান';
+
+    window.TZCropper.open(opts).then(function (prepared) {
+      avatarEl.innerHTML = '';
+      var img = document.createElement('img');
+      img.src = prepared.dataUrl;
+      img.alt = 'প্রোফাইল ছবি';
+      avatarEl.appendChild(img);
+
+      msgEl.textContent = 'ছবি আপলোড হচ্ছে…';
+      msgEl.className = 'auth-msg ok';
+      return uploadAvatarPhoto(prepared.blob);
+    }).then(function (publicUrl) {
+      return client.auth.updateUser({ data: { avatar_url: publicUrl } });
+    }).then(function (res) {
+      if (res.error) { throw res.error; }
+      currentUser = res.data.user;
+      // পাবলিক প্রোফাইলের জন্য profiles টেবিলেও সিঙ্ক (ব্যর্থ হলেও ছবি পরিবর্তন সফল ধরা হয়)
+      var newAvatarUrl = currentAvatarUrl();
+      if (newAvatarUrl) { client.from('profiles').update({ avatar_url: newAvatarUrl }).eq('id', currentUser.id).then(function () {}); }
+      deleteOldAvatar(oldAvatarUrl);
+      msgEl.textContent = 'প্রোফাইল ছবি সফলভাবে পরিবর্তন হয়েছে।';
+      msgEl.className = 'auth-msg ok';
+    }).catch(function (err) {
+      renderAvatar(currentUser); // বাতিল/ব্যর্থ হলে আগের ছবি/আদ্যক্ষরে ফিরিয়ে নেওয়া
+      if (err && err.cancelled) { msgEl.textContent = ''; return; }
+      msgEl.textContent = 'ছবি আপলোড করা যায়নি: ' + (err && err.message ? err.message : 'অজানা সমস্যা');
+      msgEl.className = 'auth-msg';
+    }).finally(function () {
+      avatarEditBtn.disabled = false;
+      avatarInput.value = '';
+    });
+  }
+
+  avatarInput.addEventListener('change', function () {
+    var file = avatarInput.files && avatarInput.files[0];
+    if (!file) { return; }
+
+    if (!file.type.startsWith('image/')) {
+      msgEl.textContent = 'শুধুমাত্র ছবি ফাইল (jpg, png ইত্যাদি) আপলোড করুন।';
+      msgEl.className = 'auth-msg';
+      avatarInput.value = '';
+      return;
+    }
+    if (file.size > 8 * 1024 * 1024) {
+      msgEl.textContent = 'ছবির সাইজ ৮ এমবি-র বেশি হওয়া যাবে না।';
+      msgEl.className = 'auth-msg';
+      avatarInput.value = '';
+      return;
+    }
+    runAvatarFlow(file);
+  });
+
+  // (ব্যানার/প্রোফাইল ছবি বদলানো এখন শুধু উপরের ব্যানার/অ্যাভাটারের ক্যামেরা আইকন দিয়েই হয় —
+  //  এডিট ফর্মে আলাদা ডুপ্লিকেট বাটন রাখা হয়নি, দেখুন coverEditBtn/avatarEditBtn ইভেন্ট উপরে)
+
+  // ================= নতুন পোস্ট ফর্ম (posts.html-এর ফর্মের হুবহু একই কাজ; পোস্ট হোমপেজ/পোস্ট ফিডে দেখা যায়) =================
+  (function () {
+    var modal = document.getElementById('postModal');
+    var form = document.getElementById('postForm');
+    var msg = document.getElementById('postFormMsg');
+    var postAuthorInput = document.getElementById('postAuthorName');
+    var submitBtn = document.getElementById('postSubmitBtn');
+    var mediaInput = document.getElementById('postMedia');
+    var mediaPreviewWrap = document.getElementById('mediaPreviewWrap');
+    var mediaPreviewImg = document.getElementById('mediaPreviewImg');
+    var mediaPreviewVideo = document.getElementById('mediaPreviewVideo');
+    var mediaPreviewRemove = document.getElementById('mediaPreviewRemove');
+    var uploadProgressWrap = document.getElementById('uploadProgressWrap');
+    var uploadProgressBar = document.getElementById('uploadProgressBar');
+    var uploadProgressText = document.getElementById('uploadProgressText');
+
+    function showProgress(pct) {
+      uploadProgressWrap.hidden = false;
+      uploadProgressBar.style.width = pct + '%';
+      uploadProgressText.textContent = pct + '%';
+    }
+    function hideProgress() {
+      uploadProgressWrap.hidden = true;
+      uploadProgressBar.style.width = '0%';
+      uploadProgressText.textContent = '০%';
+    }
+
+    function setMsg(text, ok) {
+      msg.textContent = text || '';
+      msg.className = 'auth-msg' + (ok ? ' ok' : '');
+    }
+
+    function openModal() { setMsg(''); modal.classList.add('open'); }
+    function closeModal() { modal.classList.remove('open'); }
+
+    document.getElementById('postCancelBtn').addEventListener('click', closeModal);
+    modal.addEventListener('click', function (e) { if (e.target === modal) closeModal(); });
+
+    function resetMediaPreview() {
+      mediaInput.value = '';
+      mediaPreviewWrap.style.display = 'none';
+      mediaPreviewImg.style.display = 'none';
+      mediaPreviewImg.src = '';
+      mediaPreviewVideo.style.display = 'none';
+      mediaPreviewVideo.src = '';
+      hideProgress();
+    }
+
+    var MAX_VIDEO_SECONDS = 30;
+    var MAX_IMAGE_BYTES = 15 * 1024 * 1024; // আপলোড-পূর্ব সেফটি-ক্যাপ — আপলোডের আগে অটো-কমপ্রেস হয়ে অনেক ছোট হয়ে যায়
+    var MAX_VIDEO_BYTES = 8 * 1024 * 1024;  // কোনো কমপ্রেশন নেই — এটাই আসল স্টোরেজ/ব্যান্ডউইথ সাইজ
+
+    // ---------- ভিডিওর দৈর্ঘ্য (সেকেন্ড) যাচাই করা ----------
+    function getVideoDuration(file) {
+      return new Promise(function (resolve, reject) {
+        var objectUrl = URL.createObjectURL(file);
+        var probe = document.createElement('video');
+        probe.preload = 'metadata';
+        probe.onloadedmetadata = function () {
+          var dur = probe.duration;
+          URL.revokeObjectURL(objectUrl);
+          if (!isFinite(dur) || isNaN(dur)) { reject(new Error('দৈর্ঘ্য যাচাই করা যায়নি')); return; }
+          resolve(dur);
+        };
+        probe.onerror = function () {
+          URL.revokeObjectURL(objectUrl);
+          reject(new Error('ভিডিও ফাইলটি পড়া যায়নি'));
+        };
+        probe.src = objectUrl;
+      });
+    }
+
+    function showMediaPreview(file, url) {
+      var isImage = file.type.startsWith('image/');
+      if (isImage) {
+        mediaPreviewImg.src = url;
+        mediaPreviewImg.style.display = 'block';
+        mediaPreviewVideo.style.display = 'none';
+      } else {
+        mediaPreviewVideo.src = url;
+        mediaPreviewVideo.style.display = 'block';
+        mediaPreviewImg.style.display = 'none';
+      }
+      mediaPreviewWrap.style.display = 'block';
+    }
+
+    mediaInput.addEventListener('change', function () {
+      var file = mediaInput.files && mediaInput.files[0];
+      if (!file) { resetMediaPreview(); return; }
+      var isImage = file.type.startsWith('image/');
+      var isVideo = file.type.startsWith('video/');
+      if (!isImage && !isVideo) {
+        setMsg('শুধুমাত্র ছবি অথবা ভিডিও ফাইল যোগ করা যাবে।');
+        resetMediaPreview();
+        return;
+      }
+      if (isImage && file.size > MAX_IMAGE_BYTES) {
+        setMsg('ছবির সাইজ ১৫ এমবি-র বেশি হওয়া যাবে না।');
+        resetMediaPreview();
+        return;
+      }
+      if (isVideo && file.size > MAX_VIDEO_BYTES) {
+        setMsg('ভিডিওর সাইজ ৮ এমবি-র বেশি হওয়া যাবে না।');
+        resetMediaPreview();
+        return;
+      }
+      setMsg('');
+      var url = URL.createObjectURL(file);
+
+      if (isVideo) {
+        setMsg('ভিডিওর দৈর্ঘ্য যাচাই করা হচ্ছে…', true);
+        getVideoDuration(file).then(function (dur) {
+          if (dur > MAX_VIDEO_SECONDS) {
+            setMsg('ভিডিও সর্বোচ্চ ' + MAX_VIDEO_SECONDS + ' সেকেন্ডের হতে পারবে। এই ভিডিওটি ' + Math.round(dur) + ' সেকেন্ডের।');
+            resetMediaPreview();
+            return;
+          }
+          setMsg('');
+          showMediaPreview(file, url);
+        }).catch(function (err) {
+          setMsg((err && err.message) || 'ভিডিও যাচাই করতে সমস্যা হয়েছে।');
+          resetMediaPreview();
+        });
+        return;
+      }
+
+      showMediaPreview(file, url);
+    });
+
+    mediaPreviewRemove.addEventListener('click', resetMediaPreview);
+
+    // ---------- বড় ছবি ছোট করে কম্প্রেস করা (ভিডিও ও অ্যানিমেটেড GIF অপরিবর্তিত থাকে) ----------
+    function compressImageFile(file) {
+      return new Promise(function (resolve) {
+        if (!file.type.startsWith('image/') || file.type === 'image/gif') { resolve(file); return; }
+        var objectUrl = URL.createObjectURL(file);
+        var img = new Image();
+        img.onload = function () {
+          URL.revokeObjectURL(objectUrl);
+          var maxDim = 1600;
+          var w = img.width, h = img.height;
+          // ইতিমধ্যে ছোট ও হালকা ছবি হলে কম্প্রেস করার দরকার নেই
+          if (w <= maxDim && h <= maxDim && file.size <= 700 * 1024) { resolve(file); return; }
+          var scale = Math.min(1, maxDim / Math.max(w, h));
+          var canvas = document.createElement('canvas');
+          canvas.width = Math.max(1, Math.round(w * scale));
+          canvas.height = Math.max(1, Math.round(h * scale));
+          var ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+          canvas.toBlob(function (blob) {
+            if (!blob) { resolve(file); return; }
+            var newName = file.name.replace(/\.\w+$/, '') + '.jpg';
+            var compressed = new File([blob], newName, { type: 'image/jpeg' });
+            resolve(compressed.size < file.size ? compressed : file);
+          }, 'image/jpeg', 0.82);
+        };
+        img.onerror = function () { URL.revokeObjectURL(objectUrl); resolve(file); };
+        img.src = objectUrl;
+      });
+    }
+
+    // ---------- Supabase Storage-এ সরাসরি XHR দিয়ে আপলোড (প্রোগ্রেস % ট্র্যাক করার জন্য) ----------
+    function uploadPostMedia(file, onProgress) {
+      var safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
+      var path = Date.now() + '-' + safeName;
+      var mediaType = file.type.startsWith('video/') ? 'video' : 'image';
+      return new Promise(function (resolve, reject) {
+        var xhr = new XMLHttpRequest();
+        var endpoint = window.TANGAIL_SUPABASE.url + '/storage/v1/object/post-media/' + path;
+        xhr.open('POST', endpoint, true);
+        xhr.setRequestHeader('apikey', window.TANGAIL_SUPABASE.key);
+        xhr.setRequestHeader('Authorization', 'Bearer ' + window.TANGAIL_SUPABASE.key);
+        xhr.setRequestHeader('Content-Type', file.type || 'application/octet-stream');
+        xhr.setRequestHeader('x-upsert', 'false');
+        if (xhr.upload && onProgress) {
+          xhr.upload.onprogress = function (e) {
+            if (e.lengthComputable) onProgress(Math.round((e.loaded / e.total) * 100));
+          };
+        }
+        xhr.onload = function () {
+          if (xhr.status >= 200 && xhr.status < 300) {
+            onProgress && onProgress(100);
+            resolve({ url: client.storage.from('post-media').getPublicUrl(path).data.publicUrl, type: mediaType });
+          } else {
+            reject(new Error('আপলোড ব্যর্থ (' + xhr.status + ')'));
+          }
+        };
+        xhr.onerror = function () { reject(new Error('নেটওয়ার্ক সমস্যা হয়েছে')); };
+        xhr.send(file);
+      });
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var authorName = document.getElementById('postAuthorName').value.trim();
+      var content = document.getElementById('postContent').value.trim();
+      var mediaFile = mediaInput.files && mediaInput.files[0];
+
+      if (!content) { setMsg('কী ঘটেছে তা লিখুন।'); return; }
+
+      var isVideoFile = mediaFile && mediaFile.type.startsWith('video/');
+      var durationCheck = isVideoFile ? getVideoDuration(mediaFile) : Promise.resolve(null);
+
+      submitBtn.disabled = true;
+      durationCheck.then(function (dur) {
+        if (dur !== null && dur > MAX_VIDEO_SECONDS) {
+          submitBtn.disabled = false;
+          setMsg('ভিডিও সর্বোচ্চ ' + MAX_VIDEO_SECONDS + ' সেকেন্ডের হতে পারবে। এই ভিডিওটি ' + Math.round(dur) + ' সেকেন্ডের।');
+          return Promise.reject(new Error('__handled__'));
+        }
+      }).catch(function (err) {
+        if (err && err.message === '__handled__') { return Promise.reject(err); }
+        submitBtn.disabled = false;
+        setMsg((err && err.message) || 'ভিডিও যাচাই করতে সমস্যা হয়েছে।');
+        return Promise.reject(new Error('__handled__'));
+      }).then(function () {
+      var mediaPromise;
+      if (mediaFile) {
+        setMsg('ফাইল প্রস্তুত করা হচ্ছে…', true);
+        showProgress(0);
+        mediaPromise = compressImageFile(mediaFile).then(function (processedFile) {
+          return uploadPostMedia(processedFile, function (pct) {
+            setMsg('ফাইল আপলোড হচ্ছে… ' + pct + '%', true);
+            showProgress(pct);
+          });
+        });
+      } else {
+        mediaPromise = Promise.resolve(null);
+      }
+
+      var isPendingSubmit = false;
+      mediaPromise.then(function (media) {
+        hideProgress();
+        setMsg('পোস্ট করা হচ্ছে…', true);
+        isPendingSubmit = !!(media && media.type === 'video');
+        var meta = currentUser && currentUser.user_metadata;
+        return client.from('posts').insert({
+          user_id: currentUser ? currentUser.id : null,
+          author_name: authorName || (meta && meta.full_name) || 'অতিথি',
+          avatar_url: (meta && meta.avatar_url) || null,
+          content: content,
+          media_url: media ? media.url : null,
+          media_type: media ? media.type : null,
+          status: isPendingSubmit ? 'pending' : 'approved'
+        }).select();
+      }).then(function (res) {
+        submitBtn.disabled = false;
+        if (res.error) {
+          console.error('posts insert error:', res.error);
+          var detail = res.error.message || res.error.code || '';
+          setMsg('পোস্ট করতে সমস্যা হয়েছে, একটু পর আবার চেষ্টা করুন।' + (detail ? ' (' + detail + ')' : ''));
+          return;
+        }
+        // দ্রষ্টব্য: 'pending' পোস্ট RLS অনুযায়ী তৎক্ষণাৎ ফিরতি ডেটায় নাও আসতে পারে (শুধু 'approved' পোস্ট পাবলিকলি পড়া যায়) — তাই status আগে থেকেই ট্র্যাক করা হচ্ছে
+        if (isPendingSubmit) {
+          setMsg('আপনার ভিডিওসহ পোস্ট জমা হয়েছে — এডমিনের অনুমোদনের পর ফিডে প্রকাশিত হবে।', true);
+        } else {
+          setMsg('আপনার পোস্ট প্রকাশিত হয়েছে!', true);
+        }
+        if (currentUser) { loadMyPosts(currentUser.id); }   // "মোট পোস্ট" সংখ্যা ও তালিকা আপডেট
+        form.reset();
+        resetMediaPreview();
+        setTimeout(closeModal, 1400);
+      }).catch(function (err) {
+        submitBtn.disabled = false;
+        hideProgress();
+        setMsg((err && err.message) || 'আপলোড করতে সমস্যা হয়েছে, একটু পর আবার চেষ্টা করুন।');
+      });
+      }).catch(function (err) {
+        // ভিডিও দৈর্ঘ্য যাচাইয়ে ব্যর্থ হলে এখানে চুপচাপ থেমে যাওয়া — মেসেজ ইতিমধ্যে দেখানো হয়ে গেছে
+        if (!err || err.message !== '__handled__') { console.error(err); }
+      });
+    });
+
+    // ---- প্রোফাইল থেকে "পোস্ট" বাটন: একই ফর্ম মোডালে খোলে (গেস্ট হলে লগইন পেজে যায়) ----
+    document.getElementById('profilePostBtn').addEventListener('click', function () {
+      if (isGuest || !currentUser) { window.location.href = 'login.html'; return; }
+      openModal();
+    });
+  })();
+
+  logoutBtn.addEventListener('click', function () {
+    if (isGuest) { window.location.href = 'login.html'; return; }
+    logoutBtn.disabled = true;
+    msgEl.textContent = 'লগআউট করা হচ্ছে…';
+    msgEl.className = 'auth-msg ok';
+    client.auth.signOut().then(function () {
+      window.location.href = 'login.html';
+    });
+  });
+})();
+</script>
+<script src="js/i18n.js?v=20260922203957"></script>
+<script src="js/favorite-categories.js?v=20260922203957"></script>
+<script src="js/script.js?v=20260922203957"></script>
+<script src="js/profile-inbox.js?v=20260922203957"></script>
+<script src="js/auto-update.js?v=20260922203957"></script>
+<script src="js/floating-buttons.js?v=20260922203957"></script>
+</body>
+</html>

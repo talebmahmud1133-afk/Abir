@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="tpPageTitle">মো. রাহিম উদ্দিন — শিক্ষক প্রোফাইল — টাঙ্গাইল জেলা</title>
+<meta name="description" content="যাচাইকৃত শিক্ষকের বিস্তারিত প্রোফাইল — বিষয়, অভিজ্ঞতা, রিভিউ ও যোগাযোগের তথ্য।">
+<meta name="theme-color" content="#0F766E">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="css/style.css?v=20260922203957">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  /* Teacher & Student module — scoped theme (shared with teacher-module.html) */
+  .tm-page{
+    --tm-primary:#0F766E;
+    --tm-primary-dark:#0b5c56;
+    --tm-secondary:#14B8A6;
+    --tm-accent:#22C55E;
+    --tm-bg:#F8FAFC;
+    --tm-card:#ffffff;
+    --tm-ink:#0f2027;
+    --tm-ink-soft:#5b6b74;
+    --tm-line:rgba(15,118,110,0.14);
+    --tm-radius:18px;
+    background:var(--tm-bg);
+    padding-bottom:90px;
+  }
+  .tm-page *{ box-sizing:border-box; }
+  .tm-page h1,.tm-page h2,.tm-page h3,.tm-page h4{
+    font-family:'Hind Siliguri', sans-serif; color:var(--tm-ink); margin:0; font-weight:700;
+  }
+  .tm-section{ padding:18px 16px 6px; max-width:1000px; margin:0 auto; }
+  .tm-section-head{ display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
+  .tm-section-head h2{ font-size:18px; }
+
+  /* ---------- Cover + profile header ---------- */
+  .tm-cover{
+    position:relative;
+    margin:14px 16px 0; max-width:1000px; margin-left:auto; margin-right:auto;
+    border-radius:var(--tm-radius); overflow:hidden;
+    height:150px;
+    background:linear-gradient(135deg,#0F766E 0%, #0b5c56 55%, #083f3c 100%);
+  }
+  .tm-cover::before{
+    content:"";
+    position:absolute; inset:0;
+    background:
+      radial-gradient(360px 200px at 90% -10%, rgba(34,197,94,0.35), transparent 60%),
+      radial-gradient(280px 200px at 100% 110%, rgba(20,184,166,0.35), transparent 60%);
+  }
+  .tm-cover-actions{ position:absolute; top:12px; right:12px; display:flex; gap:8px; z-index:2; }
+  .tm-icon-btn{
+    width:36px; height:36px; border-radius:50%;
+    background:rgba(255,255,255,0.22); backdrop-filter:blur(6px);
+    border:1px solid rgba(255,255,255,0.35); color:#fff;
+    display:flex; align-items:center; justify-content:center; font-size:14px; cursor:pointer;
+  }
+  .tm-icon-btn.active{ background:#fff; color:#e11d48; }
+
+  .tm-profile-head{
+    max-width:1000px; margin:0 auto; padding:0 20px;
+    display:flex; align-items:flex-end; gap:14px;
+    margin-top:-46px; position:relative; z-index:1;
+  }
+  .tm-profile-photo{
+    width:92px; height:92px; border-radius:22px; flex:0 0 92px;
+    border:4px solid #fff; box-shadow:0 10px 24px -12px rgba(15,23,42,0.4);
+    background:linear-gradient(135deg,var(--tm-primary),var(--tm-secondary));
+    display:flex; align-items:center; justify-content:center;
+    color:#fff; font-size:30px; font-weight:800; position:relative;
+  }
+  .tm-profile-photo .tm-verified{
+    position:absolute; bottom:-4px; right:-4px;
+    width:26px; height:26px; border-radius:50%;
+    background:var(--tm-accent); color:#fff; font-size:13px;
+    display:flex; align-items:center; justify-content:center; border:3px solid #fff;
+  }
+  .tm-profile-basic{ padding-bottom:6px; }
+  .tm-profile-name{ font-size:19px; font-weight:800; color:var(--tm-ink); display:flex; align-items:center; gap:6px; }
+  .tm-profile-tag{ font-size:13px; color:var(--tm-ink-soft); margin-top:3px; }
+  .tm-profile-rating{ display:flex; align-items:center; gap:6px; margin-top:6px; font-size:13px; }
+  .tm-profile-rating .tm-rating{ color:#c58f00; font-weight:700; }
+
+  /* ---------- Contact action row ---------- */
+  .tm-contact-row{
+    max-width:1000px; margin:16px auto 0; padding:0 16px;
+    display:grid; grid-template-columns:repeat(4,1fr); gap:8px;
+  }
+  .tm-contact-btn{
+    display:flex; flex-direction:column; align-items:center; gap:6px;
+    padding:12px 6px; border-radius:14px; font-size:12px; font-weight:700;
+    box-shadow:0 8px 20px -14px rgba(15,23,42,0.3);
+  }
+  .tm-contact-btn i{ font-size:16px; }
+  .tm-contact-call{ background:#1f9a4b; color:#fff; }
+  .tm-contact-whatsapp{ background:#1f9a4b; color:#fff; }
+  .tm-contact-message{ background:var(--tm-primary); color:#fff; }
+  .tm-contact-demo{ background:#f59e0b; color:#3a2500; }
+
+  /* ---------- Info cards ---------- */
+  .tm-info-card{
+    background:var(--tm-card); border:1px solid var(--tm-line);
+    border-radius:16px; padding:16px; box-shadow:0 8px 20px -16px rgba(15,23,42,0.25);
+  }
+  .tm-info-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:12px; }
+  .tm-info-stat{ text-align:center; }
+  .tm-info-stat .num{ font-size:19px; font-weight:800; color:var(--tm-primary); }
+  .tm-info-stat .lbl{ font-size:12px; color:var(--tm-ink-soft); margin-top:2px; }
+
+  .tm-chip-row{ display:flex; flex-wrap:wrap; gap:8px; }
+  .tm-chip{
+    background:rgba(15,118,110,0.1); color:var(--tm-primary);
+    font-size:12.5px; font-weight:600; padding:7px 14px; border-radius:999px;
+  }
+
+  .tm-list-item{ display:flex; align-items:flex-start; gap:10px; padding:10px 0; border-bottom:1px solid var(--tm-line); }
+  .tm-list-item:last-child{ border-bottom:none; padding-bottom:0; }
+  .tm-list-item i{ color:var(--tm-primary); font-size:14px; margin-top:3px; }
+  .tm-list-item .tt{ font-size:13.5px; font-weight:700; color:var(--tm-ink); }
+  .tm-list-item .ss{ font-size:12px; color:var(--tm-ink-soft); margin-top:2px; }
+
+  .tm-about-text{ font-size:13.5px; color:var(--tm-ink-soft); line-height:1.8; }
+
+  /* ---------- Gallery ---------- */
+  .tm-gallery-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+  .tm-gallery-item{
+    aspect-ratio:1/1; border-radius:12px;
+    background:linear-gradient(135deg,rgba(15,118,110,0.14),rgba(34,197,94,0.14));
+    display:flex; align-items:center; justify-content:center;
+    color:var(--tm-primary); font-size:20px;
+  }
+
+  /* ---------- Reviews ---------- */
+  .tm-review-card{
+    border-bottom:1px solid var(--tm-line); padding:14px 0;
+  }
+  .tm-review-card:last-child{ border-bottom:none; padding-bottom:0; }
+  .tm-review-top{ display:flex; align-items:center; gap:10px; margin-bottom:6px; }
+  .tm-review-avatar{
+    width:34px; height:34px; border-radius:50%; flex:0 0 34px;
+    background:linear-gradient(135deg,#1E3A6E,#14294F); color:#fff;
+    display:flex; align-items:center; justify-content:center; font-size:12.5px; font-weight:700;
+  }
+  .tm-review-name{ font-size:13.5px; font-weight:700; color:var(--tm-ink); }
+  .tm-review-date{ font-size:11.5px; color:var(--tm-ink-soft); }
+  .tm-review-text{ font-size:13px; color:var(--tm-ink-soft); line-height:1.7; }
+
+  /* ---------- Sticky bottom bar (mobile) ---------- */
+  .tm-sticky-bar{
+    position:fixed; left:0; right:0; bottom:0; z-index:40;
+    background:#fff; border-top:1px solid var(--tm-line);
+    padding:10px 16px; display:flex; gap:10px;
+    box-shadow:0 -10px 24px -18px rgba(15,23,42,0.3);
+  }
+  .tm-sticky-bar a{
+    flex:1; text-align:center; padding:12px 8px; border-radius:12px;
+    font-size:13.5px; font-weight:700;
+  }
+  .tm-sticky-bar{ --tm-primary:#0F766E; } /* বারটা .tm-page-এর বাইরে, তাই ভ্যারিয়েবল না পেয়ে বাটন স্বচ্ছ ও লেখা সাদা-সাদা হয়ে যাচ্ছিল */
+  .tm-sticky-bar .tm-sb-msg{ background:rgba(15,118,110,0.1); color:var(--tm-primary); }
+  .tm-sticky-bar .tm-sb-demo{ background:var(--tm-primary); color:#fff; }
+
+  .tm-grid-2col{ display:grid; grid-template-columns:1fr; gap:14px; }
+
+  @media (min-width:700px){
+    .tm-cover{ height:190px; margin:18px 20px 0; }
+    .tm-profile-photo{ width:110px; height:110px; }
+    .tm-profile-name{ font-size:22px; }
+    .tm-contact-row{ grid-template-columns:repeat(4,1fr); max-width:520px; margin-left:20px; }
+    .tm-gallery-grid{ grid-template-columns:repeat(4,1fr); }
+    .tm-section{ padding:22px 20px 6px; }
+  }
+
+  @media (min-width:1024px){
+    .tm-sticky-bar{ display:none; }
+    .tm-page{ padding-bottom:28px; }
+    .tm-grid-2col{ grid-template-columns:2fr 1fr; align-items:start; }
+    .tm-contact-row{ max-width:640px; }
+  }
+</style>
+</head>
+<body data-banner-category="teachers-schools">
+
+<header class="site-header app-header">
+  <div class="header-inner">
+    <button class="menu-toggle icon-btn" id="menuToggle" data-i18n-aria="menu.open" aria-label="মেনু খুলুন"><i class="fa-solid fa-bars" aria-hidden="true"></i></button>
+    <div class="brand-block">
+      <a href="index.html" class="brand app-brand">টাঙ্গাইল <span class="brand-accent">জেলা</span></a>
+    </div>
+    <div class="header-actions">
+      <a href="notifications.html" class="icon-btn" data-i18n-aria="menu.notifications" aria-label="বিজ্ঞপ্তি"><i class="fa-solid fa-bell" aria-hidden="true"></i></a>
+      <div class="more-menu-wrap">
+        <button type="button" class="icon-btn" id="moreMenuToggle" data-i18n-aria="menu.more" aria-label="আরও"><i class="fa-solid fa-ellipsis-vertical" aria-hidden="true"></i></button>
+        <div class="more-menu" id="moreMenu">
+          <a href="about.html" data-i18n="nav.about">পরিচিতি</a>
+          <div class="more-menu-section-title" data-i18n="menu.language">ভাষা</div>
+          <div class="lang-switcher">
+            <button type="button" class="lang-option" data-lang-choice="bn">বাংলা</button>
+            <button type="button" class="lang-option" data-lang-choice="en">English</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html" data-i18n="nav.home">হোম</a>
+      <a href="about.html" data-i18n="nav.about">পরিচিতি</a>
+      <a href="add-listing.html" data-i18n="nav.addListing">তথ্য যোগ করুন</a>
+      <a href="faq.html" data-i18n="nav.faq">সাধারণ প্রশ্ন</a>
+      <a href="contact.html" data-i18n="nav.contact">যোগাযোগ</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="post-detail-topbar list-back-topbar">
+    <button type="button" class="post-detail-back" onclick="if(window.history.length>1){history.back();}else{window.location.href='teacher-module.html';}" aria-label="পেছনে যান"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i></button>
+    <span>শিক্ষক প্রোফাইল</span>
+  </div>
+
+  <div class="tm-page">
+
+    <!-- ===== COVER + PROFILE HEAD ===== -->
+    <div class="tm-cover">
+      <div class="tm-cover-actions">
+        <button type="button" class="tm-icon-btn" aria-label="শেয়ার করুন"><i class="fa-solid fa-share-nodes"></i></button>
+        <button type="button" class="tm-icon-btn active" aria-label="পছন্দ"><i class="fa-solid fa-heart"></i></button>
+        <button type="button" class="tm-icon-btn" aria-label="রিপোর্ট করুন"><i class="fa-solid fa-flag"></i></button>
+      </div>
+    </div>
+    <div class="tm-profile-head">
+      <div class="tm-profile-photo" id="tpPhoto">রা<span class="tm-verified" id="tpVerifiedBadge"><i class="fa-solid fa-check"></i></span></div>
+      <div class="tm-profile-basic">
+        <div class="tm-profile-name" id="tpName">মো. রাহিম উদ্দিন</div>
+        <div class="tm-profile-tag" id="tpTag">পদার্থবিজ্ঞান শিক্ষক • ক্লাস ৮–১২ • টাঙ্গাইল সদর</div>
+        <div class="tm-profile-rating"><span class="tm-rating"><i class="fa-solid fa-star"></i> <span id="tpRating">৪.৯</span></span> <span id="tpReviewsCount">(১২০ রিভিউ)</span></div>
+      </div>
+    </div>
+
+    <!-- ===== CONTACT ACTIONS ===== -->
+    <div class="tm-contact-row">
+      <a href="tel:+8801700000000" class="tm-contact-btn tm-contact-call" id="tpCallBtn"><i class="fa-solid fa-phone"></i> কল করুন</a>
+      <a href="https://wa.me/8801700000000" target="_blank" rel="noopener" class="tm-contact-btn tm-contact-whatsapp" id="tpWhatsappBtn"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+      <a href="#" class="tm-contact-btn tm-contact-message"><i class="fa-solid fa-comment-dots"></i> বার্তা</a>
+      <a href="#" class="tm-contact-btn tm-contact-demo"><i class="fa-solid fa-video"></i> ডেমো ক্লাস</a>
+    </div>
+
+    <div class="tm-section">
+      <div class="tm-grid-2col">
+        <div>
+
+          <!-- ===== ABOUT + STATS ===== -->
+          <div class="tm-info-card" style="margin-bottom:14px;">
+            <div class="tm-info-grid" style="margin-bottom:14px;">
+              <div class="tm-info-stat"><div class="num" id="tpExperience">৮ বছর</div><div class="lbl">অভিজ্ঞতা</div></div>
+              <div class="tm-info-stat"><div class="num" id="tpReviewsNum">১২০+</div><div class="lbl">শিক্ষার্থী পড়িয়েছেন</div></div>
+              <div class="tm-info-stat"><div class="num" id="tpFee">৳৩,০০০</div><div class="lbl">মাসিক ফি</div></div>
+              <div class="tm-info-stat"><div class="num" id="tpMode">অন/অফলাইন</div><div class="lbl">মাধ্যম</div></div>
+            </div>
+            <p class="tm-about-text" id="tpAbout">আমি গত ৮ বছর ধরে টাঙ্গাইল সদরে পদার্থবিজ্ঞান বিষয়ে প্রাইভেট ও ব্যাচ পড়াচ্ছি। মাধ্যমিক ও উচ্চ মাধ্যমিক পর্যায়ের শিক্ষার্থীদের ধারণাভিত্তিক পাঠদানে বিশ্বাসী। প্রতিটি শিক্ষার্থীর দুর্বলতা চিহ্নিত করে আলাদাভাবে যত্ন নিয়ে থাকি।</p>
+          </div>
+
+          <!-- ===== SUBJECTS ===== -->
+          <div class="tm-info-card" style="margin-bottom:14px;">
+            <div class="tm-section-head" style="margin-bottom:10px;"><h2>পাঠদানের বিষয়</h2></div>
+            <div class="tm-chip-row" id="tpSubjectChips">
+              <span class="tm-chip">পদার্থবিজ্ঞান</span>
+              <span class="tm-chip">উচ্চতর গণিত</span>
+              <span class="tm-chip">সাধারণ বিজ্ঞান</span>
+              <span class="tm-chip">ক্লাস ৮–১০</span>
+              <span class="tm-chip">এইচএসসি</span>
+            </div>
+          </div>
+
+          <!-- ===== EDUCATION & CERTIFICATES ===== -->
+          <div class="tm-info-card" style="margin-bottom:14px;">
+            <div class="tm-section-head" style="margin-bottom:6px;"><h2>শিক্ষাগত যোগ্যতা</h2></div>
+            <div class="tm-list-item">
+              <i class="fa-solid fa-graduation-cap"></i>
+              <div><div class="tt" id="tpEducation">এমএসসি — পদার্থবিজ্ঞান</div><div class="ss">টাঙ্গাইল জেলা প্ল্যাটফর্মে যাচাইকৃত তথ্য</div></div>
+            </div>
+          </div>
+
+          <!-- ===== GALLERY ===== -->
+          <div class="tm-info-card" style="margin-bottom:14px;">
+            <div class="tm-section-head" style="margin-bottom:10px;"><h2>গ্যালারি</h2></div>
+            <div class="tm-gallery-grid">
+              <div class="tm-gallery-item"><i class="fa-solid fa-image"></i></div>
+              <div class="tm-gallery-item"><i class="fa-solid fa-image"></i></div>
+              <div class="tm-gallery-item"><i class="fa-solid fa-image"></i></div>
+              <div class="tm-gallery-item"><i class="fa-solid fa-image"></i></div>
+              <div class="tm-gallery-item"><i class="fa-solid fa-image"></i></div>
+              <div class="tm-gallery-item"><i class="fa-solid fa-image"></i></div>
+            </div>
+          </div>
+
+          <!-- ===== REVIEWS ===== -->
+          <div class="tm-info-card">
+            <div class="tm-section-head" style="margin-bottom:6px;"><h2>রিভিউ (১২০)</h2></div>
+
+            <div class="tm-review-card">
+              <div class="tm-review-top">
+                <div class="tm-review-avatar">তা</div>
+                <div>
+                  <div class="tm-review-name">তানভীর হাসান</div>
+                  <div class="tm-review-date">৩ দিন আগে • <span class="tm-rating"><i class="fa-solid fa-star"></i> ৫.০</span></div>
+                </div>
+              </div>
+              <div class="tm-review-text">স্যার খুব সুন্দরভাবে বুঝিয়ে পড়ান। পরীক্ষায় আমার রেজাল্ট অনেক ভালো হয়েছে।</div>
+            </div>
+
+            <div class="tm-review-card">
+              <div class="tm-review-top">
+                <div class="tm-review-avatar">মি</div>
+                <div>
+                  <div class="tm-review-name">মিমের অভিভাবক</div>
+                  <div class="tm-review-date">১ সপ্তাহ আগে • <span class="tm-rating"><i class="fa-solid fa-star"></i> ৪.৮</span></div>
+                </div>
+              </div>
+              <div class="tm-review-text">সময়মতো ক্লাস নেন এবং নিয়মিত পড়ার অগ্রগতি জানান। অত্যন্ত দায়িত্বশীল একজন শিক্ষক।</div>
+            </div>
+
+            <div class="tm-review-card">
+              <div class="tm-review-top">
+                <div class="tm-review-avatar">জা</div>
+                <div>
+                  <div class="tm-review-name">জাহিদ হাসান</div>
+                  <div class="tm-review-date">২ সপ্তাহ আগে • <span class="tm-rating"><i class="fa-solid fa-star"></i> ৫.০</span></div>
+                </div>
+              </div>
+              <div class="tm-review-text">উচ্চতর গণিতের কঠিন টপিকগুলো অনেক সহজভাবে বুঝিয়েছেন। ধন্যবাদ স্যার।</div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- ===== SIDEBAR (desktop) ===== -->
+        <div>
+          <div class="tm-info-card">
+            <div class="tm-section-head" style="margin-bottom:10px;"><h2>দ্রুত যোগাযোগ</h2></div>
+            <p class="tm-about-text" style="margin-bottom:12px;">শিক্ষকের সাথে সরাসরি যোগাযোগ করতে নিচের বাটনগুলো ব্যবহার করুন।</p>
+            <div style="display:flex; flex-direction:column; gap:8px;">
+              <a href="tel:+8801700000000" class="tm-contact-btn tm-contact-call" id="tpCallBtn2" style="flex-direction:row; justify-content:center;"><i class="fa-solid fa-phone"></i> কল করুন</a>
+              <a href="https://wa.me/8801700000000" target="_blank" rel="noopener" class="tm-contact-btn tm-contact-whatsapp" id="tpWhatsappBtn2" style="flex-direction:row; justify-content:center;"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+              <a href="#" class="tm-contact-btn tm-contact-demo" style="flex-direction:row; justify-content:center;"><i class="fa-solid fa-video"></i> ডেমো ক্লাস বুক করুন</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- Mobile sticky contact bar -->
+<div class="tm-sticky-bar">
+  <a href="#" class="tm-sb-msg"><i class="fa-solid fa-comment-dots"></i> বার্তা</a>
+  <a href="#" class="tm-sb-demo"><i class="fa-solid fa-video"></i> ডেমো ক্লাস বুক করুন</a>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="js/supabase-config.js?v=20260922203957"></script>
+<script src="js/nav-avatar.js?v=20260922203957"></script>
+<script src="js/call.js?v=20260922203957"></script>
+<script src="js/sticky-header.js?v=20260922203957"></script>
+<script src="js/i18n.js?v=20260922203957"></script>
+<script src="js/search-index.js?v=20260922203957"></script>
+<script src="js/smart-search.js?v=20260922203957"></script>
+<script src="js/search-ui.js?v=20260922203957"></script>
+<script src="js/script.js?v=20260922203957"></script>
+<script src="js/teacher-profile-data.js?v=20260922203957"></script>
+<script src="js/auto-update.js?v=20260922203957"></script>
+<script src="js/floating-buttons.js?v=20260922203957"></script>
+</body>
+</html>

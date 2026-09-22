@@ -1,0 +1,21 @@
+-- ============================================================================
+-- টাঙ্গাইল জেলা — ফ্রেন্ড রিকোয়েস্ট ব্যাকএন্ড: লাইভ অবস্থার স্ন্যাপশট (শুধু রেকর্ড — আবার চালানোর দরকার নেই)
+-- ============================================================================
+-- লাইভে আছে migration `friend_requests_accept_flow` (২০২৬-০৯-২১, আলাদা সেশনে করা)। এই ফাইল ২০২৬-০৯-২১-এ
+-- read-only কোয়েরিতে লাইভ থেকে তোলা; এটাই আগের `follows-schema.sql` / `friends-list.sql`-এর জায়গায় সত্য (ওগুলো পুরনো)।
+--
+-- follows: (follower_id, following_id) PK; status text not null default 'pending' check (status in ('pending','accepted'))
+--   follower_id = রিকোয়েস্ট যে পাঠিয়েছে; following_id = যে পেয়েছে। accepted হলে দুজন ফ্রেন্ড (এক সারিই, যেকোনো দিকে)।
+-- RLS পলিসি (follows):
+--   "follows: read own"               select  — follower_id = auth.uid() or following_id = auth.uid() or is_admin()
+--   "follows: request as self"        insert  — with check: follower_id = auth.uid() and is_profile_public(following_id) and status = 'pending'
+--   "follows: accept as recipient"    update  — using: following_id = auth.uid() and status = 'pending'; with check: following_id = auth.uid() and status = 'accepted'
+--   "follows: remove own relationship" delete — follower_id = auth.uid() or following_id = auth.uid() or is_admin()
+-- ফাংশন (সবই SECURITY DEFINER, search_path = public):
+--   get_follow_stats(p_username) → (followers bigint = ওই সদস্যের কাছে আসা pending রিকোয়েস্ট, friends bigint = accepted সংখ্যা,
+--                                   viewer_status text = none | pending_sent | pending_received | accepted)
+--   list_incoming_friend_requests(p_limit default 50, max 100) → (username, full_name, avatar_url, is_verified, requested_at) — আমাকে পাঠানো pending
+--   respond_friend_request(p_username, p_accept boolean) → boolean — true হলে pending → accepted (update), false হলে সারি মোছা; সারি না থাকলে false
+--   list_my_friends(p_limit default 100, max 200) → শুধু accepted (দুই দিকের), শুধু পাবলিক প্রোফাইল
+--   list_public_members(...).followers = pending রিকোয়েস্টের সংখ্যা (একই অর্থ)
+-- চ্যাট: chat_is_accepted() ও get_chat_state এখন accepted-ই ধরে — দেখুন `chat-friend-requires-accepted.sql`।

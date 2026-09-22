@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="spPageTitle">তানভীর হাসান — শিক্ষার্থী প্রোফাইল — টাঙ্গাইল জেলা</title>
+<meta name="description" content="শিক্ষার্থীর বিস্তারিত প্রোফাইল — ক্লাস, প্রতিষ্ঠান, প্রয়োজনীয় বিষয় ও বাজেট।">
+<meta name="theme-color" content="#0F766E">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="css/style.css?v=20260922203957">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  /* রুট-লেভেলে ভ্যারিয়েবল — .tm-sticky-bar এর মতো এলিমেন্ট যেগুলো .tm-page এর বাইরে থাকে,
+     তাদের জন্যও এই রঙগুলো যেন কাজ করে তা নিশ্চিত করতে */
+  :root{
+    --tm-student:#1E3A6E;
+    --tm-ink:#0f2027;
+    --tm-ink-soft:#55627a;
+    --tm-line:#e7ebf1;
+  }
+  /* Teacher & Student module — scoped theme (shared with teacher-module.html) */
+  .tm-page{
+    --tm-primary:#0F766E;
+    --tm-primary-dark:#0b5c56;
+    --tm-secondary:#14B8A6;
+    --tm-accent:#22C55E;
+    --tm-student:#1E3A6E;
+    --tm-student-dark:#1e40af;
+    --tm-bg:#F1F5F9;
+    --tm-card:#ffffff;
+    --tm-ink:#0f2027;
+    --tm-ink-soft:#55627a;
+    --tm-line:#e7ebf1;
+    --tm-radius:20px;
+    background:var(--tm-bg);
+    padding-bottom:96px;
+  }
+  .tm-page *{ box-sizing:border-box; }
+  .tm-page h1,.tm-page h2,.tm-page h3,.tm-page h4{
+    font-family:'Hind Siliguri', sans-serif; color:var(--tm-ink); margin:0; font-weight:700;
+  }
+  .tm-section{ padding:0 16px 6px; max-width:1000px; margin:0 auto; }
+  .tm-section + .tm-section{ padding-top:14px; }
+  .tm-section-head{ display:flex; align-items:center; gap:9px; margin-bottom:13px; }
+  .tm-section-head .tm-sh-icon{
+    width:30px; height:30px; border-radius:9px; flex:0 0 30px;
+    background:rgba(30,58,110,0.1); color:var(--tm-student);
+    display:flex; align-items:center; justify-content:center; font-size:13px;
+  }
+  .tm-section-head h2{ font-size:15.5px; }
+
+  /* ---------- Cover + profile header ---------- */
+  .tm-cover{
+    position:relative;
+    margin:14px 16px 0; max-width:1000px; margin-left:auto; margin-right:auto;
+    border-radius:var(--tm-radius); overflow:hidden;
+    height:128px;
+    background:linear-gradient(120deg,#14294F 0%, #1E3A6E 45%, #0F1D3D 100%);
+  }
+  .tm-cover::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.07) 1px, transparent 1px);
+    background-size:26px 26px;
+    -webkit-mask-image:linear-gradient(180deg, rgba(0,0,0,0.9), transparent 85%);
+            mask-image:linear-gradient(180deg, rgba(0,0,0,0.9), transparent 85%);
+  }
+  .tm-cover::after{
+    content:"";
+    position:absolute; inset:0;
+    background:radial-gradient(220px 140px at 88% 8%, rgba(56,189,248,0.35), transparent 65%);
+  }
+  .tm-cover-actions{ position:absolute; top:12px; right:12px; display:flex; gap:8px; z-index:2; }
+  .tm-icon-btn{
+    width:34px; height:34px; border-radius:50%;
+    background:rgba(255,255,255,0.16); backdrop-filter:blur(8px);
+    border:1px solid rgba(255,255,255,0.28); color:#fff;
+    display:flex; align-items:center; justify-content:center; font-size:13px; cursor:pointer;
+    transition:background .15s ease;
+  }
+  .tm-icon-btn:hover{ background:rgba(255,255,255,0.28); }
+  .tm-icon-btn.active{ background:#fff; color:#e11d48; border-color:#fff; }
+
+  .tm-profile-head{
+    max-width:1000px; margin:0 auto; padding:0 20px;
+    display:flex; align-items:flex-end; gap:14px;
+    margin-top:-38px; position:relative; z-index:1;
+  }
+  .tm-profile-photo{
+    width:82px; height:82px; border-radius:20px; flex:0 0 82px;
+    border:4px solid #fff; box-shadow:0 8px 18px -10px rgba(15,23,42,0.35);
+    background:linear-gradient(135deg,var(--tm-student),var(--tm-student-dark));
+    display:flex; align-items:center; justify-content:center;
+    color:#fff; font-size:28px; font-weight:800; position:relative;
+  }
+  .tm-profile-basic{ padding-bottom:5px; min-width:0; }
+  .tm-profile-name{ font-size:18px; font-weight:800; color:var(--tm-ink); display:flex; align-items:center; gap:6px; }
+  .tm-profile-badge{
+    display:inline-flex; align-items:center; justify-content:center;
+    width:16px; height:16px; border-radius:50%; background:var(--tm-student); color:#fff; font-size:9px; flex:0 0 auto;
+  }
+  .tm-profile-tag{
+    font-size:12.5px; color:var(--tm-ink-soft); margin-top:4px;
+    display:flex; flex-wrap:wrap; align-items:center; gap:5px 8px;
+  }
+  .tm-profile-tag span{ display:inline-flex; align-items:center; gap:5px; }
+  .tm-profile-tag i{ font-size:10.5px; color:#94a3b8; }
+  .tm-profile-tag .sep{ color:#cbd5e1; }
+
+  /* ---------- Contact action row ---------- */
+  .tm-contact-row{
+    max-width:1000px; margin:16px auto 0; padding:0 16px;
+    display:grid; grid-template-columns:repeat(3,1fr); gap:9px;
+  }
+  .tm-contact-btn{
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px;
+    padding:11px 6px; border-radius:14px; font-size:12px; font-weight:700;
+    border:1px solid transparent; transition:transform .12s ease, box-shadow .12s ease;
+  }
+  .tm-contact-btn:active{ transform:scale(0.97); }
+  .tm-contact-btn .tm-cb-icon{
+    width:30px; height:30px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px;
+  }
+  .tm-contact-call{ background:#fff; color:#1f9a4b; border-color:var(--tm-line); box-shadow:0 6px 16px -12px rgba(15,23,42,0.2); }
+  .tm-contact-call .tm-cb-icon{ background:rgba(22,163,74,0.12); }
+  .tm-contact-whatsapp{ background:#fff; color:#1f9a4b; border-color:var(--tm-line); box-shadow:0 6px 16px -12px rgba(15,23,42,0.2); }
+  .tm-contact-whatsapp .tm-cb-icon{ background:rgba(37,211,102,0.15); color:#1a9c4a; }
+  .tm-contact-message{ background:var(--tm-student); color:#fff; box-shadow:0 10px 22px -12px rgba(30,58,110,0.55); }
+  .tm-contact-message .tm-cb-icon{ background:rgba(255,255,255,0.2); color:#fff; }
+
+  /* ---------- Key stats ---------- */
+  .tm-stat-row{ display:grid; grid-template-columns:repeat(2,1fr); gap:10px; }
+  .tm-stat-card{
+    background:var(--tm-card); border:1px solid var(--tm-line); border-radius:16px;
+    padding:14px; display:flex; align-items:center; gap:11px;
+  }
+  .tm-stat-card .tm-stat-icon{
+    width:38px; height:38px; border-radius:11px; flex:0 0 38px;
+    background:rgba(30,58,110,0.1); color:var(--tm-student);
+    display:flex; align-items:center; justify-content:center; font-size:15px;
+  }
+  .tm-stat-card .tm-stat-val{ font-size:15.5px; font-weight:800; color:var(--tm-ink); line-height:1.25; }
+  .tm-stat-card .tm-stat-lbl{ font-size:11.5px; color:var(--tm-ink-soft); margin-top:1px; }
+
+  /* ---------- Info cards ---------- */
+  .tm-info-card{
+    background:var(--tm-card); border:1px solid var(--tm-line);
+    border-radius:16px; padding:16px;
+  }
+
+  .tm-chip-row{ display:flex; flex-wrap:wrap; gap:8px; }
+  .tm-chip{
+    background:rgba(30,58,110,0.08); color:var(--tm-student-dark);
+    font-size:12.5px; font-weight:600; padding:7px 14px; border-radius:999px;
+    border:1px solid rgba(30,58,110,0.14);
+  }
+
+  .tm-list-item{ display:flex; align-items:flex-start; gap:12px; padding:11px 0; border-bottom:1px solid var(--tm-line); }
+  .tm-list-item:first-child{ padding-top:0; }
+  .tm-list-item:last-child{ border-bottom:none; padding-bottom:0; }
+  .tm-list-item .tm-li-icon{
+    width:32px; height:32px; border-radius:10px; flex:0 0 32px;
+    background:rgba(30,58,110,0.1); color:var(--tm-student);
+    display:flex; align-items:center; justify-content:center; font-size:13px; margin-top:1px;
+  }
+  .tm-list-item .tt{ font-size:13.5px; font-weight:700; color:var(--tm-ink); }
+  .tm-list-item .ss{ font-size:11.5px; color:var(--tm-ink-soft); margin-top:1px; }
+
+  .tm-about-text{ font-size:13.5px; color:#475569; line-height:1.85; white-space:pre-line; }
+
+  .tm-sticky-bar{
+    position:fixed; left:0; right:0; bottom:0; z-index:40;
+    background:#fff; border-top:1px solid var(--tm-line);
+    padding:10px 16px; display:flex; gap:10px;
+    box-shadow:0 -10px 24px -18px rgba(15,23,42,0.3);
+  }
+  .tm-sticky-bar a{
+    flex:1; text-align:center; padding:12px 8px; border-radius:12px;
+    font-size:13.5px; font-weight:700; display:flex; align-items:center; justify-content:center; gap:7px;
+  }
+  .tm-sticky-bar .tm-sb-msg{ background:#f1f5f9; color:var(--tm-ink); border:1px solid var(--tm-line); }
+  .tm-sticky-bar .tm-sb-call{ background:var(--tm-student); color:#fff; }
+
+  .tm-grid-2col{ display:grid; grid-template-columns:1fr; gap:14px; }
+  .tm-stack{ display:flex; flex-direction:column; gap:14px; }
+
+  [hidden]{ display:none !important; }
+
+  @media (min-width:700px){
+    .tm-cover{ height:170px; margin:18px 20px 0; }
+    .tm-profile-photo{ width:104px; height:104px; border-radius:24px; }
+    .tm-profile-head{ margin-top:-44px; }
+    .tm-profile-name{ font-size:21px; }
+    .tm-contact-row{ grid-template-columns:repeat(3,1fr); max-width:420px; margin-left:20px; }
+    .tm-section{ padding:0 20px 6px; }
+    .tm-section + .tm-section{ padding-top:16px; }
+  }
+
+  @media (min-width:1024px){
+    .tm-sticky-bar{ display:none; }
+    .tm-page{ padding-bottom:32px; }
+    .tm-grid-2col{ grid-template-columns:2fr 1fr; align-items:start; }
+    .tm-contact-row{ max-width:480px; }
+  }
+</style>
+</head>
+<body data-banner-category="teachers-schools">
+
+<header class="site-header app-header">
+  <div class="header-inner">
+    <button class="menu-toggle icon-btn" id="menuToggle" data-i18n-aria="menu.open" aria-label="মেনু খুলুন"><i class="fa-solid fa-bars" aria-hidden="true"></i></button>
+    <div class="brand-block">
+      <a href="index.html" class="brand app-brand">টাঙ্গাইল <span class="brand-accent">জেলা</span></a>
+    </div>
+    <div class="header-actions">
+      <a href="notifications.html" class="icon-btn" data-i18n-aria="menu.notifications" aria-label="বিজ্ঞপ্তি"><i class="fa-solid fa-bell" aria-hidden="true"></i></a>
+      <div class="more-menu-wrap">
+        <button type="button" class="icon-btn" id="moreMenuToggle" data-i18n-aria="menu.more" aria-label="আরও"><i class="fa-solid fa-ellipsis-vertical" aria-hidden="true"></i></button>
+        <div class="more-menu" id="moreMenu">
+          <a href="about.html" data-i18n="nav.about">পরিচিতি</a>
+          <div class="more-menu-section-title" data-i18n="menu.language">ভাষা</div>
+          <div class="lang-switcher">
+            <button type="button" class="lang-option" data-lang-choice="bn">বাংলা</button>
+            <button type="button" class="lang-option" data-lang-choice="en">English</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html" data-i18n="nav.home">হোম</a>
+      <a href="about.html" data-i18n="nav.about">পরিচিতি</a>
+      <a href="add-listing.html" data-i18n="nav.addListing">তথ্য যোগ করুন</a>
+      <a href="faq.html" data-i18n="nav.faq">সাধারণ প্রশ্ন</a>
+      <a href="contact.html" data-i18n="nav.contact">যোগাযোগ</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="post-detail-topbar list-back-topbar">
+    <button type="button" class="post-detail-back" onclick="if(window.history.length>1){history.back();}else{window.location.href='teacher-module.html';}" aria-label="পেছনে যান"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i></button>
+    <span>শিক্ষার্থী প্রোফাইল</span>
+  </div>
+
+  <div class="tm-page">
+
+    <!-- ===== COVER + PROFILE HEAD ===== -->
+    <div class="tm-cover">
+      <div class="tm-cover-actions">
+        <button type="button" class="tm-icon-btn" aria-label="শেয়ার করুন"><i class="fa-solid fa-share-nodes"></i></button>
+        <button type="button" class="tm-icon-btn active" aria-label="পছন্দ"><i class="fa-solid fa-heart"></i></button>
+        <button type="button" class="tm-icon-btn" aria-label="রিপোর্ট করুন"><i class="fa-solid fa-flag"></i></button>
+      </div>
+    </div>
+    <div class="tm-profile-head">
+      <div class="tm-profile-photo" id="spPhoto">তা</div>
+      <div class="tm-profile-basic">
+        <div class="tm-profile-name">
+          <span id="spName">তানভীর হাসান</span>
+          <span class="tm-profile-badge" title="শিক্ষার্থী প্রোফাইল"><i class="fa-solid fa-check"></i></span>
+        </div>
+        <div class="tm-profile-tag" id="spTag">
+          <span id="spTagClass"><i class="fa-solid fa-graduation-cap"></i>ক্লাস ৯</span>
+          <span class="sep" id="spTagSep1">•</span>
+          <span id="spTagInstitution"><i class="fa-solid fa-school"></i>টাঙ্গাইল জেলা স্কুল</span>
+          <span class="sep" id="spTagSep2">•</span>
+          <span id="spTagUpazila"><i class="fa-solid fa-location-dot"></i>টাঙ্গাইল সদর</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== CONTACT ACTIONS ===== -->
+    <div class="tm-contact-row">
+      <a href="tel:+8801800000000" class="tm-contact-btn tm-contact-call" id="spCallBtn"><span class="tm-cb-icon"><i class="fa-solid fa-phone"></i></span>কল করুন</a>
+      <a href="https://wa.me/8801800000000" target="_blank" rel="noopener" class="tm-contact-btn tm-contact-whatsapp" id="spWhatsappBtn"><span class="tm-cb-icon"><i class="fa-brands fa-whatsapp"></i></span>WhatsApp</a>
+      <a href="#" class="tm-contact-btn tm-contact-message"><span class="tm-cb-icon"><i class="fa-solid fa-comment-dots"></i></span>বার্তা</a>
+    </div>
+
+    <!-- ===== KEY STATS (শুধু ফর্মে দেওয়া তথ্য) ===== -->
+    <div class="tm-section" style="padding-top:16px;">
+      <div class="tm-stat-row" id="spStatRow">
+        <div class="tm-stat-card" id="spClassCard">
+          <div class="tm-stat-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+          <div><div class="tm-stat-val" id="spClass">ক্লাস ৯</div><div class="tm-stat-lbl">শ্রেণি</div></div>
+        </div>
+        <div class="tm-stat-card" id="spBudgetCard">
+          <div class="tm-stat-icon"><i class="fa-solid fa-sack-dollar"></i></div>
+          <div><div class="tm-stat-val" id="spBudget">৳২,০০০</div><div class="tm-stat-lbl">মাসিক বাজেট</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tm-section">
+      <div class="tm-grid-2col">
+        <div class="tm-stack">
+
+          <!-- ===== ABOUT ===== -->
+          <div class="tm-info-card" id="spAboutCard">
+            <div class="tm-section-head"><span class="tm-sh-icon"><i class="fa-solid fa-user"></i></span><h2>শিক্ষার্থীর সম্পর্কে</h2></div>
+            <p class="tm-about-text" id="spAbout">আমি ক্লাস ৯-এ পড়ি এবং গণিত ও বিজ্ঞানে বাড়তি সহায়তা প্রয়োজন। বাসায় এসে পড়াতে পারবেন এমন একজন অভিজ্ঞ শিক্ষক খুঁজছি যিনি ধারণাভিত্তিক পড়াশোনায় সহায়তা করবেন।</p>
+          </div>
+
+          <!-- ===== EDUCATION INFO ===== -->
+          <div class="tm-info-card" id="spEduCard">
+            <div class="tm-section-head"><span class="tm-sh-icon"><i class="fa-solid fa-building-columns"></i></span><h2>প্রাতিষ্ঠানিক তথ্য</h2></div>
+            <div class="tm-list-item" id="spInstitutionRow">
+              <div class="tm-li-icon"><i class="fa-solid fa-school"></i></div>
+              <div><div class="tt" id="spInstitution">টাঙ্গাইল জেলা স্কুল</div><div class="ss">প্রতিষ্ঠানের নাম</div></div>
+            </div>
+            <div class="tm-list-item" id="spUpazilaRow">
+              <div class="tm-li-icon"><i class="fa-solid fa-location-dot"></i></div>
+              <div><div class="tt" id="spUpazila">টাঙ্গাইল সদর</div><div class="ss">উপজেলা / এলাকা</div></div>
+            </div>
+          </div>
+
+          <!-- ===== REQUIRED SUBJECTS ===== -->
+          <div class="tm-info-card" id="spSubjectsCard">
+            <div class="tm-section-head"><span class="tm-sh-icon"><i class="fa-solid fa-book"></i></span><h2>প্রয়োজনীয় বিষয়</h2></div>
+            <div class="tm-chip-row" id="spSubjectChips">
+              <span class="tm-chip">গণিত</span>
+              <span class="tm-chip">সাধারণ বিজ্ঞান</span>
+              <span class="tm-chip">ইংরেজি</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ===== SIDEBAR (desktop) ===== -->
+        <div>
+          <div class="tm-info-card">
+            <div class="tm-section-head"><span class="tm-sh-icon"><i class="fa-solid fa-headset"></i></span><h2>দ্রুত যোগাযোগ</h2></div>
+            <p class="tm-about-text" style="margin-bottom:12px;">শিক্ষার্থী/অভিভাবকের সাথে সরাসরি যোগাযোগ করতে নিচের বাটনগুলো ব্যবহার করুন।</p>
+            <div style="display:flex; flex-direction:column; gap:8px;">
+              <a href="tel:+8801800000000" class="tm-contact-btn tm-contact-call" id="spCallBtn2" style="flex-direction:row; justify-content:center;"><span class="tm-cb-icon"><i class="fa-solid fa-phone"></i></span>কল করুন</a>
+              <a href="https://wa.me/8801800000000" target="_blank" rel="noopener" class="tm-contact-btn tm-contact-whatsapp" id="spWhatsappBtn2" style="flex-direction:row; justify-content:center;"><span class="tm-cb-icon"><i class="fa-brands fa-whatsapp"></i></span>WhatsApp</a>
+              <a href="#" class="tm-contact-btn tm-contact-message" style="flex-direction:row; justify-content:center;"><span class="tm-cb-icon"><i class="fa-solid fa-comment-dots"></i></span>বার্তা পাঠান</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- Mobile sticky contact bar -->
+<div class="tm-sticky-bar">
+  <a href="#" class="tm-sb-msg"><i class="fa-solid fa-comment-dots"></i> বার্তা</a>
+  <a href="tel:+8801800000000" class="tm-sb-call" id="spCallBtn3"><i class="fa-solid fa-phone"></i> কল করুন</a>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="js/supabase-config.js?v=20260922203957"></script>
+<script src="js/nav-avatar.js?v=20260922203957"></script>
+<script src="js/call.js?v=20260922203957"></script>
+<script src="js/sticky-header.js?v=20260922203957"></script>
+<script src="js/i18n.js?v=20260922203957"></script>
+<script src="js/search-index.js?v=20260922203957"></script>
+<script src="js/smart-search.js?v=20260922203957"></script>
+<script src="js/search-ui.js?v=20260922203957"></script>
+<script src="js/script.js?v=20260922203957"></script>
+<script src="js/student-profile-data.js?v=20260922203957"></script>
+<script src="js/auto-update.js?v=20260922203957"></script>
+<script src="js/floating-buttons.js?v=20260922203957"></script>
+</body>
+</html>

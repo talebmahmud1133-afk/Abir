@@ -1,0 +1,36 @@
+{
+  "name": "টাঙ্গাইল জেলা",
+  "short_name": "টাঙ্গাইল জেলা",
+  "description": "টাঙ্গাইল জেলার ডাক্তার, জরুরি সেবা, পরিবহন, চাকরি, বাড়ি ভাড়া, রক্তদাতাসহ সকল স্থানীয় তথ্য এক জায়গায়।",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#0E6B3A",
+  "theme_color": "#0E6B3A",
+  "lang": "bn",
+  "icons": [
+    {
+      "src": "assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "assets/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

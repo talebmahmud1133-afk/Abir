@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<!-- পুরনো পাত্র-পাত্রী লেয়ার বাদ: এই পেজ আর ব্যবহার হয় না, নতুন কুরিয়ার-স্টাইল পেজ matrimony.html-এ পাঠানো হয় (ফাইল মোছা হয়নি; ফেরাতে এই দুই লাইন সরান) -->
+<meta http-equiv="refresh" content="0;url=matrimony.html">
+<script>location.replace('matrimony.html');</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="mtpPageTitle">প্রোফাইল বিস্তারিত — পাত্র-পাত্রী — টাঙ্গাইল জেলা</title>
+<meta name="description" content="যাচাইকৃত পাত্র-পাত্রী প্রোফাইলের বিস্তারিত তথ্য — বয়স, শিক্ষা, পেশা, পারিবারিক তথ্য ও নিরাপদ যোগাযোগ।">
+<meta name="robots" content="noindex, follow">
+<meta property="og:title" content="প্রোফাইল বিস্তারিত — পাত্র-পাত্রী — টাঙ্গাইল জেলা">
+<meta property="og:description" content="যাচাইকৃত পাত্র-পাত্রী প্রোফাইলের বিস্তারিত তথ্য — বয়স, শিক্ষা, পেশা, পারিবারিক তথ্য ও নিরাপদ যোগাযোগ।">
+<meta property="og:image" content="assets/favicon.svg">
+<meta property="og:type" content="profile">
+<meta name="theme-color" content="#1f7a4d">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="css/style.css?v=20260922203957">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  /* পাত্র-পাত্রী প্রোফাইল ডিটেইল পেজ (ধাপ ৮) — body[data-banner-category="matrimonial"]-এর --matri-* ভ্যারিয়েবল ব্যবহার করে,
+     শুধু .mtp-page-এর ভেতরে স্কোপড, বাকি সাইটে কোনো প্রভাব নেই। */
+  .mtp-page{
+    --mtp-accent: var(--matri-green, #1f7a4d);
+    --mtp-accent-dark: var(--matri-green-dark, #145c39);
+    --mtp-accent-soft: var(--matri-green-soft, #e8f5ee);
+    background:#F8FAFC;
+    padding-bottom:90px;
+  }
+  .mtp-page.mtp-male{
+    --mtp-accent: var(--matri-blue, #2f6fed);
+    --mtp-accent-dark: #1f4fb8;
+    --mtp-accent-soft: var(--matri-blue-soft, #eaf1ff);
+  }
+  .mtp-page.mtp-female{
+    --mtp-accent: var(--matri-rose, #d1467a);
+    --mtp-accent-dark: #a3335e;
+    --mtp-accent-soft: var(--matri-rose-soft, #fdecf2);
+  }
+  .mtp-page *{ box-sizing:border-box; }
+  .mtp-page h1,.mtp-page h2,.mtp-page h3,.mtp-page h4{
+    font-family:'Tiro Bangla', serif; color:#0f2027; margin:0; font-weight:700;
+  }
+  .mtp-section{ padding:18px 16px 6px; max-width:1000px; margin:0 auto; }
+
+  /* ---------- লোডিং / নট-ফাউন্ড ---------- */
+  .mtp-state{
+    max-width:520px; margin:40px auto; padding:36px 20px; text-align:center;
+    color:#5b6b74; font-size:14px;
+    background:#fff; border-radius:16px;
+    box-shadow:0 8px 24px -12px rgba(20,30,50,0.12);
+    line-height:1.6;
+  }
+  .mtp-state i{
+    width:56px; height:56px;
+    display:flex; align-items:center; justify-content:center;
+    margin:0 auto 12px;
+    font-size:26px; color:var(--mtp-accent, #1f7a4d);
+    background:var(--mtp-accent-soft, #e8f5ee); border-radius:50%;
+  }
+  .mtp-state a{ color:var(--mtp-accent, #1f7a4d); font-weight:700; }
+  .mtp-spinner{
+    width:30px; height:30px; border-radius:50%; margin:0 auto 12px;
+    border:3px solid var(--mtp-accent-soft,#e8f5ee); border-top-color:var(--mtp-accent,#1f7a4d);
+    animation:mtp-spin 0.8s linear infinite;
+  }
+  @keyframes mtp-spin{ to{ transform:rotate(360deg); } }
+
+  /* ---------- কভার + প্রোফাইল হেড ----------
+     নোট: আগে .mtp-profile-head একটি flex রো ছিল যেখানে ছবি ও নাম/বয়স/ঠিকানা
+     উভয়কেই নেগেটিভ মার্জিন দিয়ে কভারের উপর তোলা হতো (align-items:flex-end)।
+     এতে ছবি ঠিকভাবে কভারের উপর ভেসে থাকলেও, পাশের টেক্সট ব্লক (বিশেষ করে
+     বয়স/ঠিকানার লাইন) কভারের নীল অংশ ও সাদা অংশের ঠিক সীমানায় পড়ে যেত —
+     ফলে লেখা অর্ধেক নীল ব্যাকগ্রাউন্ডে, অর্ধেক সাদায় মিশে অস্পষ্ট দেখাত।
+     এখন ছবিটি .mtp-header-wrap-এর সাপেক্ষে absolute পজিশনে বসিয়ে শুধু ছবিই
+     কভারের উপর ভাসছে; নাম/বয়স/ঠিকানা/আইডি ব্লক (.mtp-profile-basic) স্বাভাবিক
+     ফ্লো-তে কভারের নিচে, সম্পূর্ণ সাদা ব্যাকগ্রাউন্ডে বসে — তাই আর বর্ডারের
+     সাথে মিশে যাওয়ার সুযোগ নেই। */
+  .mtp-header-wrap{
+    position:relative; max-width:1000px; margin:14px auto 0; padding:0 16px;
+  }
+  .mtp-cover{
+    position:relative;
+    border-radius:18px; overflow:hidden; height:130px;
+    background:linear-gradient(135deg, var(--mtp-accent) 0%, var(--mtp-accent-dark) 100%);
+  }
+  .mtp-cover::before{
+    content:"";
+    position:absolute; inset:0;
+    background:radial-gradient(340px 190px at 90% -10%, rgba(255,255,255,0.22), transparent 60%);
+  }
+  .mtp-profile-photo{
+    position:absolute; left:16px; top:88px; z-index:2;
+    width:88px; height:88px; border-radius:20px;
+    border:4px solid #fff; box-shadow:0 10px 24px -12px rgba(15,23,42,0.4);
+    background:linear-gradient(135deg,var(--mtp-accent),var(--mtp-accent-dark));
+    display:flex; align-items:center; justify-content:center;
+    color:#fff; font-size:28px; font-weight:800; overflow:hidden;
+  }
+  .mtp-profile-photo img{ width:100%; height:100%; object-fit:cover; border-radius:16px; }
+  .mtp-verified-badge{
+    position:absolute; bottom:-4px; right:-4px;
+    width:25px; height:25px; border-radius:50%;
+    background:#15803d; color:#fff; font-size:12px;
+    display:flex; align-items:center; justify-content:center; border:3px solid #fff;
+  }
+  .mtp-profile-basic{ padding:12px 0 6px 122px; min-height:46px; }
+  .mtp-profile-name{ font-size:18px; font-weight:800; color:#0f2027; }
+  .mtp-profile-tag{ font-size:12.5px; color:#5b6b74; margin-top:4px; display:flex; flex-wrap:wrap; gap:4px 10px; }
+  .mtp-profile-tag span{ display:inline-flex; align-items:center; gap:4px; }
+  .mtp-profile-id{
+    display:inline-block; margin-top:6px; font-size:11.5px; font-weight:700;
+    background:var(--mtp-accent-soft); color:var(--mtp-accent-dark); padding:3px 10px; border-radius:999px;
+  }
+
+  /* ---------- কন্টাক্ট রিকোয়েস্ট ---------- */
+  .mtp-contact-card{
+    max-width:1000px; margin:16px auto 0; padding:0 16px;
+  }
+  .mtp-contact-box{
+    background:#fff; border:1px solid rgba(15,23,42,0.08); border-radius:16px; padding:16px;
+    box-shadow:0 8px 20px -16px rgba(15,23,42,0.25);
+  }
+  .mtp-contact-locked{ display:flex; align-items:center; gap:12px; }
+  .mtp-contact-locked i{ font-size:20px; color:var(--mtp-accent); }
+  .mtp-contact-locked p{ margin:0; font-size:12.5px; color:#5b6b74; line-height:1.6; }
+  .mtp-contact-btn{
+    margin-top:12px; width:100%; border:none; cursor:pointer;
+    background:var(--mtp-accent); color:#fff; font-weight:700; font-size:14px;
+    padding:13px; border-radius:12px; display:flex; align-items:center; justify-content:center; gap:8px;
+    transition:background 0.18s ease;
+  }
+  .mtp-contact-btn:hover{ background:var(--mtp-accent-dark); }
+  .mtp-contact-btn:disabled{ opacity:0.7; cursor:default; }
+  .mtp-contact-revealed{ display:none; }
+  .mtp-contact-revealed.is-shown{ display:block; }
+  .mtp-phone-row{
+    display:flex; align-items:center; justify-content:space-between;
+    background:var(--mtp-accent-soft); border-radius:12px; padding:12px 14px; margin-bottom:10px;
+  }
+  .mtp-phone-row .num{ font-weight:800; font-size:15px; color:var(--mtp-accent-dark); letter-spacing:0.3px; direction:ltr; }
+  .mtp-contact-actions{ display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .mtp-contact-actions a{
+    display:flex; align-items:center; justify-content:center; gap:6px;
+    padding:11px; border-radius:11px; font-weight:700; font-size:13px;
+  }
+  .mtp-call-btn{ background:#15803d; color:#fff; }
+  .mtp-whatsapp-btn{ background:#0d7f43; color:#fff; }
+  .mtp-contact-note{ font-size:11.5px; color:#8a97a0; margin-top:10px; line-height:1.6; }
+
+  /* ---------- তথ্য কার্ড ---------- */
+  .mtp-info-card{
+    background:#fff; border:1px solid rgba(15,23,42,0.08);
+    border-radius:16px; padding:16px; box-shadow:0 8px 20px -16px rgba(15,23,42,0.25);
+    margin-bottom:14px;
+  }
+  .mtp-info-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:10px 14px; }
+  .mtp-info-item{ display:flex; align-items:flex-start; gap:9px; padding:8px 0; border-bottom:1px dashed rgba(15,23,42,0.08); }
+  .mtp-info-item i{ color:var(--mtp-accent); font-size:13px; margin-top:2px; width:14px; }
+  .mtp-info-item .lbl{ font-size:11px; color:#8a97a0; }
+  .mtp-info-item .val{ font-size:13px; font-weight:700; color:#0f2027; margin-top:1px; }
+  .mtp-section-title{ font-size:15px; margin-bottom:10px; display:flex; align-items:center; gap:8px; }
+  .mtp-section-title i{ color:var(--mtp-accent); }
+  .mtp-about-text{ font-size:13.5px; color:#5b6b74; line-height:1.85; white-space:pre-line; }
+
+  .mtp-safety-note{
+    display:flex; gap:10px; align-items:flex-start;
+    background:#fff8e6; border:1px solid #f3dfa0; border-radius:14px; padding:13px 14px;
+    font-size:12px; color:#6b5417; line-height:1.7; margin-bottom:14px;
+  }
+  .mtp-safety-note i{ color:#b8860b; margin-top:2px; }
+
+  .mtp-grid-2col{ display:grid; grid-template-columns:1fr; gap:14px; }
+
+  @media (min-width:700px){
+    .mtp-cover{ height:170px; margin:18px 20px 0; }
+    .mtp-profile-photo{ width:104px; height:104px; }
+    .mtp-profile-name{ font-size:21px; }
+    .mtp-section{ padding:22px 20px 6px; }
+  }
+  @media (min-width:1024px){
+    .mtp-page{ padding-bottom:28px; }
+    .mtp-grid-2col{ grid-template-columns:2fr 1fr; align-items:start; }
+    .mtp-contact-card{ display:none; } /* ডেস্কটপে সাইডবারে দেখানো হয় */
+  }
+  @media (max-width:1023px){
+    .mtp-sidebar-contact{ display:none; } /* মোবাইলে উপরে দেখানো হয় */
+  }
+
+  /* ---------- পরবর্তী/পূর্ববর্তী প্রোফাইল নেভিগেশন ---------- */
+  .mtp-nav-controls{
+    margin-left:auto; display:flex; align-items:center; gap:6px; flex-shrink:0;
+  }
+  .mtp-nav-btn{
+    width:34px; height:34px; border-radius:50%; border:none; cursor:pointer;
+    background:var(--mtp-accent-soft, #eef1f4); color:var(--mtp-accent-dark, #334155);
+    display:flex; align-items:center; justify-content:center; font-size:13px;
+    transition:background 0.15s ease, opacity 0.15s ease;
+  }
+  .mtp-nav-btn:hover:not(:disabled){ background:var(--mtp-accent, #64748b); color:#fff; }
+  .mtp-nav-btn:disabled{ opacity:0.32; cursor:default; }
+  .mtp-nav-counter{ font-size:11.5px; font-weight:700; color:#5b6b74; min-width:42px; text-align:center; }
+  .mtp-bottom-next{ margin-bottom:14px; }
+  .mtp-bottom-next-btn{
+    width:100%; border:none; cursor:pointer; background:var(--mtp-accent); color:#fff;
+    font-weight:700; font-size:14px; padding:13px; border-radius:12px;
+    display:flex; align-items:center; justify-content:center; gap:8px;
+    transition:background 0.18s ease;
+  }
+  .mtp-bottom-next-btn:hover{ background:var(--mtp-accent-dark); }
+  .mtp-bottom-next-btn:disabled{ opacity:0.5; cursor:default; }
+  .mtp-nav-end{
+    display:flex; align-items:center; gap:8px; justify-content:center; flex-wrap:wrap;
+    background:var(--mtp-accent-soft); color:var(--mtp-accent-dark); border-radius:12px;
+    padding:12px 14px; font-size:12.5px; font-weight:600; text-align:center; margin-bottom:14px;
+  }
+  .mtp-nav-end i{ color:#16a34a; }
+  .mtp-nav-end a{ color:var(--mtp-accent-dark); text-decoration:underline; font-weight:700; }
+  .mtp-transition-overlay{
+    position:fixed; inset:0; z-index:60; background:rgba(248,250,252,0.6);
+    display:none; align-items:center; justify-content:center; backdrop-filter:blur(1px);
+  }
+  .mtp-transition-overlay.is-active{ display:flex; }
+</style>
+</head>
+<body data-banner-category="matrimonial">
+
+<header class="site-header app-header">
+  <div class="header-inner">
+    <button class="menu-toggle icon-btn" id="menuToggle" data-i18n-aria="menu.open" aria-label="মেনু খুলুন"><i class="fa-solid fa-bars" aria-hidden="true"></i></button>
+    <div class="brand-block">
+      <a href="index.html" class="brand app-brand">টাঙ্গাইল <span class="brand-accent">জেলা</span></a>
+    </div>
+    <div class="header-actions">
+      <a href="notifications.html" class="icon-btn" data-i18n-aria="menu.notifications" aria-label="বিজ্ঞপ্তি"><i class="fa-solid fa-bell" aria-hidden="true"></i></a>
+      <div class="more-menu-wrap">
+        <button type="button" class="icon-btn" id="moreMenuToggle" data-i18n-aria="menu.more" aria-label="আরও"><i class="fa-solid fa-ellipsis-vertical" aria-hidden="true"></i></button>
+        <div class="more-menu" id="moreMenu">
+          <a href="about.html" data-i18n="nav.about">পরিচিতি</a>
+          <div class="more-menu-section-title" data-i18n="menu.language">ভাষা</div>
+          <div class="lang-switcher">
+            <button type="button" class="lang-option" data-lang-choice="bn">বাংলা</button>
+            <button type="button" class="lang-option" data-lang-choice="en">English</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html" data-i18n="nav.home">হোম</a>
+      <a href="about.html" data-i18n="nav.about">পরিচিতি</a>
+      <a href="add-listing.html" data-i18n="nav.addListing">তথ্য যোগ করুন</a>
+      <a href="faq.html" data-i18n="nav.faq">সাধারণ প্রশ্ন</a>
+      <a href="contact.html" data-i18n="nav.contact">যোগাযোগ</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap matri-topbar-wrap">
+    <div class="post-detail-topbar list-back-topbar matri-topbar">
+      <button type="button" class="post-detail-back matri-back" onclick="if(window.history.length>1){history.back();}else{window.location.href='matrimonial.html';}" aria-label="পেছনে যান"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i></button>
+      <span>প্রোফাইল বিস্তারিত</span>
+      <div class="mtp-nav-controls" id="mtpNavControls" style="display:none">
+        <button type="button" class="mtp-nav-btn" id="mtpPrevBtn" aria-label="পূর্ববর্তী প্রোফাইল"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
+        <span class="mtp-nav-counter" id="mtpNavCounter" aria-live="polite">— / —</span>
+        <button type="button" class="mtp-nav-btn" id="mtpNextBtn" aria-label="পরবর্তী প্রোফাইল"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== প্রোফাইল বদলানোর সময়কার ওভারলে ===== -->
+  <div class="mtp-transition-overlay" id="mtpTransitionOverlay" aria-hidden="true">
+    <span class="mtp-spinner"></span>
+  </div>
+
+  <!-- ===== লোডিং স্টেট ===== -->
+  <div class="mtp-state" id="mtpLoading">
+    <span class="mtp-spinner"></span>
+    প্রোফাইল লোড হচ্ছে…
+  </div>
+
+  <!-- ===== নট-ফাউন্ড স্টেট ===== -->
+  <div class="mtp-state" id="mtpNotFound" style="display:none">
+    <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
+    এই প্রোফাইলটি পাওয়া যায়নি অথবা এখনো অনুমোদিত হয়নি।<br>
+    <a href="matrimonial.html">← পাত্র-পাত্রী তালিকায় ফিরে যান</a>
+  </div>
+
+  <!-- ===== প্রোফাইল কনটেন্ট ===== -->
+  <div class="mtp-page" id="mtpContent" style="display:none">
+
+    <div class="mtp-header-wrap">
+      <div class="mtp-cover"></div>
+      <div class="mtp-profile-photo" id="mtpPhoto">?</div>
+      <div class="mtp-profile-basic">
+        <div class="mtp-profile-name" id="mtpName">—</div>
+        <div class="mtp-profile-tag" id="mtpTag"></div>
+        <span class="mtp-profile-id" id="mtpProfileId">প্রোফাইল আইডি: —</span>
+      </div>
+    </div>
+
+    <!-- ===== কন্টাক্ট রিকোয়েস্ট (মোবাইলে উপরে) ===== -->
+    <div class="mtp-contact-card">
+      <div class="mtp-contact-box">
+        <div class="mtp-contact-locked" id="mtpContactLocked">
+          <i class="fa-solid fa-lock" aria-hidden="true"></i>
+          <p>নিরাপত্তার জন্য ফোন নম্বর লুকানো আছে। যোগাযোগ করতে নিচের বাটনে ক্লিক করুন।</p>
+        </div>
+        <button type="button" class="mtp-contact-btn" id="mtpContactBtn">
+          <i class="fa-solid fa-phone" aria-hidden="true"></i> যোগাযোগের অনুরোধ করুন
+        </button>
+        <div class="mtp-contact-revealed" id="mtpContactRevealed">
+          <div class="mtp-phone-row">
+            <span class="num" id="mtpPhoneNum">—</span>
+            <i class="fa-solid fa-circle-check" style="color:#16a34a" aria-hidden="true"></i>
+          </div>
+          <div class="mtp-contact-actions">
+            <a href="#" class="mtp-call-btn" id="mtpCallBtn"><i class="fa-solid fa-phone" aria-hidden="true"></i> কল করুন</a>
+            <a href="#" class="mtp-whatsapp-btn" id="mtpWhatsappBtn" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> WhatsApp</a>
+          </div>
+        </div>
+        <p class="mtp-contact-note"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> পরিবারের মাধ্যমে যোগাযোগ করুন এবং প্রথম সাক্ষাৎ সবসময় পাবলিক স্থানে করুন।</p>
+      </div>
+    </div>
+
+    <div class="mtp-section">
+      <div class="mtp-grid-2col">
+        <div>
+
+          <!-- ===== মূল তথ্য ===== -->
+          <div class="mtp-info-card">
+            <h2 class="mtp-section-title"><i class="fa-solid fa-user" aria-hidden="true"></i> মূল তথ্য</h2>
+            <div class="mtp-info-grid" id="mtpInfoGrid"></div>
+          </div>
+
+          <!-- ===== About ===== -->
+          <div class="mtp-info-card" id="mtpAboutCard" style="display:none">
+            <h2 class="mtp-section-title"><i class="fa-solid fa-circle-info" aria-hidden="true"></i> নিজের সম্পর্কে</h2>
+            <p class="mtp-about-text" id="mtpAbout"></p>
+          </div>
+
+          <!-- ===== পারিবারিক তথ্য ===== -->
+          <div class="mtp-info-card" id="mtpFamilyCard" style="display:none">
+            <h2 class="mtp-section-title"><i class="fa-solid fa-people-roof" aria-hidden="true"></i> পারিবারিক তথ্য</h2>
+            <p class="mtp-about-text" id="mtpFamily"></p>
+          </div>
+
+          <div class="mtp-safety-note">
+            <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+            <span>নিরাপত্তার স্বার্থে: টাকা-পয়সা লেনদেন থেকে বিরত থাকুন, পরিবারকে জানিয়ে সিদ্ধান্ত নিন এবং সন্দেহজনক আচরণ দেখলে রিপোর্ট করুন।</span>
+          </div>
+
+          <!-- ===== পরবর্তী প্রোফাইল (নিচে, পড়া শেষে) ===== -->
+          <div class="mtp-bottom-next" id="mtpBottomNext" style="display:none">
+            <button type="button" class="mtp-bottom-next-btn" id="mtpBottomNextBtn">
+              পরবর্তী প্রোফাইল দেখুন <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div class="mtp-nav-end" id="mtpNavEnd" style="display:none">
+            <i class="fa-solid fa-circle-check" aria-hidden="true"></i> আপাতত এই তালিকার সবগুলো প্রোফাইল দেখা হয়ে গেছে।
+            <a href="matrimonial.html">তালিকায় ফিরে যান</a>
+          </div>
+        </div>
+
+        <!-- ===== সাইডবার (ডেস্কটপ) ===== -->
+        <div class="mtp-sidebar-contact">
+          <div class="mtp-info-card">
+            <h2 class="mtp-section-title"><i class="fa-solid fa-comments" aria-hidden="true"></i> যোগাযোগ করুন</h2>
+            <div class="mtp-contact-locked" id="mtpContactLockedSb">
+              <i class="fa-solid fa-lock" aria-hidden="true"></i>
+              <p>নিরাপত্তার জন্য ফোন নম্বর লুকানো আছে। যোগাযোগ করতে নিচের বাটনে ক্লিক করুন।</p>
+            </div>
+            <button type="button" class="mtp-contact-btn" id="mtpContactBtnSb">
+              <i class="fa-solid fa-phone" aria-hidden="true"></i> যোগাযোগের অনুরোধ করুন
+            </button>
+            <div class="mtp-contact-revealed" id="mtpContactRevealedSb">
+              <div class="mtp-phone-row">
+                <span class="num" id="mtpPhoneNumSb">—</span>
+                <i class="fa-solid fa-circle-check" style="color:#16a34a" aria-hidden="true"></i>
+              </div>
+              <div class="mtp-contact-actions">
+                <a href="#" class="mtp-call-btn" id="mtpCallBtnSb"><i class="fa-solid fa-phone" aria-hidden="true"></i> কল করুন</a>
+                <a href="#" class="mtp-whatsapp-btn" id="mtpWhatsappBtnSb" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> WhatsApp</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <h4>টাঙ্গাইল জেলা</h4>
+      <p>টাঙ্গাইল জেলার বাসিন্দা, নতুন আগন্তুক ও ব্যবসায়ীদের জন্য তৈরি একটি স্থানীয় সেবা প্ল্যাটফর্ম।</p>
+    </div>
+    <div>
+      <h4>পেজ</h4>
+      <ul class="footer-links">
+        <li><a href="index.html">হোম</a></li>
+        <li><a href="about.html">পরিচিতি</a></li>
+        <li><a href="add-listing.html">তথ্য যোগ করুন</a></li>
+        <li><a href="faq.html">সাধারণ প্রশ্ন</a></li>
+        <li><a href="contact.html">যোগাযোগ</a></li>
+        <li><a href="sitemap.html">সাইটম্যাপ</a></li>
+        <li><a href="privacy-policy.html">প্রাইভেসি পলিসি</a></li>
+        <li><a href="terms.html">শর্তাবলী</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">© ২০২৬ টাঙ্গাইল জেলা। সর্বস্বত্ব সংরক্ষিত।</div>
+</footer>
+
+<nav class="bottom-nav">
+  <a href="index.html"><span class="bn-icon"><i class="fa-solid fa-house" aria-hidden="true"></i></span><span data-i18n="bottomnav.home">Home</span></a>
+  <a href="members.html"><span class="bn-icon"><i class="fa-solid fa-users" aria-hidden="true"></i></span><span data-i18n="bottomnav.members">Members</span></a>
+  <a href="posts.html"><span class="bn-icon"><i class="fa-solid fa-plus" aria-hidden="true"></i></span><span data-i18n="bottomnav.post">Post</span></a>
+  <a href="profile.html"><span class="bn-icon"><i class="fa-solid fa-user" aria-hidden="true"></i></span><span data-i18n="bottomnav.profile">Profile</span></a>
+</nav>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="js/supabase-config.js?v=20260922203957"></script>
+<script src="js/nav-avatar.js?v=20260922203957"></script>
+<script src="js/call.js?v=20260922203957"></script>
+<script src="js/sticky-header.js?v=20260922203957"></script>
+<script src="js/i18n.js?v=20260922203957"></script>
+<script src="js/search-index.js?v=20260922203957"></script>
+<script src="js/smart-search.js?v=20260922203957"></script>
+<script src="js/search-ui.js?v=20260922203957"></script>
+<script src="js/script.js?v=20260922203957"></script>
+<script src="js/matrimonial-profile-detail.js?v=20260922203957"></script>
+<script src="js/auto-update.js?v=20260922203957"></script>
+<script src="js/floating-buttons.js?v=20260922203957"></script>
+</body>
+</html>

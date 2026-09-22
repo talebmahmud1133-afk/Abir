@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content">
+<title>মেসেজ — টাঙ্গাইল জেলা</title>
+<meta name="description" content="টাঙ্গাইল জেলা প্ল্যাটফর্মে সদস্যের সাথে ১-টু-১ মেসেজ।">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0E6B3A">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="css/style.css?v=20260922203957">
+<link rel="stylesheet" href="css/chat.css?v=20260922203957">
+</head>
+<body class="chat-body">
+
+<div class="chat-app" id="chatApp">
+
+  <!-- উপরের বার: ব্যাক + অ্যাভাটার + নাম + অনলাইন -->
+  <header class="chat-head" id="chatHead">
+    <a href="profile.html" class="chat-back" id="chatBack" aria-label="ফিরে যান"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i></a>
+    <a href="#" class="chat-peer" id="chatPeer" hidden>
+      <span class="chat-avatar" id="chatAvatar" aria-hidden="true"></span>
+      <span class="chat-peer-text">
+        <span class="chat-peer-name"><span id="chatName"></span><i class="fa-solid fa-circle-check chat-verified" id="chatVerified" title="ভেরিফাইড" aria-label="ভেরিফাইড" hidden></i></span>
+        <span class="chat-peer-status" id="chatStatus"></span>
+      </span>
+    </a>
+    <button type="button" class="chat-menu-btn" id="chatCallVoice" aria-label="ভয়েস কল" hidden><i class="fa-solid fa-phone" aria-hidden="true"></i></button>
+    <button type="button" class="chat-menu-btn" id="chatCallVideo" aria-label="ভিডিও কল" hidden><i class="fa-solid fa-video" aria-hidden="true"></i></button>
+    <div class="chat-menu-wrap" id="chatMenuWrap" hidden>
+      <button type="button" class="chat-menu-btn" id="chatMenuBtn" aria-label="আরও অপশন" aria-expanded="false"><i class="fa-solid fa-ellipsis-vertical" aria-hidden="true"></i></button>
+      <div class="chat-menu-panel" id="chatMenuPanel" role="menu" aria-label="আরও অপশন" hidden>
+        <button type="button" class="chat-menu-item" id="chatMenuBlock" role="menuitem"><i class="fa-solid fa-ban" aria-hidden="true"></i> <span id="chatMenuBlockText">ব্লক করুন</span></button>
+        <button type="button" class="chat-menu-item chat-menu-item-danger" id="chatMenuDelete" role="menuitem"><i class="fa-solid fa-trash" aria-hidden="true"></i> কথোপকথন মুছুন</button>
+      </div>
+    </div>
+    <!-- মেসেজে দীর্ঘ চাপ দিলে হেডার এই বারে বদলায় (WhatsApp-এর মতো): ✕ + ⋮ মেনু (কপি/রিপ্লাই/ফরওয়ার্ড/এডিট/ডিলিট) -->
+    <div class="chat-selbar" id="chatSelBar">
+      <button type="button" class="chat-selx" id="chatSelClose" aria-label="নির্বাচন বাতিল"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+      <span class="chat-seltitle">নির্বাচিত মেসেজ</span>
+      <div class="chat-menu-wrap">
+        <button type="button" class="chat-menu-btn" id="chatSelMenuBtn" aria-label="মেসেজের অপশন" aria-expanded="false"><i class="fa-solid fa-ellipsis-vertical" aria-hidden="true"></i></button>
+        <div class="chat-menu-panel" id="chatSelMenuPanel" role="menu" aria-label="মেসেজের অপশন" hidden>
+          <button type="button" class="chat-menu-item" id="chatActCopy" role="menuitem"><i class="fa-regular fa-copy" aria-hidden="true"></i> কপি</button>
+          <button type="button" class="chat-menu-item" id="chatActReply" role="menuitem"><i class="fa-solid fa-reply" aria-hidden="true"></i> রিপ্লাই</button>
+          <button type="button" class="chat-menu-item" id="chatActForward" role="menuitem"><i class="fa-solid fa-share" aria-hidden="true"></i> ফরওয়ার্ড</button>
+          <button type="button" class="chat-menu-item" id="chatActEdit" role="menuitem"><i class="fa-solid fa-pen" aria-hidden="true"></i> এডিট</button>
+          <button type="button" class="chat-menu-item chat-menu-item-danger" id="chatActDelete" role="menuitem"><i class="fa-solid fa-trash" aria-hidden="true"></i> ডিলিট</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- অবস্থা: লোডিং / এরর / পাওয়া যায়নি -->
+  <div class="chat-state" id="chatLoading" role="status"><i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i><p>লোড হচ্ছে…</p></div>
+  <div class="chat-state" id="chatError" hidden>
+    <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
+    <p id="chatErrorText">চ্যাট লোড করা যায়নি।</p>
+    <button type="button" class="chat-btn" id="chatRetry">আবার চেষ্টা করুন</button>
+  </div>
+  <div class="chat-state" id="chatNotFound" hidden>
+    <i class="fa-regular fa-comments" aria-hidden="true"></i>
+    <p id="chatNotFoundText">এই সদস্যকে খুঁজে পাওয়া যায়নি, অথবা তাকে মেসেজ পাঠানো যাচ্ছে না।</p>
+    <a href="members.html" class="chat-btn">সদস্য তালিকা</a>
+  </div>
+
+  <!-- চ্যাট অংশ -->
+  <div class="chat-main" id="chatMain" hidden>
+    <div class="chat-banner" id="chatBanner" hidden>
+      <div class="chat-banner-text">
+        <strong id="chatBannerTitle"></strong>
+        <span id="chatBannerSub"></span>
+      </div>
+      <button type="button" class="chat-btn chat-btn-primary" id="chatAddFriend" hidden>Add Friend</button>
+    </div>
+    <p class="chat-banner-msg" id="chatBannerMsg" role="alert" hidden></p>
+
+    <div class="chat-list-wrap">
+      <div class="chat-list" id="chatList" aria-live="polite"></div>
+      <button type="button" class="chat-newmsg" id="chatNewMsg" hidden>নতুন মেসেজ <i class="fa-solid fa-arrow-down" aria-hidden="true"></i></button>
+    </div>
+
+    <div class="chat-composer" id="chatComposer">
+      <!-- রিপ্লাই / এডিট চলাকালীন বার -->
+      <div class="chat-replybar" id="chatReplyBar" hidden>
+        <div class="chat-replybar-body">
+          <span class="chat-replybar-who" id="chatReplyWho"></span>
+          <span class="chat-replybar-snip" id="chatReplySnip"></span>
+        </div>
+        <button type="button" class="chat-replybar-x" id="chatReplyX" aria-label="বাতিল"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+      </div>
+      <!-- বাছাই করা ছবি/ভিডিওর প্রিভিউ (পাঠানোর আগে) -->
+      <div class="chat-preview" id="chatPreview" hidden>
+        <div class="chat-preview-item">
+          <img id="chatPreviewImg" alt="" hidden>
+          <video id="chatPreviewVideo" muted playsinline preload="metadata" hidden></video>
+          <span class="chat-preview-tag" id="chatPreviewTag"></span>
+          <button type="button" class="chat-preview-x" id="chatPreviewRemove" aria-label="বাদ দিন"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+        </div>
+        <span class="chat-preview-info" id="chatPreviewInfo"></span>
+      </div>
+      <div class="chat-composer-row">
+        <button type="button" class="chat-attach-btn" id="chatAttachBtn" aria-label="ছবি বা ভিডিও যোগ করুন"><i class="fa-solid fa-paperclip" aria-hidden="true"></i></button>
+        <input type="file" id="chatFile" accept="image/jpeg,image/png,image/webp,image/gif,video/mp4,video/webm,video/quicktime" hidden>
+        <div class="chat-emoji-wrap">
+          <button type="button" class="chat-emoji-btn" id="chatEmojiBtn" aria-label="ইমোজি" aria-expanded="false"><i class="fa-regular fa-face-smile" aria-hidden="true"></i></button>
+          <div class="chat-emoji-panel" id="chatEmojiPanel" role="dialog" aria-label="ইমোজি বাছাই" hidden></div>
+        </div>
+        <textarea id="chatInput" rows="1" maxlength="2000" placeholder="মেসেজ লিখুন…" aria-label="মেসেজ লিখুন"></textarea>
+        <button type="button" class="chat-send" id="chatSend" aria-label="পাঠান" disabled><i class="fa-solid fa-paper-plane" aria-hidden="true"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- বটম-শিট: ডিলিটের বিকল্প ও ফরওয়ার্ডের প্রাপক-তালিকা -->
+  <div class="chat-sheet" id="chatSheet" hidden>
+    <div class="chat-sheet-back" id="chatSheetBack"></div>
+    <div class="chat-sheet-panel" role="dialog" aria-modal="true" aria-labelledby="chatSheetTitle">
+      <div class="chat-sheet-head">
+        <strong id="chatSheetTitle"></strong>
+        <button type="button" class="chat-sheet-x" id="chatSheetClose" aria-label="বন্ধ করুন"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+      </div>
+      <div class="chat-sheet-body" id="chatSheetBody"></div>
+    </div>
+  </div>
+
+  <!-- ছবির লাইটবক্স -->
+  <div class="chat-lightbox" id="chatLightbox" role="dialog" aria-modal="true" aria-label="ছবি" hidden>
+    <button type="button" class="chat-lightbox-x" id="chatLightboxClose" aria-label="বন্ধ করুন"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+    <img id="chatLightboxImg" alt="">
+  </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="js/supabase-config.js?v=20260922203957"></script>
+<script src="js/call.js?v=20260922203957"></script>
+<script src="js/chat.js?v=20260922203957"></script>
+<script src="js/auto-update.js?v=20260922203957"></script>
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>দর্শনীয় স্থান — টাঙ্গাইল জেলা</title>
+<meta name="description" content="টাঙ্গাইল জেলার বিখ্যাত দর্শনীয় স্থান, পর্যটন কেন্দ্র ও ঐতিহাসিক স্থাপনার তথ্য এবং পথনির্দেশনা।">
+<meta property="og:title" content="দর্শনীয় স্থান — টাঙ্গাইল জেলা">
+<meta property="og:description" content="টাঙ্গাইল জেলার বিখ্যাত দর্শনীয় স্থান ও পর্যটন কেন্দ্রের তথ্য।">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0E6B3A">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="css/style.css?v=20260922203957">
+<link rel="stylesheet" href="css/tourist-spot.css?v=20260922203957">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body data-banner-category="tourist-spot">
+
+<header class="site-header app-header">
+  <div class="header-inner">
+    <button class="menu-toggle icon-btn" id="menuToggle" data-i18n-aria="menu.open" aria-label="মেনু খুলুন"><i class="fa-solid fa-bars" aria-hidden="true"></i></button>
+    <div class="brand-block">
+      <a href="index.html" class="brand app-brand">টাঙ্গাইল <span class="brand-accent">জেলা</span></a>
+    </div>
+    <div class="header-actions">
+      <a href="notifications.html" class="icon-btn" data-i18n-aria="menu.notifications" aria-label="বিজ্ঞপ্তি"><i class="fa-solid fa-bell" aria-hidden="true"></i></a>
+      <div class="more-menu-wrap">
+        <button type="button" class="icon-btn" id="moreMenuToggle" data-i18n-aria="menu.more" aria-label="আরও"><i class="fa-solid fa-ellipsis-vertical" aria-hidden="true"></i></button>
+        <div class="more-menu" id="moreMenu">
+          <a href="about.html" data-i18n="nav.about">পরিচিতি</a>
+          <div class="more-menu-section-title" data-i18n="menu.language">ভাষা</div>
+          <div class="lang-switcher">
+            <button type="button" class="lang-option" data-lang-choice="bn">বাংলা</button>
+            <button type="button" class="lang-option" data-lang-choice="en">English</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html" data-i18n="nav.home">হোম</a>
+      <a href="about.html" data-i18n="nav.about">পরিচিতি</a>
+      <a href="add-listing.html" data-i18n="nav.addListing">তথ্য যোগ করুন</a>
+      <a href="faq.html" data-i18n="nav.faq">সাধারণ প্রশ্ন</a>
+      <a href="contact.html" data-i18n="nav.contact">যোগাযোগ</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap ts-page">
+
+    <div class="ts-topbar">
+      <button type="button" class="ts-back" onclick="if(window.history.length>1){history.back();}else{window.location.href='index.html';}" aria-label="পেছনে যান"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i></button>
+      <h1>দর্শনীয় স্থান</h1>
+    </div>
+
+    <div class="ts-chip-row" id="tsChipRow">
+      <button type="button" class="ts-chip active" data-filter="all">সব</button>
+      <button type="button" class="ts-chip" data-filter="historical">ঐতিহাসিক</button>
+      <button type="button" class="ts-chip" data-filter="nature">প্রকৃতি</button>
+      <button type="button" class="ts-chip" data-filter="religious">ধর্মীয়</button>
+      <button type="button" class="ts-chip" data-filter="entertainment">বিনোদন</button>
+    </div>
+
+    <section class="ts-list" id="tsList"><div class="ts-empty">তালিকা লোড হচ্ছে…</div></section>
+    <div class="ts-empty" id="tsEmpty" style="display:none">এই বিভাগে কোনো স্থান পাওয়া যায়নি।</div>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <h4>টাঙ্গাইল জেলা</h4>
+      <p>টাঙ্গাইল জেলার বাসিন্দা, নতুন আগন্তুক ও ব্যবসায়ীদের জন্য তৈরি একটি স্থানীয় সেবা প্ল্যাটফর্ম।</p>
+    </div>
+    <div>
+      <h4>পেজ</h4>
+      <ul class="footer-links">
+        <li><a href="index.html">হোম</a></li>
+        <li><a href="about.html">পরিচিতি</a></li>
+        <li><a href="add-listing.html">তথ্য যোগ করুন</a></li>
+        <li><a href="faq.html">সাধারণ প্রশ্ন</a></li>
+        <li><a href="contact.html">যোগাযোগ</a></li>
+        <li><a href="sitemap.html">সাইটম্যাপ</a></li>
+        <li><a href="privacy-policy.html">প্রাইভেসি পলিসি</a></li>
+        <li><a href="terms.html">শর্তাবলী</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">© ২০২৬ টাঙ্গাইল জেলা। সর্বস্বত্ব সংরক্ষিত।</div>
+</footer>
+
+
+<nav class="bottom-nav">
+  <a href="index.html"><span class="bn-icon"><i class="fa-solid fa-house" aria-hidden="true"></i></span><span data-i18n="bottomnav.home">Home</span></a>
+  <a href="members.html"><span class="bn-icon"><i class="fa-solid fa-users" aria-hidden="true"></i></span><span data-i18n="bottomnav.members">Members</span></a>
+  <a href="posts.html"><span class="bn-icon"><i class="fa-solid fa-plus" aria-hidden="true"></i></span><span data-i18n="bottomnav.post">Post</span></a>
+  <a href="profile.html"><span class="bn-icon"><i class="fa-solid fa-user" aria-hidden="true"></i></span><span data-i18n="bottomnav.profile">Profile</span></a>
+</nav>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="js/supabase-config.js?v=20260922203957"></script>
+<script src="js/tourist-spots-data.js?v=20260922203957"></script>
+<script>
+(function(){
+  var listEl = document.getElementById('tsList');
+  var emptyEl = document.getElementById('tsEmpty');
+  var chips = document.querySelectorAll('.ts-chip');
+  var data = [];
+  var state = { filter: 'all' };
+
+  function starHtml(rating){
+    var full = Math.round(rating);
+    var html = '';
+    for(var i=1;i<=5;i++){ html += '<i class="fa-solid fa-star" style="' + (i<=full?'':'opacity:.25') + '"></i>'; }
+    return html;
+  }
+
+  function cardHtml(spot){
+    return (
+      '<a class="ts-card" href="tourist-spot-detail.html?id=' + encodeURIComponent(spot.id) + '">' +
+        '<div class="ts-card-img">' +
+          '<img src="' + spot.image + '" alt="' + spot.name + '" loading="lazy">' +
+          '<span class="ts-card-badge">' + spot.categoryLabel + '</span>' +
+        '</div>' +
+        '<div class="ts-card-body">' +
+          '<h3>' + spot.name + '</h3>' +
+          '<div class="ts-card-loc"><i class="fa-solid fa-location-dot"></i>' + spot.upazila + '</div>' +
+          '<div class="ts-rating">' + starHtml(spot.rating) + ' <b>' + spot.rating.toFixed(1) + '</b> (' + spot.reviews + ')</div>' +
+          '<p class="ts-card-desc">' + spot.desc + '</p>' +
+          '<button type="button" class="ts-btn" data-go="' + spot.id + '"><i class="fa-solid fa-location-arrow" aria-hidden="true"></i> পথ দেখুন</button>' +
+        '</div>' +
+      '</a>'
+    );
+  }
+
+  function render(){
+    var filtered = data.filter(function(s){
+      return state.filter === 'all' || s.category === state.filter;
+    });
+    listEl.innerHTML = filtered.map(cardHtml).join('');
+    emptyEl.style.display = filtered.length ? 'none' : 'block';
+  }
+
+  chips.forEach(function(chip){
+    chip.addEventListener('click', function(){
+      chips.forEach(function(c){ c.classList.remove('active'); });
+      chip.classList.add('active');
+      state.filter = chip.getAttribute('data-filter');
+      render();
+    });
+  });
+
+  // "পথ দেখুন" on a card should jump straight to directions on the detail page
+  // without opening the detail view first.
+  listEl.addEventListener('click', function(e){
+    var btn = e.target.closest('[data-go]');
+    if(!btn) return;
+    e.preventDefault();
+    e.stopPropagation();
+    window.location.href = 'tourist-spot-detail.html?id=' + encodeURIComponent(btn.getAttribute('data-go')) + '&nav=1';
+  });
+
+  window.getTouristSpots().then(function(list){
+    data = list;
+    render();
+  });
+})();
+</script>
+
+<script src="js/nav-avatar.js?v=20260922203957"></script>
+<script src="js/call.js?v=20260922203957"></script>
+<script src="js/sticky-header.js?v=20260922203957"></script>
+<script src="js/notice-bar.js?v=20260922203957"></script>
+<script src="js/i18n.js?v=20260922203957"></script>
+<script src="js/search-index.js?v=20260922203957"></script>
+<script src="js/smart-search.js?v=20260922203957"></script>
+<script src="js/search-ui.js?v=20260922203957"></script>
+<script src="js/script.js?v=20260922203957"></script>
+<script src="js/auto-update.js?v=20260922203957"></script>
+<script src="js/floating-buttons.js?v=20260922203957"></script>
+</body>
+</html>

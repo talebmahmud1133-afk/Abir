@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>রেজিস্ট্রেশন করুন — টাঙ্গাইল জেলা</title>
+<meta name="description" content="Gmail দিয়ে নতুন একাউন্ট খুলে টাঙ্গাইল জেলা ওয়েবসাইটে যোগ দিন।">
+<meta name="theme-color" content="#0E6B3A">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="css/style.css?v=20260922203957">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body class="auth-body">
+
+<div class="auth-wrap">
+
+  <div class="auth-logo">
+    <div class="mark">টঙ</div>
+    <div class="mark-sub">TANGAIL ZILA</div>
+  </div>
+
+  <div class="auth-card">
+    <h1>নতুন একাউন্ট তৈরি করুন</h1>
+
+    <div class="auth-field">
+      <span class="auth-icon"><i class="fa-solid fa-face-frown" aria-hidden="true"></i></span>
+      <input type="text" id="nameInput" placeholder="আপনার নাম লিখুন" autocomplete="name">
+    </div>
+
+    <div class="auth-field">
+      <span class="auth-icon"><i class="fa-solid fa-envelope" aria-hidden="true"></i></span>
+      <input type="email" id="emailInput" placeholder="আপনার Gmail লিখুন" autocomplete="username" inputmode="email">
+    </div>
+
+    <div class="auth-field">
+      <span class="auth-icon"><i class="fa-solid fa-lock" aria-hidden="true"></i></span>
+      <input type="password" id="passInput" placeholder="পাসওয়ার্ড দিন (কমপক্ষে ৬ অক্ষর)" autocomplete="new-password">
+      <button type="button" class="auth-eye" id="toggleEye1" aria-label="পাসওয়ার্ড দেখান"><i class="fa-solid fa-eye" aria-hidden="true"></i></button>
+    </div>
+
+    <div class="auth-field">
+      <span class="auth-icon"><i class="fa-solid fa-lock" aria-hidden="true"></i></span>
+      <input type="password" id="pass2Input" placeholder="পাসওয়ার্ড আবার লিখুন" autocomplete="new-password">
+      <button type="button" class="auth-eye" id="toggleEye2" aria-label="পাসওয়ার্ড দেখান"><i class="fa-solid fa-eye" aria-hidden="true"></i></button>
+    </div>
+
+    <p class="auth-msg" id="authMsg"></p>
+
+    <button type="button" class="auth-btn" id="registerBtn">রেজিস্ট্রেশন করুন</button>
+
+    <a href="login.html" class="auth-btn-outline">আগে থেকে একাউন্ট আছে? <strong>লগইন করুন</strong></a>
+
+    <a href="index.html" class="auth-btn-guest">অতিথি হিসেবে প্রবেশ করুন</a>
+  </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="js/supabase-config.js?v=20260922203957"></script>
+    <script src="js/nav-avatar.js?v=20260922203957"></script>
+    <script src="js/call.js?v=20260922203957"></script>
+<script>
+(function () {
+  var client = window.supabase.createClient(window.TANGAIL_SUPABASE.url, window.TANGAIL_SUPABASE.key);
+
+  var nameInput = document.getElementById('nameInput');
+  var emailInput = document.getElementById('emailInput');
+  var passInput = document.getElementById('passInput');
+  var pass2Input = document.getElementById('pass2Input');
+  var registerBtn = document.getElementById('registerBtn');
+  var msg = document.getElementById('authMsg');
+
+  function wireEye(btnId, inputEl) {
+    var btn = document.getElementById(btnId);
+    btn.addEventListener('click', function () {
+      var showing = inputEl.type === 'text';
+      inputEl.type = showing ? 'password' : 'text';
+      btn.innerHTML = showing ? '<i class="fa-solid fa-eye" aria-hidden="true"></i>' : '<i class="fa-solid fa-eye-slash" aria-hidden="true"></i>';
+    });
+  }
+  wireEye('toggleEye1', passInput);
+  wireEye('toggleEye2', pass2Input);
+
+  function setMsg(text, ok) {
+    msg.textContent = text || '';
+    msg.className = 'auth-msg' + (ok ? ' ok' : '');
+  }
+
+  client.auth.getSession().then(function (res) {
+    if (res.data && res.data.session) window.location.href = 'index.html';
+  });
+
+  function doRegister() {
+    var name = nameInput.value.trim();
+    var email = emailInput.value.trim();
+    var pass = passInput.value;
+    var pass2 = pass2Input.value;
+
+    if (!name) { setMsg('আপনার নাম লিখুন।'); return; }
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { setMsg('সঠিক Gmail/ইমেইল ঠিকানা দিন।'); return; }
+    if (pass.length < 6) { setMsg('পাসওয়ার্ড কমপক্ষে ৬ অক্ষরের হতে হবে।'); return; }
+    if (pass !== pass2) { setMsg('দুইটি পাসওয়ার্ড মিলছে না।'); return; }
+
+    registerBtn.disabled = true;
+    setMsg('একাউন্ট তৈরি করা হচ্ছে…', true);
+
+    client.auth.signUp({
+      email: email,
+      password: pass,
+      options: {
+        data: { full_name: name },
+        emailRedirectTo: window.location.origin + '/login.html'
+      }
+    }).then(function (res) {
+      registerBtn.disabled = false;
+      if (res.error) {
+        if (String(res.error.message || '').toLowerCase().indexOf('already') !== -1 ||
+            String(res.error.message || '').toLowerCase().indexOf('registered') !== -1) {
+          setMsg('এই Gmail দিয়ে আগে থেকেই একাউন্ট আছে। লগইন করুন।');
+        } else {
+          setMsg('রেজিস্ট্রেশন ব্যর্থ হয়েছে, আবার চেষ্টা করুন।');
+        }
+        return;
+      }
+      // ইমেইল কনফার্মেশন চালু থাকলে সাথে সাথে সেশন তৈরি হয় না — ইউজারকে Gmail চেক করতে বলা হয়
+      if (res.data && res.data.session) {
+        setMsg('একাউন্ট তৈরি সফল হয়েছে!', true);
+        window.location.href = 'index.html';
+      } else {
+        setMsg('একাউন্ট তৈরি হয়েছে! আপনার Gmail ইনবক্সে (স্প্যাম ফোল্ডারও দেখুন) পাঠানো ভেরিফিকেশন লিংকে ক্লিক করে একাউন্ট সক্রিয় করুন, তারপর লগইন করুন।', true);
+      }
+    });
+  }
+
+  registerBtn.addEventListener('click', doRegister);
+  pass2Input.addEventListener('keydown', function (e) { if (e.key === 'Enter') doRegister(); });
+})();
+</script>
+<script src="js/auto-update.js?v=20260922203957"></script>
+<script src="js/floating-buttons.js?v=20260922203957"></script>
+</body>
+</html>

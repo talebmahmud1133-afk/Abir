@@ -1,0 +1,783 @@
+/* ==========================================================================
+   কুরিয়ার সার্ভিস পেজ — dedicated styles (courier.html)
+   Uses the site's shared design tokens from css/style.css (--maroon, --gold,
+   --cream, --ink, --shadow-*, --radius, --line) so it matches the rest of
+   the site while giving this page its own modern layout.
+   Phase 2: back-only app bar + illustrated hero + toolbar (selector/info bar).
+   Phase 3: courier cards (logo tile, labelled rows, green map / blue call buttons).
+   Phase 4: footer strip, empty state, keyboard-focus ring, reduced-motion.
+   ========================================================================== */
+
+/* ---------- Page shell (this page has its own back-only app bar + footer strip) ---------- */
+body.cr-page{ padding-bottom: 24px; }
+body.cr-page .global-fab-stack{ bottom: 20px; }
+.cr-wrap{
+  max-width: 1240px;
+  padding: 0 16px 8px;
+}
+@media (min-width: 640px){ .cr-wrap{ padding-left: 24px; padding-right: 24px; } }
+
+/* keyboard focus: dark navy ring, clearly visible on the sky hero, white cards and coloured buttons */
+.cr-page a:focus-visible,
+.cr-page button:focus-visible{
+  outline: 3px solid #073047;
+  outline-offset: 2px;
+}
+
+/* ---------- Top app bar (back only) + hero ---------- */
+.cr-hero{
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: linear-gradient(180deg, #eaf6ff 0%, #d3ebfb 55%, #c2e3f7 100%);
+  border-radius: 0 0 26px 26px;
+  margin-bottom: 16px;
+}
+.cr-hero-art{
+  position: absolute;
+  right: 0; bottom: 0;
+  width: min(100%, 460px);
+  height: auto;                 /* keeps the viewBox aspect ratio: never cropped */
+  z-index: 0;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 12%);
+          mask-image: linear-gradient(90deg, transparent 0, #000 12%);
+}
+.cr-hero-inner{
+  position: relative;
+  z-index: 2;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 14px 16px calc(6px + 0.21 * min(100vw, 460px));
+}
+/* পুরনো ভাসমান "cr-back / cr-back-float" পিল সরিয়ে সাইটের স্ট্যান্ডার্ড sticky
+   টপবার (.post-detail-topbar.list-back-topbar, css/style.css) ব্যবহার হচ্ছে —
+   courier.html-এ দেখো, এই ফাইলে আর নতুন করে স্টাইল করার দরকার নেই। */
+
+.cr-hero-body{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 18px;
+}
+.cr-hero-pin{ flex: 0 0 auto; width: 40px; height: auto; }
+.cr-hero-text h1{
+  margin: 0;
+  font-family: 'Hind Siliguri', sans-serif;
+  font-weight: 700;
+  color: #073047;
+  line-height: 1.3;
+}
+.cr-t1{ display: block; font-size: clamp(1.3rem, 1rem + 1.6vw, 2rem); }
+.cr-t2{ display: block; font-size: clamp(1.95rem, 1.2rem + 3.2vw, 3.1rem); }
+.cr-hero-text p{
+  margin: 4px 0 0;
+  font-size: clamp(0.88rem, 0.8rem + 0.5vw, 1.1rem);
+  font-weight: 600;
+  color: var(--maroon-dark);
+  line-height: 1.5;
+}
+
+@media (min-width: 640px){
+  .cr-hero-pin{ width: 50px; }
+}
+@media (min-width: 768px){
+  /* side-by-side: text left, illustration right */
+  .cr-hero-inner{ padding: 18px 24px 34px; }
+  .cr-hero-art{ width: 500px; }
+}
+@media (min-width: 1024px){
+  .cr-hero-inner{ padding-bottom: 44px; }
+  .cr-hero-art{ width: auto; height: 100%; }
+  .cr-hero-pin{ width: 58px; }
+}
+
+/* ---------- Toolbar: upazila selector + info chips ---------- */
+.cr-toolbar{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+@media (min-width: 900px){
+  .cr-toolbar{ flex-direction: row; align-items: stretch; gap: 12px; }
+  .cr-filter-bar{ flex: 1 1 46%; }
+  .cr-info-bar{ flex: 1 1 54%; }
+}
+
+.cr-filter-bar{
+  background: #fff;
+  border: 1px solid rgba(11,107,140,0.22);
+  border-radius: 14px;
+  box-shadow: var(--shadow-sm);
+  padding: 10px 12px 12px;
+}
+.cr-filter-label{
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+  margin: 0 2px 6px;
+}
+.cr-select-wrap{ position: relative; }
+.cr-select-wrap i.cr-select-pin{
+  position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+  color: #0B6B8C; font-size: 1rem; pointer-events: none;
+}
+.cr-select-wrap i.cr-select-caret{
+  position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+  color: var(--ink-soft); font-size: 0.85rem; pointer-events: none;
+}
+#courierUpazilaSelect{
+  width: 100%;
+  min-height: 45px;
+  appearance: none;
+  -webkit-appearance: none;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ink);
+  background: #f6fafd;
+  border: 1px solid rgba(11,107,140,0.22);
+  border-radius: 10px;
+  padding: 9px 38px 9px 40px;
+  cursor: pointer;
+  transition: border-color .15s, box-shadow .15s;
+}
+#courierUpazilaSelect:hover{ border-color: #0B6B8C; }
+#courierUpazilaSelect:focus-visible{
+  outline: 3px solid #073047;
+  outline-offset: 2px;
+  border-color: #0B6B8C;
+}
+
+/* ---------- Info bar ---------- */
+.cr-info-bar{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.cr-info-chip{
+  flex: 1 1 220px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  border: 1px solid rgba(11,107,140,0.22);
+  border-radius: 14px;
+  box-shadow: var(--shadow-sm);
+  padding: 10px 14px;
+  min-height: 48px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.4;
+}
+.cr-chip-ic{
+  flex: 0 0 auto;
+  width: 32px; height: 32px;
+  border-radius: 9px;
+  background: #0B6B8C;
+  color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.9rem;
+}
+.cr-info-chip b{ font-weight: 700; color: #073047; }
+
+/* ---------- Courier company category bar (Phase 5) ---------- */
+.cr-cats{ margin-bottom: 10px; }
+.cr-cats-scroll{
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 12px;                        /* চিপগুলোর মাঝের ফাঁক (আগে 8px) */
+  overflow-x: auto;                 /* phones: swipe left / right */
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+  padding: 2px 2px 6px;
+  overscroll-behavior-x: contain;
+}
+.cr-cats-scroll::-webkit-scrollbar{ display: none; }
+.cr-cat{
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  min-height: 44px;                 /* touch target */
+  padding: 8px 18px;
+  border: 1px solid rgba(11,107,140,0.35);
+  border-radius: 999px;
+  background: #fff;
+  color: #073047;
+  font-family: inherit;
+  font-size: 0.92rem;
+  font-weight: 700;
+  line-height: 1.2;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color .15s, color .15s, border-color .15s;
+}
+.cr-cat:hover{ border-color: #0B6B8C; background: #eef6fd; }
+.cr-cat.is-active{ background: #0B6B8C; border-color: #0B6B8C; color: #fff; }
+.cr-cat.is-active:hover{ background: #0A5570; }
+@media (min-width: 768px){
+  /* tablet / desktop: chips wrap onto a second row instead of hiding off-screen */
+  .cr-cats-scroll{ flex-wrap: wrap; overflow-x: visible; scroll-snap-type: none; padding-bottom: 2px; }
+}
+
+/* ---------- Card grid ---------- */
+.cr-grid{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+@media (min-width: 640px){
+  .cr-grid{ grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1024px){
+  .cr-grid{ grid-template-columns: repeat(3, 1fr); }
+}
+@media (min-width: 1320px){
+  .cr-grid{ grid-template-columns: repeat(4, 1fr); }
+}
+
+.cr-card{
+  background: #fff;
+  border: 1px solid rgba(11,107,140,0.16);
+  border-radius: var(--cr-radius, 16px);
+  box-shadow: 0 3px 16px rgba(20,50,45,0.04);   /* আরও সফট শ্যাডো: বড় blur, কম opacity */
+  padding: var(--cr-pad);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+  transition: box-shadow .15s;
+}
+.cr-card:hover{ box-shadow: 0 8px 24px rgba(20,50,45,0.07); }
+
+.cr-card-main{ display: flex; align-items: flex-start; gap: 12px; }
+.cr-card-body{ flex: 1 1 auto; min-width: 0; }
+
+/* অফিসের ছবি: কার্ডের বাম কিনারা ও উপরের কিনারা থেকে শুরু হয়ে নিচে Google Map বাটনের ঠিক উপর পর্যন্ত
+   পুরো বাম পাশ জুড়ে বসে (বামে/উপরে কোনো ফাঁকা নেই)। ছবি না থাকলে রঙিন আদ্যক্ষর একই জায়গা নেয়।
+   ছবির চওড়া বদলাতে চাইলে শুধু --cr-photo-size এর মান বদলান (যেমন 104px / 116px / 128px) */
+.cr-card{ --cr-photo-size: 116px; --cr-pad: 17px; --cr-radius: 16px; overflow: hidden; }   /* --cr-pad: কার্ডের চারপাশের প্যাডিং (আগে 14px) */
+.cr-logo{
+  position: relative;
+  flex: 0 0 auto;
+  align-self: stretch;                /* ছবি উপর থেকে নিচে Google Map বাটনের ঠিক উপর পর্যন্ত নামে */
+  width: var(--cr-photo-size);
+  min-height: var(--cr-photo-size);
+  margin: calc(-1 * var(--cr-pad)) 0 0 calc(-1 * var(--cr-pad));   /* কার্ডের প্যাডিং ভেদ করে বাম ও উপরের কিনারায় লাগে */
+  /* চার কোণই কার্ডের radius-এর সাথে মেলানো (কার্ডের ১px বর্ডার বাদ দিয়ে উপরের-বাম কোণ ১px কম) */
+  border-radius: calc(var(--cr-radius) - 1px) var(--cr-radius) var(--cr-radius) var(--cr-radius);
+  overflow: hidden;
+  background: #fff;
+  border: 0;
+}
+.cr-logo.has-img{ padding: 0; }
+.cr-logo img{
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+  display: block;
+}
+.cr-logo-fallback{
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2.6rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+}
+@media (max-width: 340px){
+  .cr-card{ --cr-photo-size: 96px; }
+  .cr-logo-fallback{ font-size: 2rem; }
+}
+
+.cr-card-head{
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+.cr-card-name{
+  margin: 0;
+  font-family: 'Hind Siliguri', sans-serif;
+  font-size: 1.07rem;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+.cr-status{
+  flex: 0 0 auto;
+  font-size: 0.74rem;
+  font-weight: 700;
+  line-height: 1.2;
+  padding: 4px 11px;
+  border-radius: 999px;
+  color: #fff;
+  white-space: nowrap;
+}
+.cr-status.is-open{
+  background: #0e9440;                       /* Google Map বাটনের সাথে একই সবুজ */
+  font-size: 0.68rem;
+  padding: 3px 9px;
+  border: 1px solid #0a7433;
+  box-shadow: 0 1px 3px rgba(14,148,64,0.35);
+}
+.cr-status.is-closed{ background: #b42318; }
+
+.cr-card-meta{
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--ink);
+}
+.cr-card-meta li{ display: flex; align-items: flex-start; gap: 5px; min-width: 0; }
+.cr-card-meta li > span{ min-width: 0; overflow-wrap: anywhere; }
+.cr-card-meta i{ color: #0B6B8C; font-size: 0.82rem; flex: 0 0 auto; width: 16px; height: 1.32rem; display: flex; align-items: center; justify-content: center; }   /* আইকন প্রথম লাইনের ঠিক মাঝে */
+.cr-lbl{ color: var(--ink-soft); }
+
+.cr-card-actions{
+  display: flex;
+  gap: 10px;
+  margin-top: auto;
+}
+.cr-card-actions a{
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-sizing: border-box;
+  height: 46px;                     /* দুই বাটনের উচ্চতা হুবহু সমান (লেখা ভাঙলেও বদলাবে না) */
+  text-decoration: none;
+  font-family: inherit;
+  font-size: 0.92rem;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+  color: #fff;
+  border-radius: 10px;
+  padding: 0 12px;
+  transition: background-color .15s, transform .12s;
+}
+.cr-card-actions a i{ flex: 0 0 auto; width: 1em; text-align: center; line-height: 1; font-size: 0.95rem; }
+.cr-card-actions a span{ display: block; line-height: 1.2; padding-top: 1px; overflow: hidden; text-overflow: ellipsis; }
+.cr-card-actions a:active{ transform: scale(0.97); }
+.cr-btn-map{ background: #0e9440; }
+.cr-btn-map:hover{ background: #0b7a36; }
+.cr-btn-call{ background: #0B6B8C; }
+.cr-btn-call:hover{ background: #0A5570; }
+
+/* ---------- Empty state ---------- */
+.cr-empty{
+  grid-column: 1 / -1;          /* span the whole grid, whatever the column count */
+  text-align: center;
+  background: #fff;
+  border: 1px dashed rgba(11,107,140,0.35);
+  border-radius: 16px;
+  padding: 32px 16px 28px;
+  color: var(--ink-soft);
+}
+.cr-empty i{ font-size: 1.8rem; color: #0B6B8C; margin-bottom: 8px; display: block; }
+.cr-empty p{ margin: 0 auto 16px; max-width: 32em; font-size: 0.95rem; line-height: 1.6; }
+.cr-empty-btn{
+  min-height: 46px;
+  padding: 10px 22px;
+  border: none;
+  border-radius: 10px;
+  background: #0B6B8C;
+  color: #fff;
+  font-family: inherit;
+  font-size: 0.92rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color .15s;
+}
+.cr-empty-btn:hover{ background: #0A5570; }
+
+/* ---------- Footer strip ---------- */
+.cr-footer-strip{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px 16px;
+  margin-top: 20px;
+  padding: 6px 8px 6px 16px;
+  background: #fff;
+  border: 1px solid rgba(11,107,140,0.16);
+  border-radius: 14px;
+  box-shadow: var(--shadow-sm);
+  font-size: 0.86rem;
+  color: var(--ink);
+}
+.cr-foot-updated{ display: inline-flex; align-items: center; gap: 8px; padding: 8px 0; line-height: 1.4; }
+.cr-foot-updated i{ color: #0B6B8C; }
+.cr-foot-updated b{ font-weight: 700; color: #073047; }
+.cr-report{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;             /* large touch target */
+  padding: 0 12px;
+  border-radius: 10px;
+  color: var(--ink);
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: background-color .15s;
+}
+.cr-report i{ color: #c2410c; }
+.cr-report:hover{ background: #eef6fc; }
+@media (max-width: 380px){
+  .cr-footer-strip{ padding-left: 12px; }
+}
+
+/* ---------- Floating "+" and add-office bottom sheet (Phase 6) ---------- */
+.cr-fab{
+  position: fixed;
+  right: 19px;
+  bottom: calc(19px + env(safe-area-inset-bottom, 0px));   /* কিনারা থেকে আরও ৭px দূরে (আগে 12px / 12px) */
+  z-index: 60;
+  width: 54px; height: 54px;
+  border: none;
+  border-radius: 50%;
+  background: #0B6B8C;
+  color: #fff;
+  font-size: 1.4rem;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 8px 22px rgba(11,107,140,0.45);
+  cursor: pointer;
+  transition: background-color .15s, transform .15s;
+}
+.cr-fab:hover{ background: #0A5570; }
+.cr-fab:active{ transform: scale(0.94); }
+@media (min-width: 1024px){ .cr-fab{ right: 31px; bottom: 29px; } }
+body.cr-lock{ overflow: hidden; }
+
+.cr-sheet-backdrop{
+  position: fixed; inset: 0;
+  z-index: 100;
+  background: rgba(10,30,50,0.5);
+  display: flex;
+  align-items: flex-end;            /* phones: sheet rises from the bottom */
+  justify-content: center;
+  opacity: 0;
+  transition: opacity .2s;
+}
+.cr-sheet-backdrop[hidden]{ display: none; }
+.cr-sheet-backdrop.is-open{ opacity: 1; }
+.cr-sheet{
+  width: 100%;
+  max-width: 560px;
+  max-height: 92vh;
+  max-height: 92dvh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: #fff;
+  border-radius: 20px 20px 0 0;
+  padding: 8px 16px calc(18px + env(safe-area-inset-bottom, 0px));
+  box-shadow: 0 -10px 40px rgba(0,0,0,0.25);
+  transform: translateY(40px);
+  transition: transform .22s ease-out;
+}
+.cr-sheet-backdrop.is-open .cr-sheet{ transform: translateY(0); }
+.cr-sheet-grip{ width: 44px; height: 5px; border-radius: 3px; background: #cfd9e2; margin: 4px auto 10px; }
+@media (min-width: 768px){
+  .cr-sheet-backdrop{ align-items: center; padding: 24px; }
+  .cr-sheet{ border-radius: 20px; padding: 22px 26px 24px; max-height: 90vh; max-height: 90dvh; }
+  .cr-sheet-grip{ display: none; }
+}
+.cr-sheet-head h2{ margin: 0 0 4px; font-family: 'Hind Siliguri', sans-serif; font-size: 1.2rem; color: #073047; line-height: 1.35; }
+.cr-sheet-head p{ margin: 0 0 14px; font-size: 0.88rem; color: var(--ink-soft); line-height: 1.5; }
+
+.cr-field{ margin-bottom: 12px; }
+.cr-field label{ display: block; font-size: 0.86rem; font-weight: 600; color: var(--ink); margin: 0 2px 5px; }
+.cr-req{ color: #b42318; }
+.cr-opt{ font-weight: 500; color: var(--ink-soft); }
+.cr-field input[type="text"], .cr-field input[type="tel"], .cr-field input[type="url"], .cr-field select{
+  width: 100%;
+  min-height: 46px;
+  padding: 10px 12px;
+  border: 1.5px solid rgba(11,107,140,0.35);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 16px;                  /* stops iOS zoom-on-focus */
+  box-sizing: border-box;
+}
+.cr-field input:focus-visible, .cr-field select:focus-visible{ outline: 3px solid #073047; outline-offset: 1px; border-color: #0B6B8C; }
+.cr-field [aria-invalid="true"]{ border-color: #b42318; }
+.cr-file{ width: 100%; font-size: 0.9rem; font-family: inherit; box-sizing: border-box; }
+.cr-photo-preview{ margin-top: 8px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.cr-photo-preview[hidden]{ display: none; }
+.cr-photo-preview img{ display: block; width: 104px; height: 104px; border-radius: 16px; object-fit: cover; border: 1px solid rgba(11,107,140,0.25); }
+.cr-photo-edit{
+  display: inline-flex; align-items: center; gap: 8px;
+  min-height: 44px; padding: 8px 14px;
+  border: 1.5px solid rgba(11,107,140,0.45); border-radius: 10px;
+  background: #fff; color: #073047;
+  font-family: inherit; font-size: 0.92rem; font-weight: 700; cursor: pointer;
+}
+.cr-photo-edit:hover{ background: #eef6fd; }
+.cr-hp{ position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+.cr-form-msg{ margin: 0 0 12px; padding: 10px 12px; border-radius: 10px; background: #fdecea; color: #8a1c12; font-size: 0.9rem; font-weight: 600; line-height: 1.5; }
+.cr-form-msg[hidden], .cr-sheet-done[hidden]{ display: none; }
+.cr-sheet-actions{ display: flex; gap: 10px; margin-top: 4px; }
+.cr-btn-cancel, .cr-btn-submit{
+  flex: 1 1 0;
+  min-height: 48px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 0.98rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color .15s;
+}
+.cr-btn-cancel{ background: #fff; color: #073047; border: 1.5px solid rgba(11,107,140,0.45); }
+.cr-btn-cancel:hover{ background: #eef6fd; }
+.cr-btn-submit{ background: #0B6B8C; color: #fff; border: none; }
+.cr-btn-submit:hover{ background: #0A5570; }
+.cr-btn-submit:disabled, .cr-btn-cancel:disabled{ opacity: 0.65; cursor: default; }
+.cr-sheet-done{ text-align: center; padding: 18px 4px 6px; }
+.cr-sheet-done i{ font-size: 2.4rem; color: var(--maroon); }
+.cr-sheet-done h3{ margin: 10px 0 6px; font-family: 'Hind Siliguri', sans-serif; font-size: 1.15rem; color: #073047; }
+.cr-sheet-done p{ margin: 0 0 16px; color: var(--ink-soft); font-size: 0.92rem; line-height: 1.6; }
+.cr-sheet-done .cr-btn-submit{ width: 100%; flex: none; }
+
+/* ---------- ছবি বসানোর (crop) ধাপ: জুম ইন/আউট + টেনে সরানো ---------- */
+.cr-crop-backdrop{ z-index: 110; }               /* "+" শিটের (১০০) উপরে */
+.cr-crop-viewport{
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  aspect-ratio: 4 / 5;                            /* কার্ডের ছবির টাইলের অনুপাতে (লম্বাটে) */
+  margin: 0 auto 14px;
+  overflow: hidden;
+  border-radius: 16px;
+  background: #10202b;
+  touch-action: none;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.cr-crop-viewport.dragging{ cursor: grabbing; }
+.cr-crop-viewport img{
+  position: absolute; top: 0; left: 0;
+  transform-origin: 0 0;
+  max-width: none; max-height: none;
+  user-select: none; -webkit-user-drag: none;
+  pointer-events: none;
+}
+.cr-crop-zoom{ display: flex; align-items: center; gap: 10px; margin: 0 auto 14px; max-width: 320px; }
+.cr-crop-zoom input[type="range"]{ flex: 1; min-width: 0; }
+.cr-crop-zbtn{
+  flex: 0 0 auto; width: 44px; height: 44px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 0; border-radius: 50%;
+  background: #e4ebef; color: #073047; font-size: 1.05rem; cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.cr-crop-zbtn:active{ background: #d3dde3; }
+.cr-crop .cr-sheet-head p{ margin-bottom: 12px; }
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce){
+  .cr-page *, .cr-page *::before, .cr-page *::after{
+    transition: none !important;
+    animation: none !important;
+  }
+  .cr-card-actions a:active, .cr-back:active, .cr-fab:active{ transform: none; }
+  .cr-sheet{ transform: none; }
+}
+
+/* keep the last card / footer clear of the floating "+" (Phase 6) */
+.cr-wrap{ padding-bottom: 88px; }
+
+/* ---------- অ্যাডমিন থেকে যোগ করা ব্যানার স্লাইডার থাকলে ডিফল্ট হিরো লুকানো ---------- */
+body.has-cat-banners .cr-hero{ display: none; }
+
+/* ---------- "ফিরে যান" এখন courier.html-এর একদম উপরে সাইটের স্ট্যান্ডার্ড sticky
+   টপবার হিসেবে বসে (.post-detail-topbar.list-back-topbar, css/style.css-এ
+   সংজ্ঞায়িত) — ব্যানার/হিরোর উপরে ভাসমান পিল হিসেবে নয়, বরং তার উপরে আলাদা,
+   সবসময়-দৃশ্যমান একটা বার হিসেবে। এখানে আর অতিরিক্ত পজিশনিং দরকার নেই। ---------- */
+.cr-top-area{ position: relative; }
+
+/* ---------- অ্যাডমিন থেকে আপলোড করা ব্যানার ছবি ----------
+   ছবি পুরো ব্যানার জায়গা ভরে বসবে (cover) — উপরে/নিচে কোনো ফাঁকা বা ব্লার অংশ থাকবে না।
+   ব্যানারের অনুপাত সব স্ক্রিনে ২১:৯ (চওড়া ছবির জন্য সবচেয়ে মানানসই); বেশি লম্বা/অন্য
+   অনুপাতের ছবি হলে শুধু কিনারার সামান্য অংশ ছাঁটা যাবে। */
+body[data-banner-category="courier"] .banner-slide.has-image{
+  position: relative;
+  overflow: hidden;
+  background-image: none;
+  background-color: #0B6B8C;
+  aspect-ratio: 21 / 9;
+}
+body[data-banner-category="courier"] .banner-slide.has-image::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--banner-img);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: 1;
+}
+body[data-banner-category="courier"] .banner-slide.has-image .banner-inner{
+  position: relative;
+  z-index: 2;
+  text-shadow: 0 1px 5px rgba(0,0,0,0.6);
+}
+
+
+/* ---------- ছবিতে ক্লিক করলে পুরো ছবি (লাইটবক্স) + জুম ---------- */
+.cr-logo.has-img{ cursor: zoom-in; -webkit-tap-highlight-color: transparent; }
+.cr-logo.has-img:focus-visible{ outline: 3px solid #0B6B8C; outline-offset: -3px; }
+html.cr-lb-open, html.cr-lb-open body{ overflow: hidden; overscroll-behavior: none; }
+
+.cr-lb{
+  position: fixed; inset: 0;
+  z-index: 300;                       /* "+" শিট (১০০) ও ক্রপ (১১০) এর উপরে */
+  display: flex; flex-direction: column;
+  background: #070a10;
+  color: #fff;
+  animation: crLbIn .18s ease-out;
+}
+.cr-lb[hidden]{ display: none; }
+@keyframes crLbIn{ from{ opacity: 0; } to{ opacity: 1; } }
+.cr-lb-bar{
+  flex: 0 0 auto;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 10px 12px 6px 16px;
+  padding-top: max(10px, env(safe-area-inset-top));
+}
+.cr-lb-title{
+  font-family: 'Hind Siliguri', sans-serif;
+  font-size: 1rem; font-weight: 700;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  min-width: 0;
+}
+.cr-lb-btn{
+  flex: 0 0 auto;
+  width: 44px; height: 44px;
+  border: 0; border-radius: 50%;
+  background: rgba(255,255,255,0.16);
+  color: #fff; font-size: 1.05rem;
+  display: inline-flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.cr-lb-btn:hover{ background: rgba(255,255,255,0.28); }
+.cr-lb-btn:active{ background: rgba(255,255,255,0.36); }
+.cr-lb-stage{
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+  touch-action: none;                 /* পিঞ্চ/পান আমরা নিজেরা সামলাই, ব্রাউজারের পেজ-জুম নয় */
+  user-select: none; -webkit-user-select: none;
+  cursor: zoom-in;
+}
+.cr-lb.is-zoomed .cr-lb-stage{ cursor: grab; }
+.cr-lb.is-dragging .cr-lb-stage{ cursor: grabbing; }
+.cr-lb-img{
+  max-width: 100%; max-height: 100%;
+  width: auto; height: auto;
+  object-fit: contain;
+  display: block;
+  transform-origin: center center;
+  will-change: transform;
+  opacity: 0;
+  transition: opacity .18s ease;
+  -webkit-user-drag: none;
+}
+.cr-lb.is-loaded .cr-lb-img{ opacity: 1; }
+.cr-lb:not(.is-loaded) .cr-lb-stage::after{
+  content: ""; position: absolute; width: 34px; height: 34px;
+  border: 3px solid rgba(255,255,255,0.3); border-top-color: #fff; border-radius: 50%;
+  animation: crLbSpin .8s linear infinite;
+}
+@keyframes crLbSpin{ to{ transform: rotate(360deg); } }
+.cr-lb-controls{
+  flex: 0 0 auto;
+  display: flex; align-items: center; justify-content: center; gap: 12px;
+  padding: 8px 12px 6px;
+}
+.cr-lb-zoom{
+  min-width: 68px; height: 44px; padding: 0 12px;
+  border: 0; border-radius: 22px;
+  background: rgba(255,255,255,0.16); color: #fff;
+  font-family: 'Hind Siliguri', sans-serif; font-size: 0.95rem; font-weight: 700;
+  cursor: pointer; -webkit-tap-highlight-color: transparent;
+}
+.cr-lb-zoom:hover{ background: rgba(255,255,255,0.28); }
+.cr-lb-hint{
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 0 16px max(12px, env(safe-area-inset-bottom));
+  text-align: center;
+  font-size: 0.78rem; opacity: 0.65;
+}
+.cr-lb.is-zoomed .cr-lb-hint{ visibility: hidden; }
+@media (prefers-reduced-motion: reduce){
+  .cr-lb, .cr-lb-img{ animation: none; transition: none; }
+}
+
+/* উপরের ব্যানারের ছবিতেও ক্লিক করলে পুরো ছবি খোলে */
+body[data-banner-category="courier"] .banner-slide.has-image{ cursor: zoom-in; -webkit-tap-highlight-color: transparent; }
+.cr-lb-link{
+  flex: 0 0 auto;
+  max-width: 44%;
+  margin-left: auto;
+  padding: 9px 16px;
+  border-radius: 22px;
+  background: #0B6B8C; color: #fff;
+  font-family: 'Hind Siliguri', sans-serif; font-size: 0.86rem; font-weight: 700;
+  text-decoration: none;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.cr-lb-link[hidden]{ display: none; }
+.cr-lb-link:active{ background: #0A5570; }
+
+/* ---------- মোবাইলে ব্যাক-বার + ব্যানার স্থির (স্ক্রল করলেও উপরেই থাকবে) ----------
+   ব্যাক-বার (.list-back-topbar) আগে থেকেই sticky top:0। এখন ব্যানারও তার ঠিক নিচে sticky —
+   উচ্চতা --cr-topbar-h থেকে আসে (courier.html-এর ছোট স্ক্রিপ্ট বারের প্রকৃত উচ্চতা মেপে বসায়)।
+   ডেস্কটপে ব্যানার ২১:৯ full-width হওয়ায় খুব বড়, তাই শুধু ≤700px স্ক্রিনে প্রযোজ্য। */
+@media (max-width: 700px){
+  /* .cr-top-area শুধু ব্যানার+হিরো ধরে রাখে (উচ্চতা ~ব্যানারের সমান), তাই sticky এর "ভেসে থাকার"
+     জায়গা পেত না। display:contents দিয়ে এর বক্স সরানো হলো — ফলে ব্যানারের প্যারেন্ট হয় <main>
+     (পুরো পেজ জুড়ে লম্বা) এবং স্ক্রল করলেও ব্যানার আটকে থাকে। */
+  body[data-banner-category="courier"] .cr-top-area{ display: contents; }
+  body[data-banner-category="courier"] #catBannerWrap{
+    position: sticky;
+    top: var(--cr-topbar-h, 53px);
+    z-index: 40;
+    background: var(--cream, #f1f5f8);
+    padding-bottom: 4px;
+  }
+}
+
+/* ---------- মোবাইলে কার্ডের বাম পাশ "উপজেলা নির্বাচন করুন" বক্সের লাইনে (বর্ডারসহ), ডান পাশ কিনারা পর্যন্ত ----------
+   ডানে পেজের ১৬px/২৪px ফাঁক ভেদ করে কিনারা পর্যন্ত (ব্যানারের লাইনে), বামে স্বাভাবিক ফাঁক ও বর্ডার।
+   বাম কোণ গোল (কার্ডের radius), ডান কোণ সোজা। ছবির বাম কোণ কার্ডের সাথে মিলেই থাকে। */
+@media (max-width: 700px){
+  .cr-grid{ margin-right: -16px; gap: 12px; }
+  .cr-card{ border-radius: var(--cr-radius) 0 0 var(--cr-radius); border-right: 0; }
+}
+@media (min-width: 640px) and (max-width: 700px){
+  .cr-grid{ margin-right: -24px; }
+}

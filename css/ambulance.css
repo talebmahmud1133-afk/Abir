@@ -1,0 +1,1359 @@
+/* ============================================================
+   টাঙ্গাইল অ্যাম্বুলেন্স সার্ভিস — ডেডিকেটেড অ্যাপ মডিউল স্টাইল
+   পোর্টালের ঐতিহ্যবাহী মেরুন/ক্রিম থিম থেকে ইচ্ছাকৃতভাবে আলাদা:
+   সাদা ব্যাকগ্রাউন্ড + লাল/নীল/সবুজ — Uber/Pathao ধাঁচের প্রিমিয়াম,
+   আধুনিক হেলথকেয়ার-গ্রেড ইন্টারফেস।
+   ============================================================ */
+
+.amb-app{
+  --amb-red: #e11d2e;
+  --amb-red-dark: #a8121f;
+  --amb-red-tint: #fdecec;
+  --amb-blue: #155eef;
+  --amb-blue-dark: #0d3fa8;
+  --amb-blue-tint: #eaf1ff;
+  --amb-green: #0d7f43;
+  --amb-green-dark: #0a5f2e;
+  --amb-green-tint: #e9f8ef;
+  --amb-amber: #f5a524;
+  --amb-ink: #12151f;
+  --amb-ink-soft: #5b6072;
+  --amb-ink-faint: #687087;
+  --amb-line: rgba(18,21,31,0.09);
+  --amb-bg: #ffffff;
+  --amb-bg-soft: #f5f7fb;
+  --amb-radius-lg: 20px;
+  --amb-radius-md: 14px;
+  --amb-radius-sm: 10px;
+  --amb-shadow-red: 0 10px 24px -10px rgba(225,29,46,0.45);
+  --amb-shadow-blue: 0 10px 24px -10px rgba(21,94,239,0.4);
+  --amb-shadow-green: 0 10px 24px -10px rgba(21,154,72,0.4);
+  --amb-shadow-card: 0 2px 14px rgba(18,21,31,0.07);
+  --amb-header-h: 64px;
+
+  background: var(--amb-bg);
+  color: var(--amb-ink);
+  font-family: 'Hind Siliguri', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  padding-bottom: 84px; /* bottom nav ক্লিয়ারেন্স (মোবাইল) */
+}
+
+.amb-app *{ box-sizing: border-box; }
+.amb-app a{ color: inherit; text-decoration: none; }
+.amb-app a.app-brand{ color: var(--maroon); } /* হেডারের "টাঙ্গাইল জেলা" — উপরের color:inherit যাতে ব্র্যান্ড লোগোর রঙ না ঢাকে */
+.amb-app button{ font-family: inherit; }
+.amb-app img{ max-width: 100%; display: block; }
+
+.amb-shell{
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 18px;
+}
+
+.amb-visually-hidden{
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap;
+}
+
+/* ---------- পোর্টালে ফেরার সরু বার ---------- */
+.amb-backbar{
+  background: var(--amb-ink);
+  color: #fff;
+}
+.amb-backbar a{
+  display: flex; align-items: center; gap: 8px;
+  font-size: 13px; padding: 7px 18px;
+  color: rgba(255,255,255,0.85);
+  max-width: 1180px; margin: 0 auto;
+}
+.amb-backbar a:hover{ color: #fff; }
+
+/* ---------- হেডার ---------- */
+.amb-header{
+  position: sticky; top: 0; z-index: 60;
+  background: rgba(255,255,255,0.96);
+  backdrop-filter: saturate(180%) blur(10px);
+  border-bottom: 1px solid var(--amb-line);
+}
+.amb-header-inner{
+  max-width: 1180px; margin: 0 auto; padding: 0 16px;
+  height: var(--amb-header-h);
+  display: flex; align-items: center; gap: 14px;
+}
+.amb-brand{
+  display: flex; align-items: center; gap: 10px;
+  margin-right: auto;
+  min-width: 0;
+}
+.amb-brand-mark{
+  width: 38px; height: 38px; border-radius: 11px;
+  background: linear-gradient(150deg, var(--amb-red) 0%, var(--amb-red-dark) 100%);
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 18px; flex-shrink: 0;
+  box-shadow: var(--amb-shadow-red);
+}
+.amb-brand-text{ min-width: 0; }
+.amb-brand-text strong{
+  display: block; font-size: 15.5px; font-weight: 700; color: var(--amb-ink);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.amb-brand-text span{
+  display: block; font-size: 11.5px; color: var(--amb-ink-faint);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+.amb-nav{
+  display: none;
+  align-items: center; gap: 4px;
+}
+.amb-nav a{
+  font-size: 14.5px; font-weight: 600; color: var(--amb-ink-soft);
+  padding: 9px 13px; border-radius: 10px;
+}
+.amb-nav a:hover{ background: var(--amb-bg-soft); color: var(--amb-ink); }
+.amb-nav a.is-active{ background: var(--amb-red-tint); color: var(--amb-red-dark); }
+
+.amb-header-call{
+  display: none;
+  align-items: center; gap: 8px;
+  background: var(--amb-red); color: #fff;
+  font-weight: 700; font-size: 14px;
+  padding: 10px 16px; border-radius: 999px;
+  box-shadow: var(--amb-shadow-red);
+  white-space: nowrap;
+}
+.amb-header-call i{ font-size: 13px; }
+.amb-header-call:hover{ background: var(--amb-red-dark); }
+
+.amb-header-provider{
+  display: none;
+  align-items: center; gap: 8px;
+  background: var(--amb-blue); color: #fff;
+  font-weight: 700; font-size: 14px;
+  padding: 10px 16px; border-radius: 999px;
+  box-shadow: var(--amb-shadow-blue);
+  white-space: nowrap;
+}
+.amb-header-provider i{ font-size: 13px; }
+.amb-header-provider:hover{ background: var(--amb-blue-dark); }
+
+.amb-menu-btn{
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 40px; height: 40px; border-radius: 10px;
+  border: 1px solid var(--amb-line); background: #fff;
+  color: var(--amb-ink); font-size: 17px;
+}
+
+/* ---------- মোবাইল ড্রয়ার ---------- */
+.amb-drawer{
+  position: fixed; inset: 0; z-index: 90;
+  display: none;
+}
+.amb-drawer.is-open{ display: block; }
+.amb-drawer-backdrop{
+  position: absolute; inset: 0; background: rgba(18,21,31,0.45);
+}
+.amb-drawer-panel{
+  position: absolute; top: 0; right: 0; bottom: 0; width: 82%; max-width: 320px;
+  background: #fff; padding: 18px; overflow-y: auto;
+  display: flex; flex-direction: column; gap: 4px;
+  box-shadow: -10px 0 30px rgba(18,21,31,0.15);
+}
+.amb-drawer-close{
+  align-self: flex-end;
+  width: 36px; height: 36px; border-radius: 10px;
+  border: 1px solid var(--amb-line); background: var(--amb-bg-soft);
+  font-size: 16px; margin-bottom: 10px;
+}
+.amb-drawer-panel a{
+  padding: 13px 12px; border-radius: 10px; font-weight: 600; font-size: 15.5px;
+  color: var(--amb-ink-soft);
+}
+.amb-drawer-panel a.is-active{ background: var(--amb-red-tint); color: var(--amb-red-dark); }
+.amb-drawer-call{
+  margin-top: 10px;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  background: var(--amb-red); color: #fff; font-weight: 700;
+  padding: 13px; border-radius: 12px;
+}
+.amb-drawer-provider{
+  margin-top: 6px;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  background: var(--amb-blue); color: #fff; font-weight: 700;
+  padding: 13px; border-radius: 12px;
+}
+
+/* ---------- হিরো ---------- */
+.amb-hero{
+  position: relative;
+  background:
+    radial-gradient(120% 140% at 100% 0%, var(--amb-blue-tint) 0%, transparent 55%),
+    radial-gradient(120% 140% at 0% 100%, var(--amb-red-tint) 0%, transparent 50%),
+    var(--amb-bg-soft);
+  padding: 34px 0 30px;
+  overflow: hidden;
+}
+.amb-hero-grid{
+  display: grid;
+  gap: 26px;
+}
+.amb-hero-copy h1{
+  font-size: 27px;
+  line-height: 1.32;
+  font-weight: 700;
+  color: var(--amb-ink);
+  margin: 0 0 12px;
+}
+.amb-hero-copy h1 .amb-accent{
+  color: var(--amb-red);
+}
+.amb-hero-copy p{
+  font-size: 15.5px;
+  color: var(--amb-ink-soft);
+  margin: 0 0 20px;
+  max-width: 52ch;
+}
+.amb-hero-actions{
+  display: flex; flex-wrap: wrap; gap: 10px;
+  margin-bottom: 22px;
+}
+.amb-btn{
+  display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+  padding: 13px 20px; border-radius: 13px;
+  font-weight: 700; font-size: 15px;
+  border: none; cursor: pointer;
+  transition: transform .15s ease;
+}
+.amb-btn:active{ transform: scale(0.97); }
+.amb-btn-red{ background: var(--amb-red); color: #fff; box-shadow: var(--amb-shadow-red); }
+.amb-btn-red:hover{ background: var(--amb-red-dark); }
+.amb-btn-blue{ background: var(--amb-blue); color: #fff; box-shadow: var(--amb-shadow-blue); }
+.amb-btn-blue:hover{ background: var(--amb-blue-dark); }
+.amb-btn-green{ background: var(--amb-green); color: #fff; box-shadow: var(--amb-shadow-green); }
+.amb-btn-green:hover{ background: var(--amb-green-dark); }
+/* .amb-app a{color:inherit} এই বাটনগুলোর সাদা লেখা ঢেকে দিচ্ছিল — নির্দিষ্টতা বাড়িয়ে ঠিক করা */
+.amb-app a.amb-btn-red, .amb-app a.amb-btn-blue, .amb-app a.amb-btn-green{ color: #fff; }
+.amb-btn-outline{ background: #fff; color: var(--amb-ink); border: 1.5px solid var(--amb-line); box-shadow: none; }
+.amb-btn-outline:hover{ border-color: var(--amb-ink-faint); }
+.amb-btn-block{ width: 100%; }
+.amb-btn-sm{ padding: 9px 14px; font-size: 13.5px; border-radius: 10px; }
+
+.amb-hero-thanas{
+  display: flex; flex-wrap: wrap; gap: 6px;
+}
+.amb-hero-thanas span{
+  font-size: 12px; font-weight: 600; color: var(--amb-ink-soft);
+  background: #fff; border: 1px solid var(--amb-line);
+  padding: 5px 10px; border-radius: 999px;
+}
+
+.amb-hero-visual{
+  position: relative;
+  border-radius: var(--amb-radius-lg);
+  background: linear-gradient(160deg, #16233e 0%, #0d1730 100%);
+  padding: 22px;
+  min-height: 230px;
+  display: flex; flex-direction: column; justify-content: space-between;
+  overflow: hidden;
+  box-shadow: 0 18px 40px -18px rgba(13,23,48,0.55);
+}
+.amb-hero-visual::after{
+  content: "";
+  position: absolute; right: -40px; bottom: -40px;
+  width: 200px; height: 200px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(225,29,46,0.35) 0%, transparent 70%);
+}
+.amb-hero-visual-top{
+  display: flex; align-items: center; justify-content: space-between;
+  position: relative; z-index: 1;
+}
+.amb-hero-eta{
+  color: #fff;
+}
+.amb-hero-eta strong{ display: block; font-size: 26px; font-weight: 700; }
+.amb-hero-eta span{ font-size: 12px; color: rgba(255,255,255,0.65); }
+.amb-hero-pulse{
+  width: 44px; height: 44px; border-radius: 50%;
+  background: rgba(225,29,46,0.18);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--amb-red);
+  font-size: 18px;
+  animation: amb-pulse 1.8s ease-in-out infinite;
+}
+@keyframes amb-pulse{
+  0%,100%{ box-shadow: 0 0 0 0 rgba(225,29,46,0.35); }
+  50%{ box-shadow: 0 0 0 10px rgba(225,29,46,0); }
+}
+.amb-hero-visual svg{ width: 100%; height: auto; position: relative; z-index: 1; }
+.amb-hero-visual-tag{
+  position: relative; z-index: 1;
+  color: #fff; font-size: 13.5px; font-weight: 600;
+  display: flex; align-items: center; gap: 8px;
+}
+.amb-hero-visual-tag i{ color: var(--amb-green); }
+
+@media (prefers-reduced-motion: reduce){
+  .amb-hero-pulse{ animation: none; }
+}
+
+/* ---------- সেকশন কমন ---------- */
+.amb-section{ padding: 34px 0; }
+.amb-section-soft{ background: var(--amb-bg-soft); }
+.amb-section-head{
+  display: flex; align-items: flex-end; justify-content: space-between;
+  gap: 12px; margin-bottom: 18px; flex-wrap: wrap;
+}
+.amb-section-head h2{
+  font-size: 20px; font-weight: 700; margin: 0 0 4px; color: var(--amb-ink);
+}
+.amb-section-head p{
+  font-size: 13.5px; color: var(--amb-ink-soft); margin: 0; max-width: 60ch;
+}
+
+/* ---------- পরিসংখ্যান কার্ড ---------- */
+.amb-stats{
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;
+  margin-top: -46px; position: relative; z-index: 2;
+}
+.amb-stat-card{
+  background: #fff; border-radius: var(--amb-radius-md);
+  box-shadow: var(--amb-shadow-card);
+  border: 1px solid var(--amb-line);
+  padding: 16px 14px;
+  display: flex; align-items: center; gap: 12px;
+}
+.amb-stat-icon{
+  width: 40px; height: 40px; border-radius: 11px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; flex-shrink: 0;
+}
+.amb-stat-card:nth-child(1) .amb-stat-icon{ background: var(--amb-blue-tint); color: var(--amb-blue); }
+.amb-stat-card:nth-child(2) .amb-stat-icon{ background: var(--amb-red-tint); color: var(--amb-red); }
+.amb-stat-card:nth-child(3) .amb-stat-icon{ background: var(--amb-green-tint); color: var(--amb-green); }
+.amb-stat-card:nth-child(4) .amb-stat-icon{ background: #fef6e7; color: var(--amb-amber); }
+.amb-stat-num{ font-size: 19px; font-weight: 700; color: var(--amb-ink); line-height: 1.1; }
+.amb-stat-label{ font-size: 12px; color: var(--amb-ink-soft); margin-top: 2px; }
+
+/* ---------- কভারেজ (থানা) গ্রিড ---------- */
+/* .amb-shell-এর ১৮px পাশের প্যাডিং যাতে গ্যাপ তৈরি না করে — style.css-এর .ts-list/.cat-grid-এর
+   মতো একই 100vw + left:50% + translateX(-50%) ফুল-ব্লিড কৌশল, .amb-shell-এর নিজের
+   18px প্যাডিং-এর সাথে মিলিয়ে একই 18px পাশের প্যাডিং */
+.amb-thana-grid{
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;
+  width: 100vw;
+  max-width: 100vw;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0 18px;
+  box-sizing: border-box;
+}
+.amb-thana-card{
+  background: #fff; border: 1px solid var(--amb-line);
+  border-radius: var(--amb-radius-sm);
+  padding: 13px 12px;
+  display: flex; align-items: center; gap: 10px;
+  font-size: 13.5px; font-weight: 600; color: var(--amb-ink);
+}
+.amb-thana-card i{ color: var(--amb-red); font-size: 14px; flex-shrink: 0; }
+.amb-thana-card:hover{ border-color: var(--amb-red); background: var(--amb-red-tint); }
+
+/* ---------- ফিচার টিজার ---------- */
+.amb-teaser-row{
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;
+}
+.amb-teaser-card{
+  background: #fff; border: 1px solid var(--amb-line); border-radius: var(--amb-radius-md);
+  padding: 16px 14px;
+}
+.amb-teaser-card i{
+  width: 38px; height: 38px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--amb-blue-tint); color: var(--amb-blue);
+  font-size: 15px; margin-bottom: 10px;
+}
+.amb-teaser-card h3{ font-size: 14px; font-weight: 700; margin: 0 0 4px; color: var(--amb-ink); }
+.amb-teaser-card p{ font-size: 12.5px; color: var(--amb-ink-soft); margin: 0; line-height: 1.5; }
+
+/* ---------- Coming soon প্যানেল ---------- */
+.amb-soon{
+  text-align: center;
+  padding: 56px 20px;
+  max-width: 460px; margin: 0 auto;
+}
+.amb-soon-icon{
+  width: 68px; height: 68px; border-radius: 20px;
+  background: var(--amb-blue-tint); color: var(--amb-blue);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 28px; margin: 0 auto 18px;
+}
+.amb-soon h1{ font-size: 20px; font-weight: 700; margin: 0 0 8px; color: var(--amb-ink); }
+.amb-soon p{ font-size: 14px; color: var(--amb-ink-soft); margin: 0 0 22px; line-height: 1.6; }
+.amb-soon-list{
+  text-align: right;
+  list-style: none; padding: 0; margin: 0 0 24px;
+  display: inline-flex; flex-direction: column; gap: 8px;
+}
+.amb-soon-list li{
+  font-size: 13px; color: var(--amb-ink-soft);
+  display: flex; align-items: center; gap: 8px;
+}
+.amb-soon-list li i{ color: var(--amb-green); font-size: 12px; }
+
+/* ---------- ফুটার ---------- */
+.amb-footer{
+  background: var(--amb-ink); color: rgba(255,255,255,0.75);
+  padding: 34px 0 18px;
+}
+.amb-footer-grid{
+  display: grid; gap: 24px; margin-bottom: 22px;
+}
+.amb-footer-brand strong{ color: #fff; font-size: 16px; display: block; margin-bottom: 8px; }
+.amb-footer-brand p{ font-size: 13px; line-height: 1.7; margin: 0; max-width: 42ch; }
+.amb-footer-col h4{
+  color: #fff; font-size: 13.5px; font-weight: 700; margin: 0 0 10px;
+}
+.amb-footer-col ul{ list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+.amb-footer-col a{ font-size: 13px; }
+.amb-footer-col a:hover{ color: #fff; }
+.amb-footer-emg{
+  display: flex; align-items: center; gap: 8px; font-size: 13px;
+}
+.amb-footer-emg strong{ color: #fff; }
+.amb-footer-social{
+  display: flex; gap: 8px; margin-top: 4px;
+}
+.amb-footer-social a{
+  width: 34px; height: 34px; border-radius: 9px;
+  background: rgba(255,255,255,0.08);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+}
+.amb-footer-social a:hover{ background: var(--amb-red); color: #fff; }
+.amb-footer-bottom{
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 16px; font-size: 12px;
+  display: flex; flex-wrap: wrap; gap: 8px; justify-content: space-between;
+}
+
+/* ---------- ফ্লোটিং বাটন ---------- */
+.amb-floats{
+  position: fixed; right: 16px; bottom: 88px; z-index: 70;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.amb-float-btn{
+  width: 50px; height: 50px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 19px; border: none;
+  box-shadow: 0 8px 18px rgba(18,21,31,0.22);
+}
+.amb-float-call{ background: var(--amb-red); }
+.amb-float-top{
+  background: #fff; color: var(--amb-ink); border: 1px solid var(--amb-line);
+  opacity: 0; pointer-events: none; transform: translateY(8px);
+  transition: opacity .2s ease, transform .2s ease;
+}
+.amb-float-top.is-visible{ opacity: 1; pointer-events: auto; transform: translateY(0); }
+.amb-float-plus{
+  position: relative;
+  background: linear-gradient(135deg, var(--amb-green) 0%, var(--amb-green-dark) 100%);
+  font-size: 22px;
+}
+.amb-float-plus::after{
+  content: '';
+  position: absolute; inset: -6px;
+  border-radius: 50%;
+  border: 2px solid var(--amb-green);
+  opacity: .55;
+  animation: ambPulseRing 2.4s ease-out infinite;
+}
+@keyframes ambPulseRing{
+  0%{ transform: scale(0.88); opacity: .55; }
+  70%{ transform: scale(1.4); opacity: 0; }
+  100%{ opacity: 0; }
+}
+
+/* ---------- মোবাইল বটম ন্যাভ ---------- */
+.amb-bottom-nav{
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 65;
+  background: #fff; border-top: 1px solid var(--amb-line);
+  display: flex;
+  padding: 6px 4px calc(6px + env(safe-area-inset-bottom));
+  box-shadow: 0 -4px 14px rgba(18,21,31,0.06);
+}
+.amb-bottom-nav a{
+  flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px;
+  font-size: 10.5px; font-weight: 600; color: var(--amb-ink-faint);
+  padding: 6px 2px;
+}
+.amb-bottom-nav a i{ font-size: 16px; }
+.amb-bottom-nav a.is-active{ color: var(--amb-red); }
+
+/* ---------- পেজ হেডার (সাব-পেজ টাইটেল বার) ---------- */
+.amb-page-head{
+  padding: 22px 0 6px;
+}
+.amb-page-head h1{
+  font-size: 21px; font-weight: 700; margin: 0 0 4px; color: var(--amb-ink);
+}
+.amb-page-head p{
+  font-size: 13.5px; color: var(--amb-ink-soft); margin: 0;
+}
+
+/* ---------- সার্চ ও ফিল্টার বার ---------- */
+.amb-toolbar{
+  position: sticky; top: var(--amb-header-h); z-index: 40;
+  background: #fff;
+  border-bottom: 1px solid var(--amb-line);
+  padding: 12px 0;
+  margin-top: 14px;
+}
+.amb-toolbar-row{
+  display: flex; flex-wrap: wrap; gap: 8px;
+}
+.amb-search{
+  flex: 1 1 100%;
+  display: flex; align-items: center; gap: 9px;
+  background: var(--amb-bg-soft); border: 1px solid var(--amb-line);
+  border-radius: var(--amb-radius-sm);
+  padding: 11px 13px;
+}
+.amb-search i{ color: var(--amb-ink-faint); font-size: 14px; }
+.amb-search input{
+  border: none; background: transparent; outline: none;
+  font-family: inherit; font-size: 14px; color: var(--amb-ink); width: 100%;
+}
+.amb-filter-select{
+  flex: 1 1 calc(50% - 4px);
+  appearance: none;
+  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%235b6072'/%3E%3C/svg%3E") no-repeat right 13px center;
+  border: 1px solid var(--amb-line); border-radius: var(--amb-radius-sm);
+  padding: 11px 30px 11px 13px;
+  font-family: inherit; font-size: 13.5px; font-weight: 600; color: var(--amb-ink);
+}
+.amb-toolbar-meta{
+  flex: 1 1 100%;
+  font-size: 12.5px; color: var(--amb-ink-soft);
+  padding-top: 2px;
+}
+.amb-toolbar-meta strong{ color: var(--amb-ink); }
+
+/* ---------- ড্রাইভার কার্ড (কমপ্যাক্ট / প্রিমিয়াম) ---------- */
+/* .amb-shell-এর ১৮px পাশের প্যাডিং যাতে গ্যাপ তৈরি না করে — একই ফুল-ব্লিড কৌশল,
+   .amb-shell-এর নিজের 18px প্যাডিং-এর সাথে মিলিয়ে একই 18px পাশের প্যাডিং */
+.amb-provider-list{
+  display: grid; gap: 12px;
+  width: 100vw;
+  max-width: 100vw;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 14px 18px 8px;
+  box-sizing: border-box;
+  background: var(--amb-bg-soft);
+}
+.amb-provider-card{
+  background: #fff; border: 1px solid rgba(18,21,31,0.14); border-radius: 14px;
+  padding: 10px 12px; box-shadow: 0 2px 4px rgba(18,21,31,0.07), 0 8px 20px rgba(18,21,31,0.09);
+  display: grid; gap: 8px;
+  transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+}
+.amb-provider-card:hover{
+  box-shadow: 0 10px 24px rgba(18,21,31,0.16);
+  transform: translateY(-1px);
+  border-color: transparent;
+}
+.amb-provider-top{
+  display: flex; gap: 10px; align-items: flex-start;
+}
+.amb-provider-avatar{
+  position: relative; flex-shrink: 0;
+}
+.amb-provider-avatar img{
+  width: 44px; height: 44px; border-radius: 12px; object-fit: cover;
+  background: var(--amb-bg-soft); display: block;
+}
+.amb-status-dot{
+  position: absolute; right: -2px; bottom: -2px;
+  width: 12px; height: 12px; border-radius: 50%;
+  border: 2px solid #fff;
+}
+.amb-status-dot.online{ background: var(--amb-green); }
+.amb-status-dot.offline{ background: var(--amb-ink-faint); }
+.amb-fav-btn{
+  position: absolute; top: -5px; right: -5px; width: 19px; height: 19px; border-radius: 50%;
+  background: #fff; border: 1.5px solid var(--amb-line); color: var(--amb-ink-faint);
+  display: flex; align-items: center; justify-content: center; font-size: 9px;
+  cursor: pointer; padding: 0; box-shadow: 0 1px 3px rgba(18,21,31,0.15);
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease, transform 0.12s ease;
+}
+.amb-fav-btn.is-active{ color: #fff; background: var(--amb-red); border-color: var(--amb-red); }
+.amb-fav-btn:hover{ border-color: var(--amb-red); color: var(--amb-red); }
+.amb-fav-btn.is-active:hover{ color: #fff; background: var(--amb-red-dark, var(--amb-red)); }
+.amb-fav-btn:active{ transform: scale(0.9); }
+.amb-provider-info{ min-width: 0; flex: 1; }
+.amb-provider-info h3{
+  font-size: 13.5px; font-weight: 700; margin: 0 0 2px; color: var(--amb-ink);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; line-height: 1.25;
+}
+.amb-provider-rating{
+  display: flex; align-items: center; gap: 4px;
+  font-size: 11px; color: var(--amb-ink-soft); margin-bottom: 2px;
+  white-space: nowrap; overflow: hidden;
+}
+.amb-provider-rating i{ color: var(--amb-amber); font-size: 9.5px; }
+.amb-provider-rating span{ overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.amb-provider-meta{
+  font-size: 10.5px; color: var(--amb-ink-soft);
+  display: flex; align-items: center; gap: 8px;
+  white-space: nowrap; overflow: hidden;
+}
+.amb-provider-meta span{
+  display: inline-flex; align-items: center; gap: 3px;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0;
+}
+.amb-provider-meta i{ width: 11px; color: var(--amb-ink-faint); font-size: 10px; flex-shrink: 0; }
+.amb-badge{
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 999px;
+  flex-shrink: 0; height: fit-content; white-space: nowrap;
+}
+.amb-badge-online{ background: var(--amb-green-tint); color: var(--amb-green-dark); }
+.amb-badge-offline{ background: var(--amb-bg-soft); color: var(--amb-ink-faint); }
+.amb-badge-pending{ background: var(--amb-blue-tint); color: var(--amb-blue-dark); }
+.amb-provider-tags{
+  display: flex; flex-wrap: nowrap; gap: 5px; overflow-x: auto; scrollbar-width: none;
+}
+.amb-provider-tags::-webkit-scrollbar{ display: none; }
+.amb-tag{
+  font-size: 10px; font-weight: 600; color: var(--amb-blue);
+  background: var(--amb-blue-tint); padding: 3px 9px; border-radius: 999px;
+  white-space: nowrap; flex-shrink: 0; border: none;
+}
+.amb-tag-btn{ cursor: pointer; color: var(--amb-ink-soft); background: var(--amb-bg-soft); }
+.amb-tag-btn:hover{ background: var(--amb-line); }
+.amb-provider-actions{
+  display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+}
+.amb-icon-btn{
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  height: 44px; border-radius: 10px; font-size: 12.5px; font-weight: 700;
+  border: 1px solid var(--amb-line); background: #fff; color: var(--amb-ink);
+  transition: background 0.15s ease, box-shadow 0.15s ease, transform 0.12s ease;
+}
+.amb-icon-btn.amb-call{ background: var(--amb-green); color: #fff; border-color: var(--amb-green); }
+.amb-icon-btn.amb-whatsapp{ background: var(--amb-green-tint); color: var(--amb-green-dark); border-color: transparent; }
+.amb-icon-btn.amb-view{ background: var(--amb-bg-soft); color: var(--amb-ink); }
+.amb-icon-btn.amb-call:hover{ background: var(--amb-green-dark); border-color: var(--amb-green-dark); }
+.amb-icon-btn.amb-whatsapp:hover{ background: #d7f2e2; }
+.amb-icon-btn.amb-view:hover{ background: var(--amb-line); }
+.amb-icon-btn:active{ transform: scale(0.96); }
+
+.amb-empty{
+  text-align: center; padding: 44px 20px; color: var(--amb-ink-soft); font-size: 14px;
+  background: var(--amb-bg-soft); border-radius: var(--amb-radius-lg, 16px);
+  line-height: 1.6;
+}
+.amb-loading-row{
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 18px; color: var(--amb-ink-faint); font-size: 13px;
+  border-radius: var(--amb-radius-lg, 16px);
+}
+.amb-spinner{
+  width: 16px; height: 16px; border-radius: 50%;
+  border: 2.5px solid var(--amb-line); border-top-color: var(--amb-blue);
+  animation: amb-spin 0.7s linear infinite;
+}
+@keyframes amb-spin{ to{ transform: rotate(360deg); } }
+.amb-sentinel{ height: 1px; }
+
+/* ---------- প্রোফাইল মোডাল ---------- */
+.amb-modal{
+  position: fixed; inset: 0; z-index: 95; display: none;
+}
+.amb-modal.is-open{ display: block; }
+.amb-modal-backdrop{ position: absolute; inset: 0; background: rgba(18,21,31,0.5); }
+.amb-modal-panel{
+  position: absolute; left: 0; right: 0; bottom: 0;
+  max-height: 88vh; overflow-y: auto;
+  background: #fff; border-radius: 22px 22px 0 0;
+  padding: 20px 18px calc(20px + env(safe-area-inset-bottom));
+}
+.amb-modal-close{
+  width: 34px; height: 34px; border-radius: 10px;
+  background: var(--amb-bg-soft); border: none; font-size: 15px;
+  margin-bottom: 12px;
+}
+.amb-modal-head{ display: flex; gap: 14px; align-items: center; margin-bottom: 16px; }
+.amb-modal-head img{ width: 74px; height: 74px; border-radius: 18px; object-fit: cover; }
+.amb-modal-head h2{ font-size: 17px; font-weight: 700; margin: 0 0 4px; color: var(--amb-ink); }
+.amb-modal-stats{
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 8px;
+  margin-bottom: 16px;
+}
+.amb-modal-stats div{
+  background: var(--amb-bg-soft); border-radius: var(--amb-radius-sm);
+  padding: 10px; text-align: center;
+}
+.amb-modal-stats strong{ display: block; font-size: 15px; color: var(--amb-ink); }
+.amb-modal-stats span{ font-size: 11px; color: var(--amb-ink-soft); }
+.amb-modal-actions{ display: flex; gap: 8px; margin-top: 16px; }
+.amb-modal-actions .amb-btn{ flex: 1; }
+
+@media (min-width: 640px){
+  .amb-modal-panel{
+    left: 50%; right: auto; top: 50%; bottom: auto;
+    transform: translate(-50%,-50%);
+    width: 92%; max-width: 460px; border-radius: 20px; max-height: 85vh;
+  }
+}
+
+@media (min-width: 768px){
+  .amb-provider-card{ grid-template-columns: auto 1fr auto; align-items: center; }
+  .amb-provider-top{ display: contents; }
+  .amb-provider-actions{ grid-template-columns: auto auto; }
+  .amb-toolbar-row{ flex-wrap: nowrap; }
+  .amb-search{ flex: 1 1 auto; }
+  .amb-filter-select{ flex: 0 0 200px; }
+}
+
+@media (min-width: 1024px){
+  .amb-provider-list{ grid-template-columns: repeat(2, 1fr); }
+  .amb-provider-card{ grid-template-columns: 1fr; }
+  .amb-provider-top{ display: flex; }
+  .amb-provider-actions{ grid-template-columns: 1fr 1fr; }
+}
+
+/* ============================================================
+   টাবলেট / ৭৬৮px+
+   ============================================================ */
+@media (min-width: 768px){
+  .amb-hero-grid{ grid-template-columns: 1.1fr 0.9fr; align-items: center; }
+  .amb-hero-copy h1{ font-size: 32px; }
+  .amb-stats{ grid-template-columns: repeat(4, 1fr); }
+  .amb-thana-grid{ grid-template-columns: repeat(3, 1fr); }
+  .amb-teaser-row{ grid-template-columns: repeat(4, 1fr); }
+  .amb-footer-grid{ grid-template-columns: 1.3fr 1fr 1fr; }
+}
+
+/* ============================================================
+   ল্যাপটপ / ডেস্কটপ / ১০২৪px+
+   ============================================================ */
+@media (min-width: 1024px){
+  .amb-app{ padding-bottom: 0; }
+  .amb-nav{ display: flex; }
+  .amb-header-provider{ display: inline-flex; }
+  .amb-header-call{ display: inline-flex; }
+  .amb-menu-btn{ display: none; }
+  .amb-bottom-nav{ display: none; }
+  .amb-floats{ bottom: 24px; }
+
+  .amb-hero{ padding: 54px 0 46px; }
+  .amb-hero-copy h1{ font-size: 38px; }
+  .amb-hero-copy p{ font-size: 16.5px; }
+  .amb-stats{ margin-top: -58px; }
+  .amb-thana-grid{ grid-template-columns: repeat(4, 1fr); }
+  .amb-section{ padding: 50px 0; }
+}
+
+/* ============================================================
+   ধাপ ৩ — অ্যাম্বুলেন্স রিকোয়েস্ট ফর্ম + লাইভ রিকোয়েস্ট ফিড
+   ============================================================ */
+
+/* ---------- রিকোয়েস্ট ফর্ম কার্ড ---------- */
+.amb-form-card{
+  background: #fff; border: 1px solid var(--amb-line); border-radius: var(--amb-radius-lg);
+  padding: 18px; box-shadow: var(--amb-shadow-card);
+  margin: 18px 0 8px;
+}
+.amb-form-head{ margin-bottom: 16px; }
+.amb-form-head h2{ font-size: 18px; font-weight: 700; margin: 0 0 4px; color: var(--amb-ink); }
+.amb-form-head p{ font-size: 13px; color: var(--amb-ink-soft); margin: 0; }
+.amb-form-head .amb-tag{ margin-bottom: 8px; display: inline-flex; }
+
+.amb-form-grid{ display: grid; gap: 14px; }
+.amb-field{ display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.amb-field label{ font-size: 13px; font-weight: 700; color: var(--amb-ink); letter-spacing: .1px; }
+.amb-field label .amb-req{ color: var(--amb-red); }
+.amb-field-row{ display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+.amb-input, .amb-select, .amb-textarea{
+  border: 1.5px solid var(--amb-line); border-radius: var(--amb-radius-md);
+  padding: 13px 15px; font-family: inherit; font-size: 14.5px; color: var(--amb-ink);
+  background: var(--amb-bg-soft); width: 100%; appearance: none;
+  transition: border-color .18s ease, box-shadow .18s ease, background-color .18s ease, transform .12s ease;
+}
+.amb-input::placeholder, .amb-textarea::placeholder{ color: var(--amb-ink-faint); opacity: 1; }
+.amb-input:hover, .amb-select:hover, .amb-textarea:hover{
+  border-color: rgba(21,94,239,0.35); background: #fff;
+}
+.amb-select{
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23155eef'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 15px center; padding-right: 32px;
+  cursor: pointer;
+}
+.amb-textarea{ resize: vertical; min-height: 88px; line-height: 1.6; }
+.amb-input:focus, .amb-select:focus, .amb-textarea:focus{
+  outline: none; border-color: var(--amb-blue); background: #fff;
+  box-shadow: 0 0 0 4px var(--amb-blue-tint), 0 4px 14px -6px rgba(21,94,239,0.35);
+}
+.amb-select.amb-level-critical{ color: var(--amb-red-dark); border-color: var(--amb-red); font-weight: 700; background-color: var(--amb-red-tint); }
+.amb-select.amb-level-serious{ color: #8a5a05; border-color: var(--amb-amber); font-weight: 700; background-color: #fdf3e0; }
+.amb-select.amb-level-normal{ color: var(--amb-blue-dark); border-color: var(--amb-blue); font-weight: 700; background-color: var(--amb-blue-tint); }
+
+.amb-input-group{ position: relative; display: flex; align-items: center; }
+.amb-input-group .amb-input{ padding-right: 46px; }
+.amb-gps-btn{
+  position: absolute; right: 6px; width: 34px; height: 34px; border-radius: 9px;
+  border: none; background: var(--amb-blue-tint); color: var(--amb-blue);
+  display: flex; align-items: center; justify-content: center; font-size: 14px;
+}
+.amb-gps-btn.is-busy{ animation: amb-spin 0.8s linear infinite; }
+
+.amb-form-note{ font-size: 12px; color: var(--amb-ink-faint); margin: 2px 0 0; }
+.amb-checkbox-field{
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: 13px; color: var(--amb-ink-soft); line-height: 1.5;
+  margin-top: 6px;
+}
+.amb-checkbox-field input{ margin-top: 3px; width: 16px; height: 16px; flex-shrink: 0; accent-color: var(--amb-blue); }
+.amb-form-submit{ margin-top: 4px; }
+
+/* ---------- ফর্ম ফিল্ডে বাম পাশে আইকন (সাইটের icon-field ডিজাইনের সাথে সামঞ্জস্যপূর্ণ) ---------- */
+.amb-input-icon-wrap{ position: relative; }
+.amb-input-icon-wrap .amb-field-icon{
+  position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+  color: var(--amb-blue); font-size: 14px; pointer-events: none; z-index: 1;
+}
+.amb-input-icon-wrap .amb-field-icon.amb-field-icon-top{ top: 18px; transform: none; }
+.amb-input-icon-wrap .amb-input,
+.amb-input-icon-wrap .amb-select,
+.amb-input-icon-wrap .amb-textarea{ padding-left: 40px; }
+.amb-input-icon-wrap .amb-input-group .amb-input{ padding-right: 46px; }
+
+.amb-form-success{
+  display: none; align-items: center; gap: 10px;
+  background: var(--amb-green-tint); color: var(--amb-green-dark);
+  border-radius: var(--amb-radius-sm); padding: 12px 14px; font-size: 13.5px; font-weight: 600;
+  margin-top: 12px;
+}
+.amb-form-success.is-visible{ display: flex; }
+.amb-form-success i{ font-size: 16px; flex-shrink: 0; }
+
+/* ---------- ট্যাব (নতুন / চলমান / সম্পন্ন) ---------- */
+.amb-tabs{
+  display: flex; gap: 5px; background: var(--amb-bg-soft);
+  padding: 5px; border-radius: 999px; margin: 22px 0 4px;
+}
+.amb-tab{
+  flex: 1; text-align: center; padding: 10px 6px; border-radius: 999px;
+  font-size: 13px; font-weight: 700; color: var(--amb-ink-soft);
+  border: none; background: transparent; font-family: inherit;
+}
+.amb-tab.is-active{ background: #fff; color: var(--amb-ink); box-shadow: var(--amb-shadow-card); }
+.amb-tab .amb-tab-count{ color: var(--amb-ink-faint); font-weight: 600; }
+.amb-tab.is-active .amb-tab-count{ color: var(--amb-blue); }
+
+/* ---------- রিকোয়েস্ট কার্ড ---------- */
+/* .amb-shell-এর ১৮px পাশের প্যাডিং যাতে গ্যাপ তৈরি না করে — একই ফুল-ব্লিড কৌশল,
+   .amb-shell-এর নিজের 18px প্যাডিং-এর সাথে মিলিয়ে একই 18px পাশের প্যাডিং */
+.amb-request-list{
+  display: grid; gap: 12px;
+  width: 100vw;
+  max-width: 100vw;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 16px 18px 8px;
+  box-sizing: border-box;
+}
+.amb-request-card{
+  background: #fff; border: 1px solid var(--amb-line); border-radius: var(--amb-radius-md);
+  padding: 10px 12px; box-shadow: 0 1px 2px rgba(18,21,31,0.04), 0 6px 16px rgba(18,21,31,0.05);
+  display: grid; gap: 10px;
+  transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+}
+.amb-request-card:hover{
+  box-shadow: 0 10px 24px rgba(18,21,31,0.11);
+  transform: translateY(-1px);
+  border-color: transparent;
+}
+.amb-request-top{ display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+.amb-emg-badge{
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 11px; font-weight: 700; padding: 5px 10px; border-radius: 999px; flex-shrink: 0;
+}
+.amb-emg-badge i{ font-size: 6px; }
+.amb-emg-badge.critical{ background: var(--amb-red-tint); color: var(--amb-red-dark); }
+.amb-emg-badge.serious{ background: #fef6e7; color: #8a5a05; }
+.amb-emg-badge.normal{ background: var(--amb-blue-tint); color: var(--amb-blue-dark); }
+.amb-emg-badge.completed{ background: var(--amb-green-tint); color: var(--amb-green-dark); }
+.amb-request-time{ font-size: 11.5px; color: var(--amb-ink-faint); white-space: nowrap; }
+.amb-request-patient{ font-size: 15px; font-weight: 700; color: var(--amb-ink); margin: 0; }
+.amb-request-patient span{ font-weight: 500; color: var(--amb-ink-soft); font-size: 13px; }
+.amb-request-route{ display: flex; align-items: center; gap: 8px; font-size: 13.5px; color: var(--amb-ink); font-weight: 600; flex-wrap: wrap; }
+.amb-request-route i{ color: var(--amb-ink-faint); font-size: 11px; }
+.amb-request-meta{ display: flex; flex-wrap: wrap; gap: 8px 16px; font-size: 12.5px; color: var(--amb-ink-soft); }
+.amb-request-meta span{ display: flex; align-items: center; gap: 6px; }
+.amb-request-meta i{ color: var(--amb-ink-faint); width: 14px; }
+.amb-request-notes{
+  font-size: 12.5px; color: var(--amb-ink-soft); background: var(--amb-bg-soft);
+  padding: 8px 10px; border-radius: 10px;
+}
+.amb-request-actions{ display: grid; grid-template-columns: 1fr 1fr auto; gap: 8px; }
+.amb-icon-btn.amb-accept{ background: var(--amb-blue); color: #fff; border-color: var(--amb-blue); }
+.amb-icon-btn.amb-complete{ background: var(--amb-green); color: #fff; border-color: var(--amb-green); }
+.amb-icon-btn.amb-nav{ background: var(--amb-bg-soft); color: var(--amb-ink); flex: 0 0 auto; padding: 10px 14px; }
+
+@media (min-width: 640px){
+  .amb-form-grid{ grid-template-columns: 1fr 1fr; }
+  .amb-form-grid .amb-field-full{ grid-column: 1 / -1; }
+}
+
+@media (min-width: 1024px){
+  .amb-request-list{ grid-template-columns: repeat(2, 1fr); }
+  .amb-tabs{ max-width: 420px; }
+}
+
+/* ============================================================
+   ধাপ ৪ — সম্পন্ন সেবা ড্যাশবোর্ড + ফিচার গ্রিড
+   ============================================================ */
+
+/* ---------- ড্যাশবোর্ড পরিসংখ্যান ---------- */
+.amb-dash-stats{
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;
+  margin: 16px 0 6px;
+}
+.amb-dash-stats .amb-stat-card:nth-child(5) .amb-stat-icon{ background: #eef2ff; color: #5b4bd6; }
+.amb-dash-stats .amb-stat-card:nth-child(6) .amb-stat-icon{ background: var(--amb-green-tint); color: var(--amb-green); }
+
+/* ---------- সম্পন্ন সেবার কার্ড (রেটিং সহ) ---------- */
+.amb-completed-rating{
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  flex-wrap: wrap;
+  border-top: 1px dashed var(--amb-line); padding-top: 10px;
+}
+.amb-completed-stars{ display: flex; align-items: center; gap: 5px; font-size: 12.5px; color: var(--amb-ink-soft); }
+.amb-completed-stars i{ color: var(--amb-amber); font-size: 12px; }
+.amb-completed-review{
+  font-size: 12.5px; color: var(--amb-ink-soft); font-style: italic;
+  flex: 1 1 100%;
+}
+.amb-completed-review::before{ content: "\201C"; }
+.amb-completed-review::after{ content: "\201D"; }
+
+/* ---------- ১৬-ফিচার গ্রিড ---------- */
+.amb-feature-grid{
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;
+}
+.amb-feature-tile{
+  background: #fff; border: 1px solid var(--amb-line); border-radius: var(--amb-radius-md);
+  padding: 16px 10px; text-align: center;
+}
+.amb-feature-tile i{
+  width: 42px; height: 42px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center; margin: 0 auto 10px;
+  font-size: 17px;
+}
+.amb-feature-tile span{ display: block; font-size: 12.5px; font-weight: 700; color: var(--amb-ink); line-height: 1.4; }
+.amb-feature-tile:nth-child(8n+1) i{ background: var(--amb-blue-tint); color: var(--amb-blue); }
+.amb-feature-tile:nth-child(8n+2) i{ background: var(--amb-green-tint); color: var(--amb-green); }
+.amb-feature-tile:nth-child(8n+3) i{ background: var(--amb-red-tint); color: var(--amb-red); }
+.amb-feature-tile:nth-child(8n+4) i{ background: #fef6e7; color: var(--amb-amber); }
+.amb-feature-tile:nth-child(8n+5) i{ background: #eef2ff; color: #5b4bd6; }
+.amb-feature-tile:nth-child(8n+6) i{ background: var(--amb-red-tint); color: var(--amb-red-dark); }
+.amb-feature-tile:nth-child(8n+7) i{ background: var(--amb-blue-tint); color: var(--amb-blue-dark); }
+.amb-feature-tile:nth-child(8n+0) i{ background: var(--amb-green-tint); color: var(--amb-green-dark); }
+
+/* ---------- সমর্থিত ডিভাইস ---------- */
+.amb-device-row{
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
+}
+.amb-device-item{
+  background: var(--amb-bg-soft); border-radius: var(--amb-radius-md);
+  padding: 16px 8px; text-align: center;
+}
+.amb-device-item i{ font-size: 22px; color: var(--amb-blue); margin-bottom: 8px; display: block; }
+.amb-device-item span{ font-size: 11.5px; font-weight: 600; color: var(--amb-ink-soft); }
+
+/* ---------- সিটিএ ব্যানার ---------- */
+.amb-cta-banner{
+  margin: 26px 0 6px;
+  background: linear-gradient(120deg, #16233e 0%, #0d1730 100%);
+  border-radius: var(--amb-radius-lg);
+  padding: 20px; display: flex; align-items: center; gap: 14px;
+  color: #fff;
+}
+.amb-cta-banner i{
+  width: 46px; height: 46px; border-radius: 13px; flex-shrink: 0;
+  background: rgba(225,29,46,0.22); color: var(--amb-red);
+  display: flex; align-items: center; justify-content: center; font-size: 19px;
+}
+.amb-cta-banner strong{ display: block; font-size: 15px; margin-bottom: 2px; }
+.amb-cta-banner span{ font-size: 12.5px; color: rgba(255,255,255,0.7); }
+
+/* ---------- প্রোফাইল পেজ ---------- */
+.amb-profile-loading{
+  text-align: center; padding: 70px 20px; color: var(--amb-ink-soft); font-size: 14px;
+}
+.amb-profile-loading i{ font-size: 26px; color: var(--amb-blue); margin-bottom: 12px; display: block; }
+
+.amb-profile-card{
+  max-width: 460px; margin: 0 auto; background: #fff; border: 1px solid var(--amb-line);
+  border-radius: var(--amb-radius-lg); box-shadow: var(--amb-shadow-card);
+  padding: 30px 24px; text-align: center;
+}
+.amb-profile-avatar-wrap{ position: relative; width: 84px; height: 84px; margin: 0 auto 16px; }
+.amb-profile-avatar{
+  width: 84px; height: 84px; border-radius: 50%; background: var(--amb-red);
+  color: #fff; display: flex; align-items: center; justify-content: center;
+  font-size: 2.1rem; font-weight: 700; overflow: hidden;
+}
+.amb-profile-avatar img{ width: 100%; height: 100%; object-fit: cover; display: block; }
+.amb-profile-avatar-edit{
+  position: absolute; right: -2px; bottom: -2px; width: 28px; height: 28px; border-radius: 50%;
+  background: var(--amb-blue); color: #fff; border: 2px solid #fff; display: flex; align-items: center;
+  justify-content: center; font-size: 0.8rem; cursor: pointer; padding: 0; box-shadow: var(--amb-shadow-blue);
+}
+.amb-profile-avatar-edit:disabled{ opacity: 0.6; cursor: default; }
+.amb-profile-card h2{ font-size: 1.25rem; margin: 0 0 4px; color: var(--amb-ink); }
+.amb-profile-email{ color: var(--amb-ink-soft); font-size: 0.92rem; margin: 0 0 20px; }
+.amb-profile-info{ text-align: left; border-top: 1px solid var(--amb-line); padding-top: 14px; margin-bottom: 20px; }
+.amb-profile-info div{ display: flex; justify-content: space-between; gap: 12px; padding: 8px 0; font-size: 0.9rem; border-bottom: 1px dashed var(--amb-line); }
+.amb-profile-info div:last-child{ border-bottom: none; }
+.amb-profile-info span:first-child{ color: var(--amb-ink-soft); }
+.amb-profile-info span:last-child{ font-weight: 600; text-align: right; color: var(--amb-ink); }
+.amb-profile-msg{ font-size: 13px; margin: 0 0 14px; min-height: 18px; color: var(--amb-red); }
+.amb-profile-msg.ok{ color: var(--amb-green); }
+.amb-profile-actions{ display: flex; flex-direction: column; gap: 10px; }
+
+/* ---------- প্রোভাইডার ফর্ম: ছবি/অ্যাভাটার আপলোড ---------- */
+.amb-photo-picker{
+  display: flex; align-items: center; gap: 14px; margin-bottom: 18px;
+  padding: 12px; background: var(--amb-bg-soft); border-radius: var(--amb-radius-md);
+}
+.amb-photo-preview{
+  width: 64px; height: 64px; border-radius: 50%; flex-shrink: 0; overflow: hidden;
+  background: var(--amb-blue-tint); color: var(--amb-blue); display: flex;
+  align-items: center; justify-content: center; font-size: 20px; position: relative;
+}
+.amb-photo-preview img{ width: 100%; height: 100%; object-fit: cover; display: block; }
+.amb-photo-preview.is-loading::after{
+  content: ""; position: absolute; inset: 0; border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.6); border-top-color: var(--amb-blue);
+  animation: amb-photo-spin 0.7s linear infinite;
+}
+@keyframes amb-photo-spin{ to{ transform: rotate(360deg); } }
+.amb-photo-picker-info{ display: flex; flex-direction: column; gap: 6px; min-width: 0; flex: 1; }
+.amb-photo-picker-btn, .amb-photo-picker-remove{
+  align-self: flex-start; display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12.5px; font-weight: 700; padding: 7px 12px; border-radius: 999px; border: none; cursor: pointer;
+}
+.amb-photo-picker-btn{ background: var(--amb-blue-tint); color: var(--amb-blue-dark); }
+.amb-photo-picker-remove{ background: var(--amb-red-tint); color: var(--amb-red-dark); }
+.amb-photo-picker-hint{ font-size: 11.5px; color: var(--amb-ink-faint); line-height: 1.4; }
+.amb-photo-picker-error{ color: var(--amb-red); }
+
+.amb-profile-next{ max-width: 460px; margin: 26px auto 0; }
+.amb-profile-next-head{ text-align: center; font-size: 13px; font-weight: 700; color: var(--amb-ink-soft); margin-bottom: 12px; }
+.amb-profile-next-list{ list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+.amb-profile-next-list li{
+  display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--amb-ink-soft);
+  background: var(--amb-bg-soft); border-radius: var(--amb-radius-sm); padding: 12px 14px;
+}
+.amb-profile-next-list li i{ color: var(--amb-blue); font-size: 13px; width: 16px; text-align: center; }
+.amb-profile-next-list li span.amb-soon-tag{
+  margin-left: auto; font-size: 10.5px; font-weight: 700; color: #9a5b00;
+  background: #fef6e7; padding: 3px 8px; border-radius: 20px;
+}
+
+@media (min-width: 640px){
+  .amb-dash-stats{ grid-template-columns: repeat(3, 1fr); }
+  .amb-feature-grid{ grid-template-columns: repeat(4, 1fr); }
+}
+
+@media (min-width: 1024px){
+  .amb-dash-stats{ grid-template-columns: repeat(6, 1fr); }
+  .amb-device-row{ grid-template-columns: repeat(4, 1fr); max-width: 560px; }
+}
+
+/* ============================================================
+   নতুন: ambulance.html একক-পেজ ট্যাব লেআউট (matrimonial.html-এর
+   প্যাটার্ন অনুসরণ করে) — উপরের স্টিকি ট্যাব বার, ওভারভিউ/প্রোভাইডার/
+   রিকোয়েস্ট ভিউ টগল, Add-শিট মোডাল, প্রোভাইডার-ফর্ম মোডাল
+   ============================================================ */
+
+.amb-app .sticky-top-stack{
+  background: #fff;
+  border-bottom: 1px solid var(--amb-line);
+}
+
+/* ---------- উপরের স্টিকি ট্যাব বার ---------- */
+.amb-maintabbar{
+  display: flex; align-items: center; gap: 8px;
+  height: 58px; padding: 0 14px;
+  max-width: 1180px; margin: 0 auto;
+}
+.amb-maintab-back{
+  width: 40px; height: 40px; flex-shrink: 0;
+  border-radius: 50%; border: 1px solid var(--amb-line);
+  background: #fff; color: var(--amb-ink);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; cursor: pointer;
+}
+.amb-maintab-back:hover{ background: var(--amb-bg-soft); }
+.amb-maintab-item{
+  flex: 1; height: 42px; border-radius: 999px;
+  border: 1.5px solid var(--amb-line); background: #fff;
+  display: flex; align-items: center; justify-content: center; gap: 7px;
+  font-weight: 700; font-size: 13px; color: var(--amb-ink-soft);
+  cursor: pointer; transition: all .15s ease; white-space: nowrap;
+}
+.amb-maintab-item i{ font-size: 14px; }
+.amb-maintab-item[data-tab="provider"].is-active{
+  background: var(--amb-blue-tint); border-color: var(--amb-blue); color: var(--amb-blue-dark);
+}
+.amb-maintab-item[data-tab="request"].is-active{
+  background: var(--amb-red-tint); border-color: var(--amb-red); color: var(--amb-red-dark);
+}
+.amb-maintab-add{
+  flex-shrink: 0; height: 42px; padding: 0 16px; border-radius: 999px;
+  border: 1.5px solid var(--amb-green); background: var(--amb-green-tint); color: var(--amb-green-dark);
+  display: flex; align-items: center; gap: 6px; font-weight: 700; font-size: 13px;
+  cursor: pointer;
+}
+.amb-maintab-add:hover{ background: var(--amb-green); color: #fff; }
+@media (max-width: 480px){
+  .amb-maintab-item span{ display: inline; }
+  .amb-maintab-item{ font-size: 12px; padding: 0 6px; }
+  .amb-maintab-add span{ display: none; }
+  .amb-maintab-add{ padding: 0 12px; }
+}
+
+/* ---------- ভিউ টগল (ওভারভিউ / প্রোভাইডার / রিকোয়েস্ট) ---------- */
+.amb-view{ display: none; }
+.amb-view.is-active{ display: block; }
+
+/* ---------- Add বাটনের অপশন-সিলেক্টর (বটম-শিট) ---------- */
+.amb-addsheet{ display: flex; flex-direction: column; gap: 12px; }
+.amb-addsheet h3{ font-size: 17px; font-weight: 700; margin: 0 0 2px; color: var(--amb-ink); }
+.amb-addsheet-option{
+  display: flex; align-items: center; gap: 14px;
+  padding: 16px; border-radius: var(--amb-radius-md);
+  border: 1.5px solid var(--amb-line); background: #fff;
+  text-align: left; cursor: pointer; width: 100%;
+}
+.amb-addsheet-option:hover{ border-color: currentColor; }
+.amb-addsheet-option .amb-addsheet-icon{
+  width: 44px; height: 44px; border-radius: 12px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center; font-size: 19px;
+}
+.amb-addsheet-option.is-provider{ color: var(--amb-blue); }
+.amb-addsheet-option.is-provider .amb-addsheet-icon{ background: var(--amb-blue-tint); }
+.amb-addsheet-option.is-request{ color: var(--amb-red); }
+.amb-addsheet-option.is-request .amb-addsheet-icon{ background: var(--amb-red-tint); }
+.amb-addsheet-option strong{ display: block; font-size: 14.5px; color: var(--amb-ink); margin-bottom: 2px; }
+.amb-addsheet-option span.amb-addsheet-desc{ font-size: 12.5px; color: var(--amb-ink-soft); font-weight: 400; }
+
+/* ---------- ওভারভিউ: ৩-বাটন CTA রো ---------- */
+.amb-ov-cta-row{
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+  padding: 16px 0 0;
+}
+.amb-ov-cta-row .amb-btn{ flex-direction: column; height: 74px; gap: 6px; font-size: 12px; border-radius: var(--amb-radius-md); }
+.amb-ov-cta-row .amb-btn i{ font-size: 18px; }
+@media (max-width: 420px){
+  .amb-ov-cta-row .amb-btn{ font-size: 11px; }
+}
+
+/* ---------- কিভাবে কাজ করে / নিরাপত্তা নির্দেশনা ---------- */
+.amb-hw-grid{ display: grid; grid-template-columns: 1fr; gap: 18px; }
+@media (min-width: 860px){ .amb-hw-grid{ grid-template-columns: 1.15fr 1fr; } }
+.amb-hw-card, .amb-safety-card{
+  background: #fff; border: 1px solid var(--amb-line); border-radius: var(--amb-radius-lg);
+  padding: 20px; box-shadow: var(--amb-shadow-card);
+}
+.amb-hw-card h4, .amb-safety-card h4{
+  display: flex; align-items: center; gap: 8px; font-size: 15.5px; font-weight: 700;
+  margin: 0 0 16px; color: var(--amb-ink);
+}
+.amb-safety-card h4{ color: var(--amb-green-dark); }
+.amb-hw-steps{ list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 16px; }
+.amb-hw-steps li{ display: flex; gap: 12px; align-items: flex-start; }
+.amb-hw-step-num{
+  width: 30px; height: 30px; border-radius: 50%; flex-shrink: 0;
+  background: var(--amb-blue-tint); color: var(--amb-blue-dark);
+  display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13.5px;
+}
+.amb-hw-steps strong{ display: block; font-size: 13.5px; color: var(--amb-ink); margin-bottom: 2px; }
+.amb-hw-steps p{ margin: 0; font-size: 12.5px; color: var(--amb-ink-soft); }
+.amb-safety-list{ list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 11px; }
+.amb-safety-list li{ display: flex; gap: 9px; align-items: flex-start; font-size: 13px; color: var(--amb-ink-soft); }
+.amb-safety-list i{ color: var(--amb-green); margin-top: 2px; flex-shrink: 0; }
+
+/* ============================================================
+   প্রোভাইডার ডিটেইল পেজ (ধাপ ৬) — ambulance-provider-detail.html
+   matrimonial-profile.html-এর প্যাটার্ন অনুসরণ করে, নীল (--amb-blue)
+   অ্যাক্সেন্টে, শুধু .amb-app.amb-app-এর ভেতরে স্কোপড।
+   ============================================================ */
+.ambd-topbar{
+  display: flex; align-items: center; gap: 10px;
+  height: 58px; padding: 0 14px;
+  max-width: 1180px; margin: 0 auto;
+}
+.ambd-back{
+  width: 40px; height: 40px; flex-shrink: 0;
+  border-radius: 50%; border: 1px solid var(--amb-line);
+  background: #fff; color: var(--amb-ink);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; cursor: pointer;
+}
+.ambd-back:hover{ background: var(--amb-bg-soft); }
+.ambd-topbar-title{
+  font-family: 'Tiro Bangla', serif; font-weight: 700; font-size: 15.5px; color: var(--amb-ink);
+}
+.ambd-nav-controls{ margin-left: auto; display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+.ambd-nav-btn{
+  width: 34px; height: 34px; border-radius: 50%; border: none; cursor: pointer;
+  background: var(--amb-bg-soft); color: var(--amb-ink-soft);
+  display: flex; align-items: center; justify-content: center; font-size: 13px;
+  transition: background .15s ease, opacity .15s ease;
+}
+.ambd-nav-btn:hover:not(:disabled){ background: var(--amb-blue); color: #fff; }
+.ambd-nav-btn:disabled{ opacity: .32; cursor: default; }
+.ambd-nav-counter{ font-size: 11.5px; font-weight: 700; color: var(--amb-ink-soft); min-width: 42px; text-align: center; }
+
+.ambd-state{
+  max-width: 520px; margin: 40px auto; padding: 36px 20px; text-align: center;
+  color: var(--amb-ink-soft); font-size: 14px;
+  background: var(--amb-bg-soft); border-radius: var(--amb-radius-lg, 20px);
+  box-shadow: 0 8px 24px -12px rgba(20,30,50,0.12);
+  line-height: 1.6;
+}
+.ambd-state i{
+  width: 56px; height: 56px;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 12px;
+  font-size: 26px; color: var(--amb-blue);
+  background: #fff; border-radius: 50%;
+}
+.ambd-state a{ color: var(--amb-blue); font-weight: 700; }
+
+.ambd-page{ padding-bottom: 20px; }
+.ambd-header-wrap{ position: relative; max-width: 1180px; margin: 14px auto 0; padding: 0 18px; }
+.ambd-cover{
+  position: relative; border-radius: var(--amb-radius-lg); overflow: hidden; height: 120px;
+  background: linear-gradient(135deg, var(--amb-blue) 0%, var(--amb-blue-dark) 100%);
+}
+.ambd-cover::before{
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(340px 190px at 90% -10%, rgba(255,255,255,0.22), transparent 60%);
+}
+.ambd-photo{
+  position: absolute; left: 18px; top: 78px; z-index: 2;
+  width: 84px; height: 84px; border-radius: 18px;
+  border: 4px solid #fff; box-shadow: 0 10px 24px -12px rgba(18,21,31,0.4);
+  background: linear-gradient(135deg, var(--amb-blue), var(--amb-blue-dark));
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 26px; font-weight: 800; overflow: hidden;
+}
+.ambd-photo img{ width: 100%; height: 100%; object-fit: cover; border-radius: 14px; }
+.ambd-status-dot{
+  position: absolute; bottom: -2px; right: -2px; width: 18px; height: 18px; border-radius: 50%;
+  border: 3px solid #fff; background: var(--amb-ink-faint);
+}
+.ambd-status-dot.online{ background: var(--amb-green); }
+.ambd-status-dot.offline{ background: var(--amb-ink-faint); }
+.ambd-basic{ padding: 10px 0 6px 112px; min-height: 46px; }
+.ambd-name-row{ display: flex; align-items: center; gap: 8px; }
+.ambd-name{ font-family: 'Tiro Bangla', serif; font-size: 17px; font-weight: 800; color: var(--amb-ink); }
+.ambd-fav-btn{
+  width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--amb-line); background: #fff;
+  color: var(--amb-ink-faint); display: flex; align-items: center; justify-content: center;
+  font-size: 13px; cursor: pointer; flex-shrink: 0;
+}
+.ambd-fav-btn.is-active{ background: var(--amb-red-tint); border-color: var(--amb-red); color: var(--amb-red); }
+.ambd-rating{ font-size: 12.5px; color: var(--amb-ink-soft); margin-top: 4px; display: flex; align-items: center; gap: 5px; }
+.ambd-rating i{ color: var(--amb-amber); font-size: 11px; }
+.ambd-tag{ font-size: 12.5px; color: var(--amb-ink-soft); margin-top: 6px; display: flex; flex-wrap: wrap; gap: 5px 10px; align-items: center; }
+.ambd-tag span{ display: inline-flex; align-items: center; gap: 4px; }
+.ambd-tag i{ color: var(--amb-blue); }
+
+.ambd-section{ padding: 18px 18px 6px; max-width: 1180px; margin: 0 auto; }
+.ambd-grid-2col{ display: grid; grid-template-columns: 1fr; gap: 14px; }
+
+.ambd-contact-card, .ambd-info-card{
+  background: #fff; border: 1px solid var(--amb-line); border-radius: var(--amb-radius-lg);
+  padding: 16px; box-shadow: var(--amb-shadow-card); margin-bottom: 14px;
+}
+.ambd-contact-locked{ display: flex; align-items: center; gap: 12px; }
+.ambd-contact-locked i{ font-size: 20px; color: var(--amb-blue); }
+.ambd-contact-locked p{ margin: 0; font-size: 12.5px; color: var(--amb-ink-soft); line-height: 1.6; }
+.ambd-contact-btn{
+  margin-top: 12px; width: 100%; border: none; cursor: pointer;
+  background: var(--amb-blue); color: #fff; font-weight: 700; font-size: 14px;
+  padding: 13px; border-radius: var(--amb-radius-md); display: flex; align-items: center; justify-content: center; gap: 8px;
+  transition: background .18s ease;
+}
+.ambd-contact-btn:hover{ background: var(--amb-blue-dark); }
+.ambd-contact-revealed{ display: none; }
+.ambd-contact-revealed.is-shown{ display: block; }
+.ambd-phone-row{
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--amb-blue-tint); border-radius: var(--amb-radius-md); padding: 12px 14px; margin-bottom: 10px;
+}
+.ambd-phone-row .num{ font-weight: 800; font-size: 15px; color: var(--amb-blue-dark); letter-spacing: .3px; direction: ltr; }
+.ambd-contact-actions{ display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.ambd-contact-actions a{ display: flex; align-items: center; justify-content: center; gap: 6px; padding: 11px; border-radius: 11px; font-weight: 700; font-size: 13px; }
+.ambd-call-btn{ background: var(--amb-green); color: #fff; }
+.ambd-whatsapp-btn{ background: #0d7f43; color: #fff; }
+.ambd-contact-note{ font-size: 11.5px; color: var(--amb-ink-faint); margin-top: 10px; line-height: 1.6; }
+
+.ambd-info-grid{ display: grid; grid-template-columns: repeat(2,1fr); gap: 10px 14px; }
+.ambd-info-item{ display: flex; align-items: flex-start; gap: 9px; padding: 8px 0; border-bottom: 1px dashed var(--amb-line); }
+.ambd-info-item i{ color: var(--amb-blue); font-size: 13px; margin-top: 2px; width: 14px; }
+.ambd-info-item .lbl{ font-size: 11px; color: var(--amb-ink-faint); }
+.ambd-info-item .val{ font-size: 13px; font-weight: 700; color: var(--amb-ink); margin-top: 1px; }
+.ambd-section-title{
+  font-family: 'Tiro Bangla', serif; font-size: 15px; font-weight: 700; color: var(--amb-ink);
+  margin: 0 0 10px; display: flex; align-items: center; gap: 8px;
+}
+.ambd-section-title i{ color: var(--amb-blue); }
+.ambd-about-text{ font-size: 13.5px; color: var(--amb-ink-soft); line-height: 1.85; white-space: pre-line; margin: 0; }
+
+.ambd-safety-note{
+  display: flex; gap: 10px; align-items: flex-start;
+  background: #fff8e6; border: 1px solid #f3dfa0; border-radius: var(--amb-radius-md); padding: 13px 14px;
+  font-size: 12px; color: #6b5417; line-height: 1.7; margin-bottom: 14px;
+}
+.ambd-safety-note i{ color: #b8860b; margin-top: 2px; }
+
+.ambd-bottom-next{ margin-bottom: 14px; }
+.ambd-bottom-next-btn{
+  width: 100%; border: none; cursor: pointer; background: var(--amb-blue); color: #fff;
+  font-weight: 700; font-size: 14px; padding: 13px; border-radius: var(--amb-radius-md);
+  display: flex; align-items: center; justify-content: center; gap: 8px; transition: background .18s ease;
+}
+.ambd-bottom-next-btn:hover{ background: var(--amb-blue-dark); }
+.ambd-nav-end{
+  display: flex; align-items: center; gap: 8px; justify-content: center; flex-wrap: wrap;
+  background: var(--amb-blue-tint); color: var(--amb-blue-dark); border-radius: var(--amb-radius-md);
+  padding: 12px 14px; font-size: 12.5px; font-weight: 600; text-align: center; margin-bottom: 14px;
+}
+.ambd-nav-end i{ color: var(--amb-green); }
+.ambd-nav-end a{ color: var(--amb-blue-dark); text-decoration: underline; font-weight: 700; }
+
+.ambd-sidebar-contact{ display: none; }
+@media (min-width: 700px){
+  .ambd-cover{ height: 150px; margin: 4px 4px 0; }
+  .ambd-photo{ width: 100px; height: 100px; top: 92px; }
+  .ambd-basic{ padding-left: 128px; }
+  .ambd-name{ font-size: 20px; }
+  .ambd-section{ padding: 22px 22px 6px; }
+}
+@media (min-width: 1024px){
+  .ambd-grid-2col{ grid-template-columns: 2fr 1fr; align-items: start; }
+  .ambd-contact-card{ display: none; } /* ডেস্কটপে সাইডবারে দেখানো হয় */
+  .ambd-sidebar-contact{ display: block; }
+}

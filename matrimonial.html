@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<!-- পুরনো পাত্র-পাত্রী লেয়ার বাদ: এই পেজ আর ব্যবহার হয় না, নতুন কুরিয়ার-স্টাইল পেজ matrimony.html-এ পাঠানো হয় (ফাইল মোছা হয়নি; ফেরাতে এই দুই লাইন সরান) -->
+<meta http-equiv="refresh" content="0;url=matrimony.html">
+<script>location.replace('matrimony.html');</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>পাত্র-পাত্রী — বিভাগ — টাঙ্গাইল জেলা</title>
+<meta name="description" content="বিশ্বস্ত পাত্র-পাত্রী খোঁজার প্ল্যাটফর্ম — পারিবারিকভাবে যোগাযোগের জন্য।">
+<meta property="og:title" content="পাত্র-পাত্রী — টাঙ্গাইল জেলা">
+<meta property="og:description" content="বিশ্বস্ত পাত্র-পাত্রী খোঁজার প্ল্যাটফর্ম — পারিবারিকভাবে যোগাযোগের জন্য।">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0E6B3A">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="css/style.css?v=20260922203957">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body data-banner-category="matrimonial">
+
+<header class="site-header app-header">
+  <div class="header-inner">
+    <button class="menu-toggle icon-btn" id="menuToggle" data-i18n-aria="menu.open" aria-label="মেনু খুলুন"><i class="fa-solid fa-bars" aria-hidden="true"></i></button>
+    <div class="brand-block">
+      <a href="index.html" class="brand app-brand">টাঙ্গাইল <span class="brand-accent">জেলা</span></a>
+    </div>
+    <div class="header-actions">
+      <a href="notifications.html" class="icon-btn" data-i18n-aria="menu.notifications" aria-label="বিজ্ঞপ্তি"><i class="fa-solid fa-bell" aria-hidden="true"></i></a>
+      <div class="more-menu-wrap">
+        <button type="button" class="icon-btn" id="moreMenuToggle" data-i18n-aria="menu.more" aria-label="আরও"><i class="fa-solid fa-ellipsis-vertical" aria-hidden="true"></i></button>
+        <div class="more-menu" id="moreMenu">
+          <a href="about.html" data-i18n="nav.about">পরিচিতি</a>
+          <div class="more-menu-section-title" data-i18n="menu.language">ভাষা</div>
+          <div class="lang-switcher">
+            <button type="button" class="lang-option" data-lang-choice="bn">বাংলা</button>
+            <button type="button" class="lang-option" data-lang-choice="en">English</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html" data-i18n="nav.home">হোম</a>
+      <a href="about.html" data-i18n="nav.about">পরিচিতি</a>
+      <a href="add-listing.html" data-i18n="nav.addListing">তথ্য যোগ করুন</a>
+      <a href="faq.html" data-i18n="nav.faq">সাধারণ প্রশ্ন</a>
+      <a href="contact.html" data-i18n="nav.contact">যোগাযোগ</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <div class="wrap">
+    <div class="sticky-top-stack">
+    <div class="notice-bar app-notice">
+      <span class="notice-tag">তথ্য</span>
+      <span class="notice-text">প্রয়োজনীয় উপ-বিভাগ বেছে নিয়ে তালিকা দেখুন</span>
+    </div>
+
+        <div class="matri-tabbar" id="matriTabbar" role="tablist" aria-label="পাত্র-পাত্রী নেভিগেশন">
+      <button type="button" class="matri-tab-back" onclick="if(window.history.length>1){history.back();}else{window.location.href='index.html';}" aria-label="পেছনে যান"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i></button>
+      <button type="button" class="matri-tab-item" id="matriTabGroom" data-tab="male" role="tab" aria-selected="false"><i class="fa-solid fa-mars" aria-hidden="true"></i><span>পাত্র</span></button>
+      <button type="button" class="matri-tab-item" id="matriTabBride" data-tab="female" role="tab" aria-selected="false"><i class="fa-solid fa-venus" aria-hidden="true"></i><span>পাত্রী</span></button>
+      <a href="matrimonial-register.html" class="matri-tab-item matri-tab-add"><i class="fa-solid fa-plus" aria-hidden="true"></i><span>Add</span></a>
+    </div>
+    </div>
+
+    <div class="matri-overview-section">
+    <div class="banner-slider-wrap" id="catBannerWrap" style="display:none">
+      <section class="banner-slider" id="catBannerSlider" aria-label="বিভাগ ব্যানার">
+        <div class="banner-track" id="catBannerTrack"></div>
+      </section>
+      <div class="banner-dots" id="catBannerDots"></div>
+    </div>
+    </div>
+
+        <section class="matri-candidates" id="matriCandidatesSection" aria-label="পাত্র-পাত্রী প্রোফাইল">
+      <div class="matri-candidates-grid">
+        <div class="matri-col matri-col-groom">
+          <div class="matri-col-head">
+            <h4 class="matri-col-title"><i class="fa-solid fa-mars" aria-hidden="true"></i> পাত্র <span>(ছেলেদের প্রোফাইল)</span></h4>
+            <a href="#matriCandidatesSection" class="matri-col-viewall" data-view-gender="male">সব দেখুন <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+          </div>
+          <div class="matri-col-filters">
+            <button type="button" class="matri-filter-pill is-active" data-filter="latest">সর্বশেষ</button>
+            <button type="button" class="matri-filter-pill" data-filter="popular">জনপ্রিয়</button>
+            <button type="button" class="matri-filter-pill" data-filter="verified">ভেরিফাইড</button>
+          </div>
+          <div class="matri-card-grid" id="matriMaleGrid"></div>
+          <div class="matri-empty" id="matriMaleEmpty" style="display:none">
+            <i class="fa-solid fa-user-large" aria-hidden="true"></i> এখনো কোনো পাত্র প্রোফাইল অনুমোদিত হয়নি।
+          </div>
+          <div class="matri-loading-row" id="matriMaleLoading" style="display:none">
+            <span class="matri-spinner"></span> লোড হচ্ছে…
+          </div>
+          <div class="matri-sentinel" id="matriMaleSentinel"></div>
+        </div>
+
+        <div class="matri-col matri-col-bride">
+          <div class="matri-col-head">
+            <h4 class="matri-col-title"><i class="fa-solid fa-venus" aria-hidden="true"></i> পাত্রী <span>(মেয়েদের প্রোফাইল)</span></h4>
+            <a href="#matriCandidatesSection" class="matri-col-viewall" data-view-gender="female">সব দেখুন <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+          </div>
+          <div class="matri-col-filters">
+            <button type="button" class="matri-filter-pill is-active" data-filter="latest">সর্বশেষ</button>
+            <button type="button" class="matri-filter-pill" data-filter="popular">জনপ্রিয়</button>
+            <button type="button" class="matri-filter-pill" data-filter="verified">ভেরিফাইড</button>
+          </div>
+          <div class="matri-card-grid" id="matriFemaleGrid"></div>
+          <div class="matri-empty" id="matriFemaleEmpty" style="display:none">
+            <i class="fa-solid fa-user-large" aria-hidden="true"></i> এখনো কোনো পাত্রী প্রোফাইল অনুমোদিত হয়নি।
+          </div>
+          <div class="matri-loading-row" id="matriFemaleLoading" style="display:none">
+            <span class="matri-spinner"></span> লোড হচ্ছে…
+          </div>
+          <div class="matri-sentinel" id="matriFemaleSentinel"></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="matri-overview-section">
+    <section class="matri-info-grid">
+      <div class="matri-howworks">
+        <h4 class="matri-section-title"><i class="fa-solid fa-diagram-project" aria-hidden="true"></i> কিভাবে কাজ করে</h4>
+        <ol class="matri-steps">
+          <li>
+            <span class="matri-step-num">১</span>
+            <div>
+              <strong>প্রোফাইল তৈরি করুন</strong>
+              <p>নিজের সম্পর্কে সঠিক তথ্য দিয়ে প্রোফাইল যোগ করুন</p>
+            </div>
+          </li>
+          <li>
+            <span class="matri-step-num">২</span>
+            <div>
+              <strong>পছন্দের প্রোফাইল খুঁজুন</strong>
+              <p>ফিল্টার ব্যবহার করে উপযুক্ত পাত্র-পাত্রী বেছে নিন</p>
+            </div>
+          </li>
+          <li>
+            <span class="matri-step-num">৩</span>
+            <div>
+              <strong>যোগাযোগ করুন</strong>
+              <p>পরিবারের মাধ্যমে নিরাপদভাবে যোগাযোগ শুরু করুন</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+
+      <div class="matri-safety">
+        <h4 class="matri-section-title matri-section-title-safety"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> নিরাপত্তা নির্দেশনা</h4>
+        <ul class="matri-safety-list">
+          <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> পরিবারের সাথে আলোচনা করে সিদ্ধান্ত নিন</li>
+          <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> প্রথম সাক্ষাৎ সবসময় পাবলিক স্থানে করুন</li>
+          <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> কাউকে আগেভাগে টাকা-পয়সা পাঠাবেন না</li>
+          <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> সন্দেহজনক প্রোফাইল দেখলে রিপোর্ট করুন</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="matri-bottom-cta">
+      <p>নিজের প্রোফাইল এখনো যোগ করেননি?</p>
+      <a href="matrimonial-register.html" class="matri-cta-btn"><i class="fa-solid fa-plus" aria-hidden="true"></i> আমার প্রোফাইল যোগ করুন</a>
+    </section>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <h4>টাঙ্গাইল জেলা</h4>
+      <p>টাঙ্গাইল জেলার বাসিন্দা, নতুন আগন্তুক ও ব্যবসায়ীদের জন্য তৈরি একটি স্থানীয় সেবা প্ল্যাটফর্ম।</p>
+    </div>
+    <div>
+      <h4>পেজ</h4>
+      <ul class="footer-links">
+        <li><a href="index.html">হোম</a></li>
+        <li><a href="about.html">পরিচিতি</a></li>
+        <li><a href="add-listing.html">তথ্য যোগ করুন</a></li>
+        <li><a href="faq.html">সাধারণ প্রশ্ন</a></li>
+        <li><a href="contact.html">যোগাযোগ</a></li>
+        <li><a href="sitemap.html">সাইটম্যাপ</a></li>
+        <li><a href="privacy-policy.html">প্রাইভেসি পলিসি</a></li>
+        <li><a href="terms.html">শর্তাবলী</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">© ২০২৬ টাঙ্গাইল জেলা। সর্বস্বত্ব সংরক্ষিত।</div>
+</footer>
+
+
+<nav class="bottom-nav">
+  <a href="index.html"><span class="bn-icon"><i class="fa-solid fa-house" aria-hidden="true"></i></span><span data-i18n="bottomnav.home">Home</span></a>
+  <a href="members.html"><span class="bn-icon"><i class="fa-solid fa-users" aria-hidden="true"></i></span><span data-i18n="bottomnav.members">Members</span></a>
+  <a href="posts.html"><span class="bn-icon"><i class="fa-solid fa-plus" aria-hidden="true"></i></span><span data-i18n="bottomnav.post">Post</span></a>
+  <a href="profile.html"><span class="bn-icon"><i class="fa-solid fa-user" aria-hidden="true"></i></span><span data-i18n="bottomnav.profile">Profile</span></a>
+</nav>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="js/supabase-config.js?v=20260922203957"></script>
+    <script src="js/nav-avatar.js?v=20260922203957"></script>
+    <script src="js/call.js?v=20260922203957"></script>
+<script src="js/sticky-header.js?v=20260922203957"></script>
+<script src="js/banner-slider.js?v=20260922203957"></script>
+<script src="js/category-banners.js?v=20260922203957"></script>
+<script src="js/matrimonial-profiles.js?v=20260922203957"></script>
+<script src="js/matrimonial-tabs.js?v=20260922203957"></script>
+<script src="js/notice-bar.js?v=20260922203957"></script>
+<script src="js/i18n.js?v=20260922203957"></script>
+<script src="js/search-index.js?v=20260922203957"></script>
+<script src="js/smart-search.js?v=20260922203957"></script>
+<script src="js/search-ui.js?v=20260922203957"></script>
+<script src="js/script.js?v=20260922203957"></script>
+<script src="js/auto-update.js?v=20260922203957"></script>
+<script src="js/floating-buttons.js?v=20260922203957"></script>
+</body>
+</html>

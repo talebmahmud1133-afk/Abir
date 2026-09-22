@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="tsPageTitle">দর্শনীয় স্থান — টাঙ্গাইল জেলা</title>
+<meta name="description" content="দর্শনীয় স্থানের বিস্তারিত তথ্য, ছবি, প্রবেশ মূল্য, যাতায়াত ব্যবস্থা এবং গুগল ম্যাপে পথনির্দেশনা।">
+<meta name="theme-color" content="#0E6B3A">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="css/style.css?v=20260922203957">
+<link rel="stylesheet" href="css/tourist-spot.css?v=20260922203957">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body data-banner-category="tourist-spot">
+
+<header class="site-header app-header">
+  <div class="header-inner">
+    <button class="menu-toggle icon-btn" id="menuToggle" data-i18n-aria="menu.open" aria-label="মেনু খুলুন"><i class="fa-solid fa-bars" aria-hidden="true"></i></button>
+    <div class="brand-block">
+      <a href="index.html" class="brand app-brand">টাঙ্গাইল <span class="brand-accent">জেলা</span></a>
+    </div>
+    <div class="header-actions">
+      <a href="notifications.html" class="icon-btn" data-i18n-aria="menu.notifications" aria-label="বিজ্ঞপ্তি"><i class="fa-solid fa-bell" aria-hidden="true"></i></a>
+      <div class="more-menu-wrap">
+        <button type="button" class="icon-btn" id="moreMenuToggle" data-i18n-aria="menu.more" aria-label="আরও"><i class="fa-solid fa-ellipsis-vertical" aria-hidden="true"></i></button>
+        <div class="more-menu" id="moreMenu">
+          <a href="about.html" data-i18n="nav.about">পরিচিতি</a>
+          <div class="more-menu-section-title" data-i18n="menu.language">ভাষা</div>
+          <div class="lang-switcher">
+            <button type="button" class="lang-option" data-lang-choice="bn">বাংলা</button>
+            <button type="button" class="lang-option" data-lang-choice="en">English</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html" data-i18n="nav.home">হোম</a>
+      <a href="about.html" data-i18n="nav.about">পরিচিতি</a>
+      <a href="add-listing.html" data-i18n="nav.addListing">তথ্য যোগ করুন</a>
+      <a href="faq.html" data-i18n="nav.faq">সাধারণ প্রশ্ন</a>
+      <a href="contact.html" data-i18n="nav.contact">যোগাযোগ</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap ts-page" id="tsDetailRoot" style="display:none">
+
+    <div class="ts-hero">
+      <img id="tsHeroImg" src="" alt="">
+      <div class="ts-hero-actions">
+        <button type="button" class="ts-back" onclick="if(window.history.length>1){history.back();}else{window.location.href='tourist-spot.html';}" aria-label="পেছনে যান"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i></button>
+        <div class="ts-icon-group">
+          <button type="button" class="ts-icon-btn" id="tsFavBtn" aria-label="সংরক্ষণ করুন"><i class="fa-regular fa-heart" aria-hidden="true"></i></button>
+          <button type="button" class="ts-icon-btn" id="tsShareBtn" aria-label="শেয়ার করুন"><i class="fa-solid fa-share-nodes" aria-hidden="true"></i></button>
+        </div>
+      </div>
+      <span class="ts-hero-count" id="tsHeroCount">1/1</span>
+    </div>
+
+    <div class="ts-gallery-strip" id="tsGalleryStrip"></div>
+
+    <div class="ts-detail-head">
+      <span class="ts-badge" id="tsCatBadge">ঐতিহাসিক</span>
+      <h2 id="tsName">—</h2>
+      <div class="ts-card-loc"><i class="fa-solid fa-location-dot"></i><span id="tsUpazila">—</span></div>
+      <div class="ts-rating"><span id="tsStars"></span> <b id="tsRatingNum">0.0</b> <span id="tsReviewCount">(0 জনের মতামত)</span></div>
+    </div>
+
+    <div class="ts-info-chips">
+      <div class="ts-info-chip">
+        <i class="fa-regular fa-clock"></i>
+        <div><div class="lbl">খোলা আছে</div><div class="val" id="tsHours">—</div></div>
+      </div>
+      <div class="ts-info-chip">
+        <i class="fa-solid fa-ticket"></i>
+        <div><div class="lbl">প্রবেশ মূল্য</div><div class="val" id="tsFee">—</div></div>
+      </div>
+    </div>
+
+    <button type="button" class="ts-btn" id="tsGoBtn"><i class="fa-solid fa-location-arrow" aria-hidden="true"></i> পথ দেখুন</button>
+
+    <div class="ts-actions-row">
+      <button type="button" class="ts-action-btn" id="tsShareBtn2"><i class="fa-solid fa-share-nodes"></i>শেয়ার</button>
+      <button type="button" class="ts-action-btn" id="tsFavBtn2"><i class="fa-regular fa-heart"></i>সংরক্ষণ</button>
+      <a class="ts-action-btn" id="tsCallBtn" href="#" style="display:none"><i class="fa-solid fa-phone"></i>কল করুন</a>
+    </div>
+
+    <div class="ts-tabs">
+      <button type="button" class="ts-tab active" data-tab="info">তথ্য</button>
+      <button type="button" class="ts-tab" data-tab="transport">যাতায়াত</button>
+      <button type="button" class="ts-tab" data-tab="facility">সুবিধা</button>
+      <button type="button" class="ts-tab" data-tab="reviews">রিভিউ</button>
+    </div>
+
+    <div class="ts-tabpanel active" data-panel="info">
+      <p class="ts-desc" id="tsDesc"></p>
+    </div>
+
+    <div class="ts-tabpanel" data-panel="transport">
+      <div class="ts-transport-item">
+        <div class="ts-transport-icon"><i class="fa-solid fa-bus"></i></div>
+        <div><h4>বাসে করে</h4><p>ঢাকা থেকে টাঙ্গাইল বাসে এসে, তারপর অটো/সিএনজি/রিকশা করে পৌঁছানো যায়।</p></div>
+      </div>
+      <div class="ts-transport-item">
+        <div class="ts-transport-icon"><i class="fa-solid fa-train"></i></div>
+        <div><h4>ট্রেনে করে</h4><p>ঢাকা-টাঙ্গাইল ট্রেনে এসে, স্টেশন থেকে অটো/সিএনজি/রিকশা নিয়ে যেতে হবে।</p></div>
+      </div>
+      <div class="ts-transport-item">
+        <div class="ts-transport-icon"><i class="fa-solid fa-motorcycle"></i></div>
+        <div><h4>মোটরসাইকেলে</h4><p>ঢাকা-টাঙ্গাইল মহাসড়ক দিয়ে সরাসরি যাওয়া যায়।</p></div>
+      </div>
+      <div class="ts-transport-item">
+        <div class="ts-transport-icon"><i class="fa-solid fa-car"></i></div>
+        <div><h4>নিজস্ব গাড়িতে</h4><p>N4 মহাসড়ক হয়ে খুব সহজেই পৌঁছানো যায়।</p></div>
+      </div>
+      <div class="ts-tip">
+        <i class="fa-solid fa-lightbulb"></i>
+        <p>সকালে গেলে ভিড় কম থাকে এবং ঘুরে দেখা আরও সহজ হয়।</p>
+      </div>
+    </div>
+
+    <div class="ts-tabpanel" data-panel="facility">
+      <div class="ts-facility-grid" id="tsFacilityGrid"></div>
+    </div>
+
+    <div class="ts-tabpanel" data-panel="reviews">
+      <div class="ts-review-form" id="tsReviewForm">
+        <h4>আপনার অভিজ্ঞতা লিখুন</h4>
+        <div class="ts-star-picker" id="tsStarPicker">
+          <i class="fa-regular fa-star" data-star="1"></i>
+          <i class="fa-regular fa-star" data-star="2"></i>
+          <i class="fa-regular fa-star" data-star="3"></i>
+          <i class="fa-regular fa-star" data-star="4"></i>
+          <i class="fa-regular fa-star" data-star="5"></i>
+        </div>
+        <div class="ts-input-icon-wrap">
+          <i class="fa-solid fa-user ts-field-icon" aria-hidden="true"></i>
+          <input type="text" id="tsReviewName" placeholder="আপনার নাম (ঐচ্ছিক)" maxlength="60">
+        </div>
+        <div class="ts-input-icon-wrap">
+          <i class="fa-solid fa-comment-dots ts-field-icon ts-field-icon-top" aria-hidden="true"></i>
+          <textarea id="tsReviewComment" rows="3" placeholder="স্থানটি সম্পর্কে আপনার মতামত লিখুন..."></textarea>
+        </div>
+        <button type="button" class="ts-review-submit" id="tsReviewSubmitBtn">রিভিউ পোস্ট করুন</button>
+        <p class="ts-review-msg" id="tsReviewMsg"></p>
+      </div>
+      <div class="ts-review-list" id="tsReviewList"><p class="ts-review-empty">লোড হচ্ছে…</p></div>
+    </div>
+
+  </div>
+
+  <div class="ts-empty" id="tsNotFound" style="display:none">
+    <p>দুঃখিত, এই স্থানটি খুঁজে পাওয়া যায়নি।</p>
+    <a class="ts-btn" style="display:inline-flex; width:auto; padding:10px 22px;" href="tourist-spot.html">তালিকায় ফিরে যান</a>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <h4>টাঙ্গাইল জেলা</h4>
+      <p>টাঙ্গাইল জেলার বাসিন্দা, নতুন আগন্তুক ও ব্যবসায়ীদের জন্য তৈরি একটি স্থানীয় সেবা প্ল্যাটফর্ম।</p>
+    </div>
+    <div>
+      <h4>পেজ</h4>
+      <ul class="footer-links">
+        <li><a href="index.html">হোম</a></li>
+        <li><a href="about.html">পরিচিতি</a></li>
+        <li><a href="add-listing.html">তথ্য যোগ করুন</a></li>
+        <li><a href="faq.html">সাধারণ প্রশ্ন</a></li>
+        <li><a href="contact.html">যোগাযোগ</a></li>
+        <li><a href="sitemap.html">সাইটম্যাপ</a></li>
+        <li><a href="privacy-policy.html">প্রাইভেসি পলিসি</a></li>
+        <li><a href="terms.html">শর্তাবলী</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">© ২০২৬ টাঙ্গাইল জেলা। সর্বস্বত্ব সংরক্ষিত।</div>
+</footer>
+
+<nav class="bottom-nav">
+  <a href="index.html"><span class="bn-icon"><i class="fa-solid fa-house" aria-hidden="true"></i></span><span data-i18n="bottomnav.home">Home</span></a>
+  <a href="members.html"><span class="bn-icon"><i class="fa-solid fa-users" aria-hidden="true"></i></span><span data-i18n="bottomnav.members">Members</span></a>
+  <a href="posts.html"><span class="bn-icon"><i class="fa-solid fa-plus" aria-hidden="true"></i></span><span data-i18n="bottomnav.post">Post</span></a>
+  <a href="profile.html"><span class="bn-icon"><i class="fa-solid fa-user" aria-hidden="true"></i></span><span data-i18n="bottomnav.profile">Profile</span></a>
+</nav>
+
+<!-- Location permission modal -->
+<div class="ts-modal-overlay" id="tsPermModal">
+  <div class="ts-modal">
+    <div class="ts-modal-icon"><i class="fa-solid fa-location-dot"></i></div>
+    <h3>আপনার বর্তমান অবস্থান ব্যবহার করতে চান?</h3>
+    <p>আপনাকে সঠিক গন্তব্যে পৌঁছাতে আপনার বর্তমান অবস্থান প্রয়োজন।</p>
+    <button type="button" class="ts-btn" id="tsAllowBtn">Allow</button>
+    <button type="button" class="ts-btn ts-btn-ghost" id="tsDenyBtn">Not Now</button>
+  </div>
+</div>
+
+<!-- Gallery lightbox -->
+<div class="ts-lightbox" id="tsLightbox">
+  <button type="button" class="ts-back" onclick="document.getElementById('tsLightbox').classList.remove('open')" aria-label="বন্ধ করুন"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+  <img id="tsLightboxImg" src="" alt="">
+</div>
+
+<div class="ts-toast" id="tsToast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="js/supabase-config.js?v=20260922203957"></script>
+<script src="js/tourist-spots-data.js?v=20260922203957"></script>
+<script>
+(function(){
+  var params = new URLSearchParams(window.location.search);
+  var id = params.get('id');
+  var root = document.getElementById('tsDetailRoot');
+  var notFound = document.getElementById('tsNotFound');
+
+  function reviewClient(){
+    if(!window.supabase || !window.TANGAIL_SUPABASE) return null;
+    try{ return window.supabase.createClient(window.TANGAIL_SUPABASE.url, window.TANGAIL_SUPABASE.key); }
+    catch(e){ return null; }
+  }
+
+  window.getTouristSpots().then(function(list){
+    var spot = (list || []).find(function(s){ return s.id === id; });
+    if(!spot){
+      notFound.style.display = 'block';
+      return;
+    }
+    root.style.display = 'block';
+    renderSpot(spot);
+  });
+
+  function starHtml(rating){
+    var full = Math.round(rating);
+    var html = '';
+    for(var i=1;i<=5;i++){ html += '<i class="fa-solid fa-star" style="' + (i<=full?'color:#C9962E':'opacity:.25') + '"></i>'; }
+    return html;
+  }
+
+  function renderSpot(spot){
+  document.getElementById('tsPageTitle').textContent = spot.name + ' — টাঙ্গাইল জেলা';
+  document.getElementById('tsHeroImg').src = spot.image;
+  document.getElementById('tsHeroImg').alt = spot.name;
+  document.getElementById('tsHeroCount').textContent = '1/' + spot.gallery.length;
+  document.getElementById('tsCatBadge').textContent = spot.categoryLabel;
+  document.getElementById('tsName').textContent = spot.name;
+  document.getElementById('tsUpazila').textContent = spot.upazila + ', টাঙ্গাইল';
+  document.getElementById('tsStars').innerHTML = starHtml(spot.rating);
+  document.getElementById('tsRatingNum').textContent = spot.rating.toFixed(1);
+  document.getElementById('tsReviewCount').textContent = '(' + spot.reviews + ' জনের মতামত)';
+  document.getElementById('tsHours').textContent = spot.hours;
+  document.getElementById('tsFee').textContent = spot.fee;
+  document.getElementById('tsDesc').textContent = spot.desc;
+
+  // facility tab — spot-specific distances/counts (falls back to generic text if a spot has none set)
+  var facilityDefs = [
+    { key: 'hotel', label: 'হোটেল', icon: 'fa-bed', color: '#e08a1e' },
+    { key: 'restaurant', label: 'রেস্তোরাঁ', icon: 'fa-utensils', color: '#0B5D7A' },
+    { key: 'hospital', label: 'হাসপাতাল', icon: 'fa-truck-medical', color: '#A83D5E' },
+    { key: 'police', label: 'পুলিশ স্টেশন', icon: 'fa-shield-halved', color: '#0E6B3A' }
+  ];
+  var fac = spot.facilities || {};
+  document.getElementById('tsFacilityGrid').innerHTML = facilityDefs.map(function(f){
+    var info = fac[f.key] || {};
+    var text = (info.distance && info.count) ? (info.distance + ' · ' + info.count) : 'তথ্য পাওয়া যায়নি';
+    return '<div class="ts-facility"><div class="ts-facility-icon" style="background:' + f.color + '"><i class="fa-solid ' + f.icon + '"></i></div><div><h4>' + f.label + '</h4><span>' + text + '</span></div></div>';
+  }).join('');
+
+  var callBtn = document.getElementById('tsCallBtn');
+  if(spot.phone){
+    callBtn.style.display = 'flex';
+    callBtn.href = 'tel:' + spot.phone;
+  }
+
+  // gallery strip
+  var stripHtml = spot.gallery.map(function(src, i){
+    return '<img src="' + src + '" data-i="' + i + '" class="' + (i===0?'active':'') + '" alt="' + spot.name + ' ছবি ' + (i+1) + '">';
+  }).join('');
+  var strip = document.getElementById('tsGalleryStrip');
+  strip.innerHTML = stripHtml;
+  var heroImg = document.getElementById('tsHeroImg');
+  var heroCount = document.getElementById('tsHeroCount');
+  strip.addEventListener('click', function(e){
+    var img = e.target.closest('img');
+    if(!img) return;
+    var i = parseInt(img.getAttribute('data-i'), 10);
+    heroImg.src = spot.gallery[i];
+    heroCount.textContent = (i+1) + '/' + spot.gallery.length;
+    strip.querySelectorAll('img').forEach(function(im){ im.classList.remove('active'); });
+    img.classList.add('active');
+  });
+  heroImg.addEventListener('click', function(){
+    document.getElementById('tsLightboxImg').src = heroImg.src;
+    document.getElementById('tsLightbox').classList.add('open');
+  });
+
+  // reviews tab — tourist_spot_reviews টেবিল
+  (function(){
+    var sc = reviewClient();
+    var listEl = document.getElementById('tsReviewList');
+    var starPicker = document.getElementById('tsStarPicker');
+    var stars = starPicker.querySelectorAll('i');
+    var nameInput = document.getElementById('tsReviewName');
+    var commentInput = document.getElementById('tsReviewComment');
+    var submitBtn = document.getElementById('tsReviewSubmitBtn');
+    var msgEl = document.getElementById('tsReviewMsg');
+    var selectedRating = 0;
+
+    function escHtml(s){ return (s || '').toString().replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+    function paintStars(){
+      stars.forEach(function(st){
+        var v = parseInt(st.getAttribute('data-star'), 10);
+        st.classList.toggle('fa-solid', v <= selectedRating);
+        st.classList.toggle('fa-regular', v > selectedRating);
+      });
+    }
+    stars.forEach(function(st){
+      st.addEventListener('click', function(){
+        selectedRating = parseInt(st.getAttribute('data-star'), 10);
+        paintStars();
+      });
+    });
+
+    function timeAgo(dateStr){
+      var d = new Date(dateStr);
+      var diffDays = Math.floor((Date.now() - d.getTime()) / 86400000);
+      if(diffDays <= 0) return 'আজ';
+      if(diffDays === 1) return 'গতকাল';
+      if(diffDays < 30) return diffDays + ' দিন আগে';
+      var months = Math.floor(diffDays / 30);
+      if(months < 12) return months + ' মাস আগে';
+      return Math.floor(months / 12) + ' বছর আগে';
+    }
+
+    function loadReviews(){
+      if(!sc){ listEl.innerHTML = '<p class="ts-review-empty">রিভিউ লোড করা যাচ্ছে না।</p>'; return; }
+      sc.from('tourist_spot_reviews').select('*').eq('spot_id', spot.id).order('created_at', { ascending: false })
+        .then(function(res){
+          var rows = (res && res.data) || [];
+          if(!rows.length){
+            listEl.innerHTML = '<p class="ts-review-empty">এখনো কোনো রিভিউ নেই। প্রথম রিভিউটি আপনিই লিখুন!</p>';
+            return;
+          }
+          listEl.innerHTML = rows.map(function(r){
+            return '<div class="ts-review-card">' +
+              '<div class="ts-review-head"><b>' + escHtml(r.author_name || 'অতিথি') + '</b>' +
+              '<span class="ts-review-stars">' + starHtml(r.rating) + '</span></div>' +
+              (r.comment ? '<p class="ts-review-text">' + escHtml(r.comment) + '</p>' : '') +
+              '<span class="ts-review-time">' + timeAgo(r.created_at) + '</span>' +
+            '</div>';
+          }).join('');
+        });
+    }
+
+    submitBtn.addEventListener('click', function(){
+      if(!sc){ msgEl.textContent = 'এই মুহূর্তে রিভিউ জমা দেওয়া যাচ্ছে না।'; return; }
+      if(!selectedRating){ msgEl.textContent = 'অনুগ্রহ করে তারকা দিয়ে রেটিং দিন।'; return; }
+      submitBtn.disabled = true;
+      msgEl.textContent = 'পোস্ট করা হচ্ছে…';
+      sc.from('tourist_spot_reviews').insert({
+        spot_id: spot.id,
+        author_name: nameInput.value.trim() || 'অতিথি',
+        rating: selectedRating,
+        comment: commentInput.value.trim()
+      }).then(function(res){
+        submitBtn.disabled = false;
+        if(res.error){ msgEl.textContent = 'ব্যর্থ হয়েছে: ' + res.error.message; return; }
+        msgEl.textContent = 'ধন্যবাদ! আপনার রিভিউ প্রকাশ হয়েছে।';
+        nameInput.value = '';
+        commentInput.value = '';
+        selectedRating = 0;
+        paintStars();
+        loadReviews();
+        // header-এর রেটিং/রিভিউ সংখ্যা আপডেট করা (ট্রিগার দিয়ে tourist_spots টেবিলে অটো রিক্যালকুলেট হয়ে গেছে)
+        window.getTouristSpots().then(function(list2){
+          var updated = (list2 || []).find(function(s){ return s.id === spot.id; });
+          if(!updated) return;
+          document.getElementById('tsStars').innerHTML = starHtml(updated.rating);
+          document.getElementById('tsRatingNum').textContent = updated.rating.toFixed(1);
+          document.getElementById('tsReviewCount').textContent = '(' + updated.reviews + ' জনের মতামত)';
+        });
+      }).catch(function(err){
+        submitBtn.disabled = false;
+        msgEl.textContent = 'ব্যর্থ: ' + err.message;
+      });
+    });
+
+    loadReviews();
+  })();
+
+  // tabs
+  var tabs = document.querySelectorAll('.ts-tab');
+  var panels = document.querySelectorAll('.ts-tabpanel');
+  tabs.forEach(function(tab){
+    tab.addEventListener('click', function(){
+      tabs.forEach(function(t){ t.classList.remove('active'); });
+      panels.forEach(function(p){ p.classList.remove('active'); });
+      tab.classList.add('active');
+      document.querySelector('.ts-tabpanel[data-panel="' + tab.getAttribute('data-tab') + '"]').classList.add('active');
+    });
+  });
+
+  // favorite (localStorage)
+  var favKey = 'ts_favorites';
+  function getFavs(){ try{ return JSON.parse(localStorage.getItem(favKey)) || []; }catch(e){ return []; } }
+  function setFavs(list){ localStorage.setItem(favKey, JSON.stringify(list)); }
+  function isFav(){ return getFavs().indexOf(spot.id) !== -1; }
+  function paintFav(){
+    var on = isFav();
+    [document.getElementById('tsFavBtn'), document.getElementById('tsFavBtn2')].forEach(function(btn){
+      btn.classList.toggle('active', on);
+      var icon = btn.querySelector('i');
+      icon.classList.toggle('fa-regular', !on);
+      icon.classList.toggle('fa-solid', on);
+    });
+  }
+  function toggleFav(){
+    var favs = getFavs();
+    var idx = favs.indexOf(spot.id);
+    if(idx === -1){ favs.push(spot.id); showToast('সংরক্ষিত হয়েছে'); }
+    else { favs.splice(idx,1); showToast('সংরক্ষণ থেকে সরানো হয়েছে'); }
+    setFavs(favs);
+    paintFav();
+  }
+  document.getElementById('tsFavBtn').addEventListener('click', toggleFav);
+  document.getElementById('tsFavBtn2').addEventListener('click', toggleFav);
+  paintFav();
+
+  // share
+  function doShare(){
+    var url = window.location.href;
+    if(navigator.share){
+      navigator.share({ title: spot.name, text: spot.name + ' — টাঙ্গাইল জেলা', url: url }).catch(function(){});
+    } else if(navigator.clipboard){
+      navigator.clipboard.writeText(url).then(function(){ showToast('লিংক কপি হয়েছে'); });
+    }
+  }
+  document.getElementById('tsShareBtn').addEventListener('click', doShare);
+  document.getElementById('tsShareBtn2').addEventListener('click', doShare);
+
+  // toast
+  var toastTimer;
+  function showToast(msg){
+    var t = document.getElementById('tsToast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ t.classList.remove('show'); }, 2200);
+  }
+
+  // directions flow
+  var modal = document.getElementById('tsPermModal');
+
+  function openMaps(originLat, originLng){
+    var dest = spot.lat + ',' + spot.lng;
+    var url = 'https://www.google.com/maps/dir/?api=1' +
+      (originLat != null ? '&origin=' + originLat + ',' + originLng : '') +
+      '&destination=' + dest + '&travelmode=driving';
+    window.open(url, '_blank');
+  }
+
+  function startDirections(){
+    if(!navigator.geolocation){ openMaps(); return; }
+    modal.classList.add('open');
+  }
+
+  document.getElementById('tsAllowBtn').addEventListener('click', function(){
+    modal.classList.remove('open');
+    showToast('অবস্থান সনাক্ত করা হচ্ছে…');
+    navigator.geolocation.getCurrentPosition(
+      function(pos){ openMaps(pos.coords.latitude, pos.coords.longitude); },
+      function(){ showToast('অবস্থান পাওয়া যায়নি, গন্তব্য দেখানো হচ্ছে'); openMaps(); },
+      { enableHighAccuracy: true, timeout: 8000 }
+    );
+  });
+  document.getElementById('tsDenyBtn').addEventListener('click', function(){
+    modal.classList.remove('open');
+    openMaps();
+  });
+
+  document.getElementById('tsGoBtn').addEventListener('click', startDirections);
+
+  // arriving from list page's own "পথ দেখুন" button
+  if(params.get('nav') === '1'){ startDirections(); }
+  } // end renderSpot
+})();
+</script>
+
+<script src="js/nav-avatar.js?v=20260922203957"></script>
+<script src="js/call.js?v=20260922203957"></script>
+<script src="js/sticky-header.js?v=20260922203957"></script>
+<script src="js/i18n.js?v=20260922203957"></script>
+<script src="js/search-index.js?v=20260922203957"></script>
+<script src="js/smart-search.js?v=20260922203957"></script>
+<script src="js/search-ui.js?v=20260922203957"></script>
+<script src="js/script.js?v=20260922203957"></script>
+<script src="js/auto-update.js?v=20260922203957"></script>
+<script src="js/floating-buttons.js?v=20260922203957"></script>
+</body>
+</html>

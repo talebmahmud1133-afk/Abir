@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ব্লাড ব্যাংক তালিকা — টাঙ্গাইল জেলা</title>
+<meta name="description" content="টাঙ্গাইল জেলার ব্লাড ব্যাংকের তালিকা — যেখান থেকে প্রয়োজনে রক্ত সংগ্রহ করা যাবে।">
+<meta property="og:title" content="ব্লাড ব্যাংক তালিকা — টাঙ্গাইল জেলা">
+<meta property="og:description" content="টাঙ্গাইল জেলার ব্লাড ব্যাংকের তালিকা — যেখান থেকে প্রয়োজনে রক্ত সংগ্রহ করা যাবে।">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0E6B3A">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="css/style.css?v=20260922203957">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body data-banner-category="listing">
+
+<header class="site-header app-header">
+  <div class="header-inner">
+    <button class="menu-toggle icon-btn" id="menuToggle" data-i18n-aria="menu.open" aria-label="মেনু খুলুন"><i class="fa-solid fa-bars" aria-hidden="true"></i></button>
+    <div class="brand-block">
+      <a href="index.html" class="brand app-brand">টাঙ্গাইল <span class="brand-accent">জেলা</span></a>
+    </div>
+    <div class="header-actions">
+      <a href="notifications.html" class="icon-btn" data-i18n-aria="menu.notifications" aria-label="বিজ্ঞপ্তি"><i class="fa-solid fa-bell" aria-hidden="true"></i></a>
+      <div class="more-menu-wrap">
+        <button type="button" class="icon-btn" id="moreMenuToggle" data-i18n-aria="menu.more" aria-label="আরও"><i class="fa-solid fa-ellipsis-vertical" aria-hidden="true"></i></button>
+        <div class="more-menu" id="moreMenu">
+          <a href="about.html" data-i18n="nav.about">পরিচিতি</a>
+          <div class="more-menu-section-title" data-i18n="menu.language">ভাষা</div>
+          <div class="lang-switcher">
+            <button type="button" class="lang-option" data-lang-choice="bn">বাংলা</button>
+            <button type="button" class="lang-option" data-lang-choice="en">English</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html" data-i18n="nav.home">হোম</a>
+      <a href="about.html" data-i18n="nav.about">পরিচিতি</a>
+      <a href="add-listing.html" data-i18n="nav.addListing">তথ্য যোগ করুন</a>
+      <a href="faq.html" data-i18n="nav.faq">সাধারণ প্রশ্ন</a>
+      <a href="contact.html" data-i18n="nav.contact">যোগাযোগ</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <div class="wrap">
+        <div class="post-detail-topbar list-back-topbar">
+      <button type="button" class="post-detail-back" onclick="if(window.history.length>1){history.back();}else{window.location.href='blood-donors.html';}" aria-label="পেছনে যান"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i></button>
+      <span>ব্লাড ব্যাংক</span>
+    </div>
+
+    <div class="donor-count-line"><span class="donor-count-badge" id="bankCount">০টি ব্লাড ব্যাংক</span></div>
+
+    <div class="notice-bar app-notice">
+      <span class="notice-tag">তথ্য</span>
+      <span class="notice-text">নিচে ডান পাশের + বাটনে ক্লিক করে নিজের এলাকার ব্লাড ব্যাংকের তথ্য যুক্ত করতে পারবেন</span>
+    </div>
+
+    <form class="search-box donor-search-box" id="bankSearchForm" role="search">
+      <input type="text" id="bankSearchInput" placeholder="নাম, থানা বা এলাকা দিয়ে খুঁজুন">
+      <button type="submit" aria-label="খুঁজুন"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i></button>
+    </form>
+
+    <section class="donor-list" id="bankList">
+      <p class="donor-empty">লোড হচ্ছে…</p>
+    </section>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <h4>টাঙ্গাইল জেলা</h4>
+      <p>টাঙ্গাইল জেলার বাসিন্দা, নতুন আগন্তুক ও ব্যবসায়ীদের জন্য তৈরি একটি স্থানীয় সেবা প্ল্যাটফর্ম।</p>
+    </div>
+    <div>
+      <h4>পেজ</h4>
+      <ul class="footer-links">
+        <li><a href="index.html">হোম</a></li>
+        <li><a href="about.html">পরিচিতি</a></li>
+        <li><a href="add-listing.html">তথ্য যোগ করুন</a></li>
+        <li><a href="faq.html">সাধারণ প্রশ্ন</a></li>
+        <li><a href="contact.html">যোগাযোগ</a></li>
+        <li><a href="sitemap.html">সাইটম্যাপ</a></li>
+        <li><a href="privacy-policy.html">প্রাইভেসি পলিসি</a></li>
+        <li><a href="terms.html">শর্তাবলী</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">© ২০২৬ টাঙ্গাইল জেলা। সর্বস্বত্ব সংরক্ষিত।</div>
+</footer>
+
+
+
+<!-- ফ্লোটিং + বাটন — স্ক্রল করলেও জায়গায় স্থির থাকবে -->
+<button type="button" class="fab-add" id="fabAddBank" aria-label="ব্লাড ব্যাংক যোগ করুন">+</button>
+
+<!-- ব্লাড ব্যাংক যোগ করার মোডাল ফর্ম -->
+<div class="modal-overlay" id="bankModal">
+  <div class="modal-box icon-modal-box">
+    <h2>ব্লাড ব্যাংক যোগ করুন</h2>
+    <form class="contact-form icon-form" id="bankForm">
+      <div class="icon-field">
+        <i class="fa-solid fa-hospital field-icon" aria-hidden="true"></i>
+        <label for="bankName" class="sr-only">ব্লাড ব্যাংকের নাম</label>
+        <input type="text" id="bankName" placeholder="ব্লাড ব্যাংকের নাম">
+      </div>
+      <div class="icon-field">
+        <i class="fa-solid fa-mobile-screen field-icon" aria-hidden="true"></i>
+        <label for="bankPhone" class="sr-only">মোবাইল/ফোন নাম্বার</label>
+        <input type="tel" id="bankPhone" inputmode="numeric" placeholder="মোবাইল/ফোন নাম্বার">
+      </div>
+      <div class="icon-field icon-field-select">
+        <i class="fa-solid fa-building-shield field-icon" aria-hidden="true"></i>
+        <label for="bankThana" class="sr-only">থানা</label>
+        <select id="bankThana">
+          <option value="">থানা সিলেক্ট করুন</option>
+          <option>টাঙ্গাইল সদর</option>
+          <option>বাসাইল</option>
+          <option>ভূঞাপুর</option>
+          <option>দেলদুয়ার</option>
+          <option>ধনবাড়ী</option>
+          <option>ঘাটাইল</option>
+          <option>গোপালপুর</option>
+          <option>কালিহাতী</option>
+          <option>মধুপুর</option>
+          <option>মির্জাপুর</option>
+          <option>নাগরপুর</option>
+          <option>সখীপুর</option>
+        </select>
+      </div>
+      <div class="icon-field">
+        <i class="fa-solid fa-location-dot field-icon" aria-hidden="true"></i>
+        <label for="bankAddress" class="sr-only">সম্পূর্ণ ঠিকানা</label>
+        <input type="text" id="bankAddress" placeholder="সম্পূর্ণ ঠিকানা">
+      </div>
+      <div class="icon-field">
+        <i class="fa-solid fa-droplet field-icon" aria-hidden="true"></i>
+        <label for="bankGroups" class="sr-only">যেসব গ্রুপ সাধারণত পাওয়া যায় (ঐচ্ছিক)</label>
+        <input type="text" id="bankGroups" placeholder="যেসব গ্রুপ সাধারণত পাওয়া যায় (ঐচ্ছিক)">
+      </div>
+      <div class="icon-field">
+        <i class="fa-solid fa-clock field-icon" aria-hidden="true"></i>
+        <label for="bankHours" class="sr-only">খোলা থাকার সময় (ঐচ্ছিক)</label>
+        <input type="text" id="bankHours" placeholder="খোলা থাকার সময় (ঐচ্ছিক)">
+      </div>
+      <div class="icon-field">
+        <i class="fa-solid fa-file-lines field-icon" aria-hidden="true"></i>
+        <label for="bankComment" class="sr-only">মন্তব্য লিখুন (ঐচ্ছিক)</label>
+        <input type="text" id="bankComment" placeholder="মন্তব্য লিখুন (ঐচ্ছিক)">
+      </div>
+      <p class="auth-msg" id="bankFormMsg"></p>
+      <div class="modal-actions">
+        <button type="button" class="modal-cancel" id="bankCancelBtn">বাতিল করুন</button>
+        <button type="submit" class="modal-submit" id="bankSubmitBtn">সাবমিট করুন</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<nav class="bottom-nav">
+  <a href="index.html"><span class="bn-icon"><i class="fa-solid fa-house" aria-hidden="true"></i></span><span data-i18n="bottomnav.home">Home</span></a>
+  <a href="members.html"><span class="bn-icon"><i class="fa-solid fa-users" aria-hidden="true"></i></span><span data-i18n="bottomnav.members">Members</span></a>
+  <a href="posts.html"><span class="bn-icon"><i class="fa-solid fa-plus" aria-hidden="true"></i></span><span data-i18n="bottomnav.post">Post</span></a>
+  <a href="profile.html"><span class="bn-icon"><i class="fa-solid fa-user" aria-hidden="true"></i></span><span data-i18n="bottomnav.profile">Profile</span></a>
+</nav>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="js/supabase-config.js?v=20260922203957"></script>
+<script src="js/nav-avatar.js?v=20260922203957"></script>
+<script src="js/call.js?v=20260922203957"></script>
+<script src="js/sticky-header.js?v=20260922203957"></script>
+<script src="js/i18n.js?v=20260922203957"></script>
+<script src="js/search-index.js?v=20260922203957"></script>
+<script src="js/smart-search.js?v=20260922203957"></script>
+<script src="js/search-ui.js?v=20260922203957"></script>
+<script src="js/script.js?v=20260922203957"></script>
+<script src="js/blood-bank-list.js?v=20260922203957"></script>
+<script src="js/auto-update.js?v=20260922203957"></script>
+<script src="js/floating-buttons.js?v=20260922203957"></script>
+</body>
+</html>

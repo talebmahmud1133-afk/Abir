@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>টিউশন পোস্ট করুন — টাঙ্গাইল জেলা</title>
+<meta name="description" content="টাঙ্গাইল জেলায় শিক্ষক প্রয়োজন? বিষয়, ক্লাস, বাজেট ও এলাকা দিয়ে টিউশন পোস্ট করুন — যোগ্য শিক্ষকরা যোগাযোগ করবেন।">
+<meta property="og:title" content="টিউশন পোস্ট করুন — টাঙ্গাইল জেলা">
+<meta property="og:description" content="বিষয়, ক্লাস, বাজেট ও এলাকা দিয়ে টিউশন পোস্ট করুন।">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0F766E">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="css/style.css?v=20260922203957">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  /* এই পেজের জন্য শিক্ষক মডিউলের থিম রঙ (টিল) ব্যবহার করা হয়েছে, বাকি ফর্ম স্টাইল সাইটের সাধারণ .contact-form থেকে নেওয়া */
+  .tp-page{ --tp-primary:#0F766E; padding-bottom:28px; }
+  .tp-hero{
+    margin:14px 16px 0; padding:22px 20px; border-radius:18px;
+    background:linear-gradient(135deg,#0F766E 0%, #0b5c56 60%, #0a4440 100%);
+    color:#fff; box-shadow:0 18px 40px -18px rgba(15,118,110,0.55);
+  }
+  .tp-hero h1{ font-size:21px; margin:0 0 6px; color:#fff; font-family:'Hind Siliguri',sans-serif; }
+  .tp-hero p{ margin:0; font-size:13.5px; color:rgba(255,255,255,0.88); line-height:1.6; }
+  .tp-form-wrap{ max-width:640px; margin:0 auto; padding:0 16px; }
+  .tp-page .contact-form{ margin-top:18px; }
+  .tp-page .contact-form button{ background:var(--tp-primary); }
+  .tp-page .contact-form button:hover{ background:#0b5c56; }
+  .tp-note{
+    margin-top:14px; padding:12px 14px; border-radius:12px;
+    background:rgba(15,118,110,0.08); color:#0b5c56; font-size:13px; line-height:1.7;
+    display:flex; gap:8px; align-items:flex-start;
+  }
+  .tp-my-posts{ margin-top:30px; }
+  .tp-my-posts h2{ font-size:16px; margin:0 0 10px; font-family:'Hind Siliguri',sans-serif; }
+  .tp-post-card{
+    background:#fff; border:1px solid rgba(15,118,110,0.14); border-radius:14px;
+    padding:14px; margin-bottom:10px; box-shadow:0 6px 16px -14px rgba(15,23,42,0.25);
+  }
+  .tp-post-card-top{ display:flex; align-items:flex-start; justify-content:space-between; gap:8px; }
+  .tp-post-card-title{ font-size:14px; font-weight:700; color:#0f2027; }
+  .tp-post-card-meta{ font-size:12.5px; color:#5b6b74; margin-top:6px; display:flex; flex-wrap:wrap; gap:6px 12px; }
+  .tp-badge{ font-size:11px; font-weight:700; padding:4px 9px; border-radius:999px; white-space:nowrap; }
+  .tp-badge-pending{ background:rgba(245,158,11,0.14); color:#92400e; }
+  .tp-badge-approved{ background:rgba(34,197,94,0.14); color:#1f9a4b; }
+  .tp-empty{ text-align:center; padding:18px; color:#5b6b74; font-size:13.5px; }
+</style>
+</head>
+<body class="tp-page">
+
+<header class="site-header app-header">
+  <div class="header-inner">
+    <button class="menu-toggle icon-btn" id="menuToggle" data-i18n-aria="menu.open" aria-label="মেনু খুলুন"><i class="fa-solid fa-bars" aria-hidden="true"></i></button>
+    <div class="brand-block">
+      <a href="index.html" class="brand app-brand">টাঙ্গাইল <span class="brand-accent">জেলা</span></a>
+    </div>
+    <div class="header-actions">
+      <a href="notifications.html" class="icon-btn" data-i18n-aria="menu.notifications" aria-label="বিজ্ঞপ্তি"><i class="fa-solid fa-bell" aria-hidden="true"></i></a>
+      <div class="more-menu-wrap">
+        <button type="button" class="icon-btn" id="moreMenuToggle" data-i18n-aria="menu.more" aria-label="আরও"><i class="fa-solid fa-ellipsis-vertical" aria-hidden="true"></i></button>
+        <div class="more-menu" id="moreMenu">
+          <a href="about.html" data-i18n="nav.about">পরিচিতি</a>
+          <div class="more-menu-section-title" data-i18n="menu.language">ভাষা</div>
+          <div class="lang-switcher">
+            <button type="button" class="lang-option" data-lang-choice="bn">বাংলা</button>
+            <button type="button" class="lang-option" data-lang-choice="en">English</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html" data-i18n="nav.home">হোম</a>
+      <a href="teacher-module.html">শিক্ষক ও শিক্ষার্থী</a>
+      <a href="faq.html" data-i18n="nav.faq">সাধারণ প্রশ্ন</a>
+      <a href="contact.html" data-i18n="nav.contact">যোগাযোগ</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="post-detail-topbar list-back-topbar" style="padding-left:16px;padding-right:16px;">
+    <button type="button" class="post-detail-back" onclick="if(window.history.length>1){history.back();}else{window.location.href='teacher-module.html';}" aria-label="পেছনে যান"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i></button>
+    <span>টিউশন পোস্ট করুন</span>
+  </div>
+
+  <section class="tp-hero">
+    <h1><i class="fa-solid fa-bullhorn" aria-hidden="true"></i>&nbsp; আপনার টিউশন প্রয়োজনটি পোস্ট করুন</h1>
+    <p>বিষয়, ক্লাস, বাজেট ও এলাকা দিয়ে পোস্ট করুন — অনুমোদনের পর যোগ্য শিক্ষকরা আপনার পোস্ট দেখে যোগাযোগ করবেন।</p>
+  </section>
+
+  <div class="tp-form-wrap">
+    <form class="contact-form icon-form" id="tuitionPostForm" novalidate>
+      <div class="icon-field">
+        <i class="fa-solid fa-user field-icon" aria-hidden="true"></i>
+        <label for="tp-name" class="sr-only">পোস্টকারীর নাম *</label>
+        <input type="text" id="tp-name" placeholder="পোস্টকারীর নাম *" required>
+      </div>
+      <div class="icon-field">
+        <i class="fa-solid fa-mobile-screen field-icon" aria-hidden="true"></i>
+        <label for="tp-phone" class="sr-only">মোবাইল নম্বর *</label>
+        <input type="tel" id="tp-phone" placeholder="মোবাইল নম্বর *" pattern="01[0-9]{9}" inputmode="numeric" required>
+      </div>
+      <div class="icon-field icon-field-select">
+        <i class="fa-solid fa-book field-icon" aria-hidden="true"></i>
+        <label for="tp-subject" class="sr-only">বিষয় *</label>
+        <select id="tp-subject" required>
+          <option value="">বিষয় নির্বাচন করুন *</option>
+          <option>গণিত</option><option>ইংরেজি</option><option>বিজ্ঞান</option><option>আইসিটি</option>
+          <option>পদার্থবিজ্ঞান</option><option>রসায়ন</option><option>জীববিজ্ঞান</option><option>বাংলা</option>
+          <option>উচ্চতর গণিত</option><option>ভর্তি প্রস্তুতি</option><option>বিশ্ববিদ্যালয় ভর্তি</option>
+          <option>বিসিএস</option><option>চাকরির প্রস্তুতি</option><option>কুরআন শিক্ষা</option><option>আরবি</option>
+          <option>অন্যান্য / সকল বিষয়</option>
+        </select>
+      </div>
+      <div class="icon-field icon-field-select">
+        <i class="fa-solid fa-layer-group field-icon" aria-hidden="true"></i>
+        <label for="tp-class" class="sr-only">ক্লাস *</label>
+        <select id="tp-class" required>
+          <option value="">ক্লাস নির্বাচন করুন *</option>
+          <option value="১–৫">১–৫</option>
+          <option value="৬–৮">৬–৮</option>
+          <option value="৯–১০">৯–১০</option>
+          <option value="১১–১২">১১–১২</option>
+          <option value="ভর্তি/বিসিএস প্রস্তুতি">ভর্তি/বিসিএস প্রস্তুতি</option>
+        </select>
+      </div>
+      <div class="icon-field">
+        <i class="fa-solid fa-money-bill-wave field-icon" aria-hidden="true"></i>
+        <label for="tp-budget" class="sr-only">মাসিক বাজেট (টাকা) *</label>
+        <input type="number" id="tp-budget" min="0" placeholder="মাসিক বাজেট (টাকা) *" required>
+      </div>
+      <div class="icon-field icon-field-select">
+        <i class="fa-solid fa-map-location-dot field-icon" aria-hidden="true"></i>
+        <label for="tp-upazila" class="sr-only">উপজেলা *</label>
+        <select id="tp-upazila" required>
+          <option value="">উপজেলা নির্বাচন করুন *</option>
+          <option>টাঙ্গাইল সদর</option><option>মির্জাপুর</option><option>কালিহাতী</option><option>ঘাটাইল</option>
+          <option>সখীপুর</option><option>নাগরপুর</option><option>ভূঞাপুর</option><option>গোপালপুর</option>
+          <option>বাসাইল</option><option>দেলদুয়ার</option><option>ধনবাড়ী</option><option>মধুপুর</option>
+        </select>
+      </div>
+      <div class="icon-field">
+        <i class="fa-solid fa-file-lines field-icon" aria-hidden="true"></i>
+        <label for="tp-desc" class="sr-only">বিস্তারিত বিবরণ (ঐচ্ছিক)</label>
+        <textarea id="tp-desc" placeholder="বিস্তারিত বিবরণ (ঐচ্ছিক)"></textarea>
+      </div>
+      <button type="submit" id="tpSubmitBtn">পোস্ট জমা দিন</button>
+      <p class="auth-msg" id="tpMsg" style="margin-top:10px;"></p>
+    </form>
+
+    <div class="tp-note"><i class="fa-solid fa-circle-info" aria-hidden="true"></i> পোস্ট জমার পর আমাদের টিম যাচাই করবে। অনুমোদনের পরই এটি "সাম্প্রতিক টিউশন পোস্ট" তালিকায় প্রকাশিত হবে।</div>
+
+    <div class="tp-my-posts">
+      <h2>আপনার পাঠানো পোস্ট</h2>
+      <div id="tpMyPostsList"></div>
+      <div class="tp-empty" id="tpMyPostsEmpty" style="display:none;">এখনো কোনো পোস্ট পাঠানো হয়নি।</div>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <h4>টাঙ্গাইল জেলা</h4>
+      <p>টাঙ্গাইল জেলার বাসিন্দা, নতুন আগন্তুক ও ব্যবসায়ীদের জন্য তৈরি একটি স্থানীয় সেবা প্ল্যাটফর্ম।</p>
+    </div>
+    <div>
+      <h4>পেজ</h4>
+      <ul class="footer-links">
+        <li><a href="index.html">হোম</a></li>
+        <li><a href="teacher-module.html">শিক্ষক ও শিক্ষার্থী</a></li>
+        <li><a href="faq.html">সাধারণ প্রশ্ন</a></li>
+        <li><a href="contact.html">যোগাযোগ</a></li>
+        <li><a href="sitemap.html">সাইটম্যাপ</a></li>
+        <li><a href="privacy-policy.html">প্রাইভেসি পলিসি</a></li>
+        <li><a href="terms.html">শর্তাবলী</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">© ২০২৬ টাঙ্গাইল জেলা। সর্বস্বত্ব সংরক্ষিত।</div>
+</footer>
+
+<nav class="bottom-nav">
+  <a href="index.html"><span class="bn-icon"><i class="fa-solid fa-house" aria-hidden="true"></i></span><span data-i18n="bottomnav.home">Home</span></a>
+  <a href="teacher-module.html"><span class="bn-icon"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i></span><span>শিক্ষক</span></a>
+  <a href="notifications.html"><span class="bn-icon"><i class="fa-solid fa-bell" aria-hidden="true"></i></span><span data-i18n="bottomnav.notifications">Alerts</span></a>
+  <a href="profile.html"><span class="bn-icon"><i class="fa-solid fa-user" aria-hidden="true"></i></span><span data-i18n="bottomnav.profile">Profile</span></a>
+</nav>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="js/supabase-config.js?v=20260922203957"></script>
+<script src="js/nav-avatar.js?v=20260922203957"></script>
+<script src="js/call.js?v=20260922203957"></script>
+<script src="js/i18n.js?v=20260922203957"></script>
+<script src="js/script.js?v=20260922203957"></script>
+<script src="js/tuition-post.js?v=20260922203957"></script>
+<script src="js/auto-update.js?v=20260922203957"></script>
+<script src="js/floating-buttons.js?v=20260922203957"></script>
+</body>
+</html>
