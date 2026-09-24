@@ -13,7 +13,16 @@
 <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
 <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
 <link rel="manifest" href="manifest.json">
-<link rel="stylesheet" href="css/style.css?v=20260922203957">
+<link rel="preload" as="image" href="assets/categories/fire-service.webp?h=655ebe0b" type="image/webp" fetchpriority="high">
+<link rel="preload" as="image" href="assets/categories/police.webp?h=a09ebb6c" type="image/webp" fetchpriority="high">
+<link rel="preload" as="image" href="assets/categories/hospitals.webp?h=10bc4ae8" type="image/webp" fetchpriority="high">
+<link rel="preload" as="image" href="assets/categories/doctors.webp?h=ed8fbcd2" type="image/webp" fetchpriority="high">
+<link rel="preload" as="image" href="assets/categories/diagnostic.webp?h=bf781e39" type="image/webp" fetchpriority="high">
+<link rel="preload" as="image" href="assets/categories/blood-donors.webp?h=65fe469b" type="image/webp" fetchpriority="high">
+<link rel="preload" as="image" href="assets/categories/emergency.webp?h=fce238cd" type="image/webp" fetchpriority="high">
+<link rel="preload" as="image" href="assets/categories/help.webp?h=ef0b8ac0" type="image/webp" fetchpriority="high">
+<link rel="preload" as="image" href="assets/categories/shop.webp?h=0ef910d4" type="image/webp" fetchpriority="high">
+<link rel="stylesheet" href="css/style.css?v=20260924073609">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body class="home-page">
@@ -29,7 +38,6 @@
       <div class="more-menu-wrap">
         <button type="button" class="icon-btn" id="moreMenuToggle" data-i18n-aria="menu.more" aria-label="আরও"><i class="fa-solid fa-ellipsis-vertical" aria-hidden="true"></i></button>
         <div class="more-menu" id="moreMenu">
-          <a href="about.html" data-i18n="nav.about">পরিচিতি</a>
           <div class="more-menu-section-title" data-i18n="menu.language">ভাষা</div>
           <div class="lang-switcher">
             <button type="button" class="lang-option" data-lang-choice="bn">বাংলা</button>
@@ -41,7 +49,6 @@
     <nav class="main-nav" id="mainNav">
       <a href="index.html" class="active" data-i18n="nav.home">হোম</a>
       <a href="about.html" data-i18n="nav.about">পরিচিতি</a>
-      <a href="add-listing.html" data-i18n="nav.addListing">তথ্য যোগ করুন</a>
       <a href="faq.html" data-i18n="nav.faq">সাধারণ প্রশ্ন</a>
       <a href="contact.html" data-i18n="nav.contact">যোগাযোগ</a>
     </nav>
@@ -63,187 +70,173 @@
     </div>
 
     <section class="cat-grid" id="homeCatGrid">
-      <a class="cat-card cat-emergency" href="ambulance.html">
-        <div class="cat-icon"><span class="cat-icon-fa"><i class="fa-solid fa-truck-medical" aria-hidden="true"></i></span></div>
-        <h3 data-i18n="cat.emergency.title">অ্যাম্বুলেন্স</h3>
-        <p data-i18n="cat.emergency.desc">১২টি থানায় দ্রুত অ্যাম্বুলেন্স বুকিং, রিয়েল-টাইম রিকোয়েস্ট ও যাচাইকৃত সার্ভিস প্রোভাইডার।</p>
-      </a>
       <a class="cat-card cat-emergency" href="fire-service.html">
-        <div class="cat-icon"><span class="cat-icon-fa"><i class="fa-solid fa-fire" aria-hidden="true"></i></span></div>
+        <div class="cat-thumb"><img src="assets/categories/fire-service.webp?h=655ebe0b" fetchpriority="high" alt="ফায়ার সার্ভিস" width="360" height="360" decoding="async"></div>
         <h3 data-i18n="cat.fireService.title">ফায়ার সার্ভিস</h3>
         <p data-i18n="cat.fireService.desc">ফায়ার সার্ভিস ও সিভিল ডিফেন্স স্টেশনের যোগাযোগ নম্বর।</p>
       </a>
       <a class="cat-card cat-emergency" href="police.html">
-        <div class="cat-icon"><span class="cat-icon-fa"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i></span></div>
+        <div class="cat-thumb"><img src="assets/categories/police.webp?h=a09ebb6c" fetchpriority="high" alt="থানা-পুলিশ" width="360" height="360" decoding="async"></div>
         <h3 data-i18n="cat.police.title">থানা-পুলিশ</h3>
         <p data-i18n="cat.police.desc">বিভিন্ন থানার যোগাযোগ নম্বর।</p>
       </a>
       <a class="cat-card cat-medical" href="hospitals.html">
-        <div class="cat-icon"><span class="cat-icon-fa"><i class="fa-solid fa-hospital" aria-hidden="true"></i></span></div>
+        <div class="cat-thumb"><img src="assets/categories/hospitals.webp?h=10bc4ae8" fetchpriority="high" alt="হাসপাতাল" width="360" height="360" decoding="async"></div>
         <h3 data-i18n="cat.hospitals.title">হাসপাতাল</h3>
         <p data-i18n="cat.hospitals.desc">সরকারি ও বেসরকারি হাসপাতালের তালিকা ও যোগাযোগ নম্বর।</p>
       </a>
       <a class="cat-card cat-medical" href="doctors.html">
-        <div class="cat-icon"><span class="cat-icon-fa"><i class="fa-solid fa-user-doctor" aria-hidden="true"></i></span></div>
+        <div class="cat-thumb"><img src="assets/categories/doctors.webp?h=ed8fbcd2" fetchpriority="high" alt="ডাক্তার" width="360" height="360" decoding="async"></div>
         <h3 data-i18n="cat.doctors.title">ডাক্তার</h3>
         <p data-i18n="cat.doctors.desc">টাঙ্গাইল জেলার বিশেষজ্ঞ ডাক্তারদের তালিকা ও যোগাযোগ নম্বর।</p>
       </a>
       <a class="cat-card cat-medical" href="diagnostic.html">
-        <div class="cat-icon"><span class="cat-icon-fa"><i class="fa-solid fa-microscope" aria-hidden="true"></i></span></div>
+        <div class="cat-thumb"><img src="assets/categories/diagnostic.webp?h=bf781e39" fetchpriority="high" alt="ডায়াগনস্টিক" width="360" height="360" decoding="async"></div>
         <h3 data-i18n="cat.diagnostic.title">ডায়াগনস্টিক</h3>
         <p data-i18n="cat.diagnostic.desc">রক্ত পরীক্ষা, এক্স-রে, আল্ট্রাসনোগ্রামসহ ডায়াগনস্টিক সেবার তথ্য।</p>
       </a>
       <a class="cat-card cat-blood" href="blood-donors.html">
-        <div class="cat-icon"><span class="cat-icon-fa"><i class="fa-solid fa-droplet" aria-hidden="true"></i></span></div>
+        <div class="cat-thumb"><img src="assets/categories/blood-donors.webp?h=65fe469b" fetchpriority="high" alt="রক্তদান" width="360" height="360" decoding="async"></div>
         <h3 data-i18n="cat.bloodDonors.title">রক্তদান</h3>
         <p data-i18n="cat.bloodDonors.desc">জরুরি প্রয়োজনে নিকটস্থ রক্তদাতার সাথে দ্রুত যোগাযোগের তালিকা।</p>
       </a>
       <a class="cat-card cat-emergency" href="emergency.html">
-        <div class="cat-icon"><span class="cat-icon-fa"><i class="fa-solid fa-phone-volume" aria-hidden="true"></i></span></div>
+        <div class="cat-thumb"><img src="assets/categories/emergency.webp?h=fce238cd" fetchpriority="high" alt="জরুরি নাম্বার" width="360" height="360" decoding="async"></div>
         <h3 data-i18n="cat.emergencyNumbers.title">জরুরি নাম্বার</h3>
         <p data-i18n="cat.emergencyNumbers.desc">জরুরি মুহূর্তে দ্রুত যোগাযোগের সকল নম্বর।</p>
       </a>
       <a class="cat-card cat-help" href="help.html">
-        <div class="cat-icon"><span class="cat-icon-fa"><i class="fa-solid fa-handshake" aria-hidden="true"></i></span></div>
+        <div class="cat-thumb"><img src="assets/categories/help.webp?h=ef0b8ac0" fetchpriority="high" alt="সহায়তা" width="360" height="360" decoding="async"></div>
         <h3 data-i18n="cat.help.title">সহায়তা</h3>
         <p data-i18n="cat.help.desc">বিপদে পড়া মানুষের জন্য সহায়তা ও স্বেচ্ছাসেবী সংগঠনের তথ্য।</p>
       </a>
       <a class="cat-card cat-work" href="business-directory.html">
-        <div class="cat-icon"><span class="cat-icon-fa"><i class="fa-solid fa-store" aria-hidden="true"></i></span></div>
+        <div class="cat-thumb"><img src="assets/categories/shop.webp?h=0ef910d4" fetchpriority="high" alt="দোকান" width="360" height="360" decoding="async"></div>
         <h3 data-i18n="cat.businessDirectory.title">দোকান</h3>
         <p data-i18n="cat.businessDirectory.desc">টাঙ্গাইলের স্থানীয় ব্যবসা প্রতিষ্ঠানের তালিকা ও প্রচারের জায়গা।</p>
       </a>
       <a class="cat-card cat-market" href="buy-sell.html">
-        <div class="cat-icon"><span class="cat-icon-fa"><i class="fa-solid fa-cart-shopping" aria-hidden="true"></i></span></div>
+        <div class="cat-thumb"><img src="assets/categories/buy-sell.webp?h=ee93193a" alt="ক্রয় ও বিক্রয়" width="360" height="360" decoding="async"></div>
         <h3 data-i18n="cat.buySell.title">ক্রয় ও বিক্রয়</h3>
         <p data-i18n="cat.buySell.desc">পুরনো জিনিসপত্র ও ব্যবহৃত পণ্যের স্থানীয় কেনা-বেচার বাজার।</p>
       </a>
       <a class="cat-card cat-food" href="restaurants.html">
-        <div class="cat-icon"><span class="cat-icon-fa"><i class="fa-solid fa-utensils" aria-hidden="true"></i></span></div>
+        <div class="cat-thumb"><img src="assets/categories/restaurants.webp?h=8341d388" alt="রেস্টুরেন্ট" width="360" height="360" decoding="async"></div>
         <h3 data-i18n="cat.restaurants.title">রেস্টুরেন্ট</h3>
         <p data-i18n="cat.restaurants.desc">টাঙ্গাইলের জনপ্রিয় স্থানীয় খাবারের দোকান ও রেস্টুরেন্ট।</p>
       </a>
       <a class="cat-card cat-property" href="house-rent.html">
-        <div class="cat-icon"><span class="cat-icon-fa"><i class="fa-solid fa-house" aria-hidden="true"></i></span></div>
+        <div class="cat-thumb"><img src="assets/categories/house-rent.webp?h=e0e8a77a" alt="বাসা ভাড়া" width="360" height="360" decoding="async"></div>
         <h3 data-i18n="cat.houseRent.title">বাসা ভাড়া</h3>
         <p data-i18n="cat.houseRent.desc">বাড়ি, ফ্ল্যাট কেনা-বেচা ও ভাড়ার হালনাগাদ তালিকা।</p>
       </a>
       <a class="cat-card cat-property" href="flat-land.html">
-        <div class="cat-icon"><span class="cat-icon-fa"><i class="fa-solid fa-city" aria-hidden="true"></i></span></div>
+        <div class="cat-thumb"><img src="assets/categories/flat-land.webp?h=a1cc92e0" alt="ফ্ল্যাট ও জমি" width="360" height="360" decoding="async"></div>
         <h3 data-i18n="cat.flatLand.title">ফ্ল্যাট ও জমি</h3>
         <p data-i18n="cat.flatLand.desc">ফ্ল্যাট, প্লট ও জমি কেনা-বেচার হালনাগাদ তালিকা।</p>
       </a>
       <a class="cat-card cat-transport" href="transport.html">
-        <div class="cat-icon"><span class="cat-icon-fa"><i class="fa-solid fa-car" aria-hidden="true"></i></span></div>
+        <div class="cat-thumb"><img src="assets/categories/car-rent.webp?h=6eb0e29d" alt="গাড়ি ভাড়া" width="360" height="360" decoding="async"></div>
         <h3 data-i18n="cat.carRent.title">গাড়ি ভাড়া</h3>
         <p data-i18n="cat.carRent.desc">সিএনজি, প্রাইভেট কার, মাইক্রোবাস ভাড়ার তথ্য।</p>
       </a>
       <a class="cat-card cat-repair" href="mechanic.html">
-        <div class="cat-icon"><span class="cat-icon-fa"><i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i></span></div>
-        <h3 data-i18n="cat.mechanic.title">মিস্ত্রি/বুয়া</h3>
+        <div class="cat-thumb"><img src="assets/categories/maid.webp?h=0d056bd6" alt="বুয়া" width="360" height="360" decoding="async"></div>
+        <h3 data-i18n="cat.mechanic.title">বুয়া</h3>
         <p data-i18n="cat.mechanic.desc">ইলেকট্রিশিয়ান, প্লাম্বার ও মেরামত সেবার তালিকা।</p>
       </a>
       <a class="cat-card cat-transport" href="bus-schedule.html">
-        <div class="cat-icon"><span class="cat-icon-fa"><i class="fa-solid fa-bus" aria-hidden="true"></i></span></div>
+        <div class="cat-thumb"><img src="assets/categories/bus-schedule.webp?h=b6fa2403" alt="বাসের সময়সূচি" width="360" height="360" decoding="async"></div>
         <h3 data-i18n="cat.busSchedule.title">বাসের সময়সূচি</h3>
         <p data-i18n="cat.busSchedule.desc">টাঙ্গাইল থেকে স্থানীয় ও আন্তঃজেলা বাসের হালনাগাদ সময়সূচি।</p>
       </a>
       <a class="cat-card cat-transport" href="train-schedule.html">
-        <div class="cat-icon"><span class="cat-icon-fa"><i class="fa-solid fa-train" aria-hidden="true"></i></span></div>
+        <div class="cat-thumb"><img src="assets/categories/train-schedule.webp?h=25967c61" alt="ট্রেনের সময়সূচি" width="360" height="360" decoding="async"></div>
         <h3 data-i18n="cat.trainSchedule.title">ট্রেনের সময়সূচি</h3>
         <p data-i18n="cat.trainSchedule.desc">বিভিন্ন রুটের ট্রেনের হালনাগাদ সময়সূচি।</p>
       </a>
       <a class="cat-card cat-beauty" href="parlour-salon.html">
-        <div class="cat-icon"><span class="cat-icon-fa"><i class="fa-solid fa-scissors" aria-hidden="true"></i></span></div>
+        <div class="cat-thumb"><img src="assets/categories/parlour-salon.webp?h=32579894" alt="পার্লার ও সেলুন" width="360" height="360" decoding="async"></div>
         <h3 data-i18n="cat.parlourSalon.title">পার্লার ও সেলুন</h3>
         <p data-i18n="cat.parlourSalon.desc">নারী ও পুরুষদের পার্লার এবং সেলুন সার্ভিসের তালিকা।</p>
       </a>
       <a class="cat-card cat-work" href="jobs.html">
-        <div class="cat-icon"><span class="cat-icon-fa"><i class="fa-solid fa-briefcase" aria-hidden="true"></i></span></div>
+        <div class="cat-thumb"><img src="assets/categories/jobs.webp?h=03ee959b" alt="চাকরি" width="360" height="360" decoding="async"></div>
         <h3 data-i18n="cat.jobs.title">চাকরি</h3>
         <p data-i18n="cat.jobs.desc">টাঙ্গাইলের স্থানীয় চাকরি ও ব্যবসায়িক সুযোগের আপডেট।</p>
       </a>
       <a class="cat-card cat-education" href="teacher-module.html">
-        <div class="cat-icon"><span class="cat-icon-fa"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i></span></div>
+        <div class="cat-thumb"><img src="assets/categories/tutor.webp?h=8b51cd15" alt="ছাত্র-শিক্ষক" width="360" height="360" decoding="async"></div>
         <h3 data-i18n="cat.teachersSchools.title">ছাত্র-শিক্ষক</h3>
         <p data-i18n="cat.teachersSchools.desc">প্রাইভেট টিউটর, কোচিং সেন্টার ও স্কুল-কলেজের যাচাইকৃত তথ্য।</p>
       </a>
       <a class="cat-card cat-education" href="teachers-schools.html">
-        <div class="cat-icon"><span class="cat-icon-fa"><i class="fa-solid fa-school" aria-hidden="true"></i></span></div>
+        <div class="cat-thumb"><img src="assets/categories/college.webp?h=6c226a47" alt="শিক্ষা প্রতিষ্ঠান" width="360" height="360" decoding="async"></div>
         <h3 data-i18n="cat.eduInstitute.title">শিক্ষা প্রতিষ্ঠান</h3>
         <p data-i18n="cat.eduInstitute.desc">স্কুল, কলেজ ও শিক্ষা প্রতিষ্ঠানের তালিকা ও যোগাযোগের তথ্য।</p>
       </a>
       <a class="cat-card cat-utility" href="electricity-office.html">
-        <div class="cat-icon"><span class="cat-icon-fa"><i class="fa-solid fa-bolt" aria-hidden="true"></i></span></div>
+        <div class="cat-thumb"><img src="assets/categories/electricity-office.webp?h=39672ae6" alt="বিদ্যুৎ অফিস" width="360" height="360" decoding="async"></div>
         <h3 data-i18n="cat.electricityOffice.title">বিদ্যুৎ অফিস</h3>
         <p data-i18n="cat.electricityOffice.desc">পল্লী বিদ্যুৎ ও বিদ্যুৎ অফিসের যোগাযোগ নম্বর ও অফিস সময়।</p>
       </a>
       <a class="cat-card cat-logistics" href="courier.html">
-        <div class="cat-icon"><span class="cat-icon-fa"><i class="fa-solid fa-box" aria-hidden="true"></i></span></div>
+        <div class="cat-thumb"><img src="assets/categories/courier.webp?h=058a18b0" alt="কুরিয়ার সার্ভিস" width="360" height="360" decoding="async"></div>
         <h3 data-i18n="cat.courier.title">কুরিয়ার সার্ভিস</h3>
         <p data-i18n="cat.courier.desc">কুরিয়ার ও পার্সেল ডেলিভারি সার্ভিসের শাখা ও নম্বর।</p>
       </a>
-      <a class="cat-card cat-transport" href="transport.html">
-        <div class="cat-icon"><span class="cat-icon-fa"><i class="fa-solid fa-plane" aria-hidden="true"></i></span></div>
-        <h3 data-i18n="cat.transport.title">ভ্রমণ</h3>
-        <p data-i18n="cat.transport.desc">সিএনজি, প্রাইভেট কার, মাইক্রোবাস ভাড়া ও পরিবহন তথ্য।</p>
-      </a>
-      <a class="cat-card cat-travel" href="houseboat.html">
-        <div class="cat-icon"><span class="cat-icon-fa"><i class="fa-solid fa-ship" aria-hidden="true"></i></span></div>
-        <h3 data-i18n="cat.houseboat.title">হাউসবোট</h3>
-        <p data-i18n="cat.houseboat.desc">যমুনা ও ধলেশ্বরী নদীতে হাউসবোট ভ্রমণ ও বুকিং সংক্রান্ত তথ্য।</p>
+      <a class="cat-card cat-transport" href="travel.html">
+        <div class="cat-thumb"><img src="assets/categories/travel.webp?h=e541792d" alt="ভ্রমণ" width="360" height="360" decoding="async"></div>
+        <h3 data-i18n="cat.travel.title">ভ্রমণ</h3>
+        <p data-i18n="cat.travel.desc">টাঙ্গাইল জেলার ভ্রমণ, ট্যুর প্ল্যান ও ঘুরতে যাওয়ার তথ্য।</p>
       </a>
       <a class="cat-card cat-travel" href="hotel.html">
-        <div class="cat-icon"><span class="cat-icon-fa"><i class="fa-solid fa-hotel" aria-hidden="true"></i></span></div>
-        <h3 data-i18n="cat.hotel.title">হোটেল</h3>
+        <div class="cat-thumb"><img src="assets/categories/hotel.webp?h=0728fbe4" alt="আবাসিক হোটেল" width="360" height="360" decoding="async"></div>
+        <h3 data-i18n="cat.hotel.title">আবাসিক হোটেল</h3>
         <p data-i18n="cat.hotel.desc">থাকার জন্য হোটেল ও গেস্ট হাউজের তালিকা।</p>
       </a>
       <a class="cat-card cat-travel" href="tourist-spot.html">
-        <div class="cat-icon"><span class="cat-icon-fa"><i class="fa-solid fa-map-location-dot" aria-hidden="true"></i></span></div>
+        <div class="cat-thumb"><img src="assets/categories/tourist-spot.webp?h=0850ff86" alt="দর্শনীয় স্থান" width="360" height="360" decoding="async"></div>
         <h3 data-i18n="cat.touristSpot.title">দর্শনীয় স্থান</h3>
         <p data-i18n="cat.touristSpot.desc">বিখ্যাত দর্শনীয় স্থান ও পর্যটন কেন্দ্রের তথ্য।</p>
       </a>
       <a class="cat-card cat-personal" href="matrimony.html">
-        <div class="cat-icon"><span class="cat-icon-fa"><i class="fa-solid fa-heart" aria-hidden="true"></i></span></div>
+        <div class="cat-thumb"><img src="assets/categories/matrimony.webp?h=1ec6b102" alt="পাত্র-পাত্রী" width="360" height="360" decoding="async"></div>
         <h3 data-i18n="cat.matrimonial.title">পাত্র-পাত্রী</h3>
         <p data-i18n="cat.matrimonial.desc">বিশ্বস্ত পাত্র-পাত্রী খোঁজার প্ল্যাটফর্ম — পারিবারিকভাবে যোগাযোগের জন্য।</p>
       </a>
       <a class="cat-card cat-legal" href="lawyer.html">
-        <div class="cat-icon"><span class="cat-icon-fa"><i class="fa-solid fa-scale-balanced" aria-hidden="true"></i></span></div>
+        <div class="cat-thumb"><img src="assets/categories/lawyer.webp?h=04409311" alt="আইনজীবী" width="360" height="360" decoding="async"></div>
         <h3 data-i18n="cat.legalHelp.title">আইনজীবী</h3>
         <p data-i18n="cat.legalHelp.desc">আইনজীবী, নোটারি ও আইনি পরামর্শের জন্য যাচাইকৃত যোগাযোগ।</p>
       </a>
       <a class="cat-card cat-work" href="business-directory.html">
-        <div class="cat-icon"><span class="cat-icon-fa"><i class="fa-solid fa-user-tie" aria-hidden="true"></i></span></div>
+        <div class="cat-thumb"><img src="assets/categories/entrepreneur.webp?h=a2573fbb" alt="উদ্যোক্তা" width="360" height="360" decoding="async"></div>
         <h3 data-i18n="cat.entrepreneur.title">উদ্যোক্তা</h3>
         <p data-i18n="cat.entrepreneur.desc">নতুন উদ্যোক্তা ও স্থানীয় স্টার্টআপদের পরিচিতি ও যোগাযোগের তথ্য।</p>
       </a>
       <a class="cat-card cat-nature" href="nursery.html">
-        <div class="cat-icon"><span class="cat-icon-fa"><i class="fa-solid fa-seedling" aria-hidden="true"></i></span></div>
+        <div class="cat-thumb"><img src="assets/categories/nursery.webp?h=e5b960a8" alt="নার্সারি" width="360" height="360" decoding="async"></div>
         <h3 data-i18n="cat.nursery.title">নার্সারি</h3>
         <p data-i18n="cat.nursery.desc">ফুল, ফল ও শোভাবর্ধনকারী গাছের চারা বিক্রয়কারীর তথ্য।</p>
       </a>
       <a class="cat-card cat-gov" href="public-representative.html">
-        <div class="cat-icon"><span class="cat-icon-fa"><i class="fa-solid fa-landmark" aria-hidden="true"></i></span></div>
+        <div class="cat-thumb"><img src="assets/categories/public-representative.webp?h=b54517b0" alt="জনপ্রতিনিধি" width="360" height="360" decoding="async"></div>
         <h3 data-i18n="cat.publicRep.title">জনপ্রতিনিধি</h3>
         <p data-i18n="cat.publicRep.desc">সংসদ সদস্য, মেয়র ও চেয়ারম্যানদের কার্যালয়ের তথ্য।</p>
       </a>
       <a class="cat-card cat-web" href="website-links.html">
-        <div class="cat-icon"><span class="cat-icon-fa"><i class="fa-solid fa-globe" aria-hidden="true"></i></span></div>
-        <h3 data-i18n="cat.websiteLinks.title">ওয়েবসাইট</h3>
-        <p data-i18n="cat.websiteLinks.desc">গুরুত্বপূর্ণ সরকারি ও স্থানীয় ওয়েবসাইটের তালিকা।</p>
-      </a>
-      <a class="cat-card cat-finance" href="income-expense.html">
-        <div class="cat-icon"><span class="cat-icon-fa"><i class="fa-solid fa-sack-dollar" aria-hidden="true"></i></span></div>
-        <h3 data-i18n="cat.incomeExpense.title">আয়-ব্যয়</h3>
-        <p data-i18n="cat.incomeExpense.desc">স্থানীয় সরকার প্রতিষ্ঠানের আয়-ব্যয় ও স্বচ্ছতা সংক্রান্ত তথ্য।</p>
+        <div class="cat-thumb"><img src="assets/categories/newspaper.webp?h=b6b1785a" alt="নিউজ পেপার" width="360" height="360" decoding="async"></div>
+        <h3 data-i18n="cat.websiteLinks.title">নিউজ পেপার</h3>
+        <p data-i18n="cat.websiteLinks.desc">স্থানীয় ও জাতীয় নিউজ পেপার ও অনলাইন সংবাদ পোর্টালের তালিকা।</p>
       </a>
       <a class="cat-card cat-heritage" href="handloom.html">
-        <div class="cat-icon"><span class="cat-icon-fa"><i class="fa-solid fa-shirt" aria-hidden="true"></i></span></div>
-        <h3 data-i18n="cat.handloom.title">তাঁত ও কারুশিল্প</h3>
-        <p data-i18n="cat.handloom.desc">বিখ্যাত টাঙ্গাইল শাড়ি ও তাঁতপণ্যের কারিগর, তাঁতঘর ও বিক্রয়কেন্দ্র।</p>
+        <div class="cat-thumb"><img src="assets/categories/viral-places.webp?h=62aed510" alt="ভাইরাল প্লেস" width="360" height="360" decoding="async"></div>
+        <h3 data-i18n="cat.handloom.title">ভাইরাল প্লেস</h3>
+        <p data-i18n="cat.handloom.desc">টাঙ্গাইলের জনপ্রিয় ও ভাইরাল দর্শনীয় স্থান।</p>
       </a>
     </section>
+    <script src="js/home-order.js?v=20260924073609"></script>
 
     <section class="home-posts-section" id="homePostsSection">
       <div class="home-posts-head">
@@ -291,23 +284,23 @@
 </nav>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-<script src="js/supabase-config.js?v=20260922203957"></script>
-<script src="js/nav-avatar.js?v=20260922203957"></script>
-<script src="js/call.js?v=20260922203957"></script>
-<script src="js/sticky-header.js?v=20260922203957"></script>
-<script src="js/banner-slider.js?v=20260922203957"></script>
-<script src="js/home-banners.js?v=20260922203957"></script>
-<script src="js/notice-bar.js?v=20260922203957"></script>
-<script src="js/i18n.js?v=20260922203957"></script>
-<script src="js/cat-label-fit.js?v=20260922203957"></script>
-<script src="js/search-index.js?v=20260922203957"></script>
-<script src="js/smart-search.js?v=20260922203957"></script>
-<script src="js/search-ui.js?v=20260922203957"></script>
-<script src="js/script.js?v=20260922203957"></script>
-<script src="js/favorite-categories.js?v=20260922203957"></script>
-<script src="js/home-posts-preview.js?v=20260922203957"></script>
-<script src="js/popup-ad.js?v=20260922203957"></script>
-<script src="js/auto-update.js?v=20260922203957"></script>
-<script src="js/floating-buttons.js?v=20260922203957"></script>
+<script src="js/supabase-config.js?v=20260924073609"></script>
+<script src="js/nav-avatar.js?v=20260924073609"></script>
+<script src="js/call.js?v=20260924073609"></script>
+<script src="js/sticky-header.js?v=20260924073609"></script>
+<script src="js/banner-slider.js?v=20260924073609"></script>
+<script src="js/home-banners.js?v=20260924073609"></script>
+<script src="js/notice-bar.js?v=20260924073609"></script>
+<script src="js/i18n.js?v=20260924073609"></script>
+<script src="js/cat-label-fit.js?v=20260924073609"></script>
+<script src="js/search-index.js?v=20260924073609"></script>
+<script src="js/smart-search.js?v=20260924073609"></script>
+<script src="js/search-ui.js?v=20260924073609"></script>
+<script src="js/script.js?v=20260924073609"></script>
+<script src="js/favorite-categories.js?v=20260924073609"></script>
+<script src="js/home-posts-preview.js?v=20260924073609"></script>
+<script src="js/popup-ad.js?v=20260924073609"></script>
+<script src="js/auto-update.js?v=20260924073609"></script>
+<script src="js/floating-buttons.js?v=20260924073609"></script>
 </body>
 </html>

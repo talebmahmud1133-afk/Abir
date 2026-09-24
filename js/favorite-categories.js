@@ -6,44 +6,41 @@
 // টেবিল না থাকলে বা নেট না থাকলে চুপচাপ শুধু লোকাল সংরক্ষণে চলে, কিছু ভাঙে না।
 // supabase-js, js/supabase-config.js ও (থাকলে) js/i18n.js-এর পরে যোগ করতে হবে।
 (function () {
-  // key = কার্ডের শিরোনামের ভাষা-কী (index.html-এর data-i18n); h = লিংক; c = রঙের ক্লাস; i = আইকন; n = ডিফল্ট বাংলা নাম
+  // key = কার্ডের শিরোনামের ভাষা-কী (index.html-এর data-i18n); h = লিংক; c = রঙের ক্লাস; i = আইকন (ছবি না থাকলে ফলব্যাক); n = ডিফল্ট বাংলা নাম; g = হোম পেজের সেই একই ছবি (assets/categories/<g>.webp) — না থাকলে আইকন দেখাবে
   var CATS = [
-    { k: "cat.emergency.title", h: "ambulance.html", c: "cat-emergency", i: "fa-truck-medical", n: "অ্যাম্বুলেন্স" },
-    { k: "cat.fireService.title", h: "fire-service.html", c: "cat-emergency", i: "fa-fire", n: "ফায়ার সার্ভিস" },
-    { k: "cat.police.title", h: "police.html", c: "cat-emergency", i: "fa-shield-halved", n: "থানা-পুলিশ" },
-    { k: "cat.hospitals.title", h: "hospitals.html", c: "cat-medical", i: "fa-hospital", n: "হাসপাতাল" },
-    { k: "cat.doctors.title", h: "doctors.html", c: "cat-medical", i: "fa-user-doctor", n: "ডাক্তার" },
-    { k: "cat.diagnostic.title", h: "diagnostic.html", c: "cat-medical", i: "fa-microscope", n: "ডায়াগনস্টিক" },
-    { k: "cat.bloodDonors.title", h: "blood-donors.html", c: "cat-blood", i: "fa-droplet", n: "রক্তদান" },
-    { k: "cat.emergencyNumbers.title", h: "emergency.html", c: "cat-emergency", i: "fa-phone-volume", n: "জরুরি নাম্বার" },
-    { k: "cat.help.title", h: "help.html", c: "cat-help", i: "fa-handshake", n: "সহায়তা" },
-    { k: "cat.businessDirectory.title", h: "business-directory.html", c: "cat-work", i: "fa-store", n: "দোকান" },
-    { k: "cat.buySell.title", h: "buy-sell.html", c: "cat-market", i: "fa-cart-shopping", n: "ক্রয় ও বিক্রয়" },
-    { k: "cat.restaurants.title", h: "restaurants.html", c: "cat-food", i: "fa-utensils", n: "রেস্টুরেন্ট" },
-    { k: "cat.houseRent.title", h: "house-rent.html", c: "cat-property", i: "fa-house", n: "বাসা ভাড়া" },
-    { k: "cat.flatLand.title", h: "flat-land.html", c: "cat-property", i: "fa-city", n: "ফ্ল্যাট ও জমি" },
-    { k: "cat.carRent.title", h: "transport.html", c: "cat-transport", i: "fa-car", n: "গাড়ি ভাড়া" },
-    { k: "cat.mechanic.title", h: "mechanic.html", c: "cat-repair", i: "fa-screwdriver-wrench", n: "মিস্ত্রি/বুয়া" },
-    { k: "cat.busSchedule.title", h: "bus-schedule.html", c: "cat-transport", i: "fa-bus", n: "বাসের সময়সূচি" },
-    { k: "cat.trainSchedule.title", h: "train-schedule.html", c: "cat-transport", i: "fa-train", n: "ট্রেনের সময়সূচি" },
-    { k: "cat.parlourSalon.title", h: "parlour-salon.html", c: "cat-beauty", i: "fa-scissors", n: "পার্লার ও সেলুন" },
-    { k: "cat.jobs.title", h: "jobs.html", c: "cat-work", i: "fa-briefcase", n: "চাকরি" },
-    { k: "cat.teachersSchools.title", h: "teacher-module.html", c: "cat-education", i: "fa-graduation-cap", n: "ছাত্র-শিক্ষক" },
-    { k: "cat.eduInstitute.title", h: "teachers-schools.html", c: "cat-education", i: "fa-school", n: "শিক্ষা প্রতিষ্ঠান" },
-    { k: "cat.electricityOffice.title", h: "electricity-office.html", c: "cat-utility", i: "fa-bolt", n: "বিদ্যুৎ অফিস" },
-    { k: "cat.courier.title", h: "courier.html", c: "cat-logistics", i: "fa-box", n: "কুরিয়ার সার্ভিস" },
-    { k: "cat.transport.title", h: "transport.html", c: "cat-transport", i: "fa-plane", n: "ভ্রমণ" },
-    { k: "cat.houseboat.title", h: "houseboat.html", c: "cat-travel", i: "fa-ship", n: "হাউসবোট" },
-    { k: "cat.hotel.title", h: "hotel.html", c: "cat-travel", i: "fa-hotel", n: "হোটেল" },
-    { k: "cat.touristSpot.title", h: "tourist-spot.html", c: "cat-travel", i: "fa-map-location-dot", n: "দর্শনীয় স্থান" },
-    { k: "cat.matrimonial.title", h: "matrimony.html", c: "cat-personal", i: "fa-heart", n: "পাত্র-পাত্রী" },
-    { k: "cat.legalHelp.title", h: "lawyer.html", c: "cat-legal", i: "fa-scale-balanced", n: "আইনজীবী" },
-    { k: "cat.entrepreneur.title", h: "business-directory.html", c: "cat-work", i: "fa-user-tie", n: "উদ্যোক্তা" },
-    { k: "cat.nursery.title", h: "nursery.html", c: "cat-nature", i: "fa-seedling", n: "নার্সারি" },
-    { k: "cat.publicRep.title", h: "public-representative.html", c: "cat-gov", i: "fa-landmark", n: "জনপ্রতিনিধি" },
-    { k: "cat.websiteLinks.title", h: "website-links.html", c: "cat-web", i: "fa-globe", n: "ওয়েবসাইট" },
-    { k: "cat.incomeExpense.title", h: "income-expense.html", c: "cat-finance", i: "fa-sack-dollar", n: "আয়-ব্যয়" },
-    { k: "cat.handloom.title", h: "handloom.html", c: "cat-heritage", i: "fa-shirt", n: "তাঁত ও কারুশিল্প" }
+    { k: "cat.fireService.title", h: "fire-service.html", c: "cat-emergency", i: "fa-fire", n: "ফায়ার সার্ভিস", g: "fire-service" },
+    { k: "cat.police.title", h: "police.html", c: "cat-emergency", i: "fa-shield-halved", n: "থানা-পুলিশ", g: "police" },
+    { k: "cat.hospitals.title", h: "hospitals.html", c: "cat-medical", i: "fa-hospital", n: "হাসপাতাল", g: "hospitals" },
+    { k: "cat.doctors.title", h: "doctors.html", c: "cat-medical", i: "fa-user-doctor", n: "ডাক্তার", g: "doctors" },
+    { k: "cat.diagnostic.title", h: "diagnostic.html", c: "cat-medical", i: "fa-microscope", n: "ডায়াগনস্টিক", g: "diagnostic" },
+    { k: "cat.bloodDonors.title", h: "blood-donors.html", c: "cat-blood", i: "fa-droplet", n: "রক্তদান", g: "blood-donors" },
+    { k: "cat.emergencyNumbers.title", h: "emergency.html", c: "cat-emergency", i: "fa-phone-volume", n: "জরুরি নাম্বার", g: "emergency" },
+    { k: "cat.help.title", h: "help.html", c: "cat-help", i: "fa-handshake", n: "সহায়তা", g: "help" },
+    { k: "cat.businessDirectory.title", h: "business-directory.html", c: "cat-work", i: "fa-store", n: "দোকান", g: "shop" },
+    { k: "cat.buySell.title", h: "buy-sell.html", c: "cat-market", i: "fa-cart-shopping", n: "ক্রয় ও বিক্রয়", g: "buy-sell" },
+    { k: "cat.restaurants.title", h: "restaurants.html", c: "cat-food", i: "fa-utensils", n: "রেস্টুরেন্ট", g: "restaurants" },
+    { k: "cat.houseRent.title", h: "house-rent.html", c: "cat-property", i: "fa-house", n: "বাসা ভাড়া", g: "house-rent" },
+    { k: "cat.flatLand.title", h: "flat-land.html", c: "cat-property", i: "fa-city", n: "ফ্ল্যাট ও জমি", g: "flat-land" },
+    { k: "cat.carRent.title", h: "transport.html", c: "cat-transport", i: "fa-car", n: "গাড়ি ভাড়া", g: "car-rent" },
+    { k: "cat.mechanic.title", h: "mechanic.html", c: "cat-repair", i: "fa-screwdriver-wrench", n: "বুয়া", g: "maid" },
+    { k: "cat.busSchedule.title", h: "bus-schedule.html", c: "cat-transport", i: "fa-bus", n: "বাসের সময়সূচি", g: "bus-schedule" },
+    { k: "cat.trainSchedule.title", h: "train-schedule.html", c: "cat-transport", i: "fa-train", n: "ট্রেনের সময়সূচি", g: "train-schedule" },
+    { k: "cat.parlourSalon.title", h: "parlour-salon.html", c: "cat-beauty", i: "fa-scissors", n: "পার্লার ও সেলুন", g: "parlour-salon" },
+    { k: "cat.jobs.title", h: "jobs.html", c: "cat-work", i: "fa-briefcase", n: "চাকরি", g: "jobs" },
+    { k: "cat.teachersSchools.title", h: "teacher-module.html", c: "cat-education", i: "fa-graduation-cap", n: "ছাত্র-শিক্ষক", g: "tutor" },
+    { k: "cat.eduInstitute.title", h: "teachers-schools.html", c: "cat-education", i: "fa-school", n: "শিক্ষা প্রতিষ্ঠান", g: "college" },
+    { k: "cat.electricityOffice.title", h: "electricity-office.html", c: "cat-utility", i: "fa-bolt", n: "বিদ্যুৎ অফিস", g: "electricity-office" },
+    { k: "cat.courier.title", h: "courier.html", c: "cat-logistics", i: "fa-box", n: "কুরিয়ার সার্ভিস", g: "courier" },
+    { k: "cat.travel.title", h: "travel.html", c: "cat-transport", i: "fa-plane", n: "ভ্রমণ", g: "travel" },
+    { k: "cat.hotel.title", h: "hotel.html", c: "cat-travel", i: "fa-hotel", n: "আবাসিক হোটেল", g: "hotel" },
+    { k: "cat.touristSpot.title", h: "tourist-spot.html", c: "cat-travel", i: "fa-map-location-dot", n: "দর্শনীয় স্থান", g: "tourist-spot" },
+    { k: "cat.matrimonial.title", h: "matrimony.html", c: "cat-personal", i: "fa-heart", n: "পাত্র-পাত্রী", g: "matrimony" },
+    { k: "cat.legalHelp.title", h: "lawyer.html", c: "cat-legal", i: "fa-scale-balanced", n: "আইনজীবী", g: "lawyer" },
+    { k: "cat.entrepreneur.title", h: "business-directory.html", c: "cat-work", i: "fa-user-tie", n: "উদ্যোক্তা", g: "entrepreneur" },
+    { k: "cat.nursery.title", h: "nursery.html", c: "cat-nature", i: "fa-seedling", n: "নার্সারি", g: "nursery" },
+    { k: "cat.publicRep.title", h: "public-representative.html", c: "cat-gov", i: "fa-landmark", n: "জনপ্রতিনিধি", g: "public-representative" },
+    { k: "cat.websiteLinks.title", h: "website-links.html", c: "cat-web", i: "fa-globe", n: "নিউজ পেপার", g: "newspaper" },
+    { k: "cat.handloom.title", h: "handloom.html", c: "cat-heritage", i: "fa-shirt", n: "ভাইরাল প্লেস", g: "viral-places" }
   ];
   var BY_KEY = {};
   CATS.forEach(function (c) { BY_KEY[c.k] = c; });
@@ -224,11 +221,25 @@
       if (!cat) { return; }
       var a = el('a', 'cat-card ' + cat.c);
       a.href = cat.h;
-      var ic = el('div', 'cat-icon');
-      var sp = el('span', 'cat-icon-fa');
-      sp.appendChild(el('i', 'fa-solid ' + cat.i));
-      ic.appendChild(sp);
-      a.appendChild(ic);
+      if (cat.g) {
+        // হোম পেজে যে ছবি (assets/categories/<g>.webp) দেখানো হয়, এখানেও ঠিক সেই একই ছবি
+        var thumb = el('div', 'cat-thumb');
+        var img = document.createElement('img');
+        img.src = 'assets/categories/' + cat.g + '.webp';
+        img.alt = label(cat);
+        img.width = 180;
+        img.height = 180;
+        img.decoding = 'async';
+        img.loading = 'lazy';
+        thumb.appendChild(img);
+        a.appendChild(thumb);
+      } else {
+        var ic = el('div', 'cat-icon');
+        var sp = el('span', 'cat-icon-fa');
+        sp.appendChild(el('i', 'fa-solid ' + cat.i));
+        ic.appendChild(sp);
+        a.appendChild(ic);
+      }
       var h3 = el('h3');
       h3.setAttribute('data-i18n', cat.k);
       h3.textContent = label(cat);

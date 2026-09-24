@@ -11,8 +11,8 @@
 <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
 <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
 <link rel="manifest" href="manifest.json">
-<link rel="stylesheet" href="css/style.css?v=20260922203957">
-<link rel="stylesheet" href="css/inbox.css?v=20260922203957">
+<link rel="stylesheet" href="css/style.css?v=20260924073609">
+<link rel="stylesheet" href="css/inbox.css?v=20260924073609">
 <style>
   /* ---- উপরের চিকন বার: ব্যাক বাটন + শিরোনাম + সেটিং আইকন ---- */
   .profile-topbar{
@@ -157,6 +157,21 @@
   .pf-row{ display: flex; align-items: center; gap: 12px; padding: 13px 0; border-bottom: 1px solid var(--line); font-size: 0.95rem; }
   .pf-row:last-child{ border-bottom: 0; }
 
+
+  /* ---- তথ্য ট্যাব: কমপ্যাক্ট কার্ড, মোবাইল নম্বর মাস্ক, ঠিকানা কলাপ্সেবল ---- */
+  .pf-info-card{ background: #f7f9fa; border: 1px solid var(--line); border-radius: 14px; padding: 4px 14px 2px; margin: 14px 0 0; }
+  .pf-info-card h3{ display: flex; align-items: center; gap: 8px; font-size: 0.82rem; letter-spacing: 0.02em; color: var(--ink-soft); margin: 10px 0 2px; font-weight: 700; }
+  .pf-info-card h3 i{ color: var(--maroon); font-size: 0.9rem; }
+  .pf-info-card .pf-row{ padding: 9px 0; font-size: 0.9rem; }
+  .pf-info-card .pf-row .k{ flex: 0 0 76px; font-size: 0.85rem; }
+  .pf-info-card .pf-addr-more[hidden]{ display: none; }
+  .pf-info-card .pf-addr-more .pf-row:last-child{ border-bottom: 1px solid var(--line); }
+  .pf-eye{ flex: 0 0 auto; width: 34px; height: 34px; margin: -6px -6px -6px 0; border: 0; border-radius: 50%; background: transparent; color: var(--maroon); font-size: 1rem; cursor: pointer; }
+  .pf-eye:active{ background: #e8f3ec; }
+  .pf-more-btn{ display: flex; align-items: center; justify-content: center; gap: 6px; width: 100%; padding: 10px 0 11px; border: 0; background: none; color: var(--maroon); font-family: inherit; font-size: 0.88rem; font-weight: 700; cursor: pointer; }
+  .pf-more-btn i{ font-size: 0.75rem; transition: transform 0.2s ease; }
+  .pf-more-btn[aria-expanded="true"] i{ transform: rotate(180deg); }
+
   /* ---- "মোট পোস্ট" ট্যাব: মোট সংখ্যা + নিজের পোস্টের তালিকা ---- */
   .pf-total{ display: flex; align-items: baseline; justify-content: center; gap: 10px; padding: 18px 0 6px; }
   .pf-total-num{ font-size: 2.4rem; font-weight: 700; line-height: 1; color: var(--maroon); }
@@ -248,6 +263,10 @@
   .pf-fav-grid .cat-card:active{ border-color: var(--gold); }
   .pf-fav-grid .cat-card .cat-icon{ width: auto; height: auto; background: none !important; font-size: 1.9rem; margin: 0 auto 8px; }
   .pf-fav-grid .cat-card .cat-icon-fa{ font-size: 1.9rem; line-height: 1; display: block; }
+  /* হোম পেজের মতো একই আসল ছবি — ফেভারিট কার্ডেও */
+  .pf-fav-grid .cat-card{ padding: 8px 6px 10px; }
+  .pf-fav-grid .cat-card .cat-thumb{ position: relative; width: 100%; aspect-ratio: 1 / 1; border-radius: 12px; overflow: hidden; margin: 0 0 8px; background: #eef1f3; }
+  .pf-fav-grid .cat-card .cat-thumb img{ position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
   .pf-fav-grid .cat-card h3{
     font-size: 0.72rem; line-height: 1.2; font-weight: 700; color: #1a2530; margin: 0; width: 100%; padding: 0 2px;
     display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; overflow-wrap: anywhere;
@@ -281,7 +300,6 @@
 
     <div class="profile-card" id="profileCard" hidden>
       <div class="profile-cover" id="profileCover">
-        <span class="pf-brand" aria-hidden="true"><img src="assets/icons/icon-192.png" alt="" width="28" height="28"><span>টাঙ্গাইল<br>জেলা</span></span>
         <button type="button" class="profile-cover-edit" id="coverEditBtn" aria-label="ব্যানার পরিবর্তন করুন">
           <i class="fa-solid fa-camera" aria-hidden="true"></i><span>ব্যানার</span>
         </button>
@@ -378,17 +396,23 @@
       </nav>
 
       <section class="pf-panel" id="updatedProfileSection" data-pf-panel="info">
-        <h3>ব্যক্তিগত তথ্য</h3>
-        <div class="pf-row"><i class="fa-solid fa-phone" aria-hidden="true"></i><span class="k">মোবাইল</span><span class="v" id="updPhoneVal">—</span></div>
-        <div class="pf-row"><i class="fa-solid fa-at" aria-hidden="true"></i><span class="k">ইউজারনেম</span><span class="v" id="profileUsernameVal">—</span></div>
-        <div class="pf-row"><i class="fa-solid fa-calendar-check" aria-hidden="true"></i><span class="k">সদস্য হয়েছেন</span><span class="v" id="profileJoined">—</span></div>
+        <div class="pf-info-card">
+          <h3><i class="fa-solid fa-id-card" aria-hidden="true"></i> ব্যক্তিগত তথ্য</h3>
+          <div class="pf-row"><i class="fa-solid fa-at" aria-hidden="true"></i><span class="k">ইউজারনেম</span><span class="v" id="profileUsernameVal">—</span></div>
+          <div class="pf-row"><i class="fa-solid fa-calendar-check" aria-hidden="true"></i><span class="k">সদস্য</span><span class="v" id="profileJoined">—</span></div>
+          <div class="pf-row" id="pfPhoneRow"><i class="fa-solid fa-phone" aria-hidden="true"></i><span class="k">মোবাইল</span><span class="v" id="updPhoneVal">—</span><button type="button" class="pf-eye" id="pfPhoneToggle" aria-label="মোবাইল নম্বর দেখান" aria-pressed="false"><i class="fa-solid fa-eye" aria-hidden="true"></i></button></div>
+        </div>
 
-        <h3>ঠিকানা</h3>
-        <div class="pf-row"><i class="fa-solid fa-house" aria-hidden="true"></i><span class="k">গ্রাম</span><span class="v" id="updVillageVal">—</span></div>
-        <div class="pf-row"><i class="fa-solid fa-building-columns" aria-hidden="true"></i><span class="k">ইউনিয়ন</span><span class="v" id="updUnionVal">—</span></div>
-        <div class="pf-row"><i class="fa-solid fa-location-dot" aria-hidden="true"></i><span class="k">থানা</span><span class="v" id="updThanaVal">—</span></div>
-        <div class="pf-row"><i class="fa-solid fa-map" aria-hidden="true"></i><span class="k">জেলা</span><span class="v" id="updDistrictVal">—</span></div>
-
+        <div class="pf-info-card">
+          <h3><i class="fa-solid fa-location-dot" aria-hidden="true"></i> ঠিকানা</h3>
+          <div class="pf-row"><i class="fa-solid fa-location-dot" aria-hidden="true"></i><span class="k">থানা</span><span class="v" id="updThanaVal">—</span></div>
+          <div class="pf-row"><i class="fa-solid fa-map" aria-hidden="true"></i><span class="k">জেলা</span><span class="v" id="updDistrictVal">—</span></div>
+          <div class="pf-addr-more" id="pfAddrMore" hidden>
+            <div class="pf-row"><i class="fa-solid fa-house" aria-hidden="true"></i><span class="k">গ্রাম</span><span class="v" id="updVillageVal">—</span></div>
+            <div class="pf-row"><i class="fa-solid fa-building-columns" aria-hidden="true"></i><span class="k">ইউনিয়ন</span><span class="v" id="updUnionVal">—</span></div>
+          </div>
+          <button type="button" class="pf-more-btn" id="pfAddrToggle" aria-expanded="false" aria-controls="pfAddrMore"><span>সম্পূর্ণ ঠিকানা দেখুন</span> <i class="fa-solid fa-chevron-down" aria-hidden="true"></i></button>
+        </div>
       </section>
 
       <section class="pf-panel" data-pf-panel="messages" hidden>
@@ -518,10 +542,10 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-<script src="js/supabase-config.js?v=20260922203957"></script>
-<script src="js/nav-avatar.js?v=20260922203957"></script>
-<script src="js/call.js?v=20260922203957"></script>
-<script src="js/image-cropper.js?v=20260922203957"></script>
+<script src="js/supabase-config.js?v=20260924073609"></script>
+<script src="js/nav-avatar.js?v=20260924073609"></script>
+<script src="js/call.js?v=20260924073609"></script>
+<script src="js/image-cropper.js?v=20260924073609"></script>
 <script>
 (function () {
   var client = window.supabase.createClient(window.TANGAIL_SUPABASE.url, window.TANGAIL_SUPABASE.key);
@@ -1952,11 +1976,56 @@
   });
 })();
 </script>
-<script src="js/i18n.js?v=20260922203957"></script>
-<script src="js/favorite-categories.js?v=20260922203957"></script>
-<script src="js/script.js?v=20260922203957"></script>
-<script src="js/profile-inbox.js?v=20260922203957"></script>
-<script src="js/auto-update.js?v=20260922203957"></script>
-<script src="js/floating-buttons.js?v=20260922203957"></script>
+<script src="js/i18n.js?v=20260924073609"></script>
+<script src="js/favorite-categories.js?v=20260924073609"></script>
+<script src="js/script.js?v=20260924073609"></script>
+<script src="js/profile-inbox.js?v=20260924073609"></script>
+<script src="js/auto-update.js?v=20260924073609"></script>
+<script src="js/floating-buttons.js?v=20260924073609"></script>
+<script>
+/* তথ্য ট্যাব: মোবাইল নম্বর ডিফল্টে মাস্ক করা, আইকনে ট্যাপ করলে দেখা যায়; সম্পূর্ণ ঠিকানা কলাপ্সেবল */
+(function () {
+  var phoneEl = document.getElementById('updPhoneVal');
+  var eyeBtn = document.getElementById('pfPhoneToggle');
+  var addrBtn = document.getElementById('pfAddrToggle');
+  var addrBox = document.getElementById('pfAddrMore');
+  if (phoneEl && eyeBtn) {
+    var raw = '';
+    var shown = false;
+    var lastText = null; // আমরা নিজে সর্বশেষ যা লিখেছি — MutationObserver-এর অসীম লুপ ঠেকাতে
+    function mask(t) {
+      if (!t || t === '—') return '—';
+      if (t.length <= 5) return t;
+      return t.slice(0, 3) + '•'.repeat(t.length - 5) + t.slice(-2);
+    }
+    function render() {
+      var out = shown ? (raw || '—') : mask(raw);
+      if (phoneEl.textContent !== out) { phoneEl.textContent = out; }
+      lastText = out;
+      eyeBtn.setAttribute('aria-pressed', shown ? 'true' : 'false');
+      eyeBtn.setAttribute('aria-label', shown ? 'মোবাইল নম্বর লুকান' : 'মোবাইল নম্বর দেখান');
+      eyeBtn.firstElementChild.className = shown ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye';
+    }
+    var mo = new MutationObserver(function () {
+      var t = phoneEl.textContent.trim();
+      if (t === lastText) { return; } // আমাদের নিজের লেখা পরিবর্তন — উপেক্ষা
+      raw = t;
+      render();
+    });
+    mo.observe(phoneEl, { childList: true, characterData: true, subtree: true });
+    raw = phoneEl.textContent.trim();
+    render();
+    eyeBtn.addEventListener('click', function () { shown = !shown; render(); });
+  }
+  if (addrBtn && addrBox) {
+    addrBtn.addEventListener('click', function () {
+      var open = addrBox.hidden;
+      addrBox.hidden = !open;
+      addrBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      addrBtn.firstElementChild.textContent = open ? 'ঠিকানা লুকান' : 'সম্পূর্ণ ঠিকানা দেখুন';
+    });
+  }
+})();
+</script>
 </body>
 </html>

@@ -41,10 +41,8 @@ window.TZ_I18N = {
     "cat.entrepreneur.desc": { bn: "নতুন উদ্যোক্তা ও স্থানীয় স্টার্টআপদের পরিচিতি ও যোগাযোগের তথ্য।", en: "Profiles and contact information of new entrepreneurs and local startups." },
     "cat.doctors.title": { bn: "ডাক্তার", en: "Doctor" },
     "cat.doctors.desc": { bn: "টাঙ্গাইল জেলার বিশেষজ্ঞ ডাক্তারদের তালিকা ও যোগাযোগ নম্বর।", en: "List of specialist doctors in Tangail with contact numbers." },
-    "cat.emergency.title": { bn: "অ্যাম্বুলেন্স", en: "Ambulance" },
-    "cat.emergency.desc": { bn: "১২টি থানায় দ্রুত অ্যাম্বুলেন্স বুকিং, রিয়েল-টাইম রিকোয়েস্ট ও যাচাইকৃত সার্ভিস প্রোভাইডার।", en: "Fast ambulance booking, real-time requests, and verified service providers across all 12 upazilas." },
-    "cat.transport.title": { bn: "ভ্রমণ", en: "Travel" },
-    "cat.transport.desc": { bn: "সিএনজি, প্রাইভেট কার, মাইক্রোবাস ভাড়া ও পরিবহন তথ্য।", en: "CNG, private car, microbus rental and transport information." },
+    "cat.travel.title": { bn: "ভ্রমণ", en: "Travel" },
+    "cat.travel.desc": { bn: "টাঙ্গাইল জেলার ভ্রমণ, ট্যুর প্ল্যান ও ঘুরতে যাওয়ার তথ্য।", en: "Travel, tour planning, and sightseeing information for Tangail District." },
     "cat.jobs.title": { bn: "চাকরি", en: "Job" },
     "cat.jobs.desc": { bn: "টাঙ্গাইলের স্থানীয় চাকরি ও ব্যবসায়িক সুযোগের আপডেট।", en: "Updates on local jobs and business opportunities in Tangail." },
     "cat.houseRent.title": { bn: "বাসা ভাড়া", en: "House Rent" },
@@ -59,8 +57,8 @@ window.TZ_I18N = {
     "cat.busSchedule.desc": { bn: "টাঙ্গাইল থেকে স্থানীয় ও আন্তঃজেলা বাসের হালনাগাদ সময়সূচি।", en: "Updated local and inter-district bus schedules from Tangail." },
     "cat.restaurants.title": { bn: "রেস্টুরেন্ট", en: "Restaurant" },
     "cat.restaurants.desc": { bn: "টাঙ্গাইলের জনপ্রিয় স্থানীয় খাবারের দোকান ও রেস্টুরেন্ট।", en: "Popular local eateries and restaurants in Tangail." },
-    "cat.handloom.title": { bn: "তাঁত ও কারুশিল্প", en: "Handloom & Crafts" },
-    "cat.handloom.desc": { bn: "বিখ্যাত টাঙ্গাইল শাড়ি ও তাঁতপণ্যের কারিগর, তাঁতঘর ও বিক্রয়কেন্দ্র।", en: "Artisans, workshops and outlets for the famous Tangail sari and handloom goods." },
+    "cat.handloom.title": { bn: "ভাইরাল প্লেস", en: "Viral Places" },
+    "cat.handloom.desc": { bn: "টাঙ্গাইলের জনপ্রিয় ও ভাইরাল দর্শনীয় স্থান।", en: "Popular and viral places to visit in Tangail." },
     "cat.businessDirectory.title": { bn: "দোকান", en: "Shop" },
     "cat.businessDirectory.desc": { bn: "টাঙ্গাইলের স্থানীয় ব্যবসা প্রতিষ্ঠানের তালিকা ও প্রচারের জায়গা।", en: "Directory and promotion space for local businesses in Tangail." },
     "cat.teachersSchools.title": { bn: "ছাত্র-শিক্ষক", en: "Student-Teacher" },
@@ -89,11 +87,11 @@ window.TZ_I18N = {
     "cat.flatLand.desc": { bn: "ফ্ল্যাট, প্লট ও জমি কেনা-বেচার হালনাগাদ তালিকা।", en: "Updated listings for buying and selling flats, plots and land." },
     "cat.trainSchedule.title": { bn: "ট্রেনের সময়সূচি", en: "Train Schedule" },
     "cat.trainSchedule.desc": { bn: "বিভিন্ন রুটের ট্রেনের হালনাগাদ সময়সূচি।", en: "Updated train schedules for various routes." },
-    "cat.hotel.title": { bn: "হোটেল", en: "Hotels" },
+    "cat.hotel.title": { bn: "আবাসিক হোটেল", en: "Residential Hotels" },
     "cat.hotel.desc": { bn: "থাকার জন্য হোটেল ও গেস্ট হাউজের তালিকা।", en: "List of hotels and guest houses for accommodation." },
     "cat.touristSpot.title": { bn: "দর্শনীয় স্থান", en: "Tourist Spots" },
     "cat.touristSpot.desc": { bn: "বিখ্যাত দর্শনীয় স্থান ও পর্যটন কেন্দ্রের তথ্য।", en: "Information on famous sightseeing and tourist spots." },
-    "cat.mechanic.title": { bn: "মিস্ত্রি/বুয়া", en: "Mechanic / Maid" },
+    "cat.mechanic.title": { bn: "বুয়া", en: "Maid" },
     "cat.mechanic.desc": { bn: "ইলেকট্রিশিয়ান, প্লাম্বার ও মেরামত সেবার তালিকা।", en: "List of electricians, plumbers and repair services." },
     "cat.nursery.title": { bn: "নার্সারি", en: "Nursery" },
     "cat.nursery.desc": { bn: "ফুল, ফল ও শোভাবর্ধনকারী গাছের চারা বিক্রয়কারীর তথ্য।", en: "Info on sellers of flower, fruit and ornamental plant saplings." },
@@ -101,8 +99,8 @@ window.TZ_I18N = {
     "cat.courier.desc": { bn: "কুরিয়ার ও পার্সেল ডেলিভারি সার্ভিসের শাখা ও নম্বর।", en: "Branches and numbers for courier and parcel delivery services." },
     "cat.parlourSalon.title": { bn: "পার্লার ও সেলুন", en: "Parlour & Salon" },
     "cat.parlourSalon.desc": { bn: "নারী ও পুরুষদের পার্লার এবং সেলুন সার্ভিসের তালিকা।", en: "List of parlour and salon services for women and men." },
-    "cat.websiteLinks.title": { bn: "ওয়েবসাইট", en: "Websites" },
-    "cat.websiteLinks.desc": { bn: "গুরুত্বপূর্ণ সরকারি ও স্থানীয় ওয়েবসাইটের তালিকা।", en: "List of important government and local websites." },
+    "cat.websiteLinks.title": { bn: "নিউজ পেপার", en: "Newspapers" },
+    "cat.websiteLinks.desc": { bn: "স্থানীয় ও জাতীয় নিউজ পেপার ও অনলাইন সংবাদ পোর্টালের তালিকা।", en: "Local and national newspapers and online news portals." },
     "cat.publicRep.title": { bn: "জনপ্রতিনিধি", en: "Public Representatives" },
     "cat.publicRep.desc": { bn: "সংসদ সদস্য, মেয়র ও চেয়ারম্যানদের কার্যালয়ের তথ্য।", en: "Office information of MPs, mayors and chairmen." },
     "cat.incomeExpense.title": { bn: "আয়-ব্যয়", en: "Income & Expense" },
@@ -196,6 +194,7 @@ document.addEventListener('DOMContentLoaded', function () {
   document.querySelectorAll('.lang-option').forEach(function (el) {
     el.addEventListener('click', function () {
       TZ_I18N.set(el.getAttribute('data-lang-choice'));
+      if (moreMenu) moreMenu.classList.remove('open');
     });
   });
 });

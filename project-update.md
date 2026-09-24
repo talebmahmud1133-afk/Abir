@@ -976,3 +976,102 @@ is_public=true অথবা নিজেই দেখলে), `matrimony_entries
 - **ডাটাবেসে কোনো পরিবর্তন নেই।**
 - **যাচাই:** এই সেশনে headless/লাইভ টেস্ট করা হয়নি (নেটওয়ার্ক-স্তরের সমস্যা, সরাসরি আসল কলেই বোঝা যাবে)। **ইউজারের করণীয়:** দুই ফোন থেকে আবার ভয়েস কল করে অডিও পরিষ্কার হলো কিনা দেখা।
 - `bump-version.py` চালানো হয়েছে (v20260922131433)।
+
+## v166 (AABBV1-updated-v166.zip)
+- Removed all 33 copyrighted category thumbnail images from `assets/categories/` (used on homepage `#homeCatGrid` cards).
+- Stripped the corresponding `<img>` tags from `index.html` (33 occurrences) — each `.cat-thumb` div is left empty (shows the existing light-gray `#eef1f3` background from `css/style.css`, no broken-image icons).
+- No CSS/JS changes needed — `.cat-thumb` container styling already handles an empty state.
+- User will supply replacement (non-copyrighted) images later; once ready, re-add `<img src="assets/categories/<slug>.jpg" ...>` inside each `.cat-thumb` div and drop the files back into `assets/categories/`.
+- Ran `bump-version.py` — cache-busting version bumped, 86 files / 1070 links updated, `version.json` synced.
+
+## v167 (AABBV1-updated-v167.zip)
+- Added 2 AI-generated replacement category images (user-generated via ChatGPT, non-copyrighted): `assets/categories/fire-service.jpg` and `assets/categories/doctors.jpg` (both 1254×1254, already 1:1 — converted PNG→JPG).
+- Restored the corresponding `<img>` tags inside `index.html`'s `#homeCatGrid` for ফায়ার সার্ভিস and ডাক্তার cards (both were emptied in v166 pending replacement images).
+- Remaining 31 categories still show the empty gray `.cat-thumb` placeholder, awaiting more AI-generated images from the user.
+- Ran `bump-version.py` — cache-busting version bumped, 86 files / 1070 links updated, `version.json` synced.
+
+## v168 (AABBV1-updated-v168.zip)
+- Added 4 more AI-generated category images to `assets/categories/`: `hospitals.jpg`, `restaurants.jpg`, `car-rent.jpg`, `matrimony.jpg` (1254×1254, PNG→JPG).
+- Placed the matching `<img>` tags in `index.html` `#homeCatGrid` for হাসপাতাল, রেস্টুরেন্ট, গাড়ি ভাড়া (transport.html) and পাত্র-পাত্রী cards.
+- Remaining 27 categories still show the empty gray `.cat-thumb` placeholder.
+
+## v169 (AABBV1-updated-v169.zip)
+- Added 4 more AI-generated category images: `police.jpg`, `courier.jpg`, `shop.jpg`, `teacher-student.jpg` (1254×1254, PNG→JPG).
+- Placed `<img>` tags in `index.html` `#homeCatGrid` for থানা-পুলিশ, কুরিয়ার সার্ভিস, দোকান (business-directory.html) and ছাত্র-শিক্ষক (teacher-module.html) cards.
+- Remaining 23 categories still show the empty gray `.cat-thumb` placeholder.
+
+## v170 (AABBV1-updated-v170.zip)
+- Added `tutor.jpg` (one-on-one tutoring) and `blood-donors.jpg` (blood donation), 1254×1254.
+- ছাত্র-শিক্ষক card now uses `tutor.jpg`; the earlier group-class image (`teacher-student.jpg`, school building behind) moved to the শিক্ষা প্রতিষ্ঠান card (teachers-schools.html).
+- রক্তদান card (blood-donors.html) now shows `blood-donors.jpg`.
+- Remaining 21 categories still show the empty gray `.cat-thumb` placeholder.
+
+## v171 (AABBV1-updated-v171.zip)
+- Added `train-schedule.jpg` and `bus-schedule.jpg` (1254×1254) and placed them in the ট্রেনের সময়সূচি and বাসের সময়সূচি cards of `index.html`.
+- Remaining 19 categories still show the empty gray `.cat-thumb` placeholder.
+
+## v172 (AABBV1-updated-v172.zip)
+- Added `house-rent.jpg` and `parlour-salon.jpg` (1254×1254) and placed them in the বাসা ভাড়া and পার্লার ও সেলুন cards of `index.html`.
+- Remaining 17 categories still show the empty gray `.cat-thumb` placeholder.
+
+## v173 (AABBV1-updated-v173.zip)
+- Added `flat-land.jpg` and `jobs.jpg` (1254×1254) and placed them in the ফ্ল্যাট ও জমি and চাকরি cards of `index.html`.
+- Remaining 15 categories still show the empty gray `.cat-thumb` placeholder.
+
+## v174 (AABBV1-updated-v174.zip)
+- **Faster category thumbnails:** converted all `assets/categories/*.jpg` (1254×1254, ~250 KB each, ~4.8 MB total) to 480×480 WebP (~15–25 KB each); old JPGs removed. `index.html` now points to `.webp`.
+- **Loading:** removed `loading="lazy"` from category thumbs (they load immediately), added `decoding="async"`, `fetchpriority="high"` on the first 9 and `<link rel="preload" as="image">` for those 9 in `<head>`. Firebase already caches images for 1 year, so repeat visits are instant.
+- **Gray gap fix:** `<img>` width/height attrs were 400×300 while the thumb box is 1:1, leaving a gray strip under the photo. Attrs now 480×480 and `.cat-thumb img` is `position:absolute; inset:0` (with `.cat-thumb{position:relative}`) so the photo always fills the square.
+- NOTE for future images: convert to 480×480 WebP (`quality≈78`) and use `<img src="assets/categories/<slug>.webp" width="480" height="480" decoding="async">` (no lazy).
+
+## v175 (AABBV1-updated-v175.zip)
+- **profile.html → "তথ্য" ট্যাব redesigned** (was one long list of 7 big rows): now two compact rounded cards.
+  - "ব্যক্তিগত তথ্য": ইউজারনেম, সদস্য (তারিখ) always shown; **মোবাইল নম্বর masked by default** (`016••••••54`) with an eye button to reveal/hide.
+  - "ঠিকানা": থানা + জেলা shown; গ্রাম + ইউনিয়ন hidden behind a "সম্পূর্ণ ঠিকানা দেখুন" toggle.
+  - Row padding/font reduced so the whole tab fits ~one screen.
+- All original element IDs (`updPhoneVal`, `profileUsernameVal`, `profileJoined`, `updVillageVal`, `updUnionVal`, `updThanaVal`, `updDistrictVal`) kept, so existing JS fills them unchanged. Phone masking uses a small MutationObserver on `#updPhoneVal` (added at end of profile.html).
+- Not tested on a live device/Supabase data in this session.
+
+## v176 (AABBV1-updated-v176.zip)
+- Category renames (display names only; URLs/slugs/Firestore category keys unchanged):
+  - ওয়েবসাইট → **নিউজ পেপার** (`website-links.html`, en: "Newspapers"); description → "স্থানীয় ও জাতীয় নিউজ পেপার ও অনলাইন সংবাদ পোর্টালের তালিকা।"
+  - তাঁত ও কারুশিল্প → **ভাইরাল প্লেস** (`handloom.html`, en: "Viral Places"); description → "টাঙ্গাইলের জনপ্রিয় ও ভাইরাল দর্শনীয় স্থান।"
+- Updated in: index.html, handloom.html, website-links.html (title/meta/header), sitemap.html, about.html, admin.html (banner category labels), js/i18n.js, js/search-index.js (title + keywords), js/favorite-categories.js.
+- Still to do if wanted: the ভাইরাল প্লেস page's thana sub-cards still use `handloom-*` listing keys and 🥻 emoji; the category icons (fa-globe / fa-shirt) and the two card photos are unchanged.
+
+## v177 (AABBV1-updated-v177.zip)
+- Added 12 category images (480×480 WebP, no lazy): `viral-places`, `hotel` (Yamuna Resort), `help`, `emergency`, `maid` (বুয়া), `entrepreneur`, `lawyer`, `newspaper`, `buy-sell`, `public-representative`, `college`, `nursery` → placed by card title in `index.html` (note: দোকান and উদ্যোক্তা both link to `business-directory.html`, so cards are matched by title, not href).
+- শিক্ষা প্রতিষ্ঠান card now uses `college.webp` (Tangail Govt. College); the earlier group-class image `teacher-student.webp` is now unused (kept in assets).
+- Cards still without an image: ডায়াগনস্টিক, বিদ্যুৎ অফিস, ভ্রমণ, দর্শনীয় স্থান.
+
+## v178 (AABBV1-updated-v178.zip)
+- Yamuna Resort image moved from হোটেল to **দর্শনীয় স্থান** (`hotel.webp` → `tourist-spot.webp`); হোটেল card is empty again.
+- Added `diagnostic.webp` (ডায়াগনস্টিক) and `electricity-office.webp` (বিদ্যুৎ অফিস).
+- Cards still without an image: ভ্রমণ, হোটেল.
+
+## v179 (AABBV1-updated-v179.zip)
+- Renamed category হোটেল → **আবাসিক হোটেল** (`hotel.html`, en: "Residential Hotels") in index.html, hotel.html (title/meta/header), sitemap.html, admin.html, js/i18n.js, js/search-index.js (title + keyword), js/favorite-categories.js. The "হোটেল" filter chip inside tourist-spot-detail.html left unchanged.
+- Added `travel.webp` (ভ্রমণ) and `hotel.webp` (Tangail Residency Hotel → আবাসিক হোটেল).
+- All 33 home category cards now have an image.
+
+## v180 (AABBV1-updated-v180.zip)
+- **Category thumbnails made lighter and faster:** all `assets/categories/*.webp` re-encoded 480→360 px (cards show ~200 px on phones), quality 72. Total ≈ 1.5 MB → now 835 KB for all 33, largest 50 KB.
+- **Preload fixed:** the `<link rel="preload">` list was not the first 9 visible cards; now it is exactly the first 9 cards in DOM order (fire, police, hospital, doctor, diagnostic, blood, emergency, help, shop) with `fetchpriority="high"`.
+- **Cache-safe URLs:** every category `<img src>` now has `?h=<md5 of file>`; Firebase caches images for 1 year, so changing a photo changes the hash and users get the new file immediately, unchanged photos stay cached forever. **When you replace a category image, re-run the hash step (or ask Claude) so the `?h=` value updates.**
+- All category thumbs load eagerly (no `loading="lazy"`), `decoding="async"`, width/height 360.
+
+## v181 (AABBV1-updated-v181.zip)
+- **New feature: users can arrange the home-page categories in their own order (Binance-style).**
+  - New `js/home-order.js` (loaded synchronously right after the `#homeCatGrid` section in index.html so the saved order shows on first paint, no flicker) + CSS block at the end of `css/style.css` (`.tz-order-*`, `#homeCatGrid.is-arranging`).
+  - A "ক্যাটাগরি … সাজান" bar sits above the grid. Tap **সাজান** (or long-press any card ~0.65 s) → arrange mode: cards wiggle, show a grip badge, links are disabled, ♡ hidden.
+  - Move a card by **press-and-hold then drag** (auto-scrolls near screen edges), or by **tapping one card then tapping another** (moves it to that spot). Floating **রিসেট / সম্পন্ন** pill above the bottom nav; Esc also exits.
+  - Order is saved in `localStorage` key `tz_home_order_v1` (this device/browser only, as an array of the cards' `data-i18n` title keys). Keys not in the saved list (new categories) are appended at the end. রিসেট restores the default (HTML) order and clears the key.
+  - Tested in headless mobile Chromium (Playwright): arrange mode, tap-to-move, touch long-press + drag, persistence across reload, reset — all pass. Not tested on a real phone.
+  - Not done: syncing the order to Supabase for logged-in users across devices (would need a small table like favorite_categories).
+
+## v182 (AABBV1-updated-v182.zip)
+- Fix: floating **রিসেট / সম্পন্ন** pill (home arrange mode) showed the button text broken/stacked letter by letter. Cause: a fixed element with `left:50%` gets shrink-to-fit width limited to the remaining 50% of the screen. Now `.tz-order-float{ width:max-content; max-width:calc(100vw - 24px) }` and the buttons are `white-space:nowrap; flex:0 0 auto` (also nowrap on the top "সাজান/সম্পন্ন" button). Verified in headless mobile Chromium at 360 px width.
+
+## v183 (AABBV1-updated-v183.zip)
+- **Fix: profile page froze/hung ("প্রোফাইলে ক্লিক করার পরে স্ক্রিন হ্যাং").** Cause was my v175 phone-number masking script at the end of `profile.html`: its `MutationObserver` on `#updPhoneVal` re-wrote the same element on every callback, and the `busy` guard was reset before the (asynchronous) observer callback ran → infinite microtask loop → page never finished loading. Reproduced in headless Chromium (page.goto timed out), fixed by remembering the last text we wrote (`lastText`) and ignoring observer callbacks that only see our own write; also skip the write if the text is already identical. Verified: page loads, number masks (`016••••••54`), updates when the app fills a new number, eye button toggles show/hide.
+- Profile header brand badge: `<img src="assets/icons/icon-192.png">` now has `onerror` → hides itself instead of showing a broken-image icon. **Note:** `assets/icons/` is empty in this zip, so `icon-192.png` (also used by `manifest.json` and `sw.js`) is missing here — add the real app icon file if it isn't on the live site either.

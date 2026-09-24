@@ -9,7 +9,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
 <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
 <link rel="manifest" href="manifest.json">
-<link rel="stylesheet" href="css/style.css?v=20260922203957">
+<link rel="stylesheet" href="css/style.css?v=20260924073609">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
@@ -75,9 +75,6 @@
     </button>
     <button type="button" class="admin-tab" data-tab="reports">
       <span class="admin-tab-icon"><i class="fa-solid fa-flag" aria-hidden="true"></i></span><span>রিপোর্ট</span>
-    </button>
-    <button type="button" class="admin-tab" data-tab="ambulanceProviders">
-      <span class="admin-tab-icon"><i class="fa-solid fa-truck-medical" aria-hidden="true"></i></span><span>প্রোভাইডার আবেদন</span>
     </button>
     <button type="button" class="admin-tab" data-tab="popup">
       <span class="admin-tab-icon"><i class="fa-solid fa-image" aria-hidden="true"></i></span><span>পপ-আপ বিজ্ঞাপন</span>
@@ -401,27 +398,6 @@
     <section class="admin-list">
       <h2>সব রিপোর্ট</h2>
       <div id="reportsList"><p class="admin-empty">লোড হচ্ছে…</p></div>
-    </section>
-  </section>
-
-  <!-- ================= প্যানেল: প্রোভাইডার আবেদন (ambulance_providers টেবিল) ================= -->
-  <section class="admin-panel" id="panelAmbulanceProviders" hidden>
-    <div class="panel-intro">
-      <strong>কোথায় দেখাবে:</strong> ambulance-provider-register.html ফর্ম থেকে কেউ আবেদন করলে এখানে "যাচাই চলছে" অবস্থায় জমা হয়।
-      "অনুমোদন করুন" চাপলে সেটি সাথে সাথে ambulance-providers.html তালিকায় প্রকাশিত হবে; "বাতিল করুন" চাপলে আবেদনকারীর
-      কাছে বাতিল দেখাবে কিন্তু তালিকায় প্রকাশিত হবে না।
-    </div>
-
-    <div class="admin-top">
-      <span class="admin-count" id="ambProvidersCount">০টি আবেদন</span>
-      <div class="admin-toolbar">
-        <button type="button" class="secondary" id="ambProvidersRefreshBtn">রিফ্রেশ করুন</button>
-      </div>
-    </div>
-
-    <section class="admin-list">
-      <h2>সব আবেদন</h2>
-      <div id="ambProvidersList"><p class="admin-empty">লোড হচ্ছে…</p></div>
     </section>
   </section>
 
@@ -929,16 +905,16 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-<script src="js/supabase-config.js?v=20260922203957"></script>
-    <script src="js/nav-avatar.js?v=20260922203957"></script>
-    <script src="js/call.js?v=20260922203957"></script>
-<script src="js/banner-slider.js?v=20260922203957"></script>
-<script src="js/notice-bar.js?v=20260922203957"></script>
-<script src="js/shop-data.js?v=20260922203957"></script>
-<script src="js/courier-data.js?v=20260922203957"></script>
-<script src="js/matrimony-data.js?v=20260922203957"></script>
-<script src="js/lawyer-data.js?v=20260922203957"></script>
-<script src="js/doctors-data.js?v=20260922203957"></script>
+<script src="js/supabase-config.js?v=20260924073609"></script>
+    <script src="js/nav-avatar.js?v=20260924073609"></script>
+    <script src="js/call.js?v=20260924073609"></script>
+<script src="js/banner-slider.js?v=20260924073609"></script>
+<script src="js/notice-bar.js?v=20260924073609"></script>
+<script src="js/shop-data.js?v=20260924073609"></script>
+<script src="js/courier-data.js?v=20260924073609"></script>
+<script src="js/matrimony-data.js?v=20260924073609"></script>
+<script src="js/lawyer-data.js?v=20260924073609"></script>
+<script src="js/doctors-data.js?v=20260924073609"></script>
 <script>
 (function () {
   var client = window.supabase.createClient(window.TANGAIL_SUPABASE.url, window.TANGAIL_SUPABASE.key);
@@ -981,7 +957,6 @@
   var panelLawyer = document.getElementById('panelLawyer');
   var panelDoctors = document.getElementById('panelDoctors');
   var panelReports = document.getElementById('panelReports');
-  var panelAmbulanceProviders = document.getElementById('panelAmbulanceProviders');
   var panelStorage = document.getElementById('panelStorage');
   var panelMembers = document.getElementById('panelMembers');
   var panelPopup = document.getElementById('panelPopup');
@@ -1003,7 +978,6 @@
   // প্রতিটি বিভাগ পেজ — slug (banners.category কলামের মান), লেবেল, আইকন (হোমপেজের কার্ডের সাথে মিলিয়ে), সর্বোচ্চ ৫টি করে
   var CATS = [
     { slug: 'doctors', label: 'ডাক্তার', icon: '<i class="fa-solid fa-user-doctor" aria-hidden="true"></i>', max: 5 },
-    { slug: 'ambulance', label: 'অ্যাম্বুলেন্স সার্ভিস', icon: '<i class="fa-solid fa-truck-medical" aria-hidden="true"></i>', max: 5 },
     { slug: 'emergency', label: 'জরুরি সেবা', icon: '<i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>', max: 5 },
     { slug: 'transport', label: 'যানবাহন ও পরিবহন', icon: '<i class="fa-solid fa-car" aria-hidden="true"></i>', max: 5 },
     { slug: 'jobs', label: 'চাকরি ও কর্মসংস্থান', icon: '<i class="fa-solid fa-briefcase" aria-hidden="true"></i>', max: 5 },
@@ -1013,12 +987,13 @@
     { slug: 'blood-donors', label: 'রক্তদাতা', icon: '<i class="fa-solid fa-droplet" aria-hidden="true"></i>', max: 5 },
     { slug: 'bus-schedule', label: 'বাস সময়সূচি', icon: '<i class="fa-solid fa-bus" aria-hidden="true"></i>', max: 5 },
     { slug: 'restaurants', label: 'রেস্টুরেন্ট ও খাবার', icon: '<i class="fa-solid fa-utensils" aria-hidden="true"></i>', max: 5 },
-    { slug: 'handloom', label: 'তাঁত ও কারুশিল্প', icon: '<i class="fa-solid fa-shirt" aria-hidden="true"></i>', max: 5 },
+    { slug: 'handloom', label: 'ভাইরাল প্লেস', icon: '<i class="fa-solid fa-shirt" aria-hidden="true"></i>', max: 5 },
     { slug: 'business-directory', label: 'দোকান ডিরেক্টরি (শপ)', icon: '<i class="fa-solid fa-store" aria-hidden="true"></i>', max: 5 },
     { slug: 'teachers-schools', label: 'শিক্ষক ও স্কুল', icon: '<i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>', max: 5 },
     { slug: 'legal-help', label: 'আইনি সহায়তা', icon: '<i class="fa-solid fa-scale-balanced" aria-hidden="true"></i>', max: 5 },
     { slug: 'electricity-office', label: 'বিদ্যুৎ অফিস', icon: '<i class="fa-solid fa-lightbulb" aria-hidden="true"></i>', max: 5 },
     { slug: 'houseboat', label: 'হাউসবোট ভ্রমণ', icon: '<i class="fa-solid fa-sailboat" aria-hidden="true"></i>', max: 5 },
+    { slug: 'travel', label: 'ভ্রমণ', icon: '<i class="fa-solid fa-plane" aria-hidden="true"></i>', max: 5 },
     { slug: 'hospitals', label: 'হাসপাতাল', icon: '<i class="fa-solid fa-hospital" aria-hidden="true"></i>', max: 5 },
     { slug: 'diagnostic', label: 'ডায়াগনস্টিক', icon: '<i class="fa-solid fa-microscope" aria-hidden="true"></i>', max: 5 },
     { slug: 'help', label: 'সহায়তা', icon: '<i class="fa-solid fa-handshake" aria-hidden="true"></i>', max: 5 },
@@ -1026,14 +1001,14 @@
     { slug: 'police', label: 'থানা-পুলিশ', icon: '<i class="fa-solid fa-user-shield" aria-hidden="true"></i>', max: 5 },
     { slug: 'flat-land', label: 'ফ্ল্যাট ও জমি', icon: '<i class="fa-solid fa-building" aria-hidden="true"></i>', max: 5 },
     { slug: 'train-schedule', label: 'ট্রেনের সময়সূচি', icon: '<i class="fa-solid fa-train" aria-hidden="true"></i>', max: 5 },
-    { slug: 'hotel', label: 'হোটেল', icon: '<i class="fa-solid fa-hotel" aria-hidden="true"></i>', max: 5 },
+    { slug: 'hotel', label: 'আবাসিক হোটেল', icon: '<i class="fa-solid fa-hotel" aria-hidden="true"></i>', max: 5 },
     { slug: 'tourist-spot', label: 'দর্শনীয় স্থান', icon: '<i class="fa-solid fa-map" aria-hidden="true"></i>', max: 5 },
     { slug: 'mechanic', label: 'মিস্ত্রি', icon: '<i class="fa-solid fa-wrench" aria-hidden="true"></i>', max: 5 },
     { slug: 'nursery', label: 'নার্সারি', icon: '<i class="fa-solid fa-seedling" aria-hidden="true"></i>', max: 5 },
     { slug: 'courier', label: 'কুরিয়ার সার্ভিস', icon: '<i class="fa-solid fa-box" aria-hidden="true"></i>', max: 5 },
     { slug: 'videos', label: 'ভিডিও দেখুন', icon: '<i class="fa-solid fa-clapperboard" aria-hidden="true"></i>', max: 5 },
     { slug: 'parlour-salon', label: 'পার্লার ও সেলুন', icon: '<i class="fa-solid fa-scissors" aria-hidden="true"></i>', max: 5 },
-    { slug: 'website-links', label: 'ওয়েবসাইট', icon: '<i class="fa-solid fa-globe" aria-hidden="true"></i>', max: 5 },
+    { slug: 'website-links', label: 'নিউজ পেপার', icon: '<i class="fa-solid fa-globe" aria-hidden="true"></i>', max: 5 },
     { slug: 'public-representative', label: 'জনপ্রতিনিধি', icon: '<i class="fa-solid fa-user" aria-hidden="true"></i>\u200d<i class="fa-solid fa-briefcase" aria-hidden="true"></i>', max: 5 },
     { slug: 'income-expense', label: 'আয়-ব্যয়', icon: '<i class="fa-solid fa-wallet" aria-hidden="true"></i>', max: 5 },
     { slug: 'notifications', label: 'বিজ্ঞপ্তি', icon: '<i class="fa-solid fa-bell" aria-hidden="true"></i>', max: 5 }
@@ -1132,7 +1107,6 @@
       panelMarketplace.hidden = true;
       panelShops.hidden = true;
       panelReports.hidden = true;
-      panelAmbulanceProviders.hidden = true;
       panelStorage.hidden = true;
       panelPopup.hidden = true;
       panelMatrimonial.hidden = true;
@@ -1149,7 +1123,6 @@
       panelMarketplace.hidden = true;
       panelShops.hidden = true;
       panelReports.hidden = true;
-      panelAmbulanceProviders.hidden = true;
       panelStorage.hidden = true;
       panelPopup.hidden = true;
       panelMatrimonial.hidden = true;
@@ -1167,7 +1140,6 @@
       panelMarketplace.hidden = true;
       panelShops.hidden = true;
       panelReports.hidden = true;
-      panelAmbulanceProviders.hidden = true;
       panelStorage.hidden = true;
       panelPopup.hidden = true;
       panelMatrimonial.hidden = true;
@@ -1185,7 +1157,6 @@
       panelMarketplace.hidden = false;
       panelShops.hidden = true;
       panelReports.hidden = true;
-      panelAmbulanceProviders.hidden = true;
       panelStorage.hidden = true;
       panelPopup.hidden = true;
       panelMatrimonial.hidden = true;
@@ -1203,7 +1174,6 @@
       panelMarketplace.hidden = true;
       panelShops.hidden = false;
       panelReports.hidden = true;
-      panelAmbulanceProviders.hidden = true;
       panelStorage.hidden = true;
       panelPopup.hidden = true;
       panelMatrimonial.hidden = true;
@@ -1221,31 +1191,12 @@
       panelMarketplace.hidden = true;
       panelShops.hidden = true;
       panelReports.hidden = false;
-      panelAmbulanceProviders.hidden = true;
       panelStorage.hidden = true;
       panelPopup.hidden = true;
       panelMatrimonial.hidden = true;
       panelTeacherStudent.hidden = true;
       panelTouristSpot.hidden = true;
       loadAdminReports();
-      return;
-    }
-
-    if (tab === 'ambulanceProviders') {
-      panelNotice.hidden = true;
-      panelNotification.hidden = true;
-      panelBanners.hidden = true;
-      panelPosts.hidden = true;
-      panelMarketplace.hidden = true;
-      panelShops.hidden = true;
-      panelReports.hidden = true;
-      panelAmbulanceProviders.hidden = false;
-      panelStorage.hidden = true;
-      panelPopup.hidden = true;
-      panelMatrimonial.hidden = true;
-      panelTeacherStudent.hidden = true;
-      panelTouristSpot.hidden = true;
-      loadAdminAmbulanceProviders();
       return;
     }
 
@@ -1257,7 +1208,6 @@
       panelMarketplace.hidden = true;
       panelShops.hidden = true;
       panelReports.hidden = true;
-      panelAmbulanceProviders.hidden = true;
       panelStorage.hidden = false;
       panelPopup.hidden = true;
       panelMatrimonial.hidden = true;
@@ -1275,7 +1225,6 @@
       panelMarketplace.hidden = true;
       panelShops.hidden = true;
       panelReports.hidden = true;
-      panelAmbulanceProviders.hidden = true;
       panelStorage.hidden = true;
       panelPopup.hidden = false;
       panelMatrimonial.hidden = true;
@@ -1293,7 +1242,6 @@
       panelMarketplace.hidden = true;
       panelShops.hidden = true;
       panelReports.hidden = true;
-      panelAmbulanceProviders.hidden = true;
       panelStorage.hidden = true;
       panelPopup.hidden = true;
       panelMatrimonial.hidden = false;
@@ -1311,7 +1259,6 @@
       panelMarketplace.hidden = true;
       panelShops.hidden = true;
       panelReports.hidden = true;
-      panelAmbulanceProviders.hidden = true;
       panelStorage.hidden = true;
       panelPopup.hidden = true;
       panelMatrimonial.hidden = true;
@@ -1329,7 +1276,6 @@
       panelMarketplace.hidden = true;
       panelShops.hidden = true;
       panelReports.hidden = true;
-      panelAmbulanceProviders.hidden = true;
       panelStorage.hidden = true;
       panelPopup.hidden = true;
       panelMatrimonial.hidden = true;
@@ -1346,7 +1292,6 @@
     panelMarketplace.hidden = true;
     panelShops.hidden = true;
     panelReports.hidden = true;
-    panelAmbulanceProviders.hidden = true;
     panelStorage.hidden = true;
     panelPopup.hidden = true;
     panelMatrimonial.hidden = true;
@@ -2560,97 +2505,6 @@
   }
 
   reportsRefreshBtn.addEventListener('click', loadAdminReports);
-
-  // ---------- প্রোভাইডার আবেদন — ambulance_providers টেবিল ----------
-  var ambProvidersListEl = document.getElementById('ambProvidersList');
-  var ambProvidersCountEl = document.getElementById('ambProvidersCount');
-  var ambProvidersRefreshBtn = document.getElementById('ambProvidersRefreshBtn');
-  var adminAmbProviders = [];
-
-  function loadAdminAmbulanceProviders() {
-    ambProvidersListEl.innerHTML = '<p class="admin-empty">লোড হচ্ছে…</p>';
-    client.from('ambulance_providers').select('*').order('created_at', { ascending: false })
-      .then(function (res) {
-        if (res.error) { ambProvidersListEl.innerHTML = '<p class="admin-empty">লোড করতে সমস্যা হয়েছে: ' + res.error.message + '</p>'; return; }
-        adminAmbProviders = res.data || [];
-        renderAdminAmbulanceProviders();
-      });
-  }
-
-  function renderAdminAmbulanceProviders() {
-    ambProvidersCountEl.textContent = bnNum2(adminAmbProviders.length) + 'টি আবেদন';
-
-    if (adminAmbProviders.length === 0) {
-      ambProvidersListEl.innerHTML = '<p class="admin-empty">এখনো কোনো আবেদন নেই।</p>';
-      return;
-    }
-
-    ambProvidersListEl.innerHTML = '';
-    adminAmbProviders.forEach(function (p) {
-      var isPending = p.status === 'pending';
-      var isRejected = p.status === 'rejected';
-      var isApproved = p.status === 'approved';
-      var card = document.createElement('div');
-      card.className = 'banner-card' + (isRejected ? ' disabled' : '') + (isPending ? ' pending' : '');
-      var statusNote = isPending
-        ? ' · <strong style="color:#b26a00;">যাচাই চলছে</strong>'
-        : (isApproved ? ' · <strong style="color:#1a7f37;">অনুমোদিত (তালিকায় প্রকাশিত)</strong>' : ' · <strong style="color:#b42318;">বাতিল</strong>');
-
-      card.innerHTML =
-        '<div class="banner-card-head"><strong>' + esc(p.name) + '</strong>' +
-        '<span style="font-size:0.8rem;color:var(--ink-soft);">' + postTimeStr(p.created_at) + statusNote + '</span></div>' +
-        '<p style="font-size:0.92rem;margin:6px 0;">' +
-          '<i class="fa-solid fa-phone" aria-hidden="true"></i> ' + esc(p.phone) + ' &nbsp; ' +
-          '<i class="fa-solid fa-location-dot" aria-hidden="true"></i> ' + esc(p.upazila) + ' থানা &nbsp; ' +
-          '<i class="fa-solid fa-truck-medical" aria-hidden="true"></i> ' + esc(p.type) +
-          (p.years ? ' &nbsp; · ' + p.years + ' বছর অভিজ্ঞতা' : '') +
-        '</p>' +
-        (p.vehicle_no ? '<p style="font-size:0.85rem;color:var(--ink-soft);margin:4px 0;">গাড়ি নং: ' + esc(p.vehicle_no) + '</p>' : '') +
-        (p.address ? '<p style="font-size:0.85rem;color:var(--ink-soft);margin:4px 0;">ঠিকানা: ' + esc(p.address) + '</p>' : '') +
-        (p.notes ? '<p style="font-size:0.85rem;color:var(--ink-soft);margin:4px 0;">নোট: ' + esc(p.notes) + '</p>' : '') +
-        '<div class="banner-card-actions">' +
-          (isPending
-            ? '<button type="button" class="primary" data-act="approve"><i class="fa-solid fa-check" aria-hidden="true"></i> অনুমোদন করুন</button>' +
-              '<button type="button" class="ghost" data-act="reject">বাতিল করুন</button>'
-            : (isApproved
-                ? '<button type="button" class="ghost" data-act="reject">তালিকা থেকে সরান</button>'
-                : '<button type="button" class="primary" data-act="approve"><i class="fa-solid fa-check" aria-hidden="true"></i> অনুমোদন করুন</button>')) +
-          '<button type="button" class="danger" data-act="delete"><i class="fa-solid fa-trash" aria-hidden="true"></i> মুছুন</button>' +
-        '</div>';
-
-      var approveBtn = card.querySelector('[data-act="approve"]');
-      if (approveBtn) {
-        approveBtn.addEventListener('click', function () {
-          client.from('ambulance_providers').update({ status: 'approved' }).eq('id', p.id).then(function (res) {
-            if (res.error) { alert('ব্যর্থ: ' + res.error.message); return; }
-            loadAdminAmbulanceProviders();
-          });
-        });
-      }
-
-      var rejectBtn = card.querySelector('[data-act="reject"]');
-      if (rejectBtn) {
-        rejectBtn.addEventListener('click', function () {
-          client.from('ambulance_providers').update({ status: 'rejected' }).eq('id', p.id).then(function (res) {
-            if (res.error) { alert('ব্যর্থ: ' + res.error.message); return; }
-            loadAdminAmbulanceProviders();
-          });
-        });
-      }
-
-      card.querySelector('[data-act="delete"]').addEventListener('click', function () {
-        if (!confirm('এই আবেদনটি স্থায়ীভাবে মুছে ফেলতে চান?')) return;
-        client.from('ambulance_providers').delete().eq('id', p.id).then(function (res) {
-          if (res.error) { alert('মুছতে ব্যর্থ: ' + res.error.message); return; }
-          loadAdminAmbulanceProviders();
-        });
-      });
-
-      ambProvidersListEl.appendChild(card);
-    });
-  }
-
-  ambProvidersRefreshBtn.addEventListener('click', loadAdminAmbulanceProviders);
 
   // ---------- দোকান অনুমোদন — shops টেবিল (add-shop.html থেকে জমা) ----------
   var shopsListEl = document.getElementById('shopsList');
@@ -4455,7 +4309,7 @@
   });
 })();
 </script>
-<script src="js/auto-update.js?v=20260922203957"></script>
-<script src="js/floating-buttons.js?v=20260922203957"></script>
+<script src="js/auto-update.js?v=20260924073609"></script>
+<script src="js/floating-buttons.js?v=20260924073609"></script>
 </body>
 </html>

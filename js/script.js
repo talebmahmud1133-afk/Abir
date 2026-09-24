@@ -1,10 +1,33 @@
+// ব্রাউজারের "অ্যাড টু হোমস্ক্রিন" ইনস্টল ব্যানার (আইকনসহ) বন্ধ রাখা
+window.addEventListener('beforeinstallprompt', function (e) {
+  e.preventDefault();
+});
+
 // টাঙ্গাইল জেলা — মোবাইল মেনু টগল
 (function () {
   var toggle = document.getElementById('menuToggle');
   var nav = document.getElementById('mainNav');
   if (!toggle || !nav) return;
-  toggle.addEventListener('click', function () {
+
+  toggle.addEventListener('click', function (e) {
+    e.stopPropagation();
     nav.classList.toggle('open');
+  });
+
+  // মেনুর বাইরে ক্লিক করলে বন্ধ হয়ে যাবে
+  document.addEventListener('click', function (e) {
+    if (nav.classList.contains('open') &&
+        !nav.contains(e.target) &&
+        !toggle.contains(e.target)) {
+      nav.classList.remove('open');
+    }
+  });
+
+  // মেনুর ভেতরের কোনো লিংকে ক্লিক করলেও বন্ধ হয়ে যাবে
+  nav.addEventListener('click', function (e) {
+    if (e.target.tagName === 'A') {
+      nav.classList.remove('open');
+    }
   });
 })();
 
