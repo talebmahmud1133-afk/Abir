@@ -194,17 +194,12 @@
     var whatsapp = document.getElementById('shopWhatsapp').value.trim();
     var address = document.getElementById('shopAddress').value.trim();
     var maps = document.getElementById('shopMaps').value.trim();
-    var website = document.getElementById('shopWebsite').value.trim();
-    var facebook = document.getElementById('shopFacebook').value.trim();
-    var hours = document.getElementById('shopHours').value.trim();
-    var description = document.getElementById('shopDescription').value.trim();
 
     if (!name) { setMsg('দোকানের নাম লিখুন।'); return; }
     if (!category) { setMsg('ক্যাটাগরি নির্বাচন করুন।'); return; }
     if (!upazila) { setMsg('উপজেলা নির্বাচন করুন।'); return; }
     if (!phone || phone.replace(/\D/g, '').length < 11) { setMsg('সঠিক ১১ ডিজিটের মোবাইল নাম্বার দিন।'); return; }
     if (!address) { setMsg('ঠিকানা লিখুন।'); return; }
-    if (!description) { setMsg('দোকানের বিবরণ লিখুন।'); return; }
 
     submitBtn.disabled = true;
 
@@ -239,10 +234,6 @@
         address: address,
         upazila: upazila,
         maps_url: maps || null,
-        website: website || null,
-        facebook: facebook || null,
-        hours: hours || null,
-        description: description,
         logo_url: urls.logo_url || null,
         cover_url: urls.cover_url || null,
         rating: 0,

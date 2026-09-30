@@ -171,7 +171,7 @@ body[data-banner-category="business-directory"] .banner-dots{ margin-top: 8px; }
 /* ব্যানার */
 .shop-card-img{
   position: relative;
-  aspect-ratio: 16 / 8;
+  aspect-ratio: 16 / 7;
   display: flex; align-items: center; justify-content: center;
   overflow: hidden;
   color: rgba(255,255,255,0.92);
@@ -224,8 +224,8 @@ body[data-banner-category="business-directory"] .banner-dots{ margin-top: 8px; }
 
 /* হেডার: গোল প্রোফাইল ছবি (ব্যানারে অর্ধেক ঢোকানো) + নাম + ক্যাটাগরি */
 .shop-card-head{
-  display: flex; align-items: flex-start; gap: 12px;
-  padding: 0 14px;
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 0 12px;
 }
 .shop-card-logo{
   position: relative; z-index: 5;
@@ -247,13 +247,13 @@ body[data-banner-category="business-directory"] .banner-dots{ margin-top: 8px; }
   object-fit: cover;
   background: #fff;
 }
-.shop-card-headtext{ flex: 1; min-width: 0; padding-top: 8px; }
+.shop-card-headtext{ flex: 1; min-width: 0; padding-top: 4px; }
 .shop-card-title{
   font-size: 1.02rem;
   font-weight: 700;
   color: var(--ink);
-  margin: 0 0 5px;
-  line-height: 1.3;
+  margin: 0 0 3px;
+  line-height: 1.2;
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 .shop-card-cat{
@@ -263,18 +263,20 @@ body[data-banner-category="business-directory"] .banner-dots{ margin-top: 8px; }
   font-weight: 600;
   color: var(--maroon-dark);
   background: rgba(14,107,58,0.10);
-  padding: 3px 10px;
+  padding: 2px 9px;
+  line-height: 1.3;
   border-radius: 999px;
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 
 /* তথ্য */
-.shop-card-body{ padding: 10px 14px 0; flex: 1; min-width: 0; }
+.shop-card-body{ padding: 4px 12px 0; flex: 1; min-width: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 2px 14px; }
 .shop-card-meta{
   display: flex; align-items: center; gap: 8px;
-  font-size: 0.8rem;
+  font-size: 0.78rem;
+  line-height: 1.3;
   color: var(--ink-soft);
-  margin-bottom: 6px;
+  margin: 0;
   min-width: 0;
 }
 .shop-card-meta i{ flex: 0 0 auto; width: 14px; text-align: center; font-size: 0.75rem; color: var(--maroon); }
@@ -284,14 +286,14 @@ body[data-banner-category="business-directory"] .banner-dots{ margin-top: 8px; }
 .shop-card-actions{
   display: flex;
   gap: 8px;
-  padding: 10px 14px 14px;
+  padding: 6px 12px 10px;
   margin-top: auto;
 }
 .shop-card-actions a{
   flex: 1;
   display: flex; align-items: center; justify-content: center;
   gap: 6px;
-  height: 40px;
+  height: 36px;
   font-size: 0.8rem;
   font-weight: 700;
   border-radius: 10px;
@@ -303,8 +305,8 @@ body[data-banner-category="business-directory"] .banner-dots{ margin-top: 8px; }
 .shop-map-btn{ background: #eaf1fb; color: #1a5bb8; }
 .shop-map-btn:hover{ background: #d9e7fa; }
 .shop-icon-btn{
-  flex: 0 0 40px !important;
-  width: 40px; padding: 0 !important;
+  flex: 0 0 36px !important;
+  width: 36px; padding: 0 !important;
   font-size: 1.05rem !important;
 }
 .shop-wa-btn{ background: #e6f7ec; color: #158F52; }
@@ -313,9 +315,9 @@ body[data-banner-category="business-directory"] .banner-dots{ margin-top: 8px; }
 .shop-web-btn:hover{ background: var(--cream-deep); }
 
 /* নাম ক্লিক করলে দোকানের নিজস্ব লিংকে যায় */
-.shop-card-title-link{ color: inherit; text-decoration: none; }
-.shop-card-title-link i{ font-size: 0.62em; margin-left: 6px; color: var(--maroon); vertical-align: middle; opacity: 0.85; }
-.shop-card-title-link:hover, .shop-card-title-link:active{ color: var(--maroon-dark); text-decoration: underline; }
+.shop-card-title-link{ color: #1a5fd0; text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 3px; cursor: pointer; }
+.shop-card-title-link i{ font-size: 0.62em; margin-left: 6px; color: inherit; vertical-align: middle; opacity: 1; }
+.shop-card-title-link:hover, .shop-card-title-link:active{ color: #0f3f99; text-decoration: underline; }
 
 /* ব্যানার / প্রোফাইল ছবি ট্যাপ করলে ফুল-স্ক্রিন ভিউ */
 .shop-card-cover, .shop-card-logo img{ cursor: zoom-in; }
@@ -366,7 +368,7 @@ body.shop-lightbox-open{ overflow: hidden; }
 
 /* ---------- স্কেলিটন / এম্পটি / এরর স্টেট ---------- */
 .shop-skel{ background: #fff; border: 1px solid var(--line); border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-sm); padding-bottom: 14px; }
-.shop-skel-img{ aspect-ratio: 16 / 8; background: linear-gradient(90deg, var(--cream) 25%, var(--cream-deep) 37%, var(--cream) 63%); background-size: 400% 100%; animation: shopShimmer 1.4s ease infinite; }
+.shop-skel-img{ aspect-ratio: 16 / 7; background: linear-gradient(90deg, var(--cream) 25%, var(--cream-deep) 37%, var(--cream) 63%); background-size: 400% 100%; animation: shopShimmer 1.4s ease infinite; }
 .shop-skel-logo{ width: 64px; height: 64px; margin: -32px 0 0 14px; border-radius: 50%; border: 3px solid #fff; background: linear-gradient(90deg, var(--cream) 25%, var(--cream-deep) 37%, var(--cream) 63%); background-size: 400% 100%; animation: shopShimmer 1.4s ease infinite; }
 .shop-skel-line{ height: 10px; margin: 12px 14px 0; border-radius: 6px; background: linear-gradient(90deg, var(--cream) 25%, var(--cream-deep) 37%, var(--cream) 63%); background-size: 400% 100%; animation: shopShimmer 1.4s ease infinite; }
 .shop-skel-line.short{ width: 55%; }
