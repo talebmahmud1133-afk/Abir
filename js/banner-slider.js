@@ -24,18 +24,26 @@ window.TangailBanners = (function () {
       slide.className = 'banner-slide' + (b.image ? ' has-image' : ' bg-' + (b.bg || 'maroon'));
       if (b.buttonLink) slide.href = b.buttonLink;
       if (b.image) {
-        slide.style.backgroundImage = 'linear-gradient(rgba(0,0,0,0.32),rgba(0,0,0,0.32)), url(' + b.image + ')';
+        slide.style.backgroundImage = 'url(' + b.image + ')';
         slide.style.setProperty('--banner-img', 'url("' + String(b.image).replace(/"/g, '\\"') + '")');
       }
 
       var inner = document.createElement('div');
       inner.className = 'banner-inner';
-      inner.innerHTML =
+      // ছবি-ব্যানারে কোনো লেখা দেখানো হয় না — শুধু ছবি (লিংক থাকলে ট্যাপে সেই পেজ)
+      inner.innerHTML = b.image ? '' :
         (b.badge ? '<span class="banner-badge">' + escapeHtml(b.badge) + '</span>' : '') +
         '<h3>' + escapeHtml(b.title || '') + '</h3>' +
         (b.subtitle ? '<p>' + escapeHtml(b.subtitle) + '</p>' : '') +
         (b.buttonText ? '<span class="banner-btn">' + escapeHtml(b.buttonText) + '</span>' : '');
       slide.appendChild(inner);
+      // ছবি-ব্যানারে লিংক থাকলে মাঝখানে নীল লিংক লেখা — ট্যাপ করলে সেই পেজে যায়
+      if (b.image && b.buttonLink) {
+        var linkLabel = document.createElement('span');
+        linkLabel.className = 'banner-link-label';
+        linkLabel.innerHTML = 'বিস্তারিত দেখুন <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>';
+        slide.appendChild(linkLabel);
+      }
       trackEl.appendChild(slide);
 
       var dot = document.createElement('button');

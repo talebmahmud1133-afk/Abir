@@ -9,7 +9,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
 <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
 <link rel="manifest" href="manifest.json">
-<link rel="stylesheet" href="css/style.css?v=20260930043823">
+<link rel="stylesheet" href="css/style.css?v=20260930095736">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
@@ -841,20 +841,20 @@
 
 </main>
 
-<!-- নতুন ব্যানার যোগ করার মোডাল — শুধু নাম ও গ্যালারি থেকে ছবি -->
+<!-- নতুন ব্যানার যোগ করার মোডাল — শুধু ব্যানার ছবি + ঐচ্ছিক লিংক -->
 <div class="modal-overlay" id="addBannerModal">
   <div class="modal-box icon-modal-box">
     <h2>নতুন ব্যানার যোগ করুন</h2>
     <form class="contact-form icon-form" id="addBannerForm">
-      <div class="icon-field">
-        <i class="fa-solid fa-tag field-icon" aria-hidden="true"></i>
-        <label for="newBannerTitle" class="sr-only">নাম</label>
-        <input type="text" id="newBannerTitle" placeholder="নাম">
-      </div>
       <div>
-        <label for="newBannerFile">ব্যানার ছবি (গ্যালারি থেকে নির্বাচন করুন)</label>
+        <label for="newBannerFile">ব্যানার (গ্যালারি থেকে ছবি নির্বাচন করুন)</label>
         <input type="file" id="newBannerFile" accept="image/*">
         <img id="newBannerPreview" class="banner-image-preview" hidden>
+      </div>
+      <div class="icon-field">
+        <i class="fa-solid fa-link field-icon" aria-hidden="true"></i>
+        <label for="newBannerLink" class="sr-only">লিংক</label>
+        <input type="text" id="newBannerLink" placeholder="লিংক (ঐচ্ছিক — ট্যাপ করলে যে পেজে যাবে)">
       </div>
       <p class="auth-msg" id="addBannerMsg"></p>
       <div class="modal-actions">
@@ -1073,21 +1073,21 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-<script src="js/supabase-config.js?v=20260930043823"></script>
-    <script src="js/nav-avatar.js?v=20260930043823"></script>
-    <script src="js/call.js?v=20260930043823"></script>
-<script src="js/banner-slider.js?v=20260930043823"></script>
-<script src="js/notice-bar.js?v=20260930043823"></script>
-<script src="js/shop-data.js?v=20260930043823"></script>
-<script src="js/hotel-data.js?v=20260930043823"></script>
-<script src="js/courier-data.js?v=20260930043823"></script>
-<script src="js/matrimony-data.js?v=20260930043823"></script>
-<script src="js/technician-data.js?v=20260930043823"></script>
-<script src="js/viral-data.js?v=20260930043823"></script>
-<script src="js/nursery-data.js?v=20260930043823"></script>
-<script src="js/public-rep-data.js?v=20260930043823"></script>
-<script src="js/lawyer-data.js?v=20260930043823"></script>
-<script src="js/doctors-data.js?v=20260930043823"></script>
+<script src="js/supabase-config.js?v=20260930095736"></script>
+    <script src="js/nav-avatar.js?v=20260930095736"></script>
+    <script src="js/call.js?v=20260930095736"></script>
+<script src="js/banner-slider.js?v=20260930095736"></script>
+<script src="js/notice-bar.js?v=20260930095736"></script>
+<script src="js/shop-data.js?v=20260930095736"></script>
+<script src="js/hotel-data.js?v=20260930095736"></script>
+<script src="js/courier-data.js?v=20260930095736"></script>
+<script src="js/matrimony-data.js?v=20260930095736"></script>
+<script src="js/technician-data.js?v=20260930095736"></script>
+<script src="js/viral-data.js?v=20260930095736"></script>
+<script src="js/nursery-data.js?v=20260930095736"></script>
+<script src="js/public-rep-data.js?v=20260930095736"></script>
+<script src="js/lawyer-data.js?v=20260930095736"></script>
+<script src="js/doctors-data.js?v=20260930095736"></script>
 <script>
 (function () {
   var client = window.supabase.createClient(window.TANGAIL_SUPABASE.url, window.TANGAIL_SUPABASE.key);
@@ -1860,13 +1860,7 @@
         '<label style="font-size:0.85rem;color:var(--ink-soft);display:flex;align-items:center;gap:6px;">' +
         '<input type="checkbox" data-field="enabled" ' + (b.enabled !== false ? 'checked' : '') + '> সক্রিয়</label></div>' +
         '<div class="banner-form">' +
-          '<div><label>ব্যাজ টেক্সট (ঐচ্ছিক)</label><input type="text" data-field="badge" value="' + esc(b.badge) + '"></div>' +
-          '<div><label>ব্যাকগ্রাউন্ড থিম</label><select data-field="bg">' + bgOptions(b.bg) + '</select></div>' +
-          '<div class="full"><label>টাইটেল</label><input type="text" data-field="title" value="' + esc(b.title) + '"></div>' +
-          '<div class="full"><label>সাবটাইটেল / বার্তা</label><textarea data-field="subtitle" rows="2">' + esc(b.subtitle) + '</textarea></div>' +
-          '<div><label>বাটন টেক্সট (ঐচ্ছিক)</label><input type="text" data-field="buttonText" value="' + esc(b.buttonText) + '"></div>' +
-          '<div><label>বাটন লিংক (ঐচ্ছিক, যেমন: doctors.html)</label><input type="text" data-field="buttonLink" value="' + esc(b.buttonLink) + '"></div>' +
-          '<div class="full"><label>ব্যানার ছবি (ঐচ্ছিক — না দিলে থিম রঙ দেখাবে)</label>' +
+          '<div class="full"><label>ব্যানার</label>' +
             '<div class="banner-image-field">' +
               (b.image ? '<img class="banner-image-preview" src="' + esc(b.image) + '">' : '') +
               '<div class="banner-image-actions">' +
@@ -1876,6 +1870,7 @@
               '<span class="upload-status" data-role="upload-status"></span>' +
             '</div>' +
           '</div>' +
+          '<div class="full"><label>লিংক (ঐচ্ছিক — ট্যাপ করলে যে পেজে যাবে)</label><input type="text" data-field="buttonLink" value="' + esc(b.buttonLink) + '"></div>' +
         '</div>' +
         '<div class="banner-card-actions">' +
           '<button type="button" class="ghost" data-act="up"><i class="fa-solid fa-arrow-up" aria-hidden="true"></i> উপরে</button>' +
@@ -1971,10 +1966,10 @@
     ]).then(function () { loadBanners(); });
   }
 
-  // ---------- নতুন ব্যানার যোগ করার সহজ মোডাল (শুধু নাম + গ্যালারি থেকে ছবি) ----------
+  // ---------- নতুন ব্যানার যোগ করার সহজ মোডাল (শুধু ছবি + ঐচ্ছিক লিংক) ----------
   var addBannerModal = document.getElementById('addBannerModal');
   var addBannerForm = document.getElementById('addBannerForm');
-  var newBannerTitle = document.getElementById('newBannerTitle');
+  var newBannerLink = document.getElementById('newBannerLink');
   var newBannerFile = document.getElementById('newBannerFile');
   var newBannerPreview = document.getElementById('newBannerPreview');
   var addBannerMsg = document.getElementById('addBannerMsg');
@@ -1983,7 +1978,7 @@
   var pendingBannerFile = null; // ক্রপ করার পর ছবিটা এখানে জমা থাকে, সাবমিটের সময় এটাই আপলোড হয়
 
   function openAddBannerModal() {
-    newBannerTitle.value = '';
+    newBannerLink.value = '';
     newBannerFile.value = '';
     pendingBannerFile = null;
     newBannerPreview.hidden = true;
@@ -2016,11 +2011,11 @@
 
   addBannerForm.addEventListener('submit', function (e) {
     e.preventDefault();
-    var title = newBannerTitle.value.trim();
+    var link = newBannerLink.value.trim();
     var file = pendingBannerFile;
 
-    if (!title) {
-      addBannerMsg.textContent = 'অনুগ্রহ করে ব্যানারের নাম লিখুন।';
+    if (!file) {
+      addBannerMsg.textContent = 'অনুগ্রহ করে ব্যানারের ছবি নির্বাচন করুন।';
       addBannerMsg.className = 'auth-msg';
       return;
     }
@@ -2035,8 +2030,8 @@
 
     imagePromise.then(function (imageUrl) {
       return client.from('banners').insert({
-        position: nextPos, enabled: true, badge: '', title: title,
-        subtitle: '', button_text: '', button_link: '', image: imageUrl, bg: 'maroon', category: currentCat.slug
+        position: nextPos, enabled: true, badge: '', title: '',
+        subtitle: '', button_text: '', button_link: link, image: imageUrl, bg: 'maroon', category: currentCat.slug
       });
     }).then(function (res) {
       addBannerSubmitBtn.disabled = false;
@@ -5343,7 +5338,7 @@
   });
 })();
 </script>
-<script src="js/auto-update.js?v=20260930043823"></script>
-<script src="js/floating-buttons.js?v=20260930043823"></script>
+<script src="js/auto-update.js?v=20260930095736"></script>
+<script src="js/floating-buttons.js?v=20260930095736"></script>
 </body>
 </html>

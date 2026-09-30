@@ -165,6 +165,7 @@
   }
 
   function updateCount(n) {
+    if (!countEl) return;
     countEl.innerHTML = '<i class="fa-solid fa-store" aria-hidden="true"></i>সব দোকান (' + Number(n || 0).toLocaleString('bn-BD') + 'টি)';
   }
 
