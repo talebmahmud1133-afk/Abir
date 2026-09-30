@@ -15,7 +15,6 @@
   var phoneEl = document.getElementById('htfPhone');
   var mapEl = document.getElementById('htfMap');
   var photoEl = document.getElementById('htfPhoto');
-  var photoEditBtn = document.getElementById('htPhotoEdit');
   var previewBox = document.getElementById('htPhotoPreview');
   var extraWrap = document.getElementById('htExtraWrap');
   var hpEl = document.getElementById('htfHp');
@@ -45,8 +44,6 @@
 
   // ---------- বটম শিট ----------
   var lastFocus = null, busy = false, previewUrl = null;
-  var mainFile = null;   // জুম/ক্রপ করা প্রধান ছবি (এটাই আপলোড হয়)
-  var mainOrig = null;   // বাছাই করা আসল ছবি (আবার ঠিক করার জন্য)
 
   function focusables() {
     return Array.prototype.filter.call(
@@ -63,7 +60,7 @@
     if (file) { previewUrl = URL.createObjectURL(file); img.src = previewUrl; previewBox.hidden = false; }
     else { img.removeAttribute('src'); previewBox.hidden = true; }
   }
-  function resetForm() { form.reset(); mainFile = null; mainOrig = null; showPreview(null); clearAllExtras(); if (locNote) { locNote.hidden = true; locNote.textContent = ''; } }
+  function resetForm() { form.reset(); showPreview(null); clearAllExtras(); if (locNote) { locNote.hidden = true; locNote.textContent = ''; } }
 
   function openSheet() {
     lastFocus = document.activeElement;
@@ -87,7 +84,6 @@
   backdrop.addEventListener('click', function (e) { if (e.target === backdrop) closeSheet(); });
   document.addEventListener('keydown', function (e) {
     if (backdrop.hidden) return;
-    if (document.querySelector('.tzc-overlay')) return;   // জুম/ক্রপ উইন্ডো খোলা থাকলে শিট বন্ধ/ফোকাস-ট্র্যাপ হবে না
     if (e.key === 'Escape') { closeSheet(); return; }
     if (e.key === 'Tab') {
       var f = focusables();
@@ -99,60 +95,21 @@
   });
 
   // ---------- ছবি ----------
-  // ছবি বাছাইয়ের পর জুম ইন/আউট + টেনে বসানোর উইন্ডো খোলে (TZCropper); "ঠিক আছে" চাপলে ক্রপ করা ছবিই জমা হয়।
   var PHOTO_OK = /^image\/(jpeg|png|webp|gif)$/;
-  var MAIN_ASPECT = 4 / 5;    // কার্ডের ছবির টাইলের অনুপাত (লম্বাটে)
-  var EXTRA_ASPECT = 4 / 3;   // আরও ছবির অনুপাত
-
-  function cropperReady() {
-    if (window.TZCropper && window.TZCropper.open) return true;
-    setMsg('ছবি এডিটর লোড হয়নি। পেজ রিফ্রেশ করে আবার চেষ্টা করুন।');
-    return false;
-  }
-  function asCropped(blob, name) {
-    var f = new File([blob], name, { type: 'image/jpeg' });
-    f.__cropped = true;
-    return f;
-  }
-
-  function cropMain(file, isNew) {
-    if (!cropperReady()) { if (isNew) { photoEl.value = ''; if (!mainFile) showPreview(null); } return; }
-    window.TZCropper.open({
-      file: file, aspect: MAIN_ASPECT, outWidth: 900, shape: 'rect',
-      title: 'প্রধান ছবি ঠিক করুন', quality: 0.86
-    }).then(function (prepared) {
-      mainFile = asCropped(prepared.blob, 'hotel-main.jpg');
-      mainOrig = file;
-      showPreview(mainFile);
-      setMsg('');
-    }).catch(function (err) {
-      if (!(err && err.cancelled)) setMsg(err && err.message ? err.message : 'ছবি প্রসেস করা যায়নি।');
-      // নতুন ছবি বাছাইয়ের পর বাতিল করলে: আগের ক্রপ করা ছবি থাকলে সেটাই থাকে, না থাকলে বাছাই মুছে যায়
-      if (isNew && !mainFile) { photoEl.value = ''; mainOrig = null; showPreview(null); clearAllExtras(); }
-    });
-  }
-
   photoEl.addEventListener('change', function () {
     var f = photoEl.files && photoEl.files[0];
     setMsg('');
-    if (!f) { mainFile = null; mainOrig = null; showPreview(null); clearAllExtras(); return; }
-    if (!PHOTO_OK.test(f.type)) { photoEl.value = ''; mainFile = null; mainOrig = null; showPreview(null); clearAllExtras(); setMsg('শুধু JPG, PNG বা WebP ছবি দিন।'); return; }
-    if (f.size > 8 * 1024 * 1024) { photoEl.value = ''; mainFile = null; mainOrig = null; showPreview(null); clearAllExtras(); setMsg('ছবি ৮ MB এর বেশি হতে পারবে না।'); return; }
-    cropMain(f, true);
-  });
-
-  // প্রিভিউ বা "জুম / অবস্থান ঠিক করুন" বাটনে চাপলে আসল ছবি থেকে আবার ঠিক করা যায়
-  if (photoEditBtn) photoEditBtn.addEventListener('click', function () { if (mainOrig) cropMain(mainOrig, false); });
-  previewBox.addEventListener('click', function (e) {
-    if (e.target && e.target.tagName === 'IMG' && mainOrig) cropMain(mainOrig, false);
+    if (!f) { showPreview(null); clearAllExtras(); return; }
+    if (!PHOTO_OK.test(f.type)) { photoEl.value = ''; showPreview(null); clearAllExtras(); setMsg('শুধু JPG, PNG বা WebP ছবি দিন।'); return; }
+    if (f.size > 8 * 1024 * 1024) { photoEl.value = ''; showPreview(null); clearAllExtras(); setMsg('ছবি ৮ MB এর বেশি হতে পারবে না।'); return; }
+    showPreview(f);
   });
 
 
   // ---------- আরও ছবি (ঐচ্ছিক, সর্বোচ্চ ৪টি — প্রধান ছবিসহ মোট ৫টি) ----------
-  // প্রতিটি আলাদা স্লটে; বাছাইয়ের পর জুম ইন/আউট করে বসানো যায় (৪:৩ ফ্রেম), লাইটবক্সে সেই ছবিই পুরো দেখা যায়।
+  // প্রতিটি আলাদা স্লটে; ছবি নিজের মাপেই থাকে (লাইটবক্সে পুরো ছবি দেখানোর জন্য), জমার সময় শুধু কম্প্রেস হয়।
   var extraFiles = [];   // স্লট নম্বর → File
   var extraUrls = [];    // স্লট নম্বর → প্রিভিউয়ের object URL
-  var extraOrig = [];    // স্লট নম্বর → বাছাই করা আসল File (আবার ঠিক করার জন্য)
 
   function slotEl(idx) { return extraWrap ? extraWrap.querySelector('.ht-xslot[data-slot="' + idx + '"]') : null; }
 
@@ -162,15 +119,14 @@
     var has = !!extraFiles[idx];
     var thumb = slot.querySelector('.ht-xthumb');
     var rm = slot.querySelector('.ht-xrm');
-    var adj = slot.querySelector('.ht-xadj');
     slot.classList.toggle('has-photo', has);
-    if (has) { thumb.src = extraUrls[idx]; thumb.hidden = false; rm.hidden = false; if (adj) adj.hidden = false; }
-    else { thumb.removeAttribute('src'); thumb.hidden = true; rm.hidden = true; if (adj) adj.hidden = true; }
+    if (has) { thumb.src = extraUrls[idx]; thumb.hidden = false; rm.hidden = false; }
+    else { thumb.removeAttribute('src'); thumb.hidden = true; rm.hidden = true; }
   }
 
   function clearSlot(idx) {
     if (extraUrls[idx]) URL.revokeObjectURL(extraUrls[idx]);
-    extraFiles[idx] = null; extraUrls[idx] = null; extraOrig[idx] = null;
+    extraFiles[idx] = null; extraUrls[idx] = null;
     var slot = slotEl(idx);
     var inp = slot && slot.querySelector('.ht-xfile');
     if (inp) inp.value = '';
@@ -179,7 +135,7 @@
 
   function clearAllExtras() {
     for (var i = 0; i < 4; i++) clearSlot(i);
-    extraFiles = []; extraUrls = []; extraOrig = [];
+    extraFiles = []; extraUrls = [];
   }
 
   function onExtraPicked(idx, inp) {
@@ -188,34 +144,17 @@
     setMsg('');
     if (!PHOTO_OK.test(f.type)) { clearSlot(idx); setMsg('শুধু JPG, PNG বা WebP ছবি দিন।'); return; }
     if (f.size > 8 * 1024 * 1024) { clearSlot(idx); setMsg('ছবি ৮ MB এর বেশি হতে পারবে না।'); return; }
-    cropExtra(idx, f, true);
-  }
-
-  // বাছাই করা ছবি জুম/ক্রপ উইন্ডোতে খুলে ফলাফল স্লটে বসায়
-  function cropExtra(idx, file, isNew) {
-    if (!cropperReady()) { if (isNew) clearSlot(idx); return; }
-    window.TZCropper.open({
-      file: file, aspect: EXTRA_ASPECT, outWidth: 1200, shape: 'rect',
-      title: 'আরও ছবি ' + '১২৩৪'.charAt(idx) + ' ঠিক করুন', quality: 0.86
-    }).then(function (prepared) {
-      var out = asCropped(prepared.blob, 'hotel-extra-' + (idx + 1) + '.jpg');
-      if (extraUrls[idx]) URL.revokeObjectURL(extraUrls[idx]);
-      extraFiles[idx] = out;
-      extraOrig[idx] = file;
-      extraUrls[idx] = URL.createObjectURL(out);
-      paintSlot(idx);
-      setMsg('');
-    }).catch(function (err) {
-      if (!(err && err.cancelled)) setMsg(err && err.message ? err.message : 'ছবি প্রসেস করা যায়নি।');
-      if (isNew && !extraFiles[idx]) clearSlot(idx);   // নতুন ছবি বাতিল করলে স্লট ফাঁকা থাকে
-    });
+    if (extraUrls[idx]) URL.revokeObjectURL(extraUrls[idx]);
+    extraFiles[idx] = f;
+    extraUrls[idx] = URL.createObjectURL(f);
+    paintSlot(idx);
   }
 
   if (extraWrap) {
     extraWrap.addEventListener('click', function (e) {
       var add = e.target.closest ? e.target.closest('.ht-xadd') : null;
       if (add) {
-        if (!mainFile) {
+        if (!(photoEl.files && photoEl.files[0])) {
           setMsg('আগে প্রধান ছবি যোগ করুন — তারপর আরও ছবি দিতে পারবেন।');
           photoEl.focus();
           return;
@@ -223,18 +162,6 @@
         setMsg('');
         var inp = document.getElementById('htfExtra' + add.getAttribute('data-slot'));
         if (inp) inp.click();
-        return;
-      }
-      var adj = e.target.closest ? e.target.closest('.ht-xadj') : null;
-      if (adj) {
-        var ai = parseInt(adj.getAttribute('data-slot'), 10);
-        if (extraOrig[ai]) cropExtra(ai, extraOrig[ai], false);
-        return;
-      }
-      var th = e.target.closest ? e.target.closest('.ht-xthumb') : null;
-      if (th) {
-        var ti = parseInt(th.closest('.ht-xslot').getAttribute('data-slot'), 10);
-        if (extraOrig[ti]) cropExtra(ti, extraOrig[ti], false);
         return;
       }
       var rm = e.target.closest ? e.target.closest('.ht-xrm') : null;
@@ -295,7 +222,6 @@
   // ---------- ছবি কম্প্রেস + আপলোড (market-media বাকেট) ----------
   function compressImageFile(file) {
     return new Promise(function (resolve) {
-      if (file.__cropped) { resolve(file); return; }   // জুম/ক্রপ করা ছবি আগেই ছোট ও কম্প্রেসড
       var objectUrl = URL.createObjectURL(file);
       var img = new Image();
       img.onload = function () {
@@ -346,7 +272,7 @@
 
     var upazila = upazilaEl.value, name = nameEl.value.trim(), address = addressEl.value.trim();
     var phone = normalizePhone(phoneEl.value), map = mapEl.value.trim();
-    var photo = mainFile;
+    var photo = photoEl.files && photoEl.files[0];
 
     if (!upazila) return markInvalid(upazilaEl, 'উপজেলা নির্বাচন করুন।');
     if (!name) return markInvalid(nameEl, 'হোটেলের নাম লিখুন।');

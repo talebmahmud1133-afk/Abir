@@ -13,8 +13,8 @@
 <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
 <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
 <link rel="manifest" href="manifest.json">
-<link rel="stylesheet" href="css/style.css?v=20260930045009">
-<link rel="stylesheet" href="css/hotel.css?v=20260930045009">
+<link rel="stylesheet" href="css/style.css?v=20260930043823">
+<link rel="stylesheet" href="css/hotel.css?v=20260930043823">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body class="ht-page" data-banner-category="hotel">
@@ -127,43 +127,37 @@
       <div class="ht-field">
         <label for="htfPhoto">প্রধান ছবি <span class="ht-opt">(ঐচ্ছিক)</span></label>
         <input id="htfPhoto" type="file" accept="image/jpeg,image/png,image/webp,image/gif" class="ht-file">
-        <p class="ht-xhint">ছবি বাছাই করলে জুম ইন/আউট করে ইচ্ছামত বসানোর স্ক্রিন খুলবে।</p>
         <div class="ht-photo-preview" id="htPhotoPreview" hidden>
           <img alt="নির্বাচিত ছবির প্রিভিউ">
-          <button type="button" class="ht-photo-edit" id="htPhotoEdit"><i class="fa-solid fa-crop-simple" aria-hidden="true"></i><span>জুম / অবস্থান ঠিক করুন</span></button>
         </div>
       </div>
       <div class="ht-field ht-xfield" id="htExtraWrap">
         <span class="ht-xlabel">আরও ছবি <span class="ht-opt">— সর্বোচ্চ ৪টি (মোট ৫টি ছবি)</span></span>
-        <p class="ht-xhint">প্রধান ছবিতে ক্লিক করলে এই ছবিগুলোও দেখা যাবে ও জুম করা যাবে। (আগে প্রধান ছবি দিন) প্রতিটি ছবি বাছাইয়ের পর জুম ইন/আউট করে বসাতে পারবেন।</p>
+        <p class="ht-xhint">প্রধান ছবিতে ক্লিক করলে এই ছবিগুলোও দেখা যাবে ও জুম করা যাবে। (আগে প্রধান ছবি দিন)</p>
         <div class="ht-xgrid">
         <div class="ht-xslot" data-slot="0">
           <input type="file" class="ht-xfile" id="htfExtra0" accept="image/jpeg,image/png,image/webp,image/gif" hidden>
           <button type="button" class="ht-xadd" data-slot="0" aria-label="আরও ছবি ১ যোগ করুন"><i class="fa-solid fa-plus" aria-hidden="true"></i><span>ছবি ১</span></button>
           <img class="ht-xthumb" alt="আরও ছবি ১ এর প্রিভিউ" hidden>
           <button type="button" class="ht-xrm" data-slot="0" aria-label="আরও ছবি ১ সরান" hidden><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
-          <button type="button" class="ht-xadj" data-slot="0" aria-label="আরও ছবি ১ জুম/অবস্থান ঠিক করুন" hidden><i class="fa-solid fa-crop-simple" aria-hidden="true"></i></button>
         </div>
         <div class="ht-xslot" data-slot="1">
           <input type="file" class="ht-xfile" id="htfExtra1" accept="image/jpeg,image/png,image/webp,image/gif" hidden>
           <button type="button" class="ht-xadd" data-slot="1" aria-label="আরও ছবি ২ যোগ করুন"><i class="fa-solid fa-plus" aria-hidden="true"></i><span>ছবি ২</span></button>
           <img class="ht-xthumb" alt="আরও ছবি ২ এর প্রিভিউ" hidden>
           <button type="button" class="ht-xrm" data-slot="1" aria-label="আরও ছবি ২ সরান" hidden><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
-          <button type="button" class="ht-xadj" data-slot="1" aria-label="আরও ছবি ২ জুম/অবস্থান ঠিক করুন" hidden><i class="fa-solid fa-crop-simple" aria-hidden="true"></i></button>
         </div>
         <div class="ht-xslot" data-slot="2">
           <input type="file" class="ht-xfile" id="htfExtra2" accept="image/jpeg,image/png,image/webp,image/gif" hidden>
           <button type="button" class="ht-xadd" data-slot="2" aria-label="আরও ছবি ৩ যোগ করুন"><i class="fa-solid fa-plus" aria-hidden="true"></i><span>ছবি ৩</span></button>
           <img class="ht-xthumb" alt="আরও ছবি ৩ এর প্রিভিউ" hidden>
           <button type="button" class="ht-xrm" data-slot="2" aria-label="আরও ছবি ৩ সরান" hidden><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
-          <button type="button" class="ht-xadj" data-slot="2" aria-label="আরও ছবি ৩ জুম/অবস্থান ঠিক করুন" hidden><i class="fa-solid fa-crop-simple" aria-hidden="true"></i></button>
         </div>
         <div class="ht-xslot" data-slot="3">
           <input type="file" class="ht-xfile" id="htfExtra3" accept="image/jpeg,image/png,image/webp,image/gif" hidden>
           <button type="button" class="ht-xadd" data-slot="3" aria-label="আরও ছবি ৪ যোগ করুন"><i class="fa-solid fa-plus" aria-hidden="true"></i><span>ছবি ৪</span></button>
           <img class="ht-xthumb" alt="আরও ছবি ৪ এর প্রিভিউ" hidden>
           <button type="button" class="ht-xrm" data-slot="3" aria-label="আরও ছবি ৪ সরান" hidden><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
-          <button type="button" class="ht-xadj" data-slot="3" aria-label="আরও ছবি ৪ জুম/অবস্থান ঠিক করুন" hidden><i class="fa-solid fa-crop-simple" aria-hidden="true"></i></button>
         </div>
         </div>
       </div>
@@ -187,14 +181,13 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-<script src="js/supabase-config.js?v=20260930045009"></script>
-<script src="js/banner-slider.js?v=20260930045009"></script>
-<script src="js/category-banners.js?v=20260930045009"></script>
-<script src="js/image-cropper.js?v=20260930045009"></script>
-<script src="js/hotel-data.js?v=20260930045009"></script>
-<script src="js/hotel.js?v=20260930045009"></script>
-<script src="js/hotel-submit.js?v=20260930045009"></script>
-<script src="js/hotel-lightbox.js?v=20260930045009"></script>
+<script src="js/supabase-config.js?v=20260930043823"></script>
+<script src="js/banner-slider.js?v=20260930043823"></script>
+<script src="js/category-banners.js?v=20260930043823"></script>
+<script src="js/hotel-data.js?v=20260930043823"></script>
+<script src="js/hotel.js?v=20260930043823"></script>
+<script src="js/hotel-submit.js?v=20260930043823"></script>
+<script src="js/hotel-lightbox.js?v=20260930043823"></script>
 <script>
 (function(){
   function setH(){
@@ -207,7 +200,7 @@
   if(document.fonts&&document.fonts.ready) document.fonts.ready.then(setH);
 })();
 </script>
-<script src="js/auto-update.js?v=20260930045009"></script>
-<script src="js/floating-buttons.js?v=20260930045009"></script>
+<script src="js/auto-update.js?v=20260930043823"></script>
+<script src="js/floating-buttons.js?v=20260930043823"></script>
 </body>
 </html>
