@@ -59,7 +59,6 @@
   function renderCatBar() {
     catBarEl.innerHTML = CATEGORIES.map(function (c) {
       return '<button type="button" class="bs-cat-chip' + (c.slug === currentCat ? ' active' : '') + '" data-slug="' + c.slug + '">' +
-        '<span class="bs-cat-icon"><i class="fa-solid ' + c.icon + '" aria-hidden="true"></i></span>' +
         '<span>' + escapeHtml(c.label) + '</span></button>';
     }).join('');
   }

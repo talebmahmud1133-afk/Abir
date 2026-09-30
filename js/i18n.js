@@ -91,7 +91,7 @@ window.TZ_I18N = {
     "cat.hotel.desc": { bn: "থাকার জন্য হোটেল ও গেস্ট হাউজের তালিকা।", en: "List of hotels and guest houses for accommodation." },
     "cat.touristSpot.title": { bn: "দর্শনীয় স্থান", en: "Tourist Spots" },
     "cat.touristSpot.desc": { bn: "বিখ্যাত দর্শনীয় স্থান ও পর্যটন কেন্দ্রের তথ্য।", en: "Information on famous sightseeing and tourist spots." },
-    "cat.mechanic.title": { bn: "বুয়া", en: "Maid" },
+    "cat.mechanic.title": { bn: "টেকনিশিয়ান", en: "Technician" },
     "cat.mechanic.desc": { bn: "ইলেকট্রিশিয়ান, প্লাম্বার ও মেরামত সেবার তালিকা।", en: "List of electricians, plumbers and repair services." },
     "cat.nursery.title": { bn: "নার্সারি", en: "Nursery" },
     "cat.nursery.desc": { bn: "ফুল, ফল ও শোভাবর্ধনকারী গাছের চারা বিক্রয়কারীর তথ্য।", en: "Info on sellers of flower, fruit and ornamental plant saplings." },

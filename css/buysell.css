@@ -52,7 +52,7 @@
   gap: 10px;
   overflow-x: auto;
   padding: 4px 2px 16px;
-  scroll-snap-type: x proximity;
+  scroll-snap-type: none;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
 }
@@ -61,34 +61,27 @@
   flex: 0 0 auto;
   scroll-snap-align: start;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 6px;
-  min-width: 74px;
-  padding: 10px 12px;
+  justify-content: center;
+  white-space: nowrap;
+  min-height: 42px;
+  padding: 10px 16px;
   background: #fff;
   border: 1px solid var(--line);
   border-radius: 14px;
   box-shadow: var(--shadow-sm);
   cursor: pointer;
   color: var(--ink);
-  font-size: 0.74rem;
+  font-size: 0.88rem;
   font-weight: 600;
   transition: background .15s, color .15s, border-color .15s, transform .1s;
 }
 .bs-cat-chip:active{ transform: scale(0.97); }
-.bs-cat-chip .bs-cat-icon{
-  width: 30px; height: 30px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.05rem;
-  color: var(--maroon);
-}
 .bs-cat-chip.active{
   background: var(--maroon);
   border-color: var(--maroon);
   color: #fff;
 }
-.bs-cat-chip.active .bs-cat-icon{ color: #fff; }
 
 /* ---------- প্রোডাক্ট গ্রিড ---------- */
 /* .wrap-এর ২৪px পাশের প্যাডিং যাতে গ্যাপ তৈরি না করে — style.css-এর .ts-list/.cat-grid-এর

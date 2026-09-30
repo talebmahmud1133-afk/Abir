@@ -11,8 +11,9 @@
 <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
 <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
 <link rel="manifest" href="manifest.json">
-<link rel="stylesheet" href="css/style.css?v=20260924073609">
-<link rel="stylesheet" href="css/inbox.css?v=20260924073609">
+<link rel="stylesheet" href="css/style.css?v=20260930045009">
+<link rel="stylesheet" href="css/profile-text.css?v=20260930045009">
+<link rel="stylesheet" href="css/inbox.css?v=20260930045009">
 <style>
   /* ---- উপরের চিকন বার: ব্যাক বাটন + শিরোনাম + সেটিং আইকন ---- */
   .profile-topbar{
@@ -97,7 +98,7 @@
   /* গেস্ট (লগইন ছাড়া) — লগইন করা ইউজারের মতোই একই ফরম্যাট, কিন্তু সব তথ্য খালি */
   .profile-card.is-guest .profile-edit,
   .profile-card.is-guest .auth-msg{ display: none !important; }
-  .profile-edit{ text-align: left; border-top: 1px solid var(--line); padding-top: 16px; margin-bottom: 18px; }
+  .profile-edit{ text-align: left; padding-top: 16px; margin-bottom: 18px; }
   .profile-edit-label{ display: block; font-weight: 600; font-size: 0.9rem; margin-bottom: 6px; color: var(--ink); }
   .profile-edit .auth-field{ margin-bottom: 6px; }
   .profile-edit .auth-field textarea{
@@ -153,6 +154,8 @@
   .pf-tab i{ font-size: 1rem; }
   .pf-tab.active{ color: var(--maroon); border-bottom-color: var(--maroon); font-weight: 700; background: #f3f8ff; }
   .pf-panel[hidden]{ display: none; }
+  .pf-post-panel h3{ display: flex; align-items: center; gap: 8px; font-size: 1.05rem; margin: 16px 0 12px; }
+  .pf-post-panel h3 i{ color: var(--maroon); }
   .pf-panel h3{ font-size: 1.05rem; margin: 16px 0 4px; color: var(--ink); }
   .pf-row{ display: flex; align-items: center; gap: 12px; padding: 13px 0; border-bottom: 1px solid var(--line); font-size: 0.95rem; }
   .pf-row:last-child{ border-bottom: 0; }
@@ -165,7 +168,8 @@
   .pf-info-card .pf-row{ padding: 9px 0; font-size: 0.9rem; }
   .pf-info-card .pf-row .k{ flex: 0 0 76px; font-size: 0.85rem; }
   .pf-info-card .pf-addr-more[hidden]{ display: none; }
-  .pf-info-card .pf-addr-more .pf-row:last-child{ border-bottom: 1px solid var(--line); }
+  .pf-info-card .pf-more-btn{ border-top: 1px solid var(--line); }
+  .pf-info-card .pf-addr-more{ border-top: 1px solid var(--line); }
   .pf-eye{ flex: 0 0 auto; width: 34px; height: 34px; margin: -6px -6px -6px 0; border: 0; border-radius: 50%; background: transparent; color: var(--maroon); font-size: 1rem; cursor: pointer; }
   .pf-eye:active{ background: #e8f3ec; }
   .pf-more-btn{ display: flex; align-items: center; justify-content: center; gap: 6px; width: 100%; padding: 10px 0 11px; border: 0; background: none; color: var(--maroon); font-family: inherit; font-size: 0.88rem; font-weight: 700; cursor: pointer; }
@@ -331,7 +335,31 @@
 
       <p class="auth-msg" id="socialMsg" role="status" aria-live="polite"></p>
 
-      <form class="profile-edit" id="editPanel" hidden novalidate>
+
+      <nav class="pf-tabs" aria-label="প্রোফাইল ট্যাব">
+        <button type="button" class="pf-tab active" data-pf-tab="info"><i class="fa-solid fa-user" aria-hidden="true"></i><span>তথ্য</span></button>
+        <button type="button" class="pf-tab" id="profileEditBtn" data-pf-tab="edit"><i class="fa-solid fa-pen" aria-hidden="true"></i><span>তথ্য এডিট</span></button>
+        <button type="button" class="pf-tab" data-pf-tab="posts"><i class="fa-solid fa-newspaper" aria-hidden="true"></i><span>মোট পোস্ট</span></button>
+        <button type="button" class="pf-tab" id="profilePostBtn" data-pf-tab="post"><i class="fa-solid fa-plus" aria-hidden="true"></i><span>পোস্ট</span></button>
+      </nav>
+
+      <section class="pf-panel" id="updatedProfileSection" data-pf-panel="info">
+        <div class="pf-info-card">
+          <h3><i class="fa-solid fa-id-card" aria-hidden="true"></i> ব্যক্তিগত তথ্য</h3>
+          <div class="pf-row"><i class="fa-solid fa-at" aria-hidden="true"></i><span class="k">ইউজারনেম</span><span class="v" id="profileUsernameVal">—</span></div>
+          <div class="pf-row"><i class="fa-solid fa-calendar-check" aria-hidden="true"></i><span class="k">সদস্য</span><span class="v" id="profileJoined">—</span></div>
+          <button type="button" class="pf-more-btn" id="pfAddrToggle" aria-expanded="false" aria-controls="pfAddrMore"><span>বিস্তারিত</span> <i class="fa-solid fa-chevron-down" aria-hidden="true"></i></button>
+          <div class="pf-addr-more" id="pfAddrMore" hidden>
+            <div class="pf-row" id="pfPhoneRow"><i class="fa-solid fa-phone" aria-hidden="true"></i><span class="k">মোবাইল</span><span class="v" id="updPhoneVal">—</span><button type="button" class="pf-eye" id="pfPhoneToggle" aria-label="মোবাইল নম্বর দেখান" aria-pressed="false"><i class="fa-solid fa-eye" aria-hidden="true"></i></button></div>
+            <div class="pf-row"><i class="fa-solid fa-location-dot" aria-hidden="true"></i><span class="k">থানা</span><span class="v" id="updThanaVal">—</span></div>
+            <div class="pf-row"><i class="fa-solid fa-map" aria-hidden="true"></i><span class="k">জেলা</span><span class="v" id="updDistrictVal">—</span></div>
+            <div class="pf-row"><i class="fa-solid fa-house" aria-hidden="true"></i><span class="k">গ্রাম</span><span class="v" id="updVillageVal">—</span></div>
+            <div class="pf-row"><i class="fa-solid fa-building-columns" aria-hidden="true"></i><span class="k">ইউনিয়ন</span><span class="v" id="updUnionVal">—</span></div>
+          </div>
+        </div>
+      </section>
+
+      <form class="profile-edit pf-panel" id="editPanel" data-pf-panel="edit" hidden novalidate>
         <label class="profile-edit-label" for="editFullName">পূর্ণ নাম</label>
         <div class="auth-field">
           <span class="auth-icon" aria-hidden="true"><i class="fa-solid fa-user" aria-hidden="true"></i></span>
@@ -388,35 +416,42 @@
         </div>
       </form>
 
-      <nav class="pf-tabs" aria-label="প্রোফাইল ট্যাব">
-        <button type="button" class="pf-tab active" data-pf-tab="info"><i class="fa-solid fa-user" aria-hidden="true"></i><span>তথ্য</span></button>
-        <button type="button" class="pf-tab" id="profileEditBtn"><i class="fa-solid fa-pen" aria-hidden="true"></i><span>তথ্য এডিট</span></button>
-        <button type="button" class="pf-tab" data-pf-tab="posts"><i class="fa-solid fa-newspaper" aria-hidden="true"></i><span>মোট পোস্ট</span></button>
-        <button type="button" class="pf-tab" id="profilePostBtn"><i class="fa-solid fa-plus" aria-hidden="true"></i><span>পোস্ট</span></button>
-      </nav>
-
-      <section class="pf-panel" id="updatedProfileSection" data-pf-panel="info">
-        <div class="pf-info-card">
-          <h3><i class="fa-solid fa-id-card" aria-hidden="true"></i> ব্যক্তিগত তথ্য</h3>
-          <div class="pf-row"><i class="fa-solid fa-at" aria-hidden="true"></i><span class="k">ইউজারনেম</span><span class="v" id="profileUsernameVal">—</span></div>
-          <div class="pf-row"><i class="fa-solid fa-calendar-check" aria-hidden="true"></i><span class="k">সদস্য</span><span class="v" id="profileJoined">—</span></div>
-          <div class="pf-row" id="pfPhoneRow"><i class="fa-solid fa-phone" aria-hidden="true"></i><span class="k">মোবাইল</span><span class="v" id="updPhoneVal">—</span><button type="button" class="pf-eye" id="pfPhoneToggle" aria-label="মোবাইল নম্বর দেখান" aria-pressed="false"><i class="fa-solid fa-eye" aria-hidden="true"></i></button></div>
-        </div>
-
-        <div class="pf-info-card">
-          <h3><i class="fa-solid fa-location-dot" aria-hidden="true"></i> ঠিকানা</h3>
-          <div class="pf-row"><i class="fa-solid fa-location-dot" aria-hidden="true"></i><span class="k">থানা</span><span class="v" id="updThanaVal">—</span></div>
-          <div class="pf-row"><i class="fa-solid fa-map" aria-hidden="true"></i><span class="k">জেলা</span><span class="v" id="updDistrictVal">—</span></div>
-          <div class="pf-addr-more" id="pfAddrMore" hidden>
-            <div class="pf-row"><i class="fa-solid fa-house" aria-hidden="true"></i><span class="k">গ্রাম</span><span class="v" id="updVillageVal">—</span></div>
-            <div class="pf-row"><i class="fa-solid fa-building-columns" aria-hidden="true"></i><span class="k">ইউনিয়ন</span><span class="v" id="updUnionVal">—</span></div>
+      <section class="pf-panel pf-post-panel" id="postModal" data-pf-panel="post" hidden>
+        <h3><i class="fa-solid fa-pen-to-square" aria-hidden="true"></i> নতুন পোস্ট</h3>
+    <form class="contact-form icon-form" id="postForm">
+          <div class="icon-field">
+            <i class="fa-solid fa-user field-icon" aria-hidden="true"></i>
+            <label for="postAuthorName" class="sr-only">আপনার নাম (ঐচ্ছিক)</label>
+            <input type="text" id="postAuthorName" placeholder="আপনার নাম (ঐচ্ছিক) — না দিলে 'অতিথি' দেখাবে">
           </div>
-          <button type="button" class="pf-more-btn" id="pfAddrToggle" aria-expanded="false" aria-controls="pfAddrMore"><span>সম্পূর্ণ ঠিকানা দেখুন</span> <i class="fa-solid fa-chevron-down" aria-hidden="true"></i></button>
-        </div>
+          <div class="icon-field">
+            <i class="fa-solid fa-file-lines field-icon" aria-hidden="true"></i>
+            <label for="postContent" class="sr-only">কী ঘটেছে লিখুন</label>
+            <textarea id="postContent" placeholder="আপনার এলাকার ঘটনা, খবর বা অভিজ্ঞতা লিখুন…" required></textarea>
+          </div>
+          <div>
+            <label for="postMedia">ছবি বা ভিডিও যোগ করুন (ঐচ্ছিক)</label>
+            <input type="file" id="postMedia" accept="image/*,video/*">
+            <div class="media-preview-wrap" id="mediaPreviewWrap">
+              <button type="button" class="media-preview-remove" id="mediaPreviewRemove" aria-label="মুছুন">×</button>
+              <img id="mediaPreviewImg" style="display:none" alt="প্রিভিউ">
+              <video id="mediaPreviewVideo" style="display:none" controls></video>
+            </div>
+            <div class="upload-progress-wrap" id="uploadProgressWrap" hidden>
+              <div class="upload-progress-track"><div class="upload-progress-bar" id="uploadProgressBar" style="width:0%"></div></div>
+              <span class="upload-progress-text" id="uploadProgressText">০%</span>
+            </div>
+          </div>
+          <p class="auth-msg" id="postFormMsg"></p>
+          <div class="modal-actions">
+            <button type="button" class="modal-cancel" id="postCancelBtn">বাতিল করুন</button>
+            <button type="submit" class="modal-submit" id="postSubmitBtn">পোস্ট করুন</button>
+          </div>
+        </form>
       </section>
 
       <section class="pf-panel" data-pf-panel="messages" hidden>
-        <div class="ib-subtabs" role="group" aria-label="মেসেজ ফোল্ডার">
+        <div class="ib-subtabs" role="group" aria-label="মেসেজ ফোল্ডার" hidden>
           <button type="button" class="ib-subtab active" data-ib-folder="chat">চ্যাট<span class="ib-count" id="ibChatCount" hidden></span></button>
           <button type="button" class="ib-subtab" data-ib-folder="requests">মেসেজ রিকোয়েস্ট<span class="ib-count" id="ibReqCount" hidden></span></button>
         </div>
@@ -491,6 +526,14 @@
         <li><a href="terms.html">শর্তাবলী</a></li>
       </ul>
     </div>
+    <div>
+      <h4 data-i18n="footer.contactHeading">যোগাযোগ</h4>
+      <ul class="footer-contact">
+        <li><i class="fa-solid fa-envelope" aria-hidden="true"></i><a href="mailto:info@tangailzila.com">info@tangailzila.com</a></li>
+        <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i><span>টাঙ্গাইল সদর, টাঙ্গাইল, বাংলাদেশ</span></li>
+        <li><i class="fa-solid fa-message" aria-hidden="true"></i><a href="contact.html">বার্তা পাঠান</a></li>
+      </ul>
+    </div>
   </div>
   <div class="footer-bottom">© ২০২৬ টাঙ্গাইল জেলা। সর্বস্বত্ব সংরক্ষিত।</div>
 </footer>
@@ -504,48 +547,12 @@
   <a href="profile.html" class="active"><span class="bn-icon"><i class="fa-solid fa-user" aria-hidden="true"></i></span><span data-i18n="bottomnav.profile">Profile</span></a>
 </nav>
 
-<!-- নতুন পোস্ট করার মোডাল ফর্ম -->
-<div class="modal-overlay" id="postModal">
-  <div class="modal-box icon-modal-box">
-    <h2>নতুন পোস্ট</h2>
-    <form class="contact-form icon-form" id="postForm">
-      <div class="icon-field">
-        <i class="fa-solid fa-user field-icon" aria-hidden="true"></i>
-        <label for="postAuthorName" class="sr-only">আপনার নাম (ঐচ্ছিক)</label>
-        <input type="text" id="postAuthorName" placeholder="আপনার নাম (ঐচ্ছিক) — না দিলে 'অতিথি' দেখাবে">
-      </div>
-      <div class="icon-field">
-        <i class="fa-solid fa-file-lines field-icon" aria-hidden="true"></i>
-        <label for="postContent" class="sr-only">কী ঘটেছে লিখুন</label>
-        <textarea id="postContent" placeholder="আপনার এলাকার ঘটনা, খবর বা অভিজ্ঞতা লিখুন…" required></textarea>
-      </div>
-      <div>
-        <label for="postMedia">ছবি বা ভিডিও যোগ করুন (ঐচ্ছিক)</label>
-        <input type="file" id="postMedia" accept="image/*,video/*">
-        <div class="media-preview-wrap" id="mediaPreviewWrap">
-          <button type="button" class="media-preview-remove" id="mediaPreviewRemove" aria-label="মুছুন">×</button>
-          <img id="mediaPreviewImg" style="display:none" alt="প্রিভিউ">
-          <video id="mediaPreviewVideo" style="display:none" controls></video>
-        </div>
-        <div class="upload-progress-wrap" id="uploadProgressWrap" hidden>
-          <div class="upload-progress-track"><div class="upload-progress-bar" id="uploadProgressBar" style="width:0%"></div></div>
-          <span class="upload-progress-text" id="uploadProgressText">০%</span>
-        </div>
-      </div>
-      <p class="auth-msg" id="postFormMsg"></p>
-      <div class="modal-actions">
-        <button type="button" class="modal-cancel" id="postCancelBtn">বাতিল করুন</button>
-        <button type="submit" class="modal-submit" id="postSubmitBtn">পোস্ট করুন</button>
-      </div>
-    </form>
-  </div>
-</div>
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-<script src="js/supabase-config.js?v=20260924073609"></script>
-<script src="js/nav-avatar.js?v=20260924073609"></script>
-<script src="js/call.js?v=20260924073609"></script>
-<script src="js/image-cropper.js?v=20260924073609"></script>
+<script src="js/supabase-config.js?v=20260930045009"></script>
+<script src="js/bio-clamp.js?v=20260930045009"></script>
+<script src="js/nav-avatar.js?v=20260930045009"></script>
+<script src="js/call.js?v=20260930045009"></script>
+<script src="js/image-cropper.js?v=20260930045009"></script>
 <script>
 (function () {
   var client = window.supabase.createClient(window.TANGAIL_SUPABASE.url, window.TANGAIL_SUPABASE.key);
@@ -697,6 +704,9 @@
   Array.prototype.forEach.call(pfTabBtns, function (btn) {
     btn.addEventListener('click', function () {
       var key = btn.getAttribute('data-pf-tab');
+      // "তথ্য এডিট" ট্যাব: অন্য ট্যাবের মতোই প্যানেল বদলায়, ট্যাব বার সবসময় দেখা যায়
+      if (key === 'edit' && !openEdit()) { return; }
+      if (key !== 'edit') { stopEditChecks(); }
       Array.prototype.forEach.call(pfTabBtns, function (b) { b.classList.toggle('active', b === btn); });
       Array.prototype.forEach.call(document.querySelectorAll('[data-pf-panel]'), function (pn) { pn.hidden = pn.getAttribute('data-pf-panel') !== key; });
       if (key === 'friends') { openFriends(); }
@@ -1321,6 +1331,7 @@
     if (social.bio) {
       bioEl.textContent = social.bio;
       bioEl.hidden = false;
+      if (window.tzBioClamp) window.tzBioClamp(bioEl, social.bio);
     } else {
       bioEl.hidden = true;
     }
@@ -1343,7 +1354,7 @@
       socialLoaded = true;
       renderSocial();
       // প্রাইভেসি সেটিংস পেজ থেকে "ইউজারনেম সেট করুন" লিংকে এলে সরাসরি এডিট ফর্ম খুলে দেওয়া
-      if (window.location.hash === '#edit') { openEdit(); }
+      if (window.location.hash === '#edit') { document.getElementById('profileEditBtn').click(); }
     });
   }
 
@@ -1358,7 +1369,7 @@
   }
 
   function openEdit() {
-    if (!socialLoaded) { return; }
+    if (!socialLoaded) { return false; }
     var fallbackName = (currentUser && currentUser.user_metadata && currentUser.user_metadata.full_name) || '';
     editFullName.value = personalInfo.full_name || fallbackName;
     editPhone.value = personalInfo.phone || '';
@@ -1373,19 +1384,22 @@
     setSocialMsg('');
     usernameState = 'ok';
     setHint('৩-২০ অক্ষর: ছোট হাতের ইংরেজি অক্ষর (a-z), সংখ্যা ও _ (আন্ডারস্কোর)', '');
-    editPanel.hidden = false;
-    editPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    editFullName.focus();
+    return true;
   }
 
-  function closeEdit() {
-    editPanel.hidden = true;
+  function stopEditChecks() {
     clearTimeout(checkTimer);
     checkSeq++;
   }
 
+  // বাতিল / সংরক্ষণের পর "তথ্য" ট্যাবে ফিরে যায়
+  function closeEdit() {
+    stopEditChecks();
+    var infoTab = document.querySelector('[data-pf-tab="info"]');
+    if (infoTab) { infoTab.click(); } else { editPanel.hidden = true; }
+  }
+
   cancelBtn.addEventListener('click', closeEdit);
-  document.getElementById('profileEditBtn').addEventListener('click', function () { if (!isGuest) { openEdit(); } });
 
   editBio.addEventListener('input', updateBioCount);
 
@@ -1716,11 +1730,14 @@
       msg.className = 'auth-msg' + (ok ? ' ok' : '');
     }
 
-    function openModal() { setMsg(''); modal.classList.add('open'); }
-    function closeModal() { modal.classList.remove('open'); }
+    // পোস্ট এখন আলাদা পপআপ নয় — অন্য ট্যাবের মতোই ট্যাবের নিচে প্যানেল হিসেবে আসে
+    function openModal() { setMsg(''); }
+    function closeModal(toKey) {
+      var t = document.querySelector('[data-pf-tab="' + (typeof toKey === 'string' ? toKey : 'info') + '"]');
+      if (t) { t.click(); }
+    }
 
-    document.getElementById('postCancelBtn').addEventListener('click', closeModal);
-    modal.addEventListener('click', function (e) { if (e.target === modal) closeModal(); });
+    document.getElementById('postCancelBtn').addEventListener('click', function () { closeModal('info'); });
 
     function resetMediaPreview() {
       mediaInput.value = '';
@@ -1946,7 +1963,7 @@
         if (currentUser) { loadMyPosts(currentUser.id); }   // "মোট পোস্ট" সংখ্যা ও তালিকা আপডেট
         form.reset();
         resetMediaPreview();
-        setTimeout(closeModal, 1400);
+        setTimeout(function () { closeModal('posts'); }, 1400);
       }).catch(function (err) {
         submitBtn.disabled = false;
         hideProgress();
@@ -1976,12 +1993,12 @@
   });
 })();
 </script>
-<script src="js/i18n.js?v=20260924073609"></script>
-<script src="js/favorite-categories.js?v=20260924073609"></script>
-<script src="js/script.js?v=20260924073609"></script>
-<script src="js/profile-inbox.js?v=20260924073609"></script>
-<script src="js/auto-update.js?v=20260924073609"></script>
-<script src="js/floating-buttons.js?v=20260924073609"></script>
+<script src="js/i18n.js?v=20260930045009"></script>
+<script src="js/favorite-categories.js?v=20260930045009"></script>
+<script src="js/script.js?v=20260930045009"></script>
+<script src="js/profile-inbox.js?v=20260930045009"></script>
+<script src="js/auto-update.js?v=20260930045009"></script>
+<script src="js/floating-buttons.js?v=20260930045009"></script>
 <script>
 /* তথ্য ট্যাব: মোবাইল নম্বর ডিফল্টে মাস্ক করা, আইকনে ট্যাপ করলে দেখা যায়; সম্পূর্ণ ঠিকানা কলাপ্সেবল */
 (function () {
@@ -2022,7 +2039,7 @@
       var open = addrBox.hidden;
       addrBox.hidden = !open;
       addrBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
-      addrBtn.firstElementChild.textContent = open ? 'ঠিকানা লুকান' : 'সম্পূর্ণ ঠিকানা দেখুন';
+      addrBtn.firstElementChild.textContent = open ? 'বিস্তারিত লুকান' : 'বিস্তারিত';
     });
   }
 })();

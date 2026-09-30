@@ -22,7 +22,7 @@
 <link rel="preload" as="image" href="assets/categories/emergency.webp?h=fce238cd" type="image/webp" fetchpriority="high">
 <link rel="preload" as="image" href="assets/categories/help.webp?h=ef0b8ac0" type="image/webp" fetchpriority="high">
 <link rel="preload" as="image" href="assets/categories/shop.webp?h=0ef910d4" type="image/webp" fetchpriority="high">
-<link rel="stylesheet" href="css/style.css?v=20260924073609">
+<link rel="stylesheet" href="css/style.css?v=20260930045009">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body class="home-page">
@@ -80,7 +80,7 @@
         <h3 data-i18n="cat.police.title">থানা-পুলিশ</h3>
         <p data-i18n="cat.police.desc">বিভিন্ন থানার যোগাযোগ নম্বর।</p>
       </a>
-      <a class="cat-card cat-medical" href="hospitals.html">
+      <a class="cat-card cat-medical" href="hospital.html">
         <div class="cat-thumb"><img src="assets/categories/hospitals.webp?h=10bc4ae8" fetchpriority="high" alt="হাসপাতাল" width="360" height="360" decoding="async"></div>
         <h3 data-i18n="cat.hospitals.title">হাসপাতাল</h3>
         <p data-i18n="cat.hospitals.desc">সরকারি ও বেসরকারি হাসপাতালের তালিকা ও যোগাযোগ নম্বর।</p>
@@ -140,9 +140,9 @@
         <h3 data-i18n="cat.carRent.title">গাড়ি ভাড়া</h3>
         <p data-i18n="cat.carRent.desc">সিএনজি, প্রাইভেট কার, মাইক্রোবাস ভাড়ার তথ্য।</p>
       </a>
-      <a class="cat-card cat-repair" href="mechanic.html">
-        <div class="cat-thumb"><img src="assets/categories/maid.webp?h=0d056bd6" alt="বুয়া" width="360" height="360" decoding="async"></div>
-        <h3 data-i18n="cat.mechanic.title">বুয়া</h3>
+      <a class="cat-card cat-repair" href="technician.html">
+        <div class="cat-thumb"><img src="assets/categories/technician.webp?h=6194290b" alt="টেকনিশিয়ান" width="360" height="360" decoding="async"></div>
+        <h3 data-i18n="cat.mechanic.title">টেকনিশিয়ান</h3>
         <p data-i18n="cat.mechanic.desc">ইলেকট্রিশিয়ান, প্লাম্বার ও মেরামত সেবার তালিকা।</p>
       </a>
       <a class="cat-card cat-transport" href="bus-schedule.html">
@@ -230,13 +230,13 @@
         <h3 data-i18n="cat.websiteLinks.title">নিউজ পেপার</h3>
         <p data-i18n="cat.websiteLinks.desc">স্থানীয় ও জাতীয় নিউজ পেপার ও অনলাইন সংবাদ পোর্টালের তালিকা।</p>
       </a>
-      <a class="cat-card cat-heritage" href="handloom.html">
+      <a class="cat-card cat-heritage" href="viral.html">
         <div class="cat-thumb"><img src="assets/categories/viral-places.webp?h=62aed510" alt="ভাইরাল প্লেস" width="360" height="360" decoding="async"></div>
         <h3 data-i18n="cat.handloom.title">ভাইরাল প্লেস</h3>
         <p data-i18n="cat.handloom.desc">টাঙ্গাইলের জনপ্রিয় ও ভাইরাল দর্শনীয় স্থান।</p>
       </a>
     </section>
-    <script src="js/home-order.js?v=20260924073609"></script>
+    <script src="js/home-order.js?v=20260930045009"></script>
 
     <section class="home-posts-section" id="homePostsSection">
       <div class="home-posts-head">
@@ -270,6 +270,14 @@
         <li><a href="terms.html">শর্তাবলী</a></li>
       </ul>
     </div>
+    <div>
+      <h4 data-i18n="footer.contactHeading">যোগাযোগ</h4>
+      <ul class="footer-contact">
+        <li><i class="fa-solid fa-envelope" aria-hidden="true"></i><a href="mailto:info@tangailzila.com">info@tangailzila.com</a></li>
+        <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i><span>টাঙ্গাইল সদর, টাঙ্গাইল, বাংলাদেশ</span></li>
+        <li><i class="fa-solid fa-message" aria-hidden="true"></i><a href="contact.html">বার্তা পাঠান</a></li>
+      </ul>
+    </div>
   </div>
   <div class="footer-bottom">© ২০২৬ টাঙ্গাইল জেলা। সর্বস্বত্ব সংরক্ষিত।</div>
 </footer>
@@ -284,23 +292,23 @@
 </nav>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-<script src="js/supabase-config.js?v=20260924073609"></script>
-<script src="js/nav-avatar.js?v=20260924073609"></script>
-<script src="js/call.js?v=20260924073609"></script>
-<script src="js/sticky-header.js?v=20260924073609"></script>
-<script src="js/banner-slider.js?v=20260924073609"></script>
-<script src="js/home-banners.js?v=20260924073609"></script>
-<script src="js/notice-bar.js?v=20260924073609"></script>
-<script src="js/i18n.js?v=20260924073609"></script>
-<script src="js/cat-label-fit.js?v=20260924073609"></script>
-<script src="js/search-index.js?v=20260924073609"></script>
-<script src="js/smart-search.js?v=20260924073609"></script>
-<script src="js/search-ui.js?v=20260924073609"></script>
-<script src="js/script.js?v=20260924073609"></script>
-<script src="js/favorite-categories.js?v=20260924073609"></script>
-<script src="js/home-posts-preview.js?v=20260924073609"></script>
-<script src="js/popup-ad.js?v=20260924073609"></script>
-<script src="js/auto-update.js?v=20260924073609"></script>
-<script src="js/floating-buttons.js?v=20260924073609"></script>
+<script src="js/supabase-config.js?v=20260930045009"></script>
+<script src="js/nav-avatar.js?v=20260930045009"></script>
+<script src="js/call.js?v=20260930045009"></script>
+<script src="js/sticky-header.js?v=20260930045009"></script>
+<script src="js/banner-slider.js?v=20260930045009"></script>
+<script src="js/home-banners.js?v=20260930045009"></script>
+<script src="js/notice-bar.js?v=20260930045009"></script>
+<script src="js/i18n.js?v=20260930045009"></script>
+<script src="js/cat-label-fit.js?v=20260930045009"></script>
+<script src="js/search-index.js?v=20260930045009"></script>
+<script src="js/smart-search.js?v=20260930045009"></script>
+<script src="js/search-ui.js?v=20260930045009"></script>
+<script src="js/script.js?v=20260930045009"></script>
+<script src="js/favorite-categories.js?v=20260930045009"></script>
+<script src="js/home-posts-preview.js?v=20260930045009"></script>
+<script src="js/popup-ad.js?v=20260930045009"></script>
+<script src="js/auto-update.js?v=20260930045009"></script>
+<script src="js/floating-buttons.js?v=20260930045009"></script>
 </body>
 </html>

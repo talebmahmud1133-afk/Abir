@@ -60,19 +60,20 @@
       (locBits ? ' — ' + escapeHtml(locBits) : '') + (r.notes ? ' · ' + escapeHtml(r.notes) : '');
 
     return '' +
-      '<a class="post-card-mini req-mini" href="blood-donors.html">' +
-        '<div class="post-avatar req-mini-avatar"><i class="fa-solid fa-droplet" aria-hidden="true"></i></div>' +
+      '<a class="post-card-mini req-mini" href="blood-requests.html">' +
+        (/^https:\/\//.test(r.avatar_url || '') ? '<img class="post-avatar post-avatar-img" src="' + escapeHtml(r.avatar_url) + '" alt="" loading="lazy">' : '<div class="post-avatar req-mini-avatar"><i class="fa-solid fa-droplet" aria-hidden="true"></i></div>') +
         '<div class="post-mini-body">' +
-          '<div class="post-mini-top"><span class="post-author">রক্তের রিকোয়েস্ট' + tagHtml + '</span><span class="post-time">' + timeAgo(r.created_at) + '</span></div>' +
+          '<div class="post-mini-top"><span class="post-author">রক্তের দরকার' + tagHtml + '</span><span class="post-time">' + timeAgo(r.created_at) + '</span></div>' +
           '<p class="post-mini-text">' + text + '</p>' +
           '<div class="post-mini-stats"><i class="fa-solid fa-phone" aria-hidden="true"></i> ' + escapeHtml(r.phone || '') + '</div>' +
         '</div>' +
       '</a>';
   }
 
+  function loadPreview() {
   Promise.all([
     client.from('posts').select('*').eq('status', 'approved').order('created_at', { ascending: false }).limit(MAX_SHOW),
-    client.from('blood_requests').select('*').eq('status', 'open').order('created_at', { ascending: false }).limit(MAX_SHOW)
+    client.from('blood_requests').select('id,patient_name,blood_group,bags_needed,urgency,hospital,thana,phone,notes,status,created_at,avatar_url').eq('status', 'open').order('created_at', { ascending: false }).limit(MAX_SHOW)
   ]).then(function (results) {
     var postsRes = results[0];
     var reqRes = results[1];
@@ -99,4 +100,12 @@
 
     wrap.innerHTML = items.map(function (it) { return it.html; }).join('');
   });
+  }
+
+  loadPreview();
+
+  // অন্য পেজ (যেমন রক্তের রিকোয়েস্ট পেজ) থেকে ব্যাক করে ফিরলে ব্রাউজার আগের অবস্থার কপি (bfcache) দেখায় —
+  // তাই "প্রয়োজন মিটে গেছে" চিহ্নিত রিকোয়েস্ট হোমে থেকে যেত। ফিরে এলেই আবার লোড করা হয়।
+  window.addEventListener('pageshow', function (e) { if (e.persisted) loadPreview(); });
+  document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'visible') loadPreview(); });
 })();

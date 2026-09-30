@@ -10,7 +10,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
 <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
 <link rel="manifest" href="manifest.json">
-<link rel="stylesheet" href="css/style.css?v=20260924073609">
+<link rel="stylesheet" href="css/style.css?v=20260930045009">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body class="auth-body">
@@ -18,9 +18,11 @@
 <div class="auth-wrap">
 
   <div class="auth-logo">
+    <img src="assets/logo/tangail-logo.png" alt="টাঙ্গাইল জেলা" class="auth-logo-img" onload="this.parentNode.classList.add('logo-ok')" onerror="this.remove()">
     <div class="mark">টঙ</div>
     <div class="mark-sub">TANGAIL ZILA</div>
   </div>
+  <p class="auth-tagline">টাঙ্গাইলের সব তথ্য, এক জায়গায়</p>
 
   <div class="auth-card">
     <h1>আপনার একাউন্টে প্রবেশ করুন</h1>
@@ -42,6 +44,8 @@
 
     <button type="button" class="auth-btn" id="loginBtn">প্রবেশ করুন</button>
 
+    <div class="auth-divider">অথবা</div>
+
     <a href="register.html" class="auth-btn-outline">নতুন একাউন্ট এখানে <strong>রেজিস্ট্রেশন করুন</strong></a>
 
     <a href="index.html" class="auth-btn-guest">অতিথি হিসেবে প্রবেশ করুন</a>
@@ -50,9 +54,9 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-<script src="js/supabase-config.js?v=20260924073609"></script>
-    <script src="js/nav-avatar.js?v=20260924073609"></script>
-    <script src="js/call.js?v=20260924073609"></script>
+<script src="js/supabase-config.js?v=20260930045009"></script>
+    <script src="js/nav-avatar.js?v=20260930045009"></script>
+    <script src="js/call.js?v=20260930045009"></script>
 <script>
 (function () {
   var client = window.supabase.createClient(window.TANGAIL_SUPABASE.url, window.TANGAIL_SUPABASE.key);
@@ -116,7 +120,7 @@
   emailInput.addEventListener('keydown', function (e) { if (e.key === 'Enter') passInput.focus(); });
 })();
 </script>
-<script src="js/auto-update.js?v=20260924073609"></script>
-<script src="js/floating-buttons.js?v=20260924073609"></script>
+<script src="js/auto-update.js?v=20260930045009"></script>
+<script src="js/floating-buttons.js?v=20260930045009"></script>
 </body>
 </html>

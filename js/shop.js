@@ -72,7 +72,6 @@
   function renderCatBar() {
     catBarEl.innerHTML = CATEGORIES.map(function (c) {
       return '<button type="button" class="shop-cat-chip' + (c.slug === currentCat ? ' active' : '') + '" data-slug="' + c.slug + '">' +
-        '<span class="shop-cat-icon"><i class="fa-solid ' + c.icon + '" aria-hidden="true"></i></span>' +
         '<span>' + escapeHtml(c.label) + '</span></button>';
     }).join('');
   }
@@ -123,9 +122,9 @@
 
     var hasRating = Number(item.rating) > 0;
     var ratingHtml = hasRating
-      ? '<span class="shop-rating-chip"><i class="fa-solid fa-star" aria-hidden="true"></i>' + Number(item.rating).toFixed(1) +
+      ? '<span class="shop-rating-chip">' + Number(item.rating).toFixed(1) +
         (item.reviews ? ' <span class="count">(' + Number(item.reviews).toLocaleString('bn-BD') + ')</span>' : '') + '</span>'
-      : '<span class="shop-rating-chip is-new"><i class="fa-solid fa-seedling" aria-hidden="true"></i>নতুন</span>';
+      : '<span class="shop-rating-chip is-new">নতুন</span>';
 
     var actions = '<a class="shop-call-btn" href="tel:' + phone + '"><i class="fa-solid fa-phone" aria-hidden="true"></i> কল করুন</a>' +
       '<a class="shop-map-btn" href="' + mapsLink(item) + '" target="_blank" rel="noopener"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> লোকেশন</a>';

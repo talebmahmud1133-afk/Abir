@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
+<meta http-equiv="refresh" content="0; url=hospital.html">
+<script>location.replace('hospital.html');</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>হাসপাতাল — বিভাগ — টাঙ্গাইল জেলা</title>
@@ -13,7 +15,8 @@
 <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
 <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
 <link rel="manifest" href="manifest.json">
-<link rel="stylesheet" href="css/style.css?v=20260924073609">
+<link rel="stylesheet" href="css/style.css?v=20260930045009">
+<link rel="stylesheet" href="css/hospitals.css?v=20260930045009">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body data-banner-category="hospitals">
@@ -66,55 +69,18 @@
       <div class="banner-dots" id="catBannerDots"></div>
     </div>
 
-    <section class="cat-grid">
-      <a class="cat-card cat-medical" href="listing.html?cat=hospital-sadar&name=%E0%A6%9F%E0%A6%BE%E0%A6%99%E0%A7%8D%E0%A6%97%E0%A6%BE%E0%A6%87%E0%A6%B2%20%E0%A6%B8%E0%A6%A6%E0%A6%B0%20%E0%A6%A5%E0%A6%BE%E0%A6%A8%E0%A6%BE&icon=%F0%9F%8F%A5&back=hospitals.html&backName=%E0%A6%B9%E0%A6%BE%E0%A6%B8%E0%A6%AA%E0%A6%BE%E0%A6%A4%E0%A6%BE%E0%A6%B2&bannerCat=hospitals">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🏥</span></div>
-        <h3>টাঙ্গাইল সদর থানা</h3>
-      </a>
-      <a class="cat-card cat-medical" href="listing.html?cat=hospital-mirzapur&name=%E0%A6%AE%E0%A6%BF%E0%A6%B0%E0%A7%8D%E0%A6%9C%E0%A6%BE%E0%A6%AA%E0%A7%81%E0%A6%B0%20%E0%A6%A5%E0%A6%BE%E0%A6%A8%E0%A6%BE&icon=%F0%9F%8F%A5&back=hospitals.html&backName=%E0%A6%B9%E0%A6%BE%E0%A6%B8%E0%A6%AA%E0%A6%BE%E0%A6%A4%E0%A6%BE%E0%A6%B2&bannerCat=hospitals">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🏥</span></div>
-        <h3>মির্জাপুর থানা</h3>
-      </a>
-      <a class="cat-card cat-medical" href="listing.html?cat=hospital-delduar&name=%E0%A6%A6%E0%A7%87%E0%A6%B2%E0%A6%A6%E0%A7%81%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%B0%20%E0%A6%A5%E0%A6%BE%E0%A6%A8%E0%A6%BE&icon=%F0%9F%8F%A5&back=hospitals.html&backName=%E0%A6%B9%E0%A6%BE%E0%A6%B8%E0%A6%AA%E0%A6%BE%E0%A6%A4%E0%A6%BE%E0%A6%B2&bannerCat=hospitals">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🏥</span></div>
-        <h3>দেলদুয়ার থানা</h3>
-      </a>
-      <a class="cat-card cat-medical" href="listing.html?cat=hospital-basail&name=%E0%A6%AC%E0%A6%BE%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%B2%20%E0%A6%A5%E0%A6%BE%E0%A6%A8%E0%A6%BE&icon=%F0%9F%8F%A5&back=hospitals.html&backName=%E0%A6%B9%E0%A6%BE%E0%A6%B8%E0%A6%AA%E0%A6%BE%E0%A6%A4%E0%A6%BE%E0%A6%B2&bannerCat=hospitals">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🏥</span></div>
-        <h3>বাসাইল থানা</h3>
-      </a>
-      <a class="cat-card cat-medical" href="listing.html?cat=hospital-kalihati&name=%E0%A6%95%E0%A6%BE%E0%A6%B2%E0%A6%BF%E0%A6%B9%E0%A6%BE%E0%A6%A4%E0%A7%80%20%E0%A6%A5%E0%A6%BE%E0%A6%A8%E0%A6%BE&icon=%F0%9F%8F%A5&back=hospitals.html&backName=%E0%A6%B9%E0%A6%BE%E0%A6%B8%E0%A6%AA%E0%A6%BE%E0%A6%A4%E0%A6%BE%E0%A6%B2&bannerCat=hospitals">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🏥</span></div>
-        <h3>কালিহাতী থানা</h3>
-      </a>
-      <a class="cat-card cat-medical" href="listing.html?cat=hospital-ghatail&name=%E0%A6%98%E0%A6%BE%E0%A6%9F%E0%A6%BE%E0%A6%87%E0%A6%B2%20%E0%A6%A5%E0%A6%BE%E0%A6%A8%E0%A6%BE&icon=%F0%9F%8F%A5&back=hospitals.html&backName=%E0%A6%B9%E0%A6%BE%E0%A6%B8%E0%A6%AA%E0%A6%BE%E0%A6%A4%E0%A6%BE%E0%A6%B2&bannerCat=hospitals">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🏥</span></div>
-        <h3>ঘাটাইল থানা</h3>
-      </a>
-      <a class="cat-card cat-medical" href="listing.html?cat=hospital-gopalpur&name=%E0%A6%97%E0%A7%8B%E0%A6%AA%E0%A6%BE%E0%A6%B2%E0%A6%AA%E0%A7%81%E0%A6%B0%20%E0%A6%A5%E0%A6%BE%E0%A6%A8%E0%A6%BE&icon=%F0%9F%8F%A5&back=hospitals.html&backName=%E0%A6%B9%E0%A6%BE%E0%A6%B8%E0%A6%AA%E0%A6%BE%E0%A6%A4%E0%A6%BE%E0%A6%B2&bannerCat=hospitals">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🏥</span></div>
-        <h3>গোপালপুর থানা</h3>
-      </a>
-      <a class="cat-card cat-medical" href="listing.html?cat=hospital-madhupur&name=%E0%A6%AE%E0%A6%A7%E0%A7%81%E0%A6%AA%E0%A7%81%E0%A6%B0%20%E0%A6%A5%E0%A6%BE%E0%A6%A8%E0%A6%BE&icon=%F0%9F%8F%A5&back=hospitals.html&backName=%E0%A6%B9%E0%A6%BE%E0%A6%B8%E0%A6%AA%E0%A6%BE%E0%A6%A4%E0%A6%BE%E0%A6%B2&bannerCat=hospitals">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🏥</span></div>
-        <h3>মধুপুর থানা</h3>
-      </a>
-      <a class="cat-card cat-medical" href="listing.html?cat=hospital-dhanbari&name=%E0%A6%A7%E0%A6%A8%E0%A6%AC%E0%A6%BE%E0%A6%A1%E0%A6%BC%E0%A7%80%20%E0%A6%A5%E0%A6%BE%E0%A6%A8%E0%A6%BE&icon=%F0%9F%8F%A5&back=hospitals.html&backName=%E0%A6%B9%E0%A6%BE%E0%A6%B8%E0%A6%AA%E0%A6%BE%E0%A6%A4%E0%A6%BE%E0%A6%B2&bannerCat=hospitals">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🏥</span></div>
-        <h3>ধনবাড়ী থানা</h3>
-      </a>
-      <a class="cat-card cat-medical" href="listing.html?cat=hospital-bhuapur&name=%E0%A6%AD%E0%A7%82%E0%A6%9E%E0%A6%BE%E0%A6%AA%E0%A7%81%E0%A6%B0%20%E0%A6%A5%E0%A6%BE%E0%A6%A8%E0%A6%BE&icon=%F0%9F%8F%A5&back=hospitals.html&backName=%E0%A6%B9%E0%A6%BE%E0%A6%B8%E0%A6%AA%E0%A6%BE%E0%A6%A4%E0%A6%BE%E0%A6%B2&bannerCat=hospitals">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🏥</span></div>
-        <h3>ভূঞাপুর থানা</h3>
-      </a>
-      <a class="cat-card cat-medical" href="listing.html?cat=hospital-nagarpur&name=%E0%A6%A8%E0%A6%BE%E0%A6%97%E0%A6%B0%E0%A6%AA%E0%A7%81%E0%A6%B0%20%E0%A6%A5%E0%A6%BE%E0%A6%A8%E0%A6%BE&icon=%F0%9F%8F%A5&back=hospitals.html&backName=%E0%A6%B9%E0%A6%BE%E0%A6%B8%E0%A6%AA%E0%A6%BE%E0%A6%A4%E0%A6%BE%E0%A6%B2&bannerCat=hospitals">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🏥</span></div>
-        <h3>নাগরপুর থানা</h3>
-      </a>
-      <a class="cat-card cat-medical" href="listing.html?cat=hospital-sakhipur&name=%E0%A6%B8%E0%A6%96%E0%A7%80%E0%A6%AA%E0%A7%81%E0%A6%B0%20%E0%A6%A5%E0%A6%BE%E0%A6%A8%E0%A6%BE&icon=%F0%9F%8F%A5&back=hospitals.html&backName=%E0%A6%B9%E0%A6%BE%E0%A6%B8%E0%A6%AA%E0%A6%BE%E0%A6%A4%E0%A6%BE%E0%A6%B2&bannerCat=hospitals">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🏥</span></div>
-        <h3>সখীপুর থানা</h3>
-      </a>
+    <section class="hosp-chip-row" aria-label="হাসপাতালের ধরন নির্বাচন করুন">
+      <a class="hosp-chip" href="listing.html?cat=hospital-govt&name=%E0%A6%B8%E0%A6%B0%E0%A6%95%E0%A6%BE%E0%A6%B0%E0%A6%BF%20%E0%A6%B9%E0%A6%BE%E0%A6%B8%E0%A6%AA%E0%A6%BE%E0%A6%A4%E0%A6%BE%E0%A6%B2&icon=%F0%9F%8F%A5&back=hospitals.html&backName=%E0%A6%B9%E0%A6%BE%E0%A6%B8%E0%A6%AA%E0%A6%BE%E0%A6%A4%E0%A6%BE%E0%A6%B2&bannerCat=hospitals">সরকারি হাসপাতাল</a>
+      <a class="hosp-chip" href="listing.html?cat=hospital-private&name=%E0%A6%AC%E0%A7%87%E0%A6%B8%E0%A6%B0%E0%A6%95%E0%A6%BE%E0%A6%B0%E0%A6%BF%20%E0%A6%B9%E0%A6%BE%E0%A6%B8%E0%A6%AA%E0%A6%BE%E0%A6%A4%E0%A6%BE%E0%A6%B2&icon=%F0%9F%8F%A5&back=hospitals.html&backName=%E0%A6%B9%E0%A6%BE%E0%A6%B8%E0%A6%AA%E0%A6%BE%E0%A6%A4%E0%A6%BE%E0%A6%B2&bannerCat=hospitals">বেসরকারি হাসপাতাল</a>
+      <a class="hosp-chip" href="listing.html?cat=hospital-medical-college&name=%E0%A6%AE%E0%A7%87%E0%A6%A1%E0%A6%BF%E0%A6%95%E0%A7%87%E0%A6%B2%20%E0%A6%95%E0%A6%B2%E0%A7%87%E0%A6%9C&icon=%F0%9F%8F%A5&back=hospitals.html&backName=%E0%A6%B9%E0%A6%BE%E0%A6%B8%E0%A6%AA%E0%A6%BE%E0%A6%A4%E0%A6%BE%E0%A6%B2&bannerCat=hospitals">মেডিকেল কলেজ</a>
+      <a class="hosp-chip" href="listing.html?cat=hospital-upazila-health-complex&name=%E0%A6%89%E0%A6%AA%E0%A6%9C%E0%A7%87%E0%A6%B2%E0%A6%BE%20%E0%A6%B8%E0%A7%8D%E0%A6%AC%E0%A6%BE%E0%A6%B8%E0%A7%8D%E0%A6%A5%E0%A7%8D%E0%A6%AF%20%E0%A6%95%E0%A6%AE%E0%A6%AA%E0%A7%8D%E0%A6%B2%E0%A7%87%E0%A6%95%E0%A7%8D%E0%A6%B8&icon=%F0%9F%8F%A5&back=hospitals.html&backName=%E0%A6%B9%E0%A6%BE%E0%A6%B8%E0%A6%AA%E0%A6%BE%E0%A6%A4%E0%A6%BE%E0%A6%B2&bannerCat=hospitals">উপজেলা স্বাস্থ্য কমপ্লেক্স</a>
+      <a class="hosp-chip" href="listing.html?cat=hospital-diagnostic&name=%E0%A6%A1%E0%A6%BE%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%97%E0%A6%A8%E0%A6%B8%E0%A7%8D%E0%A6%9F%E0%A6%BF%E0%A6%95&icon=%F0%9F%A7%AA&back=hospitals.html&backName=%E0%A6%B9%E0%A6%BE%E0%A6%B8%E0%A6%AA%E0%A6%BE%E0%A6%A4%E0%A6%BE%E0%A6%B2&bannerCat=hospitals">ডায়াগনস্টিক</a>
+      <a class="hosp-chip" href="listing.html?cat=hospital-eye&name=%E0%A6%9A%E0%A6%95%E0%A7%8D%E0%A6%B7%E0%A7%81%20%E0%A6%9A%E0%A6%BF%E0%A6%95%E0%A6%BF%E0%A7%8E%E0%A6%B8%E0%A6%BE&icon=%F0%9F%91%81%EF%B8%8F&back=hospitals.html&backName=%E0%A6%B9%E0%A6%BE%E0%A6%B8%E0%A6%AA%E0%A6%BE%E0%A6%A4%E0%A6%BE%E0%A6%B2&bannerCat=hospitals">চক্ষু চিকিৎসা</a>
+      <a class="hosp-chip" href="listing.html?cat=hospital-dental&name=%E0%A6%A1%E0%A7%87%E0%A6%A8%E0%A7%8D%E0%A6%9F%E0%A6%BE%E0%A6%B2&icon=%F0%9F%A6%B7&back=hospitals.html&backName=%E0%A6%B9%E0%A6%BE%E0%A6%B8%E0%A6%AA%E0%A6%BE%E0%A6%A4%E0%A6%BE%E0%A6%B2&bannerCat=hospitals">ডেন্টাল</a>
+      <a class="hosp-chip" href="listing.html?cat=hospital-specialized&name=%E0%A6%AC%E0%A6%BF%E0%A6%B6%E0%A7%87%E0%A6%B7%E0%A6%BE%E0%A6%AF%E0%A6%BC%E0%A6%BF%E0%A6%A4%20%E0%A6%B9%E0%A6%BE%E0%A6%B8%E0%A6%AA%E0%A6%BE%E0%A6%A4%E0%A6%BE%E0%A6%B2&icon=%E2%9D%A4%EF%B8%8F&back=hospitals.html&backName=%E0%A6%B9%E0%A6%BE%E0%A6%B8%E0%A6%AA%E0%A6%BE%E0%A6%A4%E0%A6%BE%E0%A6%B2&bannerCat=hospitals">বিশেষায়িত হাসপাতাল</a>
+      <a class="hosp-chip" href="listing.html?cat=hospital-maternal-child&name=%E0%A6%AE%E0%A6%BE%E0%A6%A4%E0%A7%83%20%E0%A6%93%20%E0%A6%B6%E0%A6%BF%E0%A6%B6%E0%A7%81&icon=%F0%9F%A4%B0&back=hospitals.html&backName=%E0%A6%B9%E0%A6%BE%E0%A6%B8%E0%A6%AA%E0%A6%BE%E0%A6%A4%E0%A6%BE%E0%A6%B2&bannerCat=hospitals">মাতৃ ও শিশু</a>
+      <a class="hosp-chip" href="listing.html?cat=hospital-medical-center&name=%E0%A6%AE%E0%A7%87%E0%A6%A1%E0%A6%BF%E0%A6%95%E0%A7%87%E0%A6%B2%20%E0%A6%B8%E0%A7%87%E0%A6%A8%E0%A7%8D%E0%A6%9F%E0%A6%BE%E0%A6%B0&icon=%F0%9F%A9%BA&back=hospitals.html&backName=%E0%A6%B9%E0%A6%BE%E0%A6%B8%E0%A6%AA%E0%A6%BE%E0%A6%A4%E0%A6%BE%E0%A6%B2&bannerCat=hospitals">মেডিকেল সেন্টার</a>
+      <a class="hosp-chip" href="listing.html?cat=hospital-community-clinic&name=%E0%A6%95%E0%A6%AE%E0%A6%BF%E0%A6%89%E0%A6%A8%E0%A6%BF%E0%A6%9F%E0%A6%BF%20%E0%A6%95%E0%A7%8D%E0%A6%B2%E0%A6%BF%E0%A6%A8%E0%A6%BF%E0%A6%95&icon=%F0%9F%8F%A0&back=hospitals.html&backName=%E0%A6%B9%E0%A6%BE%E0%A6%B8%E0%A6%AA%E0%A6%BE%E0%A6%A4%E0%A6%BE%E0%A6%B2&bannerCat=hospitals">কমিউনিটি ক্লিনিক</a>
     </section>
   </div>
 </main>
@@ -138,6 +104,14 @@
         <li><a href="terms.html">শর্তাবলী</a></li>
       </ul>
     </div>
+    <div>
+      <h4 data-i18n="footer.contactHeading">যোগাযোগ</h4>
+      <ul class="footer-contact">
+        <li><i class="fa-solid fa-envelope" aria-hidden="true"></i><a href="mailto:info@tangailzila.com">info@tangailzila.com</a></li>
+        <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i><span>টাঙ্গাইল সদর, টাঙ্গাইল, বাংলাদেশ</span></li>
+        <li><i class="fa-solid fa-message" aria-hidden="true"></i><a href="contact.html">বার্তা পাঠান</a></li>
+      </ul>
+    </div>
   </div>
   <div class="footer-bottom">© ২০২৬ টাঙ্গাইল জেলা। সর্বস্বত্ব সংরক্ষিত।</div>
 </footer>
@@ -151,19 +125,19 @@
 </nav>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-<script src="js/supabase-config.js?v=20260924073609"></script>
-    <script src="js/nav-avatar.js?v=20260924073609"></script>
-    <script src="js/call.js?v=20260924073609"></script>
-<script src="js/sticky-header.js?v=20260924073609"></script>
-<script src="js/banner-slider.js?v=20260924073609"></script>
-<script src="js/category-banners.js?v=20260924073609"></script>
-<script src="js/notice-bar.js?v=20260924073609"></script>
-<script src="js/i18n.js?v=20260924073609"></script>
-<script src="js/search-index.js?v=20260924073609"></script>
-<script src="js/smart-search.js?v=20260924073609"></script>
-<script src="js/search-ui.js?v=20260924073609"></script>
-<script src="js/script.js?v=20260924073609"></script>
-<script src="js/auto-update.js?v=20260924073609"></script>
-<script src="js/floating-buttons.js?v=20260924073609"></script>
+<script src="js/supabase-config.js?v=20260930045009"></script>
+    <script src="js/nav-avatar.js?v=20260930045009"></script>
+    <script src="js/call.js?v=20260930045009"></script>
+<script src="js/sticky-header.js?v=20260930045009"></script>
+<script src="js/banner-slider.js?v=20260930045009"></script>
+<script src="js/category-banners.js?v=20260930045009"></script>
+<script src="js/notice-bar.js?v=20260930045009"></script>
+<script src="js/i18n.js?v=20260930045009"></script>
+<script src="js/search-index.js?v=20260930045009"></script>
+<script src="js/smart-search.js?v=20260930045009"></script>
+<script src="js/search-ui.js?v=20260930045009"></script>
+<script src="js/script.js?v=20260930045009"></script>
+<script src="js/auto-update.js?v=20260930045009"></script>
+<script src="js/floating-buttons.js?v=20260930045009"></script>
 </body>
 </html>

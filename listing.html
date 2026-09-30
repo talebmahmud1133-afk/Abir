@@ -13,7 +13,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
 <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
 <link rel="manifest" href="manifest.json">
-<link rel="stylesheet" href="css/style.css?v=20260924073609">
+<link rel="stylesheet" href="css/style.css?v=20260930045009">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body data-banner-category="listing">
@@ -59,29 +59,11 @@
       <div class="banner-dots" id="catBannerDots"></div>
     </div>
 
-    <div class="notice">এখানে দেখানো তথ্যগুলো নমুনা মাত্র। প্রকৃত ডেটা যুক্ত করে এই তালিকা প্রতিস্থাপন করুন। নিজের তথ্য যোগ করতে <a href="add-listing.html" style="color:var(--maroon-dark)">এখানে ক্লিক করুন</a>।</div>
-
-    <div class="listing">
-      <div class="list-item">
-        <div class="info">
-          <h3 id="itemOneTitle">নমুনা প্রতিষ্ঠান ১</h3>
-          <div class="meta" id="metaOne">টাঙ্গাইল সদর</div>
-        </div>
-        <a class="call" href="tel:01711000001">01711000001</a>
-      </div>
-      <div class="list-item">
-        <div class="info">
-          <h3 id="itemTwoTitle">নমুনা প্রতিষ্ঠান ২</h3>
-          <div class="meta" id="metaTwo">সদর হাসপাতাল রোড</div>
-        </div>
-        <a class="call" href="tel:01711000002">01711000002</a>
-      </div>
-      <div class="list-item">
-        <div class="info">
-          <h3 id="itemThreeTitle">নমুনা প্রতিষ্ঠান ৩</h3>
-          <div class="meta" id="metaThree">নিরালা মোড়</div>
-        </div>
-        <a class="call" href="tel:01711000003">01711000003</a>
+    <div class="listing" id="listingItems">
+      <div class="donor-empty" id="listingEmpty">
+        <div class="donor-empty-icon"><i class="fa-solid fa-clipboard-list" aria-hidden="true"></i></div>
+        <p id="listingEmptyText">এখনো এই তালিকায় কোনো তথ্য যুক্ত হয়নি।</p>
+        <p><a href="add-listing.html" style="color:var(--maroon-dark)">নিজের তথ্য যোগ করতে এখানে ক্লিক করুন</a></p>
       </div>
     </div>
   </div>
@@ -104,6 +86,14 @@
         <li><a href="sitemap.html">সাইটম্যাপ</a></li>
         <li><a href="privacy-policy.html">প্রাইভেসি পলিসি</a></li>
         <li><a href="terms.html">শর্তাবলী</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 data-i18n="footer.contactHeading">যোগাযোগ</h4>
+      <ul class="footer-contact">
+        <li><i class="fa-solid fa-envelope" aria-hidden="true"></i><a href="mailto:info@tangailzila.com">info@tangailzila.com</a></li>
+        <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i><span>টাঙ্গাইল সদর, টাঙ্গাইল, বাংলাদেশ</span></li>
+        <li><i class="fa-solid fa-message" aria-hidden="true"></i><a href="contact.html">বার্তা পাঠান</a></li>
       </ul>
     </div>
   </div>
@@ -131,23 +121,19 @@
 
   document.getElementById('pageTitle').textContent = name + ' — টাঙ্গাইল জেলা';
   if (document.getElementById('listTopbarTitle')) document.getElementById('listTopbarTitle').textContent = name;
-  document.getElementById('itemOneTitle').textContent = name + ' — নমুনা প্রতিষ্ঠান ১';
-  document.getElementById('metaOne').textContent = name + ' · টাঙ্গাইল সদর';
-  document.getElementById('itemTwoTitle').textContent = name + ' — নমুনা প্রতিষ্ঠান ২';
-  document.getElementById('metaTwo').textContent = name + ' · সদর হাসপাতাল রোড';
-  document.getElementById('itemThreeTitle').textContent = name + ' — নমুনা প্রতিষ্ঠান ৩';
-  document.getElementById('metaThree').textContent = name + ' · নিরালা মোড়';
+  var emptyText = document.getElementById('listingEmptyText');
+  if (emptyText) emptyText.textContent = 'এখনো "' + name + '" তালিকায় কোনো তথ্য যুক্ত হয়নি।';
 })();
 </script>
-<script src="js/i18n.js?v=20260924073609"></script>
-<script src="js/script.js?v=20260924073609"></script>
+<script src="js/i18n.js?v=20260930045009"></script>
+<script src="js/script.js?v=20260930045009"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-    <script src="js/supabase-config.js?v=20260924073609"></script>
-    <script src="js/nav-avatar.js?v=20260924073609"></script>
-    <script src="js/call.js?v=20260924073609"></script>
-<script src="js/banner-slider.js?v=20260924073609"></script>
-<script src="js/category-banners.js?v=20260924073609"></script>
-<script src="js/auto-update.js?v=20260924073609"></script>
-<script src="js/floating-buttons.js?v=20260924073609"></script>
+    <script src="js/supabase-config.js?v=20260930045009"></script>
+    <script src="js/nav-avatar.js?v=20260930045009"></script>
+    <script src="js/call.js?v=20260930045009"></script>
+<script src="js/banner-slider.js?v=20260930045009"></script>
+<script src="js/category-banners.js?v=20260930045009"></script>
+<script src="js/auto-update.js?v=20260930045009"></script>
+<script src="js/floating-buttons.js?v=20260930045009"></script>
 </body>
 </html>

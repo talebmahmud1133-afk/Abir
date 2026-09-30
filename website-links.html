@@ -13,10 +13,19 @@
 <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
 <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
 <link rel="manifest" href="manifest.json">
-<link rel="stylesheet" href="css/style.css?v=20260924073609">
+<link rel="stylesheet" href="css/style.css?v=20260930045009">
+<link rel="stylesheet" href="css/tourist-spot.css?v=20260930045009">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+.np-chips{padding-top:14px;padding-bottom:4px}
+.np-grid{padding:12px 0 60px}
+.np-grid .cat-thumb{display:flex;align-items:center;justify-content:center;background:#fff;border:1px solid var(--line)}
+.np-grid .cat-thumb img{width:88px;height:88px;object-fit:contain}
+.np-grid .np-fallback{font-size:3rem;line-height:1}
+.np-grid .np-nolink{opacity:.6;cursor:default}
+</style>
 </head>
-<body data-banner-category="website-links">
+<body>
 
 <header class="site-header app-header">
   <div class="header-inner">
@@ -47,75 +56,25 @@
 </header>
 <main>
   <div class="wrap">
-    <div class="sticky-top-stack">
-    <div class="notice-bar app-notice">
-      <span class="notice-tag">তথ্য</span>
-      <span class="notice-text">প্রয়োজনীয় উপ-বিভাগ বেছে নিয়ে তালিকা দেখুন</span>
-    </div>
-    </div>
-
         <div class="post-detail-topbar list-back-topbar">
       <button type="button" class="post-detail-back" onclick="if(window.history.length>1){history.back();}else{window.location.href='index.html';}" aria-label="পেছনে যান"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i></button>
       <span>নিউজ পেপার</span>
     </div>
 
-    <div class="banner-slider-wrap" id="catBannerWrap" style="display:none">
-      <section class="banner-slider" id="catBannerSlider" aria-label="বিভাগ ব্যানার">
-        <div class="banner-track" id="catBannerTrack"></div>
-      </section>
-      <div class="banner-dots" id="catBannerDots"></div>
+    <div class="ts-chip-row np-chips" id="npChips">
+      <button type="button" class="ts-chip active" data-filter="bangla">বাংলা</button>
+      <button type="button" class="ts-chip" data-filter="english">ইংরেজি</button>
+      <button type="button" class="ts-chip" data-filter="portal">নিউজ পোর্টাল</button>
+      <button type="button" class="ts-chip" data-filter="intl">আন্তর্জাতিক</button>
+      <button type="button" class="ts-chip" data-filter="bnworld">বাংলা বিশ্ব</button>
+      <button type="button" class="ts-chip" data-filter="local">স্থানীয়</button>
+      <button type="button" class="ts-chip" data-filter="business">ব্যবসা</button>
+      <button type="button" class="ts-chip" data-filter="epaper">ই-পেপার</button>
+      <button type="button" class="ts-chip" data-filter="weekly">সাপ্তাহিক</button>
+      <button type="button" class="ts-chip" data-filter="agency">সংবাদ সংস্থা</button>
     </div>
 
-    <section class="cat-grid">
-      <a class="cat-card cat-web" href="listing.html?cat=website-sadar&name=%E0%A6%9F%E0%A6%BE%E0%A6%99%E0%A7%8D%E0%A6%97%E0%A6%BE%E0%A6%87%E0%A6%B2%20%E0%A6%B8%E0%A6%A6%E0%A6%B0%20%E0%A6%A5%E0%A6%BE%E0%A6%A8%E0%A6%BE&icon=%F0%9F%8C%90&back=website-links.html&backName=%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%AC%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%9F&bannerCat=website-links">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🌐</span></div>
-        <h3>টাঙ্গাইল সদর থানা</h3>
-      </a>
-      <a class="cat-card cat-web" href="listing.html?cat=website-mirzapur&name=%E0%A6%AE%E0%A6%BF%E0%A6%B0%E0%A7%8D%E0%A6%9C%E0%A6%BE%E0%A6%AA%E0%A7%81%E0%A6%B0%20%E0%A6%A5%E0%A6%BE%E0%A6%A8%E0%A6%BE&icon=%F0%9F%8C%90&back=website-links.html&backName=%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%AC%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%9F&bannerCat=website-links">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🌐</span></div>
-        <h3>মির্জাপুর থানা</h3>
-      </a>
-      <a class="cat-card cat-web" href="listing.html?cat=website-delduar&name=%E0%A6%A6%E0%A7%87%E0%A6%B2%E0%A6%A6%E0%A7%81%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%B0%20%E0%A6%A5%E0%A6%BE%E0%A6%A8%E0%A6%BE&icon=%F0%9F%8C%90&back=website-links.html&backName=%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%AC%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%9F&bannerCat=website-links">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🌐</span></div>
-        <h3>দেলদুয়ার থানা</h3>
-      </a>
-      <a class="cat-card cat-web" href="listing.html?cat=website-basail&name=%E0%A6%AC%E0%A6%BE%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%B2%20%E0%A6%A5%E0%A6%BE%E0%A6%A8%E0%A6%BE&icon=%F0%9F%8C%90&back=website-links.html&backName=%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%AC%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%9F&bannerCat=website-links">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🌐</span></div>
-        <h3>বাসাইল থানা</h3>
-      </a>
-      <a class="cat-card cat-web" href="listing.html?cat=website-kalihati&name=%E0%A6%95%E0%A6%BE%E0%A6%B2%E0%A6%BF%E0%A6%B9%E0%A6%BE%E0%A6%A4%E0%A7%80%20%E0%A6%A5%E0%A6%BE%E0%A6%A8%E0%A6%BE&icon=%F0%9F%8C%90&back=website-links.html&backName=%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%AC%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%9F&bannerCat=website-links">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🌐</span></div>
-        <h3>কালিহাতী থানা</h3>
-      </a>
-      <a class="cat-card cat-web" href="listing.html?cat=website-ghatail&name=%E0%A6%98%E0%A6%BE%E0%A6%9F%E0%A6%BE%E0%A6%87%E0%A6%B2%20%E0%A6%A5%E0%A6%BE%E0%A6%A8%E0%A6%BE&icon=%F0%9F%8C%90&back=website-links.html&backName=%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%AC%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%9F&bannerCat=website-links">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🌐</span></div>
-        <h3>ঘাটাইল থানা</h3>
-      </a>
-      <a class="cat-card cat-web" href="listing.html?cat=website-gopalpur&name=%E0%A6%97%E0%A7%8B%E0%A6%AA%E0%A6%BE%E0%A6%B2%E0%A6%AA%E0%A7%81%E0%A6%B0%20%E0%A6%A5%E0%A6%BE%E0%A6%A8%E0%A6%BE&icon=%F0%9F%8C%90&back=website-links.html&backName=%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%AC%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%9F&bannerCat=website-links">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🌐</span></div>
-        <h3>গোপালপুর থানা</h3>
-      </a>
-      <a class="cat-card cat-web" href="listing.html?cat=website-madhupur&name=%E0%A6%AE%E0%A6%A7%E0%A7%81%E0%A6%AA%E0%A7%81%E0%A6%B0%20%E0%A6%A5%E0%A6%BE%E0%A6%A8%E0%A6%BE&icon=%F0%9F%8C%90&back=website-links.html&backName=%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%AC%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%9F&bannerCat=website-links">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🌐</span></div>
-        <h3>মধুপুর থানা</h3>
-      </a>
-      <a class="cat-card cat-web" href="listing.html?cat=website-dhanbari&name=%E0%A6%A7%E0%A6%A8%E0%A6%AC%E0%A6%BE%E0%A6%A1%E0%A6%BC%E0%A7%80%20%E0%A6%A5%E0%A6%BE%E0%A6%A8%E0%A6%BE&icon=%F0%9F%8C%90&back=website-links.html&backName=%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%AC%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%9F&bannerCat=website-links">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🌐</span></div>
-        <h3>ধনবাড়ী থানা</h3>
-      </a>
-      <a class="cat-card cat-web" href="listing.html?cat=website-bhuapur&name=%E0%A6%AD%E0%A7%82%E0%A6%9E%E0%A6%BE%E0%A6%AA%E0%A7%81%E0%A6%B0%20%E0%A6%A5%E0%A6%BE%E0%A6%A8%E0%A6%BE&icon=%F0%9F%8C%90&back=website-links.html&backName=%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%AC%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%9F&bannerCat=website-links">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🌐</span></div>
-        <h3>ভূঞাপুর থানা</h3>
-      </a>
-      <a class="cat-card cat-web" href="listing.html?cat=website-nagarpur&name=%E0%A6%A8%E0%A6%BE%E0%A6%97%E0%A6%B0%E0%A6%AA%E0%A7%81%E0%A6%B0%20%E0%A6%A5%E0%A6%BE%E0%A6%A8%E0%A6%BE&icon=%F0%9F%8C%90&back=website-links.html&backName=%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%AC%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%9F&bannerCat=website-links">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🌐</span></div>
-        <h3>নাগরপুর থানা</h3>
-      </a>
-      <a class="cat-card cat-web" href="listing.html?cat=website-sakhipur&name=%E0%A6%B8%E0%A6%96%E0%A7%80%E0%A6%AA%E0%A7%81%E0%A6%B0%20%E0%A6%A5%E0%A6%BE%E0%A6%A8%E0%A6%BE&icon=%F0%9F%8C%90&back=website-links.html&backName=%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%AC%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%9F&bannerCat=website-links">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🌐</span></div>
-        <h3>সখীপুর থানা</h3>
-      </a>
-    </section>
+    <section class="cat-grid np-grid" id="npGrid"></section>
   </div>
 </main>
 
@@ -138,6 +97,14 @@
         <li><a href="terms.html">শর্তাবলী</a></li>
       </ul>
     </div>
+    <div>
+      <h4 data-i18n="footer.contactHeading">যোগাযোগ</h4>
+      <ul class="footer-contact">
+        <li><i class="fa-solid fa-envelope" aria-hidden="true"></i><a href="mailto:info@tangailzila.com">info@tangailzila.com</a></li>
+        <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i><span>টাঙ্গাইল সদর, টাঙ্গাইল, বাংলাদেশ</span></li>
+        <li><i class="fa-solid fa-message" aria-hidden="true"></i><a href="contact.html">বার্তা পাঠান</a></li>
+      </ul>
+    </div>
   </div>
   <div class="footer-bottom">© ২০২৬ টাঙ্গাইল জেলা। সর্বস্বত্ব সংরক্ষিত।</div>
 </footer>
@@ -151,19 +118,899 @@
 </nav>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-<script src="js/supabase-config.js?v=20260924073609"></script>
-    <script src="js/nav-avatar.js?v=20260924073609"></script>
-    <script src="js/call.js?v=20260924073609"></script>
-<script src="js/sticky-header.js?v=20260924073609"></script>
-<script src="js/banner-slider.js?v=20260924073609"></script>
-<script src="js/category-banners.js?v=20260924073609"></script>
-<script src="js/notice-bar.js?v=20260924073609"></script>
-<script src="js/i18n.js?v=20260924073609"></script>
-<script src="js/search-index.js?v=20260924073609"></script>
-<script src="js/smart-search.js?v=20260924073609"></script>
-<script src="js/search-ui.js?v=20260924073609"></script>
-<script src="js/script.js?v=20260924073609"></script>
-<script src="js/auto-update.js?v=20260924073609"></script>
-<script src="js/floating-buttons.js?v=20260924073609"></script>
+<script src="js/supabase-config.js?v=20260930045009"></script>
+    <script>
+/* নিউজ পেপার তালিকা — প্রতিটি ক্যাটাগরিতে ২০টি।  ফরম্যাট: ["নাম", "ওয়েবসাইট লিংক"]
+   লিংক ফাঁকা ("") থাকলে কার্ডটি দেখা যাবে কিন্তু ক্লিক হবে না; পরে শুধু লিংকটা বসিয়ে দিলেই চালু হয়ে যাবে। */
+var NEWSPAPERS = {
+ "bangla": [
+  [
+   "প্রথম আলো",
+   "https://www.prothomalo.com"
+  ],
+  [
+   "দৈনিক ইত্তেফাক",
+   "https://www.ittefaq.com.bd"
+  ],
+  [
+   "কালের কণ্ঠ",
+   "https://www.kalerkantho.com"
+  ],
+  [
+   "সমকাল",
+   "https://samakal.com"
+  ],
+  [
+   "যুগান্তর",
+   "https://www.jugantor.com"
+  ],
+  [
+   "বাংলাদেশ প্রতিদিন",
+   "https://www.bd-pratidin.com"
+  ],
+  [
+   "জনকণ্ঠ",
+   "https://www.dailyjanakantha.com"
+  ],
+  [
+   "নয়া দিগন্ত",
+   "https://www.dailynayadiganta.com"
+  ],
+  [
+   "আমাদের সময়",
+   "https://www.dainikamadershomoy.com"
+  ],
+  [
+   "ভোরের কাগজ",
+   "https://www.bhorerkagoj.com"
+  ],
+  [
+   "মানবজমিন",
+   "https://mzamin.com"
+  ],
+  [
+   "ইনকিলাব",
+   "https://www.dailyinqilab.com"
+  ],
+  [
+   "সংবাদ",
+   "https://sangbad.net.bd"
+  ],
+  [
+   "সুপ্রভাত বাংলাদেশ",
+   ""
+  ],
+  [
+   "আজকের পত্রিকা",
+   "https://www.ajkerpatrika.com"
+  ],
+  [
+   "দৈনিক দেশ রূপান্তর",
+   "https://www.deshrupantor.com"
+  ],
+  [
+   "অর্থসূচক",
+   "https://www.arthosuchak.com"
+  ],
+  [
+   "দৈনিক বর্তমান",
+   ""
+  ],
+  [
+   "দৈনিক জনতা",
+   ""
+  ],
+  [
+   "দৈনিক আলোকিত বাংলাদেশ",
+   "https://www.alokitobangladesh.com"
+  ]
+ ],
+ "english": [
+  [
+   "The Daily Star",
+   "https://www.thedailystar.net"
+  ],
+  [
+   "Dhaka Tribune",
+   "https://www.dhakatribune.com"
+  ],
+  [
+   "The Financial Express",
+   "https://thefinancialexpress.com.bd"
+  ],
+  [
+   "New Age",
+   "https://www.newagebd.net"
+  ],
+  [
+   "The Business Standard",
+   "https://www.tbsnews.net"
+  ],
+  [
+   "Daily Sun",
+   "https://www.daily-sun.com"
+  ],
+  [
+   "The Independent",
+   "https://www.theindependentbd.com"
+  ],
+  [
+   "The New Nation",
+   "https://thedailynewnation.com"
+  ],
+  [
+   "The Bangladesh Today",
+   "https://thebangladeshtoday.com"
+  ],
+  [
+   "The Asian Age",
+   "https://dailyasianage.com"
+  ],
+  [
+   "The Daily Observer",
+   "https://www.observerbd.com"
+  ],
+  [
+   "The Guardian BD",
+   ""
+  ],
+  [
+   "Morning News BD",
+   ""
+  ],
+  [
+   "Bangladesh Post",
+   "https://bangladeshpost.net"
+  ],
+  [
+   "The News Today",
+   "https://www.thenewstoday.info"
+  ],
+  [
+   "Business Post",
+   "https://businesspostbd.com"
+  ],
+  [
+   "The People’s Time",
+   ""
+  ],
+  [
+   "Daily Industry",
+   ""
+  ],
+  [
+   "The Country Today",
+   ""
+  ],
+  [
+   "Daily Asian News",
+   ""
+  ]
+ ],
+ "portal": [
+  [
+   "bdnews24.com",
+   "https://bdnews24.com"
+  ],
+  [
+   "Jago News 24",
+   "https://www.jagonews24.com"
+  ],
+  [
+   "Bangla Tribune",
+   "https://www.banglatribune.com"
+  ],
+  [
+   "UNB",
+   "https://unb.com.bd"
+  ],
+  [
+   "Risingbd",
+   "https://www.risingbd.com"
+  ],
+  [
+   "News24",
+   "https://www.news24bd.tv"
+  ],
+  [
+   "BSS News",
+   "https://www.bssnews.net"
+  ],
+  [
+   "Sarabangla",
+   "https://sarabangla.net"
+  ],
+  [
+   "Dhaka Post",
+   "https://www.dhakapost.com"
+  ],
+  [
+   "Jagonews24",
+   "https://www.jagonews24.com"
+  ],
+  [
+   "BanglaNews24",
+   "https://www.banglanews24.com"
+  ],
+  [
+   "Daily Bangladesh",
+   "https://www.daily-bangladesh.com"
+  ],
+  [
+   "Barta24",
+   "https://barta24.com"
+  ],
+  [
+   "Amar Sangbad",
+   "https://www.amarsangbad.com"
+  ],
+  [
+   "Channel 24 Online",
+   "https://www.channel24bd.tv"
+  ],
+  [
+   "Jamuna TV Online",
+   "https://jamunatv.com"
+  ],
+  [
+   "ATN News Online",
+   "https://www.atnnewstv.com"
+  ],
+  [
+   "RTV Online",
+   "https://www.rtvonline.com"
+  ],
+  [
+   "Independent TV Online",
+   "https://www.itvbd.com"
+  ],
+  [
+   "Ekattor TV Online",
+   "https://ekattor.tv"
+  ]
+ ],
+ "intl": [
+  [
+   "BBC News",
+   "https://www.bbc.com/news"
+  ],
+  [
+   "Reuters",
+   "https://www.reuters.com"
+  ],
+  [
+   "Associated Press",
+   "https://apnews.com"
+  ],
+  [
+   "CNN",
+   "https://www.cnn.com"
+  ],
+  [
+   "Al Jazeera",
+   "https://www.aljazeera.com"
+  ],
+  [
+   "The New York Times",
+   "https://www.nytimes.com"
+  ],
+  [
+   "The Washington Post",
+   "https://www.washingtonpost.com"
+  ],
+  [
+   "The Guardian",
+   "https://www.theguardian.com"
+  ],
+  [
+   "The Times",
+   "https://www.thetimes.com"
+  ],
+  [
+   "The Telegraph",
+   "https://www.telegraph.co.uk"
+  ],
+  [
+   "USA Today",
+   "https://www.usatoday.com"
+  ],
+  [
+   "Financial Times",
+   "https://www.ft.com"
+  ],
+  [
+   "The Wall Street Journal",
+   "https://www.wsj.com"
+  ],
+  [
+   "Le Monde",
+   "https://www.lemonde.fr"
+  ],
+  [
+   "Der Spiegel",
+   "https://www.spiegel.de"
+  ],
+  [
+   "Nikkei Asia",
+   "https://asia.nikkei.com"
+  ],
+  [
+   "Bloomberg",
+   "https://www.bloomberg.com"
+  ],
+  [
+   "CNBC",
+   "https://www.cnbc.com"
+  ],
+  [
+   "Euronews",
+   "https://www.euronews.com"
+  ],
+  [
+   "Sky News",
+   "https://news.sky.com"
+  ]
+ ],
+ "bnworld": [
+  [
+   "BBC বাংলা",
+   "https://www.bbc.com/bengali"
+  ],
+  [
+   "DW বাংলা",
+   "https://www.dw.com/bn"
+  ],
+  [
+   "VOA বাংলা",
+   "https://www.voabangla.com"
+  ],
+  [
+   "RFI বাংলা",
+   ""
+  ],
+  [
+   "Deutsche Welle বাংলা",
+   "https://www.dw.com/bn"
+  ],
+  [
+   "আনন্দবাজার পত্রিকা",
+   "https://www.anandabazar.com"
+  ],
+  [
+   "এই সময়",
+   "https://eisamay.com"
+  ],
+  [
+   "বর্তমান",
+   "https://bartamanpatrika.com"
+  ],
+  [
+   "সংবাদ প্রতিদিন",
+   "https://www.sangbadpratidin.in"
+  ],
+  [
+   "আজকাল",
+   "https://www.aajkaal.in"
+  ],
+  [
+   "গণশক্তি",
+   "https://ganashakti.com"
+  ],
+  [
+   "উত্তরবঙ্গ সংবাদ",
+   "https://uttarbangasambad.com"
+  ],
+  [
+   "The Wall বাংলা",
+   ""
+  ],
+  [
+   "TV9 বাংলা",
+   "https://tv9bangla.com"
+  ],
+  [
+   "News18 বাংলা",
+   "https://bengali.news18.com"
+  ],
+  [
+   "ABP আনন্দ",
+   "https://bengali.abplive.com"
+  ],
+  [
+   "কলকাতা ২৪x৭",
+   ""
+  ],
+  [
+   "Ei Samay Digital",
+   "https://eisamay.com"
+  ],
+  [
+   "Hindustan Times বাংলা",
+   "https://bengali.hindustantimes.com"
+  ],
+  [
+   "Zee 24 Ghanta",
+   "https://zeenews.india.com/bengali"
+  ]
+ ],
+ "local": [
+  [
+   "দৈনিক আজাদী",
+   "https://dainikazadi.net"
+  ],
+  [
+   "পূর্বকোণ",
+   "https://dainikpurbokone.net"
+  ],
+  [
+   "চট্টগ্রাম প্রতিদিন",
+   ""
+  ],
+  [
+   "খুলনা গেজেট",
+   ""
+  ],
+  [
+   "খুলনা টাইমস",
+   ""
+  ],
+  [
+   "রাজশাহী নিউজ",
+   ""
+  ],
+  [
+   "বরিশাল বার্তা",
+   ""
+  ],
+  [
+   "রংপুর প্রতিদিন",
+   ""
+  ],
+  [
+   "সিলেট ভয়েস",
+   ""
+  ],
+  [
+   "সিলেট টুডে",
+   ""
+  ],
+  [
+   "কুমিল্লা কাগজ",
+   ""
+  ],
+  [
+   "নোয়াখালী প্রতিদিন",
+   ""
+  ],
+  [
+   "ফেনী সংবাদ",
+   ""
+  ],
+  [
+   "ময়মনসিংহ প্রতিদিন",
+   ""
+  ],
+  [
+   "যশোর প্রতিদিন",
+   ""
+  ],
+  [
+   "বগুড়া সংবাদ",
+   ""
+  ],
+  [
+   "পাবনা নিউজ",
+   ""
+  ],
+  [
+   "কুষ্টিয়া বার্তা",
+   ""
+  ],
+  [
+   "চাঁদপুর কণ্ঠ",
+   ""
+  ],
+  [
+   "দিনাজপুর সংবাদ",
+   ""
+  ]
+ ],
+ "business": [
+  [
+   "The Financial Express",
+   "https://thefinancialexpress.com.bd"
+  ],
+  [
+   "The Business Standard",
+   "https://www.tbsnews.net"
+  ],
+  [
+   "Bonik Barta",
+   "https://bonikbarta.com"
+  ],
+  [
+   "Business Post",
+   "https://businesspostbd.com"
+  ],
+  [
+   "Bloomberg",
+   "https://www.bloomberg.com"
+  ],
+  [
+   "CNBC",
+   "https://www.cnbc.com"
+  ],
+  [
+   "Financial Times",
+   "https://www.ft.com"
+  ],
+  [
+   "The Wall Street Journal",
+   "https://www.wsj.com"
+  ],
+  [
+   "Forbes",
+   "https://www.forbes.com"
+  ],
+  [
+   "Fortune",
+   "https://fortune.com"
+  ],
+  [
+   "MarketWatch",
+   "https://www.marketwatch.com"
+  ],
+  [
+   "Investing.com",
+   "https://www.investing.com"
+  ],
+  [
+   "Yahoo Finance",
+   "https://finance.yahoo.com"
+  ],
+  [
+   "Business Insider",
+   "https://www.businessinsider.com"
+  ],
+  [
+   "Nikkei Asia",
+   "https://asia.nikkei.com"
+  ],
+  [
+   "The Economist",
+   "https://www.economist.com"
+  ],
+  [
+   "Moneycontrol",
+   "https://www.moneycontrol.com"
+  ],
+  [
+   "Economic Times",
+   "https://economictimes.indiatimes.com"
+  ],
+  [
+   "Mint",
+   "https://www.livemint.com"
+  ],
+  [
+   "Business Today",
+   "https://www.businesstoday.in"
+  ]
+ ],
+ "epaper": [
+  [
+   "প্রথম আলো ePaper",
+   "https://epaper.prothomalo.com"
+  ],
+  [
+   "ইত্তেফাক ePaper",
+   "https://www.ittefaq.com.bd"
+  ],
+  [
+   "সমকাল ePaper",
+   "https://samakal.com"
+  ],
+  [
+   "যুগান্তর ePaper",
+   "https://e-paper.jugantor.com"
+  ],
+  [
+   "কালের কণ্ঠ ePaper",
+   "https://www.kalerkantho.com"
+  ],
+  [
+   "বাংলাদেশ প্রতিদিন ePaper",
+   "https://www.bd-pratidin.com"
+  ],
+  [
+   "জনকণ্ঠ ePaper",
+   "https://www.dailyjanakantha.com"
+  ],
+  [
+   "নয়া দিগন্ত ePaper",
+   "https://www.dailynayadiganta.com"
+  ],
+  [
+   "মানবজমিন ePaper",
+   "https://mzamin.com"
+  ],
+  [
+   "ইনকিলাব ePaper",
+   "https://www.dailyinqilab.com"
+  ],
+  [
+   "The Daily Star ePaper",
+   "https://epaper.thedailystar.net"
+  ],
+  [
+   "Dhaka Tribune ePaper",
+   "https://www.dhakatribune.com"
+  ],
+  [
+   "Financial Express ePaper",
+   "https://thefinancialexpress.com.bd"
+  ],
+  [
+   "New Age ePaper",
+   "https://www.newagebd.net"
+  ],
+  [
+   "Daily Sun ePaper",
+   "https://www.daily-sun.com"
+  ],
+  [
+   "The Guardian ePaper",
+   "https://www.theguardian.com"
+  ],
+  [
+   "NYT ePaper",
+   "https://www.nytimes.com"
+  ],
+  [
+   "Washington Post ePaper",
+   "https://www.washingtonpost.com"
+  ],
+  [
+   "Telegraph ePaper",
+   "https://www.telegraph.co.uk"
+  ],
+  [
+   "Financial Times ePaper",
+   "https://www.ft.com"
+  ]
+ ],
+ "weekly": [
+  [
+   "Holiday",
+   "https://www.weeklyholiday.net"
+  ],
+  [
+   "Forum",
+   ""
+  ],
+  [
+   "The Economist",
+   "https://www.economist.com"
+  ],
+  [
+   "Time",
+   "https://time.com"
+  ],
+  [
+   "Newsweek",
+   "https://www.newsweek.com"
+  ],
+  [
+   "India Today",
+   "https://www.indiatoday.in"
+  ],
+  [
+   "Outlook India",
+   "https://www.outlookindia.com"
+  ],
+  [
+   "Frontline",
+   "https://frontline.thehindu.com"
+  ],
+  [
+   "The Week",
+   "https://theweek.com"
+  ],
+  [
+   "Desh",
+   ""
+  ],
+  [
+   "Sananda",
+   ""
+  ],
+  [
+   "Anandalok",
+   ""
+  ],
+  [
+   "Science",
+   "https://www.science.org"
+  ],
+  [
+   "Nature",
+   "https://www.nature.com"
+  ],
+  [
+   "National Geographic",
+   "https://www.nationalgeographic.com"
+  ],
+  [
+   "New Scientist",
+   "https://www.newscientist.com"
+  ],
+  [
+   "Fortune",
+   "https://fortune.com"
+  ],
+  [
+   "Forbes",
+   "https://www.forbes.com"
+  ],
+  [
+   "Business Today",
+   "https://www.businesstoday.in"
+  ],
+  [
+   "Reader's Digest",
+   "https://www.rd.com"
+  ]
+ ],
+ "agency": [
+  [
+   "BSS",
+   "https://www.bssnews.net"
+  ],
+  [
+   "UNB",
+   "https://unb.com.bd"
+  ],
+  [
+   "Reuters",
+   "https://www.reuters.com"
+  ],
+  [
+   "Associated Press",
+   "https://apnews.com"
+  ],
+  [
+   "Agence France-Presse",
+   "https://www.afp.com"
+  ],
+  [
+   "Xinhua",
+   "https://english.news.cn"
+  ],
+  [
+   "TASS",
+   "https://tass.com"
+  ],
+  [
+   "Anadolu Agency",
+   "https://www.aa.com.tr"
+  ],
+  [
+   "Kyodo News",
+   "https://english.kyodonews.net"
+  ],
+  [
+   "Yonhap",
+   "https://en.yna.co.kr"
+  ],
+  [
+   "PTI",
+   "https://www.ptinews.com"
+  ],
+  [
+   "ANI",
+   "https://www.aninews.in"
+  ],
+  [
+   "EFE",
+   "https://efe.com"
+  ],
+  [
+   "DPA",
+   "https://www.dpa.com/en"
+  ],
+  [
+   "BelTA",
+   "https://eng.belta.by"
+  ],
+  [
+   "IRNA",
+   "https://en.irna.ir"
+  ],
+  [
+   "SANA",
+   "https://sana.sy/en"
+  ],
+  [
+   "PNA",
+   "https://www.pna.gov.ph"
+  ],
+  [
+   "MAP",
+   "https://www.mapnews.ma"
+  ],
+  [
+   "Bernama",
+   "https://www.bernama.com"
+  ]
+ ]
+};
+
+(function(){
+  var chipRow = document.getElementById('npChips');
+  var grid = document.getElementById('npGrid');
+
+  function el(tag, cls, text){
+    var n = document.createElement(tag);
+    if(cls) n.className = cls;
+    if(text != null) n.textContent = text;
+    return n;
+  }
+  function safeUrl(u){
+    try { var x = new URL(String(u||'').trim()); return (x.protocol==='http:'||x.protocol==='https:') ? x.href : ''; }
+    catch(e){ return ''; }
+  }
+  function fallbackIcon(){ return el('span', 'np-fallback', '📰'); }
+
+  function cardEl(item){
+    var name = item[0], url = safeUrl(item[1]);
+    var card = url ? el('a', 'cat-card cat-web') : el('div', 'cat-card cat-web np-nolink');
+    if(url){ card.href = url; card.target = '_blank'; card.rel = 'noopener noreferrer'; }
+
+    var thumb = el('div', 'cat-thumb');
+    if(url){
+      var host = new URL(url).hostname;
+      var img = document.createElement('img');
+      img.src = 'https://www.google.com/s2/favicons?domain=' + encodeURIComponent(host) + '&sz=128';
+      img.alt = name; img.width = 96; img.height = 96; img.loading = 'lazy';
+      img.onerror = function(){ thumb.replaceChild(fallbackIcon(), img); };
+      thumb.appendChild(img);
+    } else {
+      thumb.appendChild(fallbackIcon());
+    }
+    card.appendChild(thumb);
+    card.appendChild(el('h3', null, name));
+    card.appendChild(el('p', null, url ? new URL(url).hostname.replace(/^www\./, '') : 'লিংক শীঘ্রই যোগ হবে'));
+    return card;
+  }
+
+  function show(key){
+    grid.innerHTML = '';
+    (NEWSPAPERS[key] || []).forEach(function(item){ grid.appendChild(cardEl(item)); });
+    window.scrollTo({ top: 0 });
+  }
+
+  chipRow.addEventListener('click', function(e){
+    var chip = e.target.closest('.ts-chip');
+    if(!chip) return;
+    chipRow.querySelectorAll('.ts-chip').forEach(function(c){ c.classList.remove('active'); });
+    chip.classList.add('active');
+    if(chip.scrollIntoView) chip.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' });
+    show(chip.getAttribute('data-filter'));
+  });
+
+  show('bangla');
+})();
+</script>
+<script src="js/nav-avatar.js?v=20260930045009"></script>
+    <script src="js/call.js?v=20260930045009"></script>
+<script src="js/sticky-header.js?v=20260930045009"></script>
+<script src="js/notice-bar.js?v=20260930045009"></script>
+<script src="js/i18n.js?v=20260930045009"></script>
+<script src="js/search-index.js?v=20260930045009"></script>
+<script src="js/smart-search.js?v=20260930045009"></script>
+<script src="js/search-ui.js?v=20260930045009"></script>
+<script src="js/script.js?v=20260930045009"></script>
+<script src="js/auto-update.js?v=20260930045009"></script>
+<script src="js/floating-buttons.js?v=20260930045009"></script>
 </body>
 </html>

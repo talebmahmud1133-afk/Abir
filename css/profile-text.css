@@ -1,0 +1,29 @@
+/* প্রোফাইলের লেখা — আরও স্পষ্ট ও পেশাদার (public-profile.html + profile.html)
+   ঘন রঙ, পড়ার মতো সাইজ, বাংলার জন্য বাড়তি লাইন-গ্যাপ। কোনো লেআউট/বাটন বদলায়নি। */
+
+/* নাম */
+main .pp-card .pp-name,
+main .profile-card .pf-name-row h1{ color: #10241a; font-weight: 700; letter-spacing: 0; }
+
+/* @ইউজারনেম ও যাচাইকৃত ব্যাজ */
+main .pp-card .pp-username{ font-size: 1rem; font-weight: 600; margin-bottom: 8px; }
+main .pp-card .pp-verified{ font-size: 0.86rem; padding: 4px 12px; margin-bottom: 10px; }
+
+/* বায়ো */
+main .pp-card .pp-bio,
+main .profile-card .profile-bio{
+  color: #1c2a31; font-size: 1rem; line-height: 1.65; font-weight: 400;
+  max-width: 420px; margin-left: auto; margin-right: auto; text-align: center;
+}
+main .pp-card .pp-bio{ margin-bottom: 12px; }
+
+/* ঠিকানা / যোগদানের তারিখ */
+main .pp-card .pp-meta{ gap: 6px; color: #3d4b53; font-size: 0.95rem; line-height: 1.5; margin-bottom: 14px; }
+main .pp-card .pp-meta i{ width: 1.1em; text-align: center; }
+
+/* ফলোয়ার · ফ্রেন্ড */
+main .pp-card .pp-stats{ color: #3d4b53; font-weight: 500; margin: 4px 0 14px; }
+main .pp-card .pp-stats strong{ color: #10241a; font-size: 1.15rem; font-weight: 700; margin-right: 2px; }
+main .pp-card .pp-stats .dot{ color: #8a979e; }
+main .profile-card .profile-stats{ color: #3d4b53; font-weight: 500; }
+main .profile-card .profile-stats b{ color: #10241a; font-weight: 700; }

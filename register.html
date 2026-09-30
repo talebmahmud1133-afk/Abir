@@ -10,7 +10,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
 <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
 <link rel="manifest" href="manifest.json">
-<link rel="stylesheet" href="css/style.css?v=20260924073609">
+<link rel="stylesheet" href="css/style.css?v=20260930045009">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body class="auth-body">
@@ -18,6 +18,7 @@
 <div class="auth-wrap">
 
   <div class="auth-logo">
+    <img src="assets/logo/tangail-logo.png" alt="টাঙ্গাইল জেলা" class="auth-logo-img" onload="this.parentNode.classList.add('logo-ok')" onerror="this.remove()">
     <div class="mark">টঙ</div>
     <div class="mark-sub">TANGAIL ZILA</div>
   </div>
@@ -59,9 +60,9 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-<script src="js/supabase-config.js?v=20260924073609"></script>
-    <script src="js/nav-avatar.js?v=20260924073609"></script>
-    <script src="js/call.js?v=20260924073609"></script>
+<script src="js/supabase-config.js?v=20260930045009"></script>
+    <script src="js/nav-avatar.js?v=20260930045009"></script>
+    <script src="js/call.js?v=20260930045009"></script>
 <script>
 (function () {
   var client = window.supabase.createClient(window.TANGAIL_SUPABASE.url, window.TANGAIL_SUPABASE.key);
@@ -139,7 +140,7 @@
   pass2Input.addEventListener('keydown', function (e) { if (e.key === 'Enter') doRegister(); });
 })();
 </script>
-<script src="js/auto-update.js?v=20260924073609"></script>
-<script src="js/floating-buttons.js?v=20260924073609"></script>
+<script src="js/auto-update.js?v=20260930045009"></script>
+<script src="js/floating-buttons.js?v=20260930045009"></script>
 </body>
 </html>

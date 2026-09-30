@@ -107,7 +107,6 @@
   flex:1; min-width:140px; background:var(--cream); border-radius:14px; padding:10px 14px;
   display:flex; align-items:flex-start; gap:10px;
 }
-.ts-info-chip i{ color:var(--maroon); font-size:1.05rem; margin-top:2px; }
 .ts-info-chip .lbl{ font-size:0.72rem; color:var(--ink-soft); margin-bottom:2px; }
 .ts-info-chip .val{ font-size:0.86rem; font-weight:700; color:var(--ink); }
 

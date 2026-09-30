@@ -1,0 +1,1264 @@
+/* ==========================================================================
+   হাসপাতাল পেজ — dedicated styles (hospital.html) — lawyer.css কপি, মেডিকেল টিল থিমে
+   Uses the site's shared design tokens from css/style.css (--gold, --cream, --ink,
+   --shadow-*, --radius, --line) so it matches the rest of the site.
+   Sections: back-only app bar + illustrated hero + toolbar · cards (person / agent layouts) ·
+   call sheet · detail page · form sheet · footer strip · empty state · focus ring · reduced-motion.
+   ========================================================================== */
+
+/* ---------- Page shell (this page has its own back-only app bar + footer strip) ---------- */
+body.hp-page{ padding-bottom: 24px; }
+body.hp-page .global-fab-stack{ bottom: 20px; }
+.hp-wrap{
+  max-width: 1240px;
+  padding: 0 16px 8px;
+}
+@media (min-width: 640px){ .hp-wrap{ padding-left: 24px; padding-right: 24px; } }
+
+/* keyboard focus: dark navy ring, clearly visible on white cards and coloured buttons */
+.hp-page a:focus-visible,
+.hp-page button:focus-visible{
+  outline: 3px solid #2B0F0F;
+  outline-offset: 2px;
+}
+
+/* ---------- Top app bar (back only) + hero ---------- */
+.hp-hero{
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: linear-gradient(180deg, #2C4373 0%, #23386B 52%, #2B0F0F 100%);
+  border-radius: 0 0 26px 26px;
+  margin-bottom: 16px;
+}
+.hp-hero-art{
+  position: absolute;
+  right: 0; bottom: 0;
+  width: min(100%, 460px);
+  height: auto;                 /* keeps the viewBox aspect ratio: never cropped */
+  z-index: 0;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 12%);
+          mask-image: linear-gradient(90deg, transparent 0, #000 12%);
+}
+.hp-hero-inner{
+  position: relative;
+  z-index: 2;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 14px 16px calc(6px + 0.21 * min(100vw, 460px));
+}
+/* পুরনো ভাসমান "cr-back / cr-back-float" পিল সরিয়ে সাইটের স্ট্যান্ডার্ড sticky
+   টপবার (.post-detail-topbar.list-back-topbar, css/style.css) ব্যবহার হচ্ছে —
+   hospital.html-এ দেখো, এই ফাইলে আর নতুন করে স্টাইল করার দরকার নেই। */
+
+.hp-hero-body{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 18px;
+}
+.hp-hero-pin{ flex: 0 0 auto; width: 40px; height: auto; }
+.hp-hero-text h1{
+  margin: 0;
+  font-family: 'Hind Siliguri', sans-serif;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.3;
+}
+.hp-t1{ display: block; font-size: clamp(1.3rem, 1rem + 1.6vw, 2rem); }
+.hp-t2{ display: block; font-size: clamp(1.95rem, 1.2rem + 3.2vw, 3.1rem); }
+.hp-hero-text p{
+  margin: 4px 0 0;
+  font-size: clamp(0.88rem, 0.8rem + 0.5vw, 1.1rem);
+  font-weight: 600;
+  color: #dbe5fb;
+  line-height: 1.5;
+}
+
+@media (min-width: 640px){
+  .hp-hero-pin{ width: 50px; }
+}
+@media (min-width: 768px){
+  /* side-by-side: text left, illustration right */
+  .hp-hero-inner{ padding: 18px 24px 34px; }
+  .hp-hero-art{ width: 500px; }
+}
+@media (min-width: 1024px){
+  .hp-hero-inner{ padding-bottom: 44px; }
+  .hp-hero-art{ width: auto; height: 100%; }
+  .hp-hero-pin{ width: 58px; }
+}
+
+/* ---------- Toolbar: upazila selector + info chips ---------- */
+.hp-toolbar{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+@media (min-width: 900px){
+  .hp-toolbar{ flex-direction: row; align-items: stretch; gap: 12px; }
+  .hp-filter-bar{ flex: 1 1 46%; }
+  .hp-info-bar{ flex: 1 1 54%; }
+}
+
+.hp-filter-bar{
+  background: #fff;
+  border: 1px solid rgba(30,47,92,0.22);
+  border-radius: 14px;
+  box-shadow: var(--shadow-sm);
+  padding: 10px 12px;               /* উপরের লেবেল বাদ — সমান প্যাডিং */
+  position: relative;
+}
+.hp-filter-label{
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+  margin: 0 2px 6px;
+}
+.hp-select-wrap{ position: relative; }
+.hp-select-wrap i.hp-select-pin{
+  position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+  color: #A12B2B; font-size: 1rem; pointer-events: none;
+}
+.hp-select-wrap i.hp-select-caret{
+  position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+  color: var(--ink-soft); font-size: 0.85rem; pointer-events: none;
+}
+#hospitalUpazilaSelect{
+  width: 100%;
+  min-height: 45px;
+  appearance: none;
+  -webkit-appearance: none;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ink);
+  background: #fbeeee;
+  border: 1px solid rgba(30,47,92,0.22);
+  border-radius: 10px;
+  padding: 9px 38px 9px 40px;
+  cursor: pointer;
+  transition: border-color .15s, box-shadow .15s;
+}
+#hospitalUpazilaSelect:hover{ border-color: #A12B2B; }
+#hospitalUpazilaSelect:focus-visible{
+  outline: 3px solid #2B0F0F;
+  outline-offset: 2px;
+  border-color: #A12B2B;
+}
+
+/* ---------- Info bar ---------- */
+.hp-info-bar{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.hp-info-chip{
+  flex: 1 1 220px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  border: 1px solid rgba(30,47,92,0.22);
+  border-radius: 14px;
+  box-shadow: var(--shadow-sm);
+  padding: 10px 14px;
+  min-height: 48px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.4;
+}
+.hp-chip-ic{
+  flex: 0 0 auto;
+  width: 32px; height: 32px;
+  border-radius: 9px;
+  background: #A12B2B;
+  color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.9rem;
+}
+.hp-info-chip b{ font-weight: 700; color: #2B0F0F; }
+
+/* ---------- সাব-ক্যাটাগরি চিপ বার (Phase 5) ---------- */
+.hp-cats{ margin-bottom: 10px; }
+.hp-cats-scroll{
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 12px;                        /* চিপগুলোর মাঝের ফাঁক (আগে 8px) */
+  overflow-x: auto;                 /* phones: swipe left / right */
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: none;
+  scrollbar-width: none;
+  padding: 2px 2px 6px;
+  overscroll-behavior-x: contain;
+}
+.hp-cats-scroll::-webkit-scrollbar{ display: none; }
+.hp-cat{
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  min-height: 44px;                 /* touch target */
+  padding: 8px 18px;
+  border: 1px solid rgba(30,47,92,0.35);
+  border-radius: 999px;
+  background: #fff;
+  color: #2B0F0F;
+  font-family: inherit;
+  font-size: 0.92rem;
+  font-weight: 700;
+  line-height: 1.2;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color .15s, color .15s, border-color .15s;
+}
+.hp-cat:hover{ border-color: #A12B2B; background: #fdecec; }
+.hp-cat.is-active{ background: #A12B2B; border-color: #A12B2B; color: #fff; }
+.hp-cat.is-active:hover{ background: #7A1F1F; }
+@media (min-width: 768px){
+  /* tablet / desktop: chips wrap onto a second row instead of hiding off-screen */
+  .hp-cats-scroll{ flex-wrap: wrap; overflow-x: visible; scroll-snap-type: none; padding-bottom: 2px; }
+}
+
+/* ---------- Card grid ---------- */
+.hp-grid{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+@media (min-width: 640px){
+  .hp-grid{ grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1024px){
+  .hp-grid{ grid-template-columns: repeat(3, 1fr); }
+}
+@media (min-width: 1320px){
+  .hp-grid{ grid-template-columns: repeat(4, 1fr); }
+}
+
+.hp-card{
+  background: #fff;
+  border: 1px solid rgba(30,47,92,0.16);
+  border-radius: var(--hp-radius, 16px);
+  box-shadow: 0 3px 16px rgba(20,50,45,0.04);   /* আরও সফট শ্যাডো: বড় blur, কম opacity */
+  padding: var(--hp-pad);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+  transition: box-shadow .15s;
+}
+.hp-card:hover{ box-shadow: 0 8px 24px rgba(20,50,45,0.07); }
+
+.hp-card-main{ display: flex; align-items: flex-start; gap: 12px; }
+.hp-card-body{ flex: 1 1 auto; min-width: 0; }
+
+/* অফিসের ছবি: কার্ডের বাম কিনারা ও উপরের কিনারা থেকে শুরু হয়ে নিচে Google Map বাটনের ঠিক উপর পর্যন্ত
+   পুরো বাম পাশ জুড়ে বসে (বামে/উপরে কোনো ফাঁকা নেই)। ছবি না থাকলে রঙিন আদ্যক্ষর একই জায়গা নেয়।
+   ছবির চওড়া বদলাতে চাইলে শুধু --hp-photo-size এর মান বদলান (যেমন 104px / 116px / 128px) */
+.hp-card{ --hp-photo-size: 116px; --hp-pad: 17px; --hp-radius: 16px; overflow: hidden; }   /* --hp-pad: কার্ডের চারপাশের প্যাডিং (আগে 14px) */
+.hp-logo{
+  position: relative;
+  flex: 0 0 auto;
+  align-self: stretch;                /* ছবি উপর থেকে নিচে Google Map বাটনের ঠিক উপর পর্যন্ত নামে */
+  width: var(--hp-photo-size);
+  min-height: var(--hp-photo-size);
+  margin: calc(-1 * var(--hp-pad)) 0 0 calc(-1 * var(--hp-pad));   /* কার্ডের প্যাডিং ভেদ করে বাম ও উপরের কিনারায় লাগে */
+  /* চার কোণই কার্ডের radius-এর সাথে মেলানো (কার্ডের ১px বর্ডার বাদ দিয়ে উপরের-বাম কোণ ১px কম) */
+  border-radius: calc(var(--hp-radius) - 1px) var(--hp-radius) var(--hp-radius) var(--hp-radius);
+  overflow: hidden;
+  background: #fff;
+  border: 0;
+}
+.hp-logo.has-img{ padding: 0; }
+.hp-logo img{
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+  display: block;
+}
+.hp-logo-fallback{
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2.6rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+}
+@media (max-width: 340px){
+  .hp-card{ --hp-photo-size: 96px; }
+  .hp-logo-fallback{ font-size: 2rem; }
+}
+
+.hp-card-head{
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+.hp-card-name{
+  margin: 0;
+  font-family: 'Hind Siliguri', sans-serif;
+  font-size: 1.07rem;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+.hp-status{
+  flex: 0 0 auto;
+  font-size: 0.74rem;
+  font-weight: 700;
+  line-height: 1.2;
+  padding: 4px 11px;
+  border-radius: 999px;
+  color: #fff;
+  white-space: nowrap;
+}
+.hp-status.is-open{
+  background: #A12B2B;
+  font-size: 0.68rem;
+  padding: 3px 9px;
+  border: 1px solid #2B0F0F;
+  box-shadow: 0 1px 3px rgba(30,47,92,0.35);
+}
+.hp-status.is-closed{ background: #b42318; }
+
+.hp-card-meta{
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--ink);
+}
+.hp-card-meta li{ display: flex; align-items: flex-start; gap: 5px; min-width: 0; }
+.hp-card-meta li > span{ min-width: 0; overflow-wrap: anywhere; }
+.hp-card-meta i{ color: #A12B2B; font-size: 0.82rem; flex: 0 0 auto; width: 16px; height: 1.32rem; display: flex; align-items: center; justify-content: center; }   /* আইকন প্রথম লাইনের ঠিক মাঝে */
+.hp-lbl{ color: var(--ink-soft); }
+
+.hp-card-actions{
+  display: flex;
+  gap: 10px;
+  margin-top: auto;
+}
+.hp-card-actions a,
+.hp-card-actions button.hp-btn-call{
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-sizing: border-box;
+  height: 46px;                     /* দুই বাটনের উচ্চতা হুবহু সমান (লেখা ভাঙলেও বদলাবে না) */
+  text-decoration: none;
+  font-family: inherit;
+  font-size: 0.92rem;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+  color: #fff;
+  border-radius: 10px;
+  padding: 0 12px;
+  transition: background-color .15s, transform .12s;
+}
+.hp-card-actions a i,
+.hp-card-actions button.hp-btn-call i{ flex: 0 0 auto; width: 1em; text-align: center; line-height: 1; font-size: 0.95rem; }
+.hp-card-actions a span,
+.hp-card-actions button.hp-btn-call span{ display: block; line-height: 1.2; padding-top: 1px; overflow: hidden; text-overflow: ellipsis; }
+.hp-card-actions a:active,
+.hp-card-actions button.hp-btn-call:active{ transform: scale(0.97); }
+.hp-btn-map{ background: #A12B2B; }
+.hp-btn-map:hover{ background: #7A1F1F; }
+.hp-btn-call{ background: #A12B2B; }
+.hp-btn-call:hover{ background: #7A1F1F; }
+.hp-btn-whatsapp{ background: #25b358; }
+.hp-btn-whatsapp:hover{ background: #1f9a4b; }
+
+/* ---------- Empty state ---------- */
+.hp-empty{
+  grid-column: 1 / -1;          /* span the whole grid, whatever the column count */
+  text-align: center;
+  background: #fff;
+  border: 1px dashed rgba(30,47,92,0.35);
+  border-radius: 16px;
+  padding: 32px 16px 28px;
+  color: var(--ink-soft);
+}
+.hp-empty i{ font-size: 1.8rem; color: #A12B2B; margin-bottom: 8px; display: block; }
+.hp-empty p{ margin: 0 auto 16px; max-width: 32em; font-size: 0.95rem; line-height: 1.6; }
+.hp-empty-btn{
+  min-height: 46px;
+  padding: 10px 22px;
+  border: none;
+  border-radius: 10px;
+  background: #A12B2B;
+  color: #fff;
+  font-family: inherit;
+  font-size: 0.92rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color .15s;
+}
+.hp-empty-btn:hover{ background: #7A1F1F; }
+
+/* ---------- Footer strip ---------- */
+.hp-footer-strip{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px 16px;
+  margin-top: 20px;
+  padding: 6px 8px 6px 16px;
+  background: #fff;
+  border: 1px solid rgba(30,47,92,0.16);
+  border-radius: 14px;
+  box-shadow: var(--shadow-sm);
+  font-size: 0.86rem;
+  color: var(--ink);
+}
+.hp-foot-updated{ display: inline-flex; align-items: center; gap: 8px; padding: 8px 0; line-height: 1.4; }
+.hp-foot-updated i{ color: #A12B2B; }
+.hp-foot-updated b{ font-weight: 700; color: #2B0F0F; }
+.hp-report{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;             /* large touch target */
+  padding: 0 12px;
+  border-radius: 10px;
+  color: var(--ink);
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: background-color .15s;
+}
+.hp-report i{ color: #c2410c; }
+.hp-report:hover{ background: #ecf1fb; }
+@media (max-width: 380px){
+  .hp-footer-strip{ padding-left: 12px; }
+}
+
+/* ---------- Floating "+" and add-office bottom sheet (Phase 6) ---------- */
+.hp-fab{
+  position: fixed;
+  right: 19px;
+  bottom: calc(19px + env(safe-area-inset-bottom, 0px));   /* কিনারা থেকে আরও ৭px দূরে (আগে 12px / 12px) */
+  z-index: 60;
+  width: 54px; height: 54px;
+  border: none;
+  border-radius: 50%;
+  background: #A12B2B;
+  color: #fff;
+  font-size: 1.4rem;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 8px 22px rgba(30,47,92,0.45);
+  cursor: pointer;
+  transition: background-color .15s, transform .15s;
+}
+.hp-fab:hover{ background: #7A1F1F; }
+.hp-fab:active{ transform: scale(0.94); }
+@media (min-width: 1024px){ .hp-fab{ right: 31px; bottom: 29px; } }
+body.hp-lock{ overflow: hidden; }
+
+.hp-sheet-backdrop{
+  position: fixed; inset: 0;
+  z-index: 100;
+  background: rgba(10,30,50,0.5);
+  display: flex;
+  align-items: flex-end;            /* phones: sheet rises from the bottom */
+  justify-content: center;
+  opacity: 0;
+  transition: opacity .2s;
+}
+.hp-sheet-backdrop[hidden]{ display: none; }
+.hp-sheet-backdrop.is-open{ opacity: 1; }
+.hp-sheet{
+  width: 100%;
+  max-width: 560px;
+  max-height: 92vh;
+  max-height: 92dvh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: #fff;
+  border-radius: 20px 20px 0 0;
+  padding: 8px 16px calc(18px + env(safe-area-inset-bottom, 0px));
+  box-shadow: 0 -10px 40px rgba(0,0,0,0.25);
+  transform: translateY(40px);
+  transition: transform .22s ease-out;
+}
+.hp-sheet-backdrop.is-open .hp-sheet{ transform: translateY(0); }
+.hp-sheet-grip{ width: 44px; height: 5px; border-radius: 3px; background: #cfd9e2; margin: 4px auto 10px; }
+@media (min-width: 768px){
+  .hp-sheet-backdrop{ align-items: center; padding: 24px; }
+  .hp-sheet{ border-radius: 20px; padding: 22px 26px 24px; max-height: 90vh; max-height: 90dvh; }
+  .hp-sheet-grip{ display: none; }
+}
+.hp-sheet-head h2{ margin: 0 0 4px; font-family: 'Hind Siliguri', sans-serif; font-size: 1.2rem; color: #2B0F0F; line-height: 1.35; }
+.hp-sheet-head p{ margin: 0 0 14px; font-size: 0.88rem; color: var(--ink-soft); line-height: 1.5; }
+
+.hp-field{ margin-bottom: 12px; }
+.hp-field label{ display: block; font-size: 0.86rem; font-weight: 600; color: var(--ink); margin: 0 2px 5px; }
+.hp-req{ color: #b42318; }
+.hp-opt{ font-weight: 500; color: var(--ink-soft); }
+.hp-field input[type="text"], .hp-field input[type="tel"], .hp-field input[type="url"], .hp-field select{
+  width: 100%;
+  min-height: 46px;
+  padding: 10px 12px;
+  border: 1.5px solid rgba(30,47,92,0.35);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 16px;                  /* stops iOS zoom-on-focus */
+  box-sizing: border-box;
+}
+.hp-field input:focus-visible, .hp-field select:focus-visible{ outline: 3px solid #2B0F0F; outline-offset: 1px; border-color: #A12B2B; }
+.hp-field [aria-invalid="true"]{ border-color: #b42318; }
+.hp-field input[type="number"], .hp-field textarea{
+  width: 100%;
+  padding: 10px 12px;
+  border: 1.5px solid rgba(30,47,92,0.35);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 16px;                  /* stops iOS zoom-on-focus */
+  box-sizing: border-box;
+}
+.hp-field input[type="number"]{ min-height: 46px; }
+.hp-field textarea{ min-height: 84px; resize: vertical; }
+.hp-field input[type="number"]:focus-visible, .hp-field textarea:focus-visible{ outline: 3px solid #2B0F0F; outline-offset: 1px; border-color: #A12B2B; }
+.hp-field-check{ margin-bottom: 12px; }
+.hp-field-check label{ display: flex; align-items: flex-start; gap: 10px; font-size: 0.86rem; font-weight: 600; color: var(--ink); cursor: pointer; line-height: 1.45; }
+.hp-field-check input[type="checkbox"]{ width: 20px; height: 20px; flex: 0 0 auto; margin-top: 1px; accent-color: #A12B2B; }
+.hp-field-check.is-invalid label{ color: #b42318; }
+.hp-hint{ margin: -6px 2px 12px; font-size: 0.8rem; color: var(--ink-soft); }
+.hp-file{ width: 100%; font-size: 0.9rem; font-family: inherit; box-sizing: border-box; }
+.hp-photo-preview{ margin-top: 8px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.hp-photo-preview[hidden]{ display: none; }
+.hp-photo-preview img{ display: block; width: 104px; height: 104px; border-radius: 16px; object-fit: cover; border: 1px solid rgba(30,47,92,0.25); }
+.hp-photo-edit{
+  display: inline-flex; align-items: center; gap: 8px;
+  min-height: 44px; padding: 8px 14px;
+  border: 1.5px solid rgba(30,47,92,0.45); border-radius: 10px;
+  background: #fff; color: #2B0F0F;
+  font-family: inherit; font-size: 0.92rem; font-weight: 700; cursor: pointer;
+}
+.hp-photo-edit:hover{ background: #fdecec; }
+.hp-hp{ position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+.hp-form-msg{ margin: 0 0 12px; padding: 10px 12px; border-radius: 10px; background: #fdecea; color: #8a1c12; font-size: 0.9rem; font-weight: 600; line-height: 1.5; }
+.hp-form-msg[hidden], .hp-sheet-done[hidden]{ display: none; }
+.hp-sheet-actions{ display: flex; gap: 10px; margin-top: 4px; }
+.hp-btn-cancel, .hp-btn-submit{
+  flex: 1 1 0;
+  min-height: 48px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 0.98rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color .15s;
+}
+.hp-btn-cancel{ background: #fff; color: #2B0F0F; border: 1.5px solid rgba(30,47,92,0.45); }
+.hp-btn-cancel:hover{ background: #fdecec; }
+.hp-btn-submit{ background: #A12B2B; color: #fff; border: none; }
+.hp-btn-submit:hover{ background: #7A1F1F; }
+.hp-btn-submit:disabled, .hp-btn-cancel:disabled{ opacity: 0.65; cursor: default; }
+.hp-sheet-done{ text-align: center; padding: 18px 4px 6px; }
+.hp-sheet-done i{ font-size: 2.4rem; color: #A12B2B; }
+.hp-sheet-done h3{ margin: 10px 0 6px; font-family: 'Hind Siliguri', sans-serif; font-size: 1.15rem; color: #2B0F0F; }
+.hp-sheet-done p{ margin: 0 0 16px; color: var(--ink-soft); font-size: 0.92rem; line-height: 1.6; }
+.hp-sheet-done .hp-btn-submit{ width: 100%; flex: none; }
+
+/* ---------- ছবি বসানোর (crop) ধাপ: জুম ইন/আউট + টেনে সরানো ---------- */
+.hp-crop-backdrop{ z-index: 110; }               /* "+" শিটের (১০০) উপরে */
+.hp-crop-viewport{
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  aspect-ratio: 4 / 5;                            /* কার্ডের ছবির টাইলের অনুপাতে (লম্বাটে) */
+  margin: 0 auto 14px;
+  overflow: hidden;
+  border-radius: 16px;
+  background: #10202b;
+  touch-action: none;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.hp-crop-viewport.dragging{ cursor: grabbing; }
+.hp-crop-viewport img{
+  position: absolute; top: 0; left: 0;
+  transform-origin: 0 0;
+  max-width: none; max-height: none;
+  user-select: none; -webkit-user-drag: none;
+  pointer-events: none;
+}
+.hp-crop-zoom{ display: flex; align-items: center; gap: 10px; margin: 0 auto 14px; max-width: 320px; }
+.hp-crop-zoom input[type="range"]{ flex: 1; min-width: 0; }
+.hp-crop-zbtn{
+  flex: 0 0 auto; width: 44px; height: 44px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 0; border-radius: 50%;
+  background: #e4ebef; color: #2B0F0F; font-size: 1.05rem; cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.hp-crop-zbtn:active{ background: #d3dde3; }
+.hp-crop .hp-sheet-head p{ margin-bottom: 12px; }
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce){
+  .hp-page *, .hp-page *::before, .hp-page *::after{
+    transition: none !important;
+    animation: none !important;
+  }
+  .hp-card-actions a:active, .hp-back:active, .hp-fab:active{ transform: none; }
+  .hp-sheet{ transform: none; }
+}
+
+/* keep the last card / footer clear of the floating "+" (Phase 6) */
+.hp-wrap{ padding-bottom: 88px; }
+
+/* ---------- অ্যাডমিন থেকে যোগ করা ব্যানার স্লাইডার থাকলে ডিফল্ট হিরো লুকানো ---------- */
+body.has-cat-banners .hp-hero{ display: none; }
+
+/* ---------- "ফিরে যান" এখন hospital.html-এর একদম উপরে সাইটের স্ট্যান্ডার্ড sticky
+   টপবার হিসেবে বসে (.post-detail-topbar.list-back-topbar, css/style.css-এ
+   সংজ্ঞায়িত) — ব্যানার/হিরোর উপরে ভাসমান পিল হিসেবে নয়, বরং তার উপরে আলাদা,
+   সবসময়-দৃশ্যমান একটা বার হিসেবে। এখানে আর অতিরিক্ত পজিশনিং দরকার নেই। ---------- */
+.hp-top-area{ position: relative; }
+
+/* ---------- অ্যাডমিন থেকে আপলোড করা ব্যানার ছবি ----------
+   ছবি পুরো ব্যানার জায়গা ভরে বসবে (cover) — উপরে/নিচে কোনো ফাঁকা বা ব্লার অংশ থাকবে না।
+   ব্যানারের অনুপাত সব স্ক্রিনে ২১:৯ (চওড়া ছবির জন্য সবচেয়ে মানানসই); বেশি লম্বা/অন্য
+   অনুপাতের ছবি হলে শুধু কিনারার সামান্য অংশ ছাঁটা যাবে। */
+body[data-banner-category="legal-help"] .banner-slide.has-image{
+  position: relative;
+  overflow: hidden;
+  background-image: none;
+  background-color: #A12B2B;
+  aspect-ratio: 21 / 9;
+}
+body[data-banner-category="legal-help"] .banner-slide.has-image::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--banner-img);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: 1;
+}
+body[data-banner-category="legal-help"] .banner-slide.has-image .banner-inner{
+  position: relative;
+  z-index: 2;
+  text-shadow: 0 1px 5px rgba(0,0,0,0.6);
+}
+
+
+/* ---------- মোবাইলে ব্যাক-বার + ব্যানার স্থির (স্ক্রল করলেও উপরেই থাকবে) ----------
+   ব্যাক-বার (.list-back-topbar) আগে থেকেই sticky top:0। এখন ব্যানারও তার ঠিক নিচে sticky —
+   উচ্চতা --hp-topbar-h থেকে আসে (hospital.html-এর ছোট স্ক্রিপ্ট বারের প্রকৃত উচ্চতা মেপে বসায়)।
+   ডেস্কটপে ব্যানার ২১:৯ full-width হওয়ায় খুব বড়, তাই শুধু ≤700px স্ক্রিনে প্রযোজ্য। */
+@media (max-width: 700px){
+  /* .hp-top-area শুধু ব্যানার+হিরো ধরে রাখে (উচ্চতা ~ব্যানারের সমান), তাই sticky এর "ভেসে থাকার"
+     জায়গা পেত না। display:contents দিয়ে এর বক্স সরানো হলো — ফলে ব্যানারের প্যারেন্ট হয় <main>
+     (পুরো পেজ জুড়ে লম্বা) এবং স্ক্রল করলেও ব্যানার আটকে থাকে। */
+  body[data-banner-category="legal-help"] .hp-top-area{ display: contents; }
+  body[data-banner-category="legal-help"] #catBannerWrap{
+    position: sticky;
+    top: var(--hp-topbar-h, 53px);
+    z-index: 40;
+    background: var(--cream, #fbeeee);
+    padding-bottom: 4px;
+  }
+}
+
+/* ---------- মোবাইলে কার্ডের বাম পাশ "উপজেলা নির্বাচন করুন" বক্সের লাইনে (বর্ডারসহ), ডান পাশ কিনারা পর্যন্ত ----------
+   ডানে পেজের ১৬px/২৪px ফাঁক ভেদ করে কিনারা পর্যন্ত (ব্যানারের লাইনে), বামে স্বাভাবিক ফাঁক ও বর্ডার।
+   বাম কোণ গোল (কার্ডের radius), ডান কোণ সোজা। ছবির বাম কোণ কার্ডের সাথে মিলেই থাকে। */
+@media (max-width: 700px){
+  .hp-grid{ margin-right: -16px; gap: 12px; }
+  .hp-card{ border-radius: var(--hp-radius) 0 0 var(--hp-radius); border-right: 0; }
+}
+@media (min-width: 640px) and (max-width: 700px){
+  .hp-grid{ margin-right: -24px; }
+}
+
+/* ==========================================================================
+   হাসপাতাল নিজস্ব সংযোজন — কুরিয়ার থেকে আলাদা অংশ
+   ========================================================================== */
+
+/* সক্রিয় চিপ নিজের সাব-ক্যাটাগরির রঙে (--acc); "সব" চিপ ও ডিফল্ট: গাঢ় নীল */
+.hp-cat[style*="--acc"]{ border-color: var(--acc); color: var(--acc); }
+.hp-cat[style*="--acc"]:hover{ background: #fff; box-shadow: inset 0 0 0 1px var(--acc); }
+.hp-cat.is-active[style*="--acc"]{ background: var(--acc); border-color: var(--acc); color: #fff; }
+.hp-cat.is-active[style*="--acc"]:hover{ background: var(--acc); filter: brightness(.94); }
+
+/* "বর্তমানে দেখা হচ্ছে" স্ট্যাটাস ব্যান্ড (aria-live) */
+.hp-band{
+  display: flex; align-items: flex-start; gap: 9px;
+  margin: 2px 0 12px;
+  padding: 9px 14px;
+  background: #fdecec;
+  border: 1px solid rgba(30,47,92,0.22);
+  border-radius: 12px;
+  font-size: 0.9rem; font-weight: 600; line-height: 1.45;
+  color: var(--ink);
+}
+.hp-band i{ color: #A12B2B; margin-top: 0.28rem; flex: 0 0 auto; }
+.hp-band b{ color: #2B0F0F; font-weight: 700; }
+
+/* নিরাপত্তা নোট */
+.hp-safe{
+  display: flex; align-items: flex-start; gap: 9px;
+  margin: 0 0 14px;
+  padding: 9px 14px;
+  background: #fff8e6;
+  border: 1px solid rgba(183,121,31,0.35);
+  border-radius: 12px;
+  font-size: 0.84rem; line-height: 1.55;
+  color: #5c3b06;
+}
+.hp-safe i{ color: #8a5a0b; margin-top: 0.22rem; flex: 0 0 auto; }
+
+/* কার্ড: উপরের রঙিন সাব-ক্যাটাগরি রেখা */
+.hp-card{ border-top: 3px solid var(--acc, #A12B2B); }
+.hp-card-name{ font-size: 1.05rem; }
+.hp-tags{ display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.hp-tag, .hp-demo{
+  display: inline-flex; align-items: center;
+  font-size: 0.74rem; font-weight: 700; line-height: 1.2;
+  padding: 3px 10px; border-radius: 999px;
+  white-space: nowrap;
+}
+.hp-demo{ background: #eceff2; color: #4a5560; }
+.hp-clamp{
+  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+.hp-logo-fallback i{ font-size: 2.2rem; }
+.hp-card-meta i{ color: var(--acc, #A12B2B); }
+
+/* কার্ডের নিচের অংশ: হোয়াটসঅ্যাপ + কল বাটন (থাকলে পাশাপাশি) বা নোট */
+.hp-card-actions .hp-btn-call{ background: #0E8A93; }
+.hp-card-actions .hp-btn-call:hover{ background: #075E66; }
+.hp-card-actions .hp-btn-whatsapp{ background: #25b358; }
+.hp-card-actions .hp-btn-whatsapp:hover{ background: #1f9a4b; }
+/* ম্যাপ + হোয়াটসঅ্যাপ + কল — তিন বাটন একসারিতে: ছোট স্ক্রিনে হোয়াটসঅ্যাপে শুধু আইকন (লেখা কাটা পড়ে না; aria-label আগের মতোই) */
+@media (max-width: 519px){
+  .hp-card-actions .hp-btn-map ~ .hp-btn-whatsapp{ flex: 0 0 56px; position: relative; padding: 0; }
+  .hp-card-actions .hp-btn-map ~ .hp-btn-whatsapp span{
+    position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden;
+    clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+  }
+  .hp-card-actions .hp-btn-map ~ .hp-btn-whatsapp i{ font-size: 1.25rem; width: auto; }
+}
+.hp-nophone{
+  margin: 0; width: 100%;
+  display: flex; align-items: center; gap: 8px;
+  min-height: 46px; padding: 0 12px;
+  background: #fbeeee; border-radius: 10px;
+  font-size: 0.84rem; font-weight: 600; color: #4a5560; line-height: 1.35;
+}
+.hp-nophone i{ color: #6b7783; }
+
+/* হিরো: হাসপাতাল থিম (মেডিকেল টিল) */
+.hp-hero-pin{ width: 40px; }
+
+/* মোবাইলে দুটো ইনফো চিপ পাশাপাশি (জায়গা বাঁচাতে) */
+.hp-info-chip{ flex: 1 1 150px; padding: 8px 10px; gap: 8px; font-size: 0.84rem; }
+@media (min-width: 640px){ .hp-info-chip{ flex-basis: 220px; padding: 10px 14px; font-size: 0.9rem; } }
+
+
+/* ---------- ছবিতে ক্লিক করলে পুরো ছবি (লাইটবক্স) + জুম (ধাপ ২) ---------- */
+/* ---------- ছবিতে ক্লিক করলে পুরো ছবি (লাইটবক্স) + জুম ---------- */
+.hp-logo.has-img{ cursor: zoom-in; -webkit-tap-highlight-color: transparent; }
+.hp-logo.has-img:focus-visible{ outline: 3px solid #A12B2B; outline-offset: -3px; }
+html.hp-lb-open, html.hp-lb-open body{ overflow: hidden; overscroll-behavior: none; }
+
+.hp-lb{
+  position: fixed; inset: 0;
+  z-index: 300;                       /* "+" শিট (১০০) ও ক্রপ (১১০) এর উপরে */
+  display: flex; flex-direction: column;
+  background: #070a10;
+  color: #fff;
+  animation: hpLbIn .18s ease-out;
+}
+.hp-lb[hidden]{ display: none; }
+@keyframes hpLbIn{ from{ opacity: 0; } to{ opacity: 1; } }
+.hp-lb-bar{
+  flex: 0 0 auto;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 10px 12px 6px 16px;
+  padding-top: max(10px, env(safe-area-inset-top));
+}
+.hp-lb-title{
+  font-family: 'Hind Siliguri', sans-serif;
+  font-size: 1rem; font-weight: 700;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  min-width: 0;
+}
+.hp-lb-btn{
+  flex: 0 0 auto;
+  width: 44px; height: 44px;
+  border: 0; border-radius: 50%;
+  background: rgba(255,255,255,0.16);
+  color: #fff; font-size: 1.05rem;
+  display: inline-flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.hp-lb-btn:hover{ background: rgba(255,255,255,0.28); }
+.hp-lb-btn:active{ background: rgba(255,255,255,0.36); }
+.hp-lb-stage{
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+  touch-action: none;                 /* পিঞ্চ/পান আমরা নিজেরা সামলাই, ব্রাউজারের পেজ-জুম নয় */
+  user-select: none; -webkit-user-select: none;
+  cursor: zoom-in;
+}
+.hp-lb.is-zoomed .hp-lb-stage{ cursor: grab; }
+.hp-lb.is-dragging .hp-lb-stage{ cursor: grabbing; }
+.hp-lb-img{
+  max-width: 100%; max-height: 100%;
+  width: auto; height: auto;
+  object-fit: contain;
+  display: block;
+  transform-origin: center center;
+  will-change: transform;
+  opacity: 0;
+  transition: opacity .18s ease;
+  -webkit-user-drag: none;
+}
+.hp-lb.is-loaded .hp-lb-img{ opacity: 1; }
+.hp-lb:not(.is-loaded) .hp-lb-stage::after{
+  content: ""; position: absolute; width: 34px; height: 34px;
+  border: 3px solid rgba(255,255,255,0.3); border-top-color: #fff; border-radius: 50%;
+  animation: crLbSpin .8s linear infinite;
+}
+@keyframes crLbSpin{ to{ transform: rotate(360deg); } }
+.hp-lb-controls{
+  flex: 0 0 auto;
+  display: flex; align-items: center; justify-content: center; gap: 12px;
+  padding: 8px 12px 6px;
+}
+.hp-lb-zoom{
+  min-width: 68px; height: 44px; padding: 0 12px;
+  border: 0; border-radius: 22px;
+  background: rgba(255,255,255,0.16); color: #fff;
+  font-family: 'Hind Siliguri', sans-serif; font-size: 0.95rem; font-weight: 700;
+  cursor: pointer; -webkit-tap-highlight-color: transparent;
+}
+.hp-lb-zoom:hover{ background: rgba(255,255,255,0.28); }
+.hp-lb-hint{
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 0 16px max(12px, env(safe-area-inset-bottom));
+  text-align: center;
+  font-size: 0.78rem; opacity: 0.65;
+}
+.hp-lb.is-zoomed .hp-lb-hint{ visibility: hidden; }
+@media (prefers-reduced-motion: reduce){
+  .hp-lb, .hp-lb-img{ animation: none; transition: none; }
+}
+
+/* উপরের ব্যানারের ছবিতেও ক্লিক করলে পুরো ছবি খোলে */
+body[data-banner-category="legal-help"] .banner-slide.has-image{ cursor: zoom-in; -webkit-tap-highlight-color: transparent; }
+.hp-lb-link{
+  flex: 0 0 auto;
+  max-width: 44%;
+  margin-left: auto;
+  padding: 9px 16px;
+  border-radius: 22px;
+  background: #A12B2B; color: #fff;
+  font-family: 'Hind Siliguri', sans-serif; font-size: 0.86rem; font-weight: 700;
+  text-decoration: none;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.hp-lb-link[hidden]{ display: none; }
+.hp-lb-link:active{ background: #7A1F1F; }
+
+
+
+/* ==========================================================================
+   ধাপ ২ — চিপ অনুযায়ী আলাদা কার্ড লেআউট
+   person   : বাম কিনারায় ছবি-টাইল (ব্যবহৃত হচ্ছে না — ভবিষ্যতের জন্য রাখা)
+   agent    : সব হাসপাতাল/ক্লিনিক চিপ — গোল লোগো, কম্প্যাক্ট
+   ========================================================================== */
+.hp-facts{ display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.hp-fact{
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 0.82rem; font-weight: 700; line-height: 1.2;
+  padding: 4px 10px; border-radius: 8px;
+  background: #fbeeee; color: var(--ink);
+}
+.hp-fact i{ color: var(--acc, #A12B2B); font-size: 0.8rem; }
+
+/* agent + guardian: বড় ছবি-টাইল নেই, তাই কার্ডের ভেতরের প্যাডিং স্বাভাবিক */
+.hp-card--agent .hp-card-main,
+.hp-card--guardian .hp-card-main{ gap: 12px; }
+.hp-avatar{
+  flex: 0 0 auto;
+  width: 60px; height: 60px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem;
+  position: relative; overflow: hidden;
+}
+.hp-avatar.hp-logo{ align-self: flex-start; min-height: 0; margin: 0; border-radius: 50%; }
+.hp-avatar.hp-logo img{ border-radius: 50%; }
+.hp-card--agent .hp-card-actions,
+.hp-card--guardian .hp-card-actions{ margin-top: 2px; }
+
+.hp-quote{
+  margin: 10px 0 0;
+  padding: 9px 12px;
+  border-left: 3px solid var(--acc, #A12B2B);
+  background: #fbeeee;
+  border-radius: 0 10px 10px 0;
+  font-size: 0.92rem; font-weight: 600; line-height: 1.55;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+
+/* person কার্ডে ছবি ক্লিকযোগ্য: ফোকাস রিং */
+.hp-card .hp-logo.has-img:focus-visible{ outline: 3px solid #2B0F0F; outline-offset: -3px; }
+
+/* কল করুন বাটন এখন <button>: ব্রাউজারের ডিফল্ট স্টাইল রিসেট */
+.hp-card-actions button.hp-btn-call{
+  border: 0; margin: 0; cursor: pointer;
+  -webkit-appearance: none; appearance: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.hp-card-actions button.hp-btn-call:focus-visible{ outline: 3px solid #2B0F0F; outline-offset: 2px; }
+
+/* ---------- কল-শিট ("কল করুন" চাপলে নিচ থেকে উঠে আসে) ---------- */
+html.hp-call-open, html.hp-call-open body{ overflow: hidden; overscroll-behavior: none; }
+.hp-call{
+  position: fixed; inset: 0;
+  z-index: 400;                       /* লাইটবক্স (৩০০) ও "+" শিটের উপরে */
+  display: flex; align-items: flex-end; justify-content: center;
+}
+.hp-call[hidden]{ display: none; }
+.hp-call-backdrop{
+  position: absolute; inset: 0;
+  background: rgba(10, 20, 28, 0.55);
+  opacity: 0; transition: opacity .18s ease;
+}
+.hp-call.is-open .hp-call-backdrop{ opacity: 1; }
+.hp-call-sheet{
+  position: relative;
+  width: 100%; max-width: 480px;
+  box-sizing: border-box;
+  background: #fff;
+  border-radius: 20px 20px 0 0;
+  padding: 10px 20px 20px;
+  padding-bottom: max(20px, env(safe-area-inset-bottom));
+  font-family: 'Hind Siliguri', sans-serif;
+  text-align: center;
+  box-shadow: 0 -10px 30px rgba(0,0,0,.18);
+  transform: translateY(100%);
+  transition: transform .2s ease-out;
+}
+.hp-call.is-open .hp-call-sheet{ transform: translateY(0); }
+.hp-call-grab{ width: 42px; height: 4px; border-radius: 4px; background: #d3dbe0; margin: 0 auto 10px; }
+.hp-call-x{
+  position: absolute; top: 10px; right: 12px;
+  width: 36px; height: 36px; border: 0; border-radius: 50%;
+  background: #fbeeee; color: var(--ink, #22303a);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 1rem;
+}
+.hp-call-hint{ margin: 6px 0 2px; font-size: 0.85rem; color: var(--ink-soft, #5b6b73); font-weight: 600; }
+.hp-call-name{
+  margin: 0; font-size: 1.2rem; font-weight: 800; color: var(--ink, #22303a);
+  overflow-wrap: anywhere; padding: 0 40px;
+}
+.hp-call-num{
+  margin: 8px 0 16px;
+  font-size: 1.55rem; font-weight: 800; letter-spacing: .5px;
+  color: #0E8A93;
+  font-variant-numeric: tabular-nums;
+}
+.hp-call-go, .hp-call-copy{
+  display: flex; align-items: center; justify-content: center; gap: 9px;
+  box-sizing: border-box; width: 100%; height: 50px;
+  border-radius: 12px; border: 0;
+  font-family: inherit; font-size: 1rem; font-weight: 700; line-height: 1;
+  text-decoration: none; cursor: pointer;
+  transition: background-color .15s, transform .12s;
+}
+.hp-call-go{ background: #0E8A93; color: #fff; }
+.hp-call-go:hover{ background: #075E66; }
+.hp-call-copy{ background: #eef3f6; color: var(--ink, #22303a); margin-top: 10px; }
+.hp-call-copy:hover{ background: #e2eaef; }
+.hp-call-copy.is-done{ background: #e3f6ea; color: #0F7A52; }   /* কপি সফল: সবুজ (সাফল্যের রং) */
+.hp-call-go:active, .hp-call-copy:active{ transform: scale(0.98); }
+.hp-call-go:focus-visible, .hp-call-copy:focus-visible, .hp-call-x:focus-visible{ outline: 3px solid #2B0F0F; outline-offset: 2px; }
+@media (min-width: 640px){
+  .hp-call{ align-items: center; }
+  .hp-call-sheet{ border-radius: 20px; transform: translateY(24px); opacity: 0; transition: transform .2s ease-out, opacity .2s; }
+  .hp-call.is-open .hp-call-sheet{ transform: none; opacity: 1; }
+  .hp-call-grab{ display: none; }
+}
+@media (prefers-reduced-motion: reduce){
+  .hp-call-sheet, .hp-call-backdrop{ transition: none; }
+}
+
+/* ---------- আরও ছবি (ঐচ্ছিক): ফর্মে ৪টি স্লট ---------- */
+.hp-xfield{ margin-bottom: 14px; }
+.hp-xlabel{ display: block; font-size: 0.86rem; font-weight: 600; color: var(--ink); margin: 0 2px 4px; }
+.hp-xhint{ margin: 0 2px 8px; font-size: 0.8rem; color: var(--ink-soft); line-height: 1.45; }
+.hp-xgrid{ display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.hp-xslot{ position: relative; aspect-ratio: 1 / 1; border-radius: 12px; overflow: hidden; }
+.hp-xadd{
+  width: 100%; height: 100%; box-sizing: border-box;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+  border: 1.5px dashed rgba(30,47,92,0.5); border-radius: 12px;
+  background: #fbeeee; color: #A12B2B;
+  font-family: inherit; font-size: 0.72rem; font-weight: 700; line-height: 1.2;
+  cursor: pointer; -webkit-tap-highlight-color: transparent;
+}
+.hp-xadd i{ font-size: 1rem; }
+.hp-xadd:hover{ background: #e8eefa; }
+.hp-xadd:focus-visible, .hp-xrm:focus-visible{ outline: 3px solid #2B0F0F; outline-offset: 2px; }
+.hp-xslot.has-photo .hp-xadd{ display: none; }
+.hp-xthumb{
+  display: block; width: 100%; height: 100%; object-fit: cover;
+  border-radius: 12px; border: 1px solid rgba(30,47,92,0.25); box-sizing: border-box;
+}
+.hp-xthumb[hidden], .hp-xrm[hidden]{ display: none; }
+.hp-xrm{
+  position: absolute; top: 4px; right: 4px;
+  width: 26px; height: 26px; padding: 0;
+  display: flex; align-items: center; justify-content: center;
+  border: 0; border-radius: 50%;
+  background: rgba(0,0,0,0.68); color: #fff; font-size: 0.78rem;
+  cursor: pointer;
+}
+
+/* ---------- কার্ডের ছবিতে "আরও ছবি আছে" ব্যাজ ---------- */
+.hp-photo-count{
+  position: absolute; right: 6px; bottom: 6px;
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 2px 8px; border-radius: 999px;
+  background: rgba(0,0,0,0.65); color: #fff;
+  font-family: 'Hind Siliguri', sans-serif; font-size: 0.74rem; font-weight: 700; line-height: 1.4;
+  pointer-events: none;
+}
+.hp-photo-count i{ font-size: 0.72rem; }
+
+/* ---------- লাইটবক্স গ্যালারি: ◀ ▶ বাটন, ক্রমিক নম্বর, থাম্বনেইল ---------- */
+.hp-lb-count{
+  flex: 0 0 auto;
+  font-family: 'Hind Siliguri', sans-serif; font-size: 0.86rem; font-weight: 700;
+  padding: 2px 10px; border-radius: 999px; background: rgba(255,255,255,0.16);
+}
+.hp-lb-count[hidden], .hp-lb-nav[hidden], .hp-lb-thumbs[hidden]{ display: none; }
+.hp-lb-nav{
+  position: absolute; top: 50%; transform: translateY(-50%);
+  z-index: 2;
+  width: 44px; height: 44px; padding: 0;
+  display: flex; align-items: center; justify-content: center;
+  border: 0; border-radius: 50%;
+  background: rgba(255,255,255,0.16); color: #fff; font-size: 1.05rem;
+  cursor: pointer; -webkit-tap-highlight-color: transparent;
+}
+.hp-lb-nav:hover{ background: rgba(255,255,255,0.28); }
+.hp-lb-prev{ left: 8px; }
+.hp-lb-next{ right: 8px; }
+.hp-lb.is-zoomed .hp-lb-nav{ display: none; }
+.hp-lb-thumbs{
+  flex: 0 0 auto;
+  display: flex; gap: 8px; justify-content: center;
+  padding: 8px 12px 2px;
+  overflow-x: auto;
+}
+.hp-lb-thumbs button{
+  flex: 0 0 auto; width: 52px; height: 52px; padding: 0;
+  border: 2px solid transparent; border-radius: 8px; overflow: hidden;
+  background: #1d232c; opacity: 0.6; cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.hp-lb-thumbs button.is-active{ border-color: #fff; opacity: 1; }
+.hp-lb-thumbs img{ display: block; width: 100%; height: 100%; object-fit: cover; }
+.hp-lb.is-zoomed .hp-lb-thumbs{ visibility: hidden; }
+
+/* ---------- "ভেরিফাইড" ব্যাজ (অ্যাডমিন যাচাইকৃত) — সোনালি ---------- */
+.hp-verified{
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 3px 10px; border-radius: 999px;
+  background: linear-gradient(135deg, #fbe08a 0%, #f0b429 55%, #d99a0b 100%);
+  color: #3d2b00;                                   /* সোনালি ব্যাকগ্রাউন্ডে গাঢ় বাদামি লেখা — WCAG AA কনট্রাস্ট */
+  border: 1px solid #c58f00;
+  font-size: 0.78rem; font-weight: 700; line-height: 1.3;
+  box-shadow: 0 1px 4px rgba(197,143,0,0.4), inset 0 1px 0 rgba(255,255,255,0.45);
+  white-space: nowrap;
+}
+.hp-verified i{ font-size: 0.85rem; color: #6b4a00; }
+.hp-sr{ position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.hp-card.is-verified{ box-shadow: 0 0 0 1.5px rgba(217,154,11,0.55), var(--shadow-sm, 0 2px 8px rgba(0,0,0,.06)); }
+
+/* ---------- ব্যানারের উপরের ফাঁকা জায়গা বাদ: ব্যাক-বারের ঠিক নিচেই ব্যানার ----------
+   css/style.css-এর `body[data-banner-category="legal-help"] #catBannerWrap { margin: 14px 0 6px }`
+   (মোবাইলে 10px 0 4px) উপরে ১০–১৪px ফাঁক রাখছিল; এখানে শুধু উপরের মার্জিন ০ করা হলো (নিচের মার্জিন অপরিবর্তিত)। */
+body[data-banner-category="legal-help"] #catBannerWrap{ margin-top: 0; }
+/* উপরের ফাঁক না থাকায় উপরের কোণ সোজা (ব্যাক-বারের সাথে লেগে থাকে), নিচের কোণ গোলই থাকে */
+body[data-banner-category="legal-help"] #catBannerSlider{ border-radius: 0 0 18px 18px; }
+@media (max-width: 700px){
+  body[data-banner-category="legal-help"] #catBannerSlider{ border-radius: 0 0 14px 14px; }
+}
+
+/* ==========================================================================
+   কার্ডের লেখা ক্লিকযোগ্য + "বিস্তারিত পেজ" (কার্ডের লেখায় ক্লিক করলে খোলে)
+   ========================================================================== */
+.hp-card-body[data-hp-open]{ cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.hp-card-body[data-hp-open]:focus-visible{ outline: 3px solid #2B0F0F; outline-offset: 3px; border-radius: 8px; }
+.hp-more{
+  display: inline-flex; align-items: center; gap: 5px;
+  margin: 8px 0 10px;
+  font-size: 0.86rem; font-weight: 700; line-height: 1.2;
+  color: var(--acc, #A12B2B);
+}
+.hp-more i{ font-size: 0.7rem; }
+
+html.hp-detail-open, html.hp-detail-open body{ overflow: hidden; overscroll-behavior: none; }
+.hp-detail{
+  position: fixed; inset: 0;
+  z-index: 200;                       /* "+" শিট (১০০) এর উপরে; লাইটবক্স (৩০০) ও কল-শিট (৪০০) এর নিচে */
+  display: flex; flex-direction: column;
+  overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain;
+  background: var(--cream, #fbeeee);
+  font-family: 'Hind Siliguri', sans-serif;
+  animation: hpDetailIn .2s ease-out;
+}
+.hp-detail[hidden]{ display: none; }
+@keyframes hpDetailIn{ from{ opacity: 0; transform: translateY(14px); } to{ opacity: 1; transform: none; } }
+
+.hp-detail-bar{
+  position: sticky; top: 0; z-index: 3;
+  flex: 0 0 auto;
+  display: flex; align-items: center; gap: 12px;
+  padding: 8px 16px;
+  padding-top: max(8px, env(safe-area-inset-top));
+  background: #fff;
+  border-bottom: 1px solid var(--line, rgba(34,48,58,0.12));
+}
+.hp-detail-back{
+  flex: 0 0 auto;
+  width: 44px; height: 44px; padding: 0;
+  display: flex; align-items: center; justify-content: center;
+  border: 0; border-radius: 50%;
+  background: #fbeeee; color: var(--ink, #22303a); font-size: 1.05rem;
+  cursor: pointer; -webkit-tap-highlight-color: transparent;
+}
+.hp-detail-back:hover{ background: #e6ecf0; }
+.hp-detail-title{ font-size: 1.05rem; font-weight: 700; color: var(--ink, #22303a); }
+
+.hp-detail-inner{
+  flex: 1 0 auto;
+  width: 100%; max-width: 640px; margin: 0 auto; box-sizing: border-box;
+  padding-bottom: 20px;
+}
+
+/* উপরে বড় ছবি */
+.hp-dhero{
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  max-height: 54vh;
+  overflow: hidden;
+  background: #f0dada;
+  border-radius: 0 0 22px 22px;
+}
+.hp-dhero img{ display: block; width: 100%; height: 100%; object-fit: cover; }
+.hp-dhero.hp-dph{ cursor: zoom-in; -webkit-tap-highlight-color: transparent; }
+.hp-dhero .hp-photo-count{ right: 12px; bottom: 12px; font-size: 0.82rem; padding: 3px 10px; }
+.hp-dhero--none{
+  aspect-ratio: auto; height: 150px;
+  display: flex; align-items: center; justify-content: center;
+}
+.hp-dhero--none i{ font-size: 3.4rem; }
+.hp-dph:focus-visible{ outline: 3px solid #2B0F0F; outline-offset: -3px; }
+
+.hp-dthumbs{
+  display: flex; gap: 8px;
+  padding: 12px 16px 2px;
+  overflow-x: auto; -webkit-overflow-scrolling: touch;
+}
+.hp-dthumb{
+  flex: 0 0 auto; width: 64px; height: 64px;
+  border-radius: 10px; overflow: hidden;
+  border: 2px solid #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.18);
+  cursor: pointer; background: #f0dada;
+  -webkit-tap-highlight-color: transparent;
+}
+.hp-dthumb img{ display: block; width: 100%; height: 100%; object-fit: cover; }
+
+.hp-dhead{ padding: 14px 16px 4px; }
+.hp-dname{ margin: 0; font-size: 1.45rem; font-weight: 800; line-height: 1.3; color: var(--ink, #22303a); overflow-wrap: anywhere; }
+.hp-dhead .hp-tags{ margin-top: 8px; }
+
+/* বিস্তারিত তথ্য */
+.hp-dsec{
+  margin: 12px 16px 0;
+  padding: 6px 14px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 1px 8px rgba(20,40,60,0.06);
+}
+.hp-dsec .hp-quote{ margin: 8px 0; }
+.hp-dsec-title{ margin: 8px 0 2px; font-size: 0.95rem; font-weight: 800; color: var(--ink, #22303a); }
+.hp-drow{
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--line, rgba(34,48,58,0.1));
+}
+.hp-drow:last-child{ border-bottom: 0; }
+.hp-dico{
+  flex: 0 0 auto; width: 34px; height: 34px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 10px;
+  background: #edf2fa; color: var(--acc, #A12B2B); font-size: 0.95rem;
+}
+.hp-dtxt{ display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.hp-dlbl{ font-size: 0.8rem; font-weight: 600; color: var(--ink-soft, #5b6b73); }
+.hp-dval{ font-size: 1rem; font-weight: 600; line-height: 1.55; color: var(--ink, #22303a); white-space: pre-line; overflow-wrap: anywhere; }
+
+/* নিচে আটকে থাকা যোগাযোগ বাটন */
+.hp-detail-actions{
+  position: sticky; bottom: 0; z-index: 3;
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 10px 16px;
+  padding-bottom: max(10px, env(safe-area-inset-bottom));
+  background: #fff;
+  border-top: 1px solid var(--line, rgba(34,48,58,0.12));
+  box-shadow: 0 -4px 14px rgba(20,40,60,0.06);
+}
+.hp-detail-actions:empty{ display: none; }
+.hp-detail-actions .hp-nophone{ width: 100%; }
+
+@media (min-width: 700px){
+  .hp-detail-inner{ padding-top: 14px; }
+  .hp-dhero{ border-radius: 22px; max-height: 54vh; }
+  .hp-detail-actions{ padding-left: max(16px, calc(50% - 320px)); padding-right: max(16px, calc(50% - 320px)); }
+}
+@media (prefers-reduced-motion: reduce){
+  .hp-detail{ animation: none; }
+}

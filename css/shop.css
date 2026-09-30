@@ -106,33 +106,24 @@ body[data-banner-category="business-directory"] .banner-dots{ margin-top: 8px; }
 .shop-cat-chip{
   flex: 0 0 auto;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 6px;
-  width: 68px;
+  justify-content: center;
   background: #fff;
   border: 1px solid var(--line);
   border-radius: 12px;
-  padding: 10px 6px 8px;
+  padding: 10px 16px;
+  min-height: 42px;
   cursor: pointer;
-  font-size: 0.7rem;
+  font-size: 0.88rem;
   color: var(--ink-soft);
   font-weight: 600;
   text-align: center;
   line-height: 1.2;
+  white-space: nowrap;
   transition: background .15s, border-color .15s, color .15s, transform .1s;
 }
 .shop-cat-chip:active{ transform: scale(0.96); }
-.shop-cat-chip .shop-cat-icon{
-  width: 30px; height: 30px;
-  border-radius: 9px;
-  background: var(--cream);
-  display: flex; align-items: center; justify-content: center;
-  color: var(--maroon);
-  font-size: 0.95rem;
-}
 .shop-cat-chip.active{ background: var(--maroon); border-color: var(--maroon); color: #fff; }
-.shop-cat-chip.active .shop-cat-icon{ background: rgba(255,255,255,0.2); color: #fff; }
 
 /* ---------- টুলবার: গণনা ---------- */
 .shop-toolbar{
@@ -228,10 +219,8 @@ body[data-banner-category="business-directory"] .banner-dots{ margin-top: 8px; }
   display: flex; align-items: center; gap: 4px;
   box-shadow: 0 1px 4px rgba(0,0,0,0.18);
 }
-.shop-rating-chip i{ font-size: 0.7rem; }
 .shop-rating-chip .count{ color: var(--ink-soft); font-weight: 500; }
 .shop-rating-chip.is-new{ color: var(--maroon-dark); }
-.shop-rating-chip.is-new i{ color: #158F52; }
 
 /* হেডার: গোল প্রোফাইল ছবি (ব্যানারে অর্ধেক ঢোকানো) + নাম + ক্যাটাগরি */
 .shop-card-head{

@@ -9,7 +9,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
 <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
 <link rel="manifest" href="manifest.json">
-<link rel="stylesheet" href="css/style.css?v=20260924073609">
+<link rel="stylesheet" href="css/style.css?v=20260930045009">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
@@ -70,6 +70,9 @@
     <button type="button" class="admin-tab" data-tab="courier">
       <span class="admin-tab-icon"><i class="fa-solid fa-truck-fast" aria-hidden="true"></i></span><span>কুরিয়ার</span>
     </button>
+    <button type="button" class="admin-tab" data-tab="hotel">
+      <span class="admin-tab-icon"><i class="fa-solid fa-hotel" aria-hidden="true"></i></span><span>হোটেল</span>
+    </button>
     <button type="button" class="admin-tab" data-tab="doctors">
       <span class="admin-tab-icon"><i class="fa-solid fa-user-doctor" aria-hidden="true"></i></span><span>ডাক্তার</span>
     </button>
@@ -84,6 +87,18 @@
     </button>
     <button type="button" class="admin-tab" data-tab="matrimony">
       <span class="admin-tab-icon"><i class="fa-solid fa-ring" aria-hidden="true"></i></span><span>পাত্র-পাত্রী (নতুন)</span>
+    </button>
+    <button type="button" class="admin-tab" data-tab="technician">
+      <span class="admin-tab-icon"><i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i></span><span>টেকনিশিয়ান</span>
+    </button>
+    <button type="button" class="admin-tab" data-tab="viral">
+      <span class="admin-tab-icon"><i class="fa-solid fa-location-dot" aria-hidden="true"></i></span><span>ভাইরাল প্লেস</span>
+    </button>
+    <button type="button" class="admin-tab" data-tab="nursery">
+      <span class="admin-tab-icon"><i class="fa-solid fa-seedling" aria-hidden="true"></i></span><span>নার্সারি</span>
+    </button>
+    <button type="button" class="admin-tab" data-tab="publicRep">
+      <span class="admin-tab-icon"><i class="fa-solid fa-landmark" aria-hidden="true"></i></span><span>জনপ্রতিনিধি</span>
     </button>
     <button type="button" class="admin-tab" data-tab="lawyer">
       <span class="admin-tab-icon"><i class="fa-solid fa-scale-balanced" aria-hidden="true"></i></span><span>আইনজীবী</span>
@@ -255,6 +270,33 @@
     </section>
   </section>
 
+  <!-- ================= প্যানেল: আবাসিক হোটেল অনুমোদন (hotel_offices টেবিল) ================= -->
+  <section class="admin-panel" id="panelHotel" hidden>
+    <div class="panel-intro">
+      <strong>কোথায় দেখাবে:</strong> hotel.html পেজের ভাসমান "+" বাটন থেকে কেউ নতুন আবাসিক হোটেল জমা দিলে এখানে "পেন্ডিং" অবস্থায়
+      আসে। "অনুমোদন করুন" চাপলে সেটি সাথে সাথে আবাসিক হোটেল পেজের তালিকায় প্রকাশিত হবে; "বাতিল করুন" চাপলে প্রকাশিত হবে না।
+      অনুমোদিত হোটেলের "খোলা/বন্ধ" অবস্থাও এখান থেকে বদলানো যাবে।
+    </div>
+
+    <div class="admin-top">
+      <span class="admin-count" id="hotelCount">০টি হোটেল</span>
+      <div class="admin-toolbar">
+        <select id="hotelFilterSelect">
+          <option value="pending" selected>পেন্ডিং</option>
+          <option value="all">সব</option>
+          <option value="approved">অনুমোদিত</option>
+          <option value="rejected">বাতিল</option>
+        </select>
+        <button type="button" class="secondary" id="hotelRefreshBtn">রিফ্রেশ করুন</button>
+      </div>
+    </div>
+
+    <section class="admin-list">
+      <h2>আবাসিক হোটেলের আবেদন</h2>
+      <div id="hotelList"><p class="admin-empty">লোড হচ্ছে…</p></div>
+    </section>
+  </section>
+
   <!-- ================= প্যানেল: কুরিয়ার অফিস অনুমোদন (courier_offices টেবিল) ================= -->
   <section class="admin-panel" id="panelCourier" hidden>
     <div class="panel-intro">
@@ -317,6 +359,132 @@
       <div id="mmAdminList"><p class="admin-empty">লোড হচ্ছে…</p></div>
     </section>
   </section>
+
+  <!-- ================= প্যানেল: টেকনিশিয়ান অনুমোদন (technician_entries টেবিল) ================= -->
+  <section class="admin-panel" id="panelTechnician" hidden>
+    <div class="panel-intro">
+      <strong>কোথায় দেখাবে:</strong> technician.html পেজের ভাসমান "+" বাটন থেকে কেউ ইলেকট্রিশিয়ান / প্লাম্বার / মেরামত / নির্মাণ ইত্যাদি
+      কাজের টেকনিশিয়ান হিসেবে তথ্য জমা দিলে এখানে "পেন্ডিং" অবস্থায় আসে। "অনুমোদন করুন" চাপলে সেটি সাথে সাথে টেকনিশিয়ান পেজে প্রকাশিত হবে;
+      "বাতিল করুন" চাপলে প্রকাশিত হবে না।<br>
+      <strong>ডেমো:</strong> কোনো উপজেলা + ধরনে আসল এন্ট্রি অনুমোদন করলে সেই উপজেলা ও ধরনের ডেমো <b>নিজে থেকেই মুছে যায়</b>; "ফিল্টার → ডেমো" বা "সব ডেমো মুছুন" দিয়েও মুছতে পারবেন।<br>
+      <strong>গোপনীয়তা:</strong> মোবাইল নম্বর শুধু জমাদাতা প্রকাশে সম্মতি দিলেই পেজে দেখায়। অনুমোদনের আগে তথ্য ও নম্বর ঠিক আছে কিনা দেখে নিন।
+    </div>
+
+    <div class="admin-top">
+      <span class="admin-count" id="tcAdminCount">০জন</span>
+      <div class="admin-toolbar">
+        <select id="tcAdminFilterSelect" aria-label="ফিল্টার">
+          <option value="pending" selected>পেন্ডিং</option>
+          <option value="all">সব</option>
+          <option value="approved">অনুমোদিত</option>
+          <option value="rejected">বাতিল</option>
+          <option value="demo">ডেমো</option>
+        </select>
+        <button type="button" class="secondary" id="tcAdminRefreshBtn">রিফ্রেশ করুন</button>
+        <button type="button" class="danger" id="tcAdminPurgeDemoBtn">সব ডেমো মুছুন</button>
+      </div>
+    </div>
+
+    <section class="admin-list">
+      <h2>টেকনিশিয়ানের আবেদন</h2>
+      <div id="tcAdminList"><p class="admin-empty">লোড হচ্ছে…</p></div>
+    </section>
+  </section>
+
+
+  <!-- ================= প্যানেল: ভাইরাল প্লেস অনুমোদন (viral_entries টেবিল) ================= -->
+  <section class="admin-panel" id="panelViral" hidden>
+    <div class="panel-intro">
+      <strong>কোথায় দেখাবে:</strong> viral.html পেজের ভাসমান "+" বাটন থেকে কেউ ফুচকা / মিষ্টি / দেশি খাবার / ফুড কোর্ট / ক্যাফে / আড্ডা /
+      ফ্যামিলি / পার্ক / লেক / পিকনিক / ফটোস্পট / সিনেমা হিসেবে তথ্য জমা দিলে এখানে "পেন্ডিং" অবস্থায় আসে। "অনুমোদন করুন" চাপলে সেটি
+      সাথে সাথে ভাইরাল প্লেস পেজে প্রকাশিত হবে; "বাতিল করুন" চাপলে প্রকাশিত হবে না।<br>
+      <strong>ডেমো:</strong> কোনো উপজেলা + ধরনে আসল এন্ট্রি অনুমোদন করলে সেই উপজেলা ও ধরনের ডেমো <b>নিজে থেকেই মুছে যায়</b>; "ফিল্টার → ডেমো" বা "সব ডেমো মুছুন" দিয়েও মুছতে পারবেন।<br>
+      <strong>গোপনীয়তা:</strong> মোবাইল নম্বর ঐচ্ছিক; দিলেও জমাদাতা প্রকাশে সম্মতি দিলেই পেজে দেখায়। অনুমোদনের আগে তথ্য ও ছবি ঠিক আছে কিনা দেখে নিন।
+    </div>
+
+    <div class="admin-top">
+      <span class="admin-count" id="vrAdminCount">০টি</span>
+      <div class="admin-toolbar">
+        <select id="vrAdminFilterSelect" aria-label="ফিল্টার">
+          <option value="pending" selected>পেন্ডিং</option>
+          <option value="all">সব</option>
+          <option value="approved">অনুমোদিত</option>
+          <option value="rejected">বাতিল</option>
+          <option value="demo">ডেমো</option>
+        </select>
+        <button type="button" class="secondary" id="vrAdminRefreshBtn">রিফ্রেশ করুন</button>
+        <button type="button" class="danger" id="vrAdminPurgeDemoBtn">সব ডেমো মুছুন</button>
+      </div>
+    </div>
+
+    <section class="admin-list">
+      <h2>ভাইরাল প্লেসের আবেদন</h2>
+      <div id="vrAdminList"><p class="admin-empty">লোড হচ্ছে…</p></div>
+    </section>
+  </section>
+
+  <!-- ================= প্যানেল: নার্সারি অনুমোদন (nursery_entries টেবিল) ================= -->
+  <section class="admin-panel" id="panelNursery" hidden>
+    <div class="panel-intro">
+      <strong>কোথায় দেখাবে:</strong> nursery.html পেজের ভাসমান "+" বাটন থেকে কেউ ফুলের গাছ / ফলজ / বনজ / ইনডোর / ঔষধি / সবজি চারা / শোভাবর্ধক / ক্যাকটাস / অর্কিড / বনসাই / অন্যান্য হিসেবে তথ্য জমা দিলে এখানে "পেন্ডিং" অবস্থায় আসে। "অনুমোদন করুন" চাপলে সেটি
+      সাথে সাথে নার্সারি পেজে প্রকাশিত হবে; "বাতিল করুন" চাপলে প্রকাশিত হবে না।<br>
+      <strong>ডেমো:</strong> কোনো উপজেলা + ধরনে আসল এন্ট্রি অনুমোদন করলে সেই উপজেলা ও ধরনের ডেমো <b>নিজে থেকেই মুছে যায়</b>; "ফিল্টার → ডেমো" বা "সব ডেমো মুছুন" দিয়েও মুছতে পারবেন।<br>
+      <strong>গোপনীয়তা:</strong> মোবাইল নম্বর ঐচ্ছিক; দিলেও জমাদাতা প্রকাশে সম্মতি দিলেই পেজে দেখায়। অনুমোদনের আগে তথ্য ও ছবি ঠিক আছে কিনা দেখে নিন।
+    </div>
+
+    <div class="admin-top">
+      <span class="admin-count" id="nrAdminCount">০টি</span>
+      <div class="admin-toolbar">
+        <select id="nrAdminFilterSelect" aria-label="ফিল্টার">
+          <option value="pending" selected>পেন্ডিং</option>
+          <option value="all">সব</option>
+          <option value="approved">অনুমোদিত</option>
+          <option value="rejected">বাতিল</option>
+          <option value="demo">ডেমো</option>
+        </select>
+        <button type="button" class="secondary" id="nrAdminRefreshBtn">রিফ্রেশ করুন</button>
+        <button type="button" class="danger" id="nrAdminPurgeDemoBtn">সব ডেমো মুছুন</button>
+      </div>
+    </div>
+
+    <section class="admin-list">
+      <h2>নার্সারিের আবেদন</h2>
+      <div id="nrAdminList"><p class="admin-empty">লোড হচ্ছে…</p></div>
+    </section>
+  </section>
+
+
+  <!-- ================= প্যানেল: জনপ্রতিনিধি অনুমোদন (public_representatives টেবিল) ================= -->
+  <section class="admin-panel" id="panelPublicRep" hidden>
+    <div class="panel-intro">
+      <strong>কোথায় দেখাবে:</strong> public-representative.html পেজের ভাসমান "+" বাটন থেকে কেউ সংসদ সদস্য / জেলা পরিষদ / উপজেলা চেয়ারম্যান /
+      পৌর মেয়র / ইউপি চেয়ারম্যান / ইউপি সদস্য / সংরক্ষিত নারী সদস্যের তথ্য জমা দিলে এখানে "পেন্ডিং" অবস্থায় আসে। "অনুমোদন করুন" চাপলে সেটি
+      সাথে সাথে জনপ্রতিনিধি পেজে প্রকাশিত হবে; "বাতিল করুন" চাপলে প্রকাশিত হবে না।<br>
+      <strong>ডেমো:</strong> "নমুনা" লেখা এন্ট্রিগুলো ডেমো — কোনো ধরনে (যেমন ইউপি চেয়ারম্যান) আসল এন্ট্রি অনুমোদন করলে সেই ধরনের ডেমো <b>নিজে থেকেই মুছে যায়</b>; "ফিল্টার → ডেমো" বা "সব ডেমো মুছুন" দিয়েও মুছতে পারবেন।<br>
+      <strong>গোপনীয়তা:</strong> মোবাইল নম্বর অনুমোদনের পর পাবলিক পেজে সবার কাছে দেখা যায় — অনুমোদনের আগে নাম, নম্বর ও ছবি ঠিক আছে কিনা মিলিয়ে নিন।
+    </div>
+
+    <div class="admin-top">
+      <span class="admin-count" id="prAdminCount">০টি</span>
+      <div class="admin-toolbar">
+        <select id="prAdminFilterSelect" aria-label="ফিল্টার">
+          <option value="pending" selected>পেন্ডিং</option>
+          <option value="all">সব</option>
+          <option value="approved">অনুমোদিত</option>
+          <option value="rejected">বাতিল</option>
+          <option value="demo">ডেমো</option>
+        </select>
+        <button type="button" class="secondary" id="prAdminRefreshBtn">রিফ্রেশ করুন</button>
+        <button type="button" class="danger" id="prAdminPurgeDemoBtn">সব ডেমো মুছুন</button>
+      </div>
+    </div>
+
+    <section class="admin-list">
+      <h2>জনপ্রতিনিধির আবেদন</h2>
+      <div id="prAdminList"><p class="admin-empty">লোড হচ্ছে…</p></div>
+    </section>
+  </section>
+
 
   <!-- ================= প্যানেল: আইনজীবী অনুমোদন (lawyer_entries টেবিল) ================= -->
   <section class="admin-panel" id="panelLawyer" hidden>
@@ -905,16 +1073,21 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-<script src="js/supabase-config.js?v=20260924073609"></script>
-    <script src="js/nav-avatar.js?v=20260924073609"></script>
-    <script src="js/call.js?v=20260924073609"></script>
-<script src="js/banner-slider.js?v=20260924073609"></script>
-<script src="js/notice-bar.js?v=20260924073609"></script>
-<script src="js/shop-data.js?v=20260924073609"></script>
-<script src="js/courier-data.js?v=20260924073609"></script>
-<script src="js/matrimony-data.js?v=20260924073609"></script>
-<script src="js/lawyer-data.js?v=20260924073609"></script>
-<script src="js/doctors-data.js?v=20260924073609"></script>
+<script src="js/supabase-config.js?v=20260930045009"></script>
+    <script src="js/nav-avatar.js?v=20260930045009"></script>
+    <script src="js/call.js?v=20260930045009"></script>
+<script src="js/banner-slider.js?v=20260930045009"></script>
+<script src="js/notice-bar.js?v=20260930045009"></script>
+<script src="js/shop-data.js?v=20260930045009"></script>
+<script src="js/hotel-data.js?v=20260930045009"></script>
+<script src="js/courier-data.js?v=20260930045009"></script>
+<script src="js/matrimony-data.js?v=20260930045009"></script>
+<script src="js/technician-data.js?v=20260930045009"></script>
+<script src="js/viral-data.js?v=20260930045009"></script>
+<script src="js/nursery-data.js?v=20260930045009"></script>
+<script src="js/public-rep-data.js?v=20260930045009"></script>
+<script src="js/lawyer-data.js?v=20260930045009"></script>
+<script src="js/doctors-data.js?v=20260930045009"></script>
 <script>
 (function () {
   var client = window.supabase.createClient(window.TANGAIL_SUPABASE.url, window.TANGAIL_SUPABASE.key);
@@ -953,7 +1126,12 @@
   var panelMarketplace = document.getElementById('panelMarketplace');
   var panelShops = document.getElementById('panelShops');
   var panelCourier = document.getElementById('panelCourier');
+  var panelHotel = document.getElementById('panelHotel');
   var panelMatrimony = document.getElementById('panelMatrimony');
+  var panelTechnician = document.getElementById('panelTechnician');
+  var panelViral = document.getElementById('panelViral');
+  var panelNursery = document.getElementById('panelNursery');
+  var panelPublicRep = document.getElementById('panelPublicRep');
   var panelLawyer = document.getElementById('panelLawyer');
   var panelDoctors = document.getElementById('panelDoctors');
   var panelReports = document.getElementById('panelReports');
@@ -1020,7 +1198,7 @@
   // বিভাগ পিকার চিপ-গ্রিড বানানো
   catPickerGrid.innerHTML = CATS.map(function (c) {
     return '<button type="button" class="cat-chip" data-slug="' + c.slug + '">' +
-      '<span class="cat-chip-icon">' + c.icon + '</span><span>' + c.label + '</span></button>';
+      '<span>' + c.label + '</span></button>';
   }).join('');
 
   function setActiveChip(slug) {
@@ -1057,7 +1235,12 @@
     currentTab = tab;
     panelMembers.hidden = true;
     panelCourier.hidden = true;
+    panelHotel.hidden = true;
     panelMatrimony.hidden = true;
+    panelTechnician.hidden = true;
+    panelViral.hidden = true;
+    panelNursery.hidden = true;
+    panelPublicRep.hidden = true;
     panelLawyer.hidden = true;
     panelDoctors.hidden = true;
     tabButtons.forEach(function (btn) {
@@ -1075,6 +1258,41 @@
       Array.prototype.forEach.call(document.querySelectorAll('.admin-panel'), function (pn) { pn.hidden = true; });
       panelCourier.hidden = false;
       loadAdminCourier();
+      return;
+    }
+
+    if (tab === 'hotel') {
+      Array.prototype.forEach.call(document.querySelectorAll('.admin-panel'), function (pn) { pn.hidden = true; });
+      panelHotel.hidden = false;
+      loadAdminHotel();
+      return;
+    }
+
+    if (tab === 'technician') {
+      Array.prototype.forEach.call(document.querySelectorAll('.admin-panel'), function (pn) { pn.hidden = true; });
+      panelTechnician.hidden = false;
+      loadAdminTechnician();
+      return;
+    }
+
+    if (tab === 'viral') {
+      Array.prototype.forEach.call(document.querySelectorAll('.admin-panel'), function (pn) { pn.hidden = true; });
+      panelViral.hidden = false;
+      loadAdminViral();
+      return;
+    }
+    if (tab === 'nursery') {
+      Array.prototype.forEach.call(document.querySelectorAll('.admin-panel'), function (pn) { pn.hidden = true; });
+      panelNursery.hidden = false;
+      loadAdminNursery();
+      return;
+    }
+
+
+    if (tab === 'publicRep') {
+      Array.prototype.forEach.call(document.querySelectorAll('.admin-panel'), function (pn) { pn.hidden = true; });
+      panelPublicRep.hidden = false;
+      loadAdminPublicRep();
       return;
     }
 
@@ -2744,6 +2962,105 @@
   courierRefreshBtn.addEventListener('click', loadAdminCourier);
   if (courierFilterSelect) courierFilterSelect.addEventListener('change', renderAdminCourier);
 
+  // ---------- আবাসিক হোটেল অনুমোদন — hotel_offices টেবিল (hotel.html "+" ফর্ম থেকে জমা) ----------
+  var hotelListEl = document.getElementById('hotelList');
+  var hotelCountEl = document.getElementById('hotelCount');
+  var hotelRefreshBtn = document.getElementById('hotelRefreshBtn');
+  var hotelFilterSelect = document.getElementById('hotelFilterSelect');
+  var adminHotel = [];
+
+  function loadAdminHotel() {
+    hotelListEl.innerHTML = '<p class="admin-empty">লোড হচ্ছে…</p>';
+    client.from('hotel_offices').select('*').order('created_at', { ascending: false })
+      .then(function (res) {
+        if (res.error) { hotelListEl.innerHTML = '<p class="admin-empty">লোড করতে সমস্যা হয়েছে: ' + esc(res.error.message) + '</p>'; return; }
+        adminHotel = res.data || [];
+        renderAdminHotel();
+      });
+  }
+
+  // আরও ছবির লিংক (extra_photos) — শুধু http(s)
+  function hotelAdminExtras(o) {
+    return (Array.isArray(o && o.extra_photos) ? o.extra_photos : []).filter(function (u) { return /^https?:\/\//i.test(u); });
+  }
+
+  function hotelUpdate(id, patch) {
+    client.from('hotel_offices').update(patch).eq('id', id).then(function (res) {
+      if (res.error) { alert('ব্যর্থ: ' + res.error.message); return; }
+      loadAdminHotel();
+    });
+  }
+
+  function renderAdminHotel() {
+    var filter = hotelFilterSelect ? hotelFilterSelect.value : 'pending';
+    var filtered = filter === 'all' ? adminHotel : adminHotel.filter(function (o) { return o.status === filter; });
+    hotelCountEl.textContent = bnNum2(filtered.length) + 'টি হোটেল';
+
+    if (filtered.length === 0) {
+      hotelListEl.innerHTML = '<p class="admin-empty">' + (filter === 'pending' ? 'কোনো পেন্ডিং আবেদন নেই।' : 'এখনো কোনো হোটেল নেই।') + '</p>';
+      return;
+    }
+
+    hotelListEl.innerHTML = '';
+    filtered.forEach(function (o) {
+      var isPending = o.status === 'pending';
+      var isRejected = o.status === 'rejected';
+      var isApproved = o.status === 'approved';
+      var card = document.createElement('div');
+      card.className = 'banner-card' + (isRejected ? ' disabled' : '') + (isPending ? ' pending' : '');
+      var statusNote = isPending
+        ? ' · <strong style="color:#b26a00;">পেন্ডিং</strong>'
+        : (isApproved ? ' · <strong style="color:#1a7f37;">অনুমোদিত (পেজে প্রকাশিত)</strong>' : ' · <strong style="color:#b42318;">বাতিল</strong>');
+      var upazila = courierLabel(window.HOTEL_UPAZILAS, o.upazila) || o.upazila;
+      var mapOk = /^https?:\/\//i.test(o.maps_url || '');
+
+      card.innerHTML =
+        '<div class="banner-card-head"><strong>' + esc(o.name) + '</strong>' +
+        '<span style="font-size:0.8rem;color:var(--ink-soft);">' + postTimeStr(o.created_at) + statusNote + '</span></div>' +
+        '<p style="font-size:0.92rem;margin:6px 0;">' +
+          '<i class="fa-solid fa-phone" aria-hidden="true"></i> ' + esc(o.phone) + ' &nbsp; ' +
+          '<i class="fa-solid fa-location-dot" aria-hidden="true"></i> ' + esc(upazila) +
+          (isApproved ? ' &nbsp; <strong style="color:' + (o.is_open === false ? '#b42318' : '#1a7f37') + ';">' + (o.is_open === false ? 'বন্ধ' : 'খোলা') + '</strong>' : '') +
+        '</p>' +
+        '<p style="font-size:0.85rem;color:var(--ink-soft);margin:4px 0;">ঠিকানা: ' + esc(o.address) + '</p>' +
+        (mapOk ? '<p style="font-size:0.85rem;margin:4px 0;"><a href="' + esc(o.maps_url) + '" target="_blank" rel="noopener noreferrer">Google Map লিংক যাচাই করুন</a></p>' : '') +
+        (o.logo_url ? '<div style="margin:6px 0;display:flex;flex-wrap:wrap;gap:6px;align-items:flex-start;"><img class="banner-image-preview" src="' + esc(o.logo_url) + '" alt="" style="max-width:120px;max-height:90px;">' +
+          hotelAdminExtras(o).map(function (u) { return '<img class="banner-image-preview" src="' + esc(u) + '" alt="" style="max-width:120px;max-height:90px;">'; }).join('') + '</div>' : '') +
+        '<div class="banner-card-actions">' +
+          (isPending
+            ? '<button type="button" class="primary" data-act="approve"><i class="fa-solid fa-check" aria-hidden="true"></i> অনুমোদন করুন</button>' +
+              '<button type="button" class="ghost" data-act="reject">বাতিল করুন</button>'
+            : (isApproved
+                ? '<button type="button" class="ghost" data-act="reject">তালিকা থেকে সরান</button>' +
+                  '<button type="button" class="secondary" data-act="toggleOpen">' + (o.is_open === false ? 'খোলা করুন' : 'বন্ধ করুন') + '</button>'
+                : '<button type="button" class="primary" data-act="approve"><i class="fa-solid fa-check" aria-hidden="true"></i> অনুমোদন করুন</button>')) +
+          '<button type="button" class="danger" data-act="delete"><i class="fa-solid fa-trash" aria-hidden="true"></i> মুছুন</button>' +
+        '</div>';
+
+      var approveBtn = card.querySelector('[data-act="approve"]');
+      if (approveBtn) approveBtn.addEventListener('click', function () { hotelUpdate(o.id, { status: 'approved' }); });
+      var rejectBtn = card.querySelector('[data-act="reject"]');
+      if (rejectBtn) rejectBtn.addEventListener('click', function () { hotelUpdate(o.id, { status: 'rejected' }); });
+      var toggleBtn = card.querySelector('[data-act="toggleOpen"]');
+      if (toggleBtn) toggleBtn.addEventListener('click', function () { hotelUpdate(o.id, { is_open: o.is_open === false }); });
+
+      card.querySelector('[data-act="delete"]').addEventListener('click', function () {
+        if (!confirm('এই হোটেলের তথ্য স্থায়ীভাবে মুছে ফেলতে চান?')) return;
+        client.from('hotel_offices').delete().eq('id', o.id).then(function (res) {
+          if (res.error) { alert('মুছতে ব্যর্থ: ' + res.error.message); return; }
+          if (o.logo_url) deleteStorageFileByUrl('market-media', o.logo_url);
+          hotelAdminExtras(o).forEach(function (u) { deleteStorageFileByUrl('market-media', u); });
+          loadAdminHotel();
+        });
+      });
+
+      hotelListEl.appendChild(card);
+    });
+  }
+
+  hotelRefreshBtn.addEventListener('click', loadAdminHotel);
+  if (hotelFilterSelect) hotelFilterSelect.addEventListener('change', renderAdminHotel);
+
   // ---------- পাত্র-পাত্রী (নতুন) অনুমোদন — matrimony_entries টেবিল (matrimony.html "+" ফর্ম থেকে জমা) ----------
   var mmListEl = document.getElementById('mmAdminList');
   var mmCountEl = document.getElementById('mmAdminCount');
@@ -2939,6 +3256,723 @@
 
   mmRefreshBtn.addEventListener('click', loadAdminMatrimony);
   if (mmFilterSelect) mmFilterSelect.addEventListener('change', renderAdminMatrimony);
+
+
+  // ---------- টেকনিশিয়ান অনুমোদন — technician_entries টেবিল (technician.html "+" ফর্ম থেকে জমা) ----------
+  var tcListEl = document.getElementById('tcAdminList');
+  var tcCountEl = document.getElementById('tcAdminCount');
+  var tcRefreshBtn = document.getElementById('tcAdminRefreshBtn');
+  var tcFilterSelect = document.getElementById('tcAdminFilterSelect');
+  var tcPurgeDemoBtn = document.getElementById('tcAdminPurgeDemoBtn');
+  var adminTechnician = [];
+
+  // পূর্ণ escape (& < > " ') — এবং ০ সংখ্যাও ঠিকভাবে দেখায় (সাধারণ esc() ০-কে খালি করে দেয়)
+  function tcAdminEsc(s) {
+    return (s === null || s === undefined ? '' : String(s)).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  // কার্ডে যে ফিল্ডগুলো এই ক্রমে দেখায় (ছোটগুলো এক লাইনে, লম্বাগুলো আলাদা লাইনে)
+  var TC_ADMIN_SHORT = [['experience', 'অভিজ্ঞতা (বছর)'], ['rate', 'মজুরি / ভিজিট'], ['availability', 'সেবার সময়'], ['address', 'কাজের এলাকা']];
+  var TC_ADMIN_LONG = [['about', 'কাজের বিবরণ']];
+
+  function tcAdminUpazila(key) {
+    var list = window.TC_UPAZILAS || [];
+    for (var i = 0; i < list.length; i++) { if (list[i][0] === key) return list[i][1]; }
+    return key;
+  }
+  function tcAdminType(key) {
+    var list = window.TC_TYPES || [];
+    for (var i = 0; i < list.length; i++) { if (list[i].key === key) return list[i]; }
+    return { key: key, label: key, color: '#555' };
+  }
+  // আরও ছবির লিংক (extra_photos কলাম না থাকলে খালি) — শুধু http(s)
+  function tcAdminExtras(o) {
+    return (Array.isArray(o && o.extra_photos) ? o.extra_photos : []).filter(function (u) { return /^https?:\/\//i.test(u); });
+  }
+  function tcAdminHas(v) { return v !== null && v !== undefined && v !== ''; }
+
+  var tcOwners = {};
+
+  function loadAdminTechnician() {
+    tcListEl.innerHTML = '<p class="admin-empty">লোড হচ্ছে…</p>';
+    client.from('technician_entries').select('*').order('created_at', { ascending: false })
+      .then(function (res) {
+        if (res.error) { tcListEl.innerHTML = '<p class="admin-empty">লোড করতে সমস্যা হয়েছে: ' + tcAdminEsc(res.error.message) + '</p>'; return; }
+        adminTechnician = res.data || [];
+        // মালিকের ইমেইল/নাম (profiles থেকে; অ্যাডমিন সব পড়তে পারে) — কার্ডে "মালিক" লাইনের জন্য
+        var ids = adminTechnician.map(function (o) { return o.user_id; }).filter(Boolean)
+          .filter(function (v, i, a) { return a.indexOf(v) === i; });
+        tcOwners = {};
+        if (!ids.length) { renderAdminTechnician(); return; }
+        client.from('profiles').select('id, email, full_name').in('id', ids).then(function (pr) {
+          (pr.data || []).forEach(function (u) { tcOwners[u.id] = u; });
+          renderAdminTechnician();
+        }, function () { renderAdminTechnician(); });
+      });
+  }
+
+  // মালিক নির্ধারণ/বদল: ইউজারের ইমেইল দিয়ে profiles থেকে খুঁজে technician_entries.user_id বসায়।
+  // পুরনো (লগইন-বাধ্যতামূলক হওয়ার আগে জমা দেওয়া) এন্ট্রিের মালিক নেই — এখান থেকে মালিক ঠিক করলে সেই ইউজারই
+  // technician.html-এর বিস্তারিত পেজ থেকে ছবিসহ এডিট করতে পারবে।
+  function assignTechnicianOwner(o) {
+    var email = prompt('এই এন্ট্রিের মালিকের ইমেইল লিখুন (সাইটে যে ইমেইলে অ্যাকাউন্ট আছে):');
+    if (email === null) return;
+    email = email.trim().toLowerCase();
+    if (!email) return;
+    client.from('profiles').select('id, email, full_name').ilike('email', email).limit(2).then(function (r) {
+      if (r.error) { alert('খুঁজতে ব্যর্থ: ' + r.error.message); return; }
+      var rows = r.data || [];
+      if (rows.length !== 1) { alert(rows.length ? 'একাধিক অ্যাকাউন্ট মিলেছে — ইমেইল সঠিকভাবে লিখুন।' : 'এই ইমেইলে কোনো অ্যাকাউন্ট পাওয়া যায়নি। ইউজারকে আগে সাইটে রেজিস্টার করতে বলুন।'); return; }
+      var u = rows[0];
+      if (!confirm('"' + (o.name || '') + '" এন্ট্রিের মালিক করা হবে: ' + (u.full_name || '') + ' (' + u.email + ')। নিশ্চিত?')) return;
+      technicianUpdate(o.id, { user_id: u.id });
+    });
+  }
+
+  function technicianUpdate(id, patch) {
+    client.from('technician_entries').update(patch).eq('id', id).then(function (res) {
+      if (res.error) { alert('ব্যর্থ: ' + res.error.message); return; }
+      loadAdminTechnician();
+    });
+  }
+
+  function renderAdminTechnician() {
+    var filter = tcFilterSelect ? tcFilterSelect.value : 'pending';
+    var filtered = filter === 'all' ? adminTechnician
+      : (filter === 'demo' ? adminTechnician.filter(function (o) { return o.is_demo; })
+        : adminTechnician.filter(function (o) { return o.status === filter; }));
+
+    tcCountEl.textContent = bnNum2(filtered.length) + 'জন';
+
+    if (filtered.length === 0) {
+      tcListEl.innerHTML = '<p class="admin-empty">' + (filter === 'pending' ? 'কোনো পেন্ডিং আবেদন নেই।' : 'এখনো কোনো টেকনিশিয়ান নেই।') + '</p>';
+      return;
+    }
+
+    tcListEl.innerHTML = '';
+    filtered.forEach(function (o) {
+      var isPending = o.status === 'pending';
+      var isRejected = o.status === 'rejected';
+      var isApproved = o.status === 'approved';
+      var t = tcAdminType(o.type);
+      var card = document.createElement('div');
+      card.className = 'banner-card' + (isRejected ? ' disabled' : '') + (isPending ? ' pending' : '');
+      var statusNote = isPending
+        ? ' · <strong style="color:#b26a00;">পেন্ডিং</strong>'
+        : (isApproved ? ' · <strong style="color:#1a7f37;">অনুমোদিত (পেজে প্রকাশিত)</strong>' : ' · <strong style="color:#b42318;">বাতিল</strong>');
+      if (o.is_demo) statusNote += ' · <strong style="color:#6d5fd6;">ডেমো</strong>';
+      var isVerified = o.is_verified === true;
+      if (isVerified) statusNote += ' · <strong style="color:#a06f00;"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> ভেরিফাইড</strong>';
+
+      var shortLine = TC_ADMIN_SHORT.filter(function (f) { return tcAdminHas(o[f[0]]); })
+        .map(function (f) { return f[1] + ': <strong>' + tcAdminEsc(o[f[0]]) + '</strong>'; }).join(' &nbsp;·&nbsp; ');
+      var longLines = TC_ADMIN_LONG.filter(function (f) { return tcAdminHas(o[f[0]]); })
+        .map(function (f) { return '<p style="font-size:0.85rem;color:var(--ink-soft);margin:4px 0;">' + f[1] + ': ' + tcAdminEsc(o[f[0]]) + '</p>'; }).join('');
+      var photoOk = /^https?:\/\//i.test(o.photo_url || '');
+      var phoneNote = o.phone_public
+        ? '<span style="color:#1a7f37;">নম্বর প্রকাশে সম্মত</span>'
+        : '<span style="color:#b42318;">নম্বর প্রকাশে সম্মত নয়</span>';
+
+      card.innerHTML =
+        '<div class="banner-card-head"><strong>' + tcAdminEsc(o.name) + '</strong> ' +
+          '<span style="display:inline-block;padding:1px 8px;border-radius:10px;font-size:0.78rem;font-weight:700;background:' + tcAdminEsc(t.color) + '1f;color:' + tcAdminEsc(t.color) + ';">' + tcAdminEsc(t.label) + '</span>' +
+          '<span style="font-size:0.8rem;color:var(--ink-soft);"> ' + postTimeStr(o.created_at) + statusNote + '</span></div>' +
+        '<p style="font-size:0.92rem;margin:6px 0;">' +
+          '<i class="fa-solid fa-phone" aria-hidden="true"></i> ' + tcAdminEsc(o.phone) + ' (' + phoneNote + ') &nbsp; ' +
+          '<i class="fa-solid fa-location-dot" aria-hidden="true"></i> ' + tcAdminEsc(tcAdminUpazila(o.upazila)) +
+        '</p>' +
+        (shortLine ? '<p style="font-size:0.88rem;margin:4px 0;">' + shortLine + '</p>' : '') +
+        longLines +
+        (photoOk ? '<div style="margin:6px 0;"><img class="banner-image-preview" src="' + tcAdminEsc(o.photo_url) + '" alt="" style="max-width:120px;max-height:150px;"></div>' : '') +
+        (tcAdminExtras(o).length ? '<div style="margin:6px 0;display:flex;flex-wrap:wrap;gap:6px;align-items:center;"><span style="font-size:0.8rem;color:var(--ink-soft);">আরও ছবি (' + tcAdminExtras(o).length + 'টি):</span>' +
+          tcAdminExtras(o).map(function (u) { return '<a href="' + tcAdminEsc(u) + '" target="_blank" rel="noopener"><img src="' + tcAdminEsc(u) + '" alt="" style="width:64px;height:64px;object-fit:cover;border-radius:8px;border:1px solid var(--line);"></a>'; }).join('') + '</div>' : '') +
+        (o.is_demo ? '' : '<p style="font-size:0.82rem;margin:6px 0;color:var(--ink-soft);"><i class="fa-solid fa-user-pen" aria-hidden="true"></i> মালিক (এডিটের অধিকার): ' +
+          (o.user_id
+            ? '<strong>' + tcAdminEsc((tcOwners[o.user_id] && (tcOwners[o.user_id].email || tcOwners[o.user_id].full_name)) || 'নির্ধারিত') + '</strong>'
+            : '<strong style="color:#b42318;">নেই</strong> (পুরনো এন্ট্রি — মালিক নির্ধারণ না করলে কেউ এডিট করতে পারবে না)') + '</p>') +
+        '<div class="banner-card-actions">' +
+          (o.is_demo ? '' : '<button type="button" class="ghost" data-act="owner"><i class="fa-solid fa-user-pen" aria-hidden="true"></i> ' + (o.user_id ? 'মালিক বদলান' : 'মালিক নির্ধারণ করুন') + '</button>') +
+          (isPending
+            ? '<button type="button" class="primary" data-act="approve"><i class="fa-solid fa-check" aria-hidden="true"></i> অনুমোদন করুন</button>' +
+              '<button type="button" class="ghost" data-act="reject">বাতিল করুন</button>'
+            : (isApproved
+                ? '<button type="button" class="ghost" data-act="reject">তালিকা থেকে সরান</button>'
+                : '<button type="button" class="primary" data-act="approve"><i class="fa-solid fa-check" aria-hidden="true"></i> অনুমোদন করুন</button>')) +
+          // ভেরিফাইড ব্যাজ: শুধু অনুমোদিত (পেজে প্রকাশিত) আসল এন্ট্রিে দেওয়া যায়
+          ((isApproved && !o.is_demo)
+            ? (isVerified
+                ? '<button type="button" class="ghost" data-act="unverify"><i class="fa-solid fa-circle-xmark" aria-hidden="true"></i> ভেরিফাইড বাতিল</button>'
+                : '<button type="button" class="primary" data-act="verify" style="background:#a06f00;"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> ভেরিফাইড করুন</button>')
+            : '') +
+          '<button type="button" class="danger" data-act="delete"><i class="fa-solid fa-trash" aria-hidden="true"></i> মুছুন</button>' +
+        '</div>';
+
+      var ownerBtn = card.querySelector('[data-act="owner"]');
+      if (ownerBtn) ownerBtn.addEventListener('click', function () { assignTechnicianOwner(o); });
+
+      var verifyBtn = card.querySelector('[data-act="verify"]');
+      if (verifyBtn) verifyBtn.addEventListener('click', function () {
+        if (!confirm('"' + (o.name || '') + '" এন্ট্রিকে ভেরিফাইড হিসেবে চিহ্নিত করবেন? পাবলিক পেজে "ভেরিফাইড" ব্যাজ দেখাবে।')) return;
+        technicianUpdate(o.id, { is_verified: true });
+      });
+      var unverifyBtn = card.querySelector('[data-act="unverify"]');
+      if (unverifyBtn) unverifyBtn.addEventListener('click', function () { technicianUpdate(o.id, { is_verified: false }); });
+
+      var approveBtn = card.querySelector('[data-act="approve"]');
+      if (approveBtn) approveBtn.addEventListener('click', function () { technicianUpdate(o.id, { status: 'approved' }); });
+      var rejectBtn = card.querySelector('[data-act="reject"]');
+      if (rejectBtn) rejectBtn.addEventListener('click', function () { technicianUpdate(o.id, { status: 'rejected', is_verified: false }); });
+
+      card.querySelector('[data-act="delete"]').addEventListener('click', function () {
+        if (!confirm('এই এন্ট্রিের তথ্য স্থায়ীভাবে মুছে ফেলতে চান?')) return;
+        client.from('technician_entries').delete().eq('id', o.id).then(function (res) {
+          if (res.error) { alert('মুছতে ব্যর্থ: ' + res.error.message); return; }
+          if (o.photo_url) deleteStorageFileByUrl('market-media', o.photo_url);
+          tcAdminExtras(o).forEach(function (u) { deleteStorageFileByUrl('market-media', u); });
+          loadAdminTechnician();
+        });
+      });
+
+      tcListEl.appendChild(card);
+    });
+  }
+
+  if (tcPurgeDemoBtn) tcPurgeDemoBtn.addEventListener('click', function () {
+    var n = adminTechnician.filter(function (o) { return o.is_demo; }).length;
+    if (!n) { alert('কোনো ডেমো এন্ট্রি নেই।'); return; }
+    if (!confirm('সব ' + bnNum2(n) + 'টি ডেমো এন্ট্রি স্থায়ীভাবে মুছে ফেলতে চান? আসল এন্ট্রি মুছবে না।')) return;
+    client.from('technician_entries').delete().eq('is_demo', true).then(function (res) {
+      if (res.error) { alert('মুছতে ব্যর্থ: ' + res.error.message); return; }
+      loadAdminTechnician();
+    });
+  });
+
+  tcRefreshBtn.addEventListener('click', loadAdminTechnician);
+  if (tcFilterSelect) tcFilterSelect.addEventListener('change', renderAdminTechnician);
+
+
+  // ---------- ভাইরাল প্লেস অনুমোদন — viral_entries টেবিল (viral.html "+" ফর্ম থেকে জমা) ----------
+  var vrListEl = document.getElementById('vrAdminList');
+  var vrCountEl = document.getElementById('vrAdminCount');
+  var vrRefreshBtn = document.getElementById('vrAdminRefreshBtn');
+  var vrFilterSelect = document.getElementById('vrAdminFilterSelect');
+  var vrPurgeDemoBtn = document.getElementById('vrAdminPurgeDemoBtn');
+  var adminViral = [];
+
+  // পূর্ণ escape (& < > " ') — এবং ০ সংখ্যাও ঠিকভাবে দেখায় (সাধারণ esc() ০-কে খালি করে দেয়)
+  function vrAdminEsc(s) {
+    return (s === null || s === undefined ? '' : String(s)).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  // কার্ডে যে ফিল্ডগুলো এই ক্রমে দেখায় (ছোটগুলো এক লাইনে, লম্বাগুলো আলাদা লাইনে)
+  var VR_ADMIN_SHORT = [['speciality', 'বিখ্যাত আইটেম'], ['price', 'আনুমানিক দাম'], ['hours', 'খোলার সময়'], ['best_time', 'ঘোরার সেরা সময়'], ['entry_fee', 'প্রবেশ ফি'], ['facilities', 'সুবিধা'], ['address', 'ঠিকানা']];
+  var VR_ADMIN_LONG = [['about', 'বিবরণ']];
+
+  function vrAdminUpazila(key) {
+    var list = window.VR_UPAZILAS || [];
+    for (var i = 0; i < list.length; i++) { if (list[i][0] === key) return list[i][1]; }
+    return key;
+  }
+  function vrAdminType(key) {
+    var list = window.VR_TYPES || [];
+    for (var i = 0; i < list.length; i++) { if (list[i].key === key) return list[i]; }
+    return { key: key, label: key, color: '#555' };
+  }
+  // আরও ছবির লিংক (extra_photos কলাম না থাকলে খালি) — শুধু http(s)
+  function vrAdminExtras(o) {
+    return (Array.isArray(o && o.extra_photos) ? o.extra_photos : []).filter(function (u) { return /^https?:\/\//i.test(u); });
+  }
+  function vrAdminHas(v) { return v !== null && v !== undefined && v !== ''; }
+
+  var vrOwners = {};
+
+  function loadAdminViral() {
+    vrListEl.innerHTML = '<p class="admin-empty">লোড হচ্ছে…</p>';
+    client.from('viral_entries').select('*').order('created_at', { ascending: false })
+      .then(function (res) {
+        if (res.error) { vrListEl.innerHTML = '<p class="admin-empty">লোড করতে সমস্যা হয়েছে: ' + vrAdminEsc(res.error.message) + '</p>'; return; }
+        adminViral = res.data || [];
+        // মালিকের ইমেইল/নাম (profiles থেকে; অ্যাডমিন সব পড়তে পারে) — কার্ডে "মালিক" লাইনের জন্য
+        var ids = adminViral.map(function (o) { return o.user_id; }).filter(Boolean)
+          .filter(function (v, i, a) { return a.indexOf(v) === i; });
+        vrOwners = {};
+        if (!ids.length) { renderAdminViral(); return; }
+        client.from('profiles').select('id, email, full_name').in('id', ids).then(function (pr) {
+          (pr.data || []).forEach(function (u) { vrOwners[u.id] = u; });
+          renderAdminViral();
+        }, function () { renderAdminViral(); });
+      });
+  }
+
+  // মালিক নির্ধারণ/বদল: ইউজারের ইমেইল দিয়ে profiles থেকে খুঁজে viral_entries.user_id বসায়।
+  // পুরনো (লগইন-বাধ্যতামূলক হওয়ার আগে জমা দেওয়া) এন্ট্রিের মালিক নেই — এখান থেকে মালিক ঠিক করলে সেই ইউজারই
+  // viral.html-এর বিস্তারিত পেজ থেকে ছবিসহ এডিট করতে পারবে।
+  function assignViralOwner(o) {
+    var email = prompt('এই এন্ট্রিের মালিকের ইমেইল লিখুন (সাইটে যে ইমেইলে অ্যাকাউন্ট আছে):');
+    if (email === null) return;
+    email = email.trim().toLowerCase();
+    if (!email) return;
+    client.from('profiles').select('id, email, full_name').ilike('email', email).limit(2).then(function (r) {
+      if (r.error) { alert('খুঁজতে ব্যর্থ: ' + r.error.message); return; }
+      var rows = r.data || [];
+      if (rows.length !== 1) { alert(rows.length ? 'একাধিক অ্যাকাউন্ট মিলেছে — ইমেইল সঠিকভাবে লিখুন।' : 'এই ইমেইলে কোনো অ্যাকাউন্ট পাওয়া যায়নি। ইউজারকে আগে সাইটে রেজিস্টার করতে বলুন।'); return; }
+      var u = rows[0];
+      if (!confirm('"' + (o.name || '') + '" এন্ট্রিের মালিক করা হবে: ' + (u.full_name || '') + ' (' + u.email + ')। নিশ্চিত?')) return;
+      viralUpdate(o.id, { user_id: u.id });
+    });
+  }
+
+  function viralUpdate(id, patch) {
+    client.from('viral_entries').update(patch).eq('id', id).then(function (res) {
+      if (res.error) { alert('ব্যর্থ: ' + res.error.message); return; }
+      loadAdminViral();
+    });
+  }
+
+  function renderAdminViral() {
+    var filter = vrFilterSelect ? vrFilterSelect.value : 'pending';
+    var filtered = filter === 'all' ? adminViral
+      : (filter === 'demo' ? adminViral.filter(function (o) { return o.is_demo; })
+        : adminViral.filter(function (o) { return o.status === filter; }));
+
+    vrCountEl.textContent = bnNum2(filtered.length) + 'টি';
+
+    if (filtered.length === 0) {
+      vrListEl.innerHTML = '<p class="admin-empty">' + (filter === 'pending' ? 'কোনো পেন্ডিং আবেদন নেই।' : 'এখনো কোনো ভাইরাল প্লেস নেই।') + '</p>';
+      return;
+    }
+
+    vrListEl.innerHTML = '';
+    filtered.forEach(function (o) {
+      var isPending = o.status === 'pending';
+      var isRejected = o.status === 'rejected';
+      var isApproved = o.status === 'approved';
+      var t = vrAdminType(o.type);
+      var card = document.createElement('div');
+      card.className = 'banner-card' + (isRejected ? ' disabled' : '') + (isPending ? ' pending' : '');
+      var statusNote = isPending
+        ? ' · <strong style="color:#b26a00;">পেন্ডিং</strong>'
+        : (isApproved ? ' · <strong style="color:#1a7f37;">অনুমোদিত (পেজে প্রকাশিত)</strong>' : ' · <strong style="color:#b42318;">বাতিল</strong>');
+      if (o.is_demo) statusNote += ' · <strong style="color:#6d5fd6;">ডেমো</strong>';
+      var isVerified = o.is_verified === true;
+      if (isVerified) statusNote += ' · <strong style="color:#a06f00;"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> ভেরিফাইড</strong>';
+
+      var shortLine = VR_ADMIN_SHORT.filter(function (f) { return vrAdminHas(o[f[0]]); })
+        .map(function (f) { return f[1] + ': <strong>' + vrAdminEsc(o[f[0]]) + '</strong>'; }).join(' &nbsp;·&nbsp; ');
+      var longLines = VR_ADMIN_LONG.filter(function (f) { return vrAdminHas(o[f[0]]); })
+        .map(function (f) { return '<p style="font-size:0.85rem;color:var(--ink-soft);margin:4px 0;">' + f[1] + ': ' + vrAdminEsc(o[f[0]]) + '</p>'; }).join('');
+      var photoOk = /^https?:\/\//i.test(o.photo_url || '');
+      var phoneNote = o.phone_public
+        ? '<span style="color:#1a7f37;">নম্বর প্রকাশে সম্মত</span>'
+        : '<span style="color:#b42318;">নম্বর প্রকাশে সম্মত নয়</span>';
+
+      card.innerHTML =
+        '<div class="banner-card-head"><strong>' + vrAdminEsc(o.name) + '</strong> ' +
+          '<span style="display:inline-block;padding:1px 8px;border-radius:10px;font-size:0.78rem;font-weight:700;background:' + vrAdminEsc(t.color) + '1f;color:' + vrAdminEsc(t.color) + ';">' + vrAdminEsc(t.label) + '</span>' +
+          '<span style="font-size:0.8rem;color:var(--ink-soft);"> ' + postTimeStr(o.created_at) + statusNote + '</span></div>' +
+        '<p style="font-size:0.92rem;margin:6px 0;">' +
+          '<i class="fa-solid fa-phone" aria-hidden="true"></i> ' + vrAdminEsc(o.phone) + ' (' + phoneNote + ') &nbsp; ' +
+          '<i class="fa-solid fa-location-dot" aria-hidden="true"></i> ' + vrAdminEsc(vrAdminUpazila(o.upazila)) +
+        '</p>' +
+        (shortLine ? '<p style="font-size:0.88rem;margin:4px 0;">' + shortLine + '</p>' : '') +
+        longLines +
+        (photoOk ? '<div style="margin:6px 0;"><img class="banner-image-preview" src="' + vrAdminEsc(o.photo_url) + '" alt="" style="max-width:120px;max-height:150px;"></div>' : '') +
+        (vrAdminExtras(o).length ? '<div style="margin:6px 0;display:flex;flex-wrap:wrap;gap:6px;align-items:center;"><span style="font-size:0.8rem;color:var(--ink-soft);">আরও ছবি (' + vrAdminExtras(o).length + 'টি):</span>' +
+          vrAdminExtras(o).map(function (u) { return '<a href="' + vrAdminEsc(u) + '" target="_blank" rel="noopener"><img src="' + vrAdminEsc(u) + '" alt="" style="width:64px;height:64px;object-fit:cover;border-radius:8px;border:1px solid var(--line);"></a>'; }).join('') + '</div>' : '') +
+        (o.is_demo ? '' : '<p style="font-size:0.82rem;margin:6px 0;color:var(--ink-soft);"><i class="fa-solid fa-user-pen" aria-hidden="true"></i> মালিক (এডিটের অধিকার): ' +
+          (o.user_id
+            ? '<strong>' + vrAdminEsc((vrOwners[o.user_id] && (vrOwners[o.user_id].email || vrOwners[o.user_id].full_name)) || 'নির্ধারিত') + '</strong>'
+            : '<strong style="color:#b42318;">নেই</strong> (পুরনো এন্ট্রি — মালিক নির্ধারণ না করলে কেউ এডিট করতে পারবে না)') + '</p>') +
+        '<div class="banner-card-actions">' +
+          (o.is_demo ? '' : '<button type="button" class="ghost" data-act="owner"><i class="fa-solid fa-user-pen" aria-hidden="true"></i> ' + (o.user_id ? 'মালিক বদলান' : 'মালিক নির্ধারণ করুন') + '</button>') +
+          (isPending
+            ? '<button type="button" class="primary" data-act="approve"><i class="fa-solid fa-check" aria-hidden="true"></i> অনুমোদন করুন</button>' +
+              '<button type="button" class="ghost" data-act="reject">বাতিল করুন</button>'
+            : (isApproved
+                ? '<button type="button" class="ghost" data-act="reject">তালিকা থেকে সরান</button>'
+                : '<button type="button" class="primary" data-act="approve"><i class="fa-solid fa-check" aria-hidden="true"></i> অনুমোদন করুন</button>')) +
+          // ভেরিফাইড ব্যাজ: শুধু অনুমোদিত (পেজে প্রকাশিত) আসল এন্ট্রিে দেওয়া যায়
+          ((isApproved && !o.is_demo)
+            ? (isVerified
+                ? '<button type="button" class="ghost" data-act="unverify"><i class="fa-solid fa-circle-xmark" aria-hidden="true"></i> ভেরিফাইড বাতিল</button>'
+                : '<button type="button" class="primary" data-act="verify" style="background:#a06f00;"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> ভেরিফাইড করুন</button>')
+            : '') +
+          '<button type="button" class="danger" data-act="delete"><i class="fa-solid fa-trash" aria-hidden="true"></i> মুছুন</button>' +
+        '</div>';
+
+      var ownerBtn = card.querySelector('[data-act="owner"]');
+      if (ownerBtn) ownerBtn.addEventListener('click', function () { assignViralOwner(o); });
+
+      var verifyBtn = card.querySelector('[data-act="verify"]');
+      if (verifyBtn) verifyBtn.addEventListener('click', function () {
+        if (!confirm('"' + (o.name || '') + '" এন্ট্রিকে ভেরিফাইড হিসেবে চিহ্নিত করবেন? পাবলিক পেজে "ভেরিফাইড" ব্যাজ দেখাবে।')) return;
+        viralUpdate(o.id, { is_verified: true });
+      });
+      var unverifyBtn = card.querySelector('[data-act="unverify"]');
+      if (unverifyBtn) unverifyBtn.addEventListener('click', function () { viralUpdate(o.id, { is_verified: false }); });
+
+      var approveBtn = card.querySelector('[data-act="approve"]');
+      if (approveBtn) approveBtn.addEventListener('click', function () { viralUpdate(o.id, { status: 'approved' }); });
+      var rejectBtn = card.querySelector('[data-act="reject"]');
+      if (rejectBtn) rejectBtn.addEventListener('click', function () { viralUpdate(o.id, { status: 'rejected', is_verified: false }); });
+
+      card.querySelector('[data-act="delete"]').addEventListener('click', function () {
+        if (!confirm('এই এন্ট্রিের তথ্য স্থায়ীভাবে মুছে ফেলতে চান?')) return;
+        client.from('viral_entries').delete().eq('id', o.id).then(function (res) {
+          if (res.error) { alert('মুছতে ব্যর্থ: ' + res.error.message); return; }
+          if (o.photo_url) deleteStorageFileByUrl('market-media', o.photo_url);
+          vrAdminExtras(o).forEach(function (u) { deleteStorageFileByUrl('market-media', u); });
+          loadAdminViral();
+        });
+      });
+
+      vrListEl.appendChild(card);
+    });
+  }
+
+  if (vrPurgeDemoBtn) vrPurgeDemoBtn.addEventListener('click', function () {
+    var n = adminViral.filter(function (o) { return o.is_demo; }).length;
+    if (!n) { alert('কোনো ডেমো এন্ট্রি নেই।'); return; }
+    if (!confirm('সব ' + bnNum2(n) + 'টি ডেমো এন্ট্রি স্থায়ীভাবে মুছে ফেলতে চান? আসল এন্ট্রি মুছবে না।')) return;
+    client.from('viral_entries').delete().eq('is_demo', true).then(function (res) {
+      if (res.error) { alert('মুছতে ব্যর্থ: ' + res.error.message); return; }
+      loadAdminViral();
+    });
+  });
+
+  vrRefreshBtn.addEventListener('click', loadAdminViral);
+  if (vrFilterSelect) vrFilterSelect.addEventListener('change', renderAdminViral);
+
+
+  // ---------- নার্সারি অনুমোদন — nursery_entries টেবিল (nursery.html "+" ফর্ম থেকে জমা) ----------
+  var nrListEl = document.getElementById('nrAdminList');
+  var nrCountEl = document.getElementById('nrAdminCount');
+  var nrRefreshBtn = document.getElementById('nrAdminRefreshBtn');
+  var nrFilterSelect = document.getElementById('nrAdminFilterSelect');
+  var nrPurgeDemoBtn = document.getElementById('nrAdminPurgeDemoBtn');
+  var adminNursery = [];
+
+  // পূর্ণ escape (& < > " ') — এবং ০ সংখ্যাও ঠিকভাবে দেখায় (সাধারণ esc() ০-কে খালি করে দেয়)
+  function nrAdminEsc(s) {
+    return (s === null || s === undefined ? '' : String(s)).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  // কার্ডে যে ফিল্ডগুলো এই ক্রমে দেখায় (ছোটগুলো এক লাইনে, লম্বাগুলো আলাদা লাইনে)
+  var NR_ADMIN_SHORT = [['plants', 'গাছ'], ['seedling_type', 'চারার ধরন'], ['size', 'আকার'], ['pot', 'টব'], ['light', 'আলো'], ['season', 'মৌসুম'], ['sale_type', 'বিক্রি'], ['uses', 'উপকারিতা'], ['age', 'বয়স'], ['price', 'দামের পরিসর'], ['delivery', 'হোম ডেলিভারি'], ['hours', 'খোলার সময়'], ['address', 'ঠিকানা']];
+  var NR_ADMIN_LONG = [['about', 'বিবরণ']];
+
+  function nrAdminUpazila(key) {
+    var list = window.NR_UPAZILAS || [];
+    for (var i = 0; i < list.length; i++) { if (list[i][0] === key) return list[i][1]; }
+    return key;
+  }
+  function nrAdminType(key) {
+    var list = window.NR_TYPES || [];
+    for (var i = 0; i < list.length; i++) { if (list[i].key === key) return list[i]; }
+    return { key: key, label: key, color: '#555' };
+  }
+  // আরও ছবির লিংক (extra_photos কলাম না থাকলে খালি) — শুধু http(s)
+  function nrAdminExtras(o) {
+    return (Array.isArray(o && o.extra_photos) ? o.extra_photos : []).filter(function (u) { return /^https?:\/\//i.test(u); });
+  }
+  function nrAdminHas(v) { return v !== null && v !== undefined && v !== ''; }
+
+  var nrOwners = {};
+
+  function loadAdminNursery() {
+    nrListEl.innerHTML = '<p class="admin-empty">লোড হচ্ছে…</p>';
+    client.from('nursery_entries').select('*').order('created_at', { ascending: false })
+      .then(function (res) {
+        if (res.error) { nrListEl.innerHTML = '<p class="admin-empty">লোড করতে সমস্যা হয়েছে: ' + nrAdminEsc(res.error.message) + '</p>'; return; }
+        adminNursery = res.data || [];
+        // মালিকের ইমেইল/নাম (profiles থেকে; অ্যাডমিন সব পড়তে পারে) — কার্ডে "মালিক" লাইনের জন্য
+        var ids = adminNursery.map(function (o) { return o.user_id; }).filter(Boolean)
+          .filter(function (v, i, a) { return a.indexOf(v) === i; });
+        nrOwners = {};
+        if (!ids.length) { renderAdminNursery(); return; }
+        client.from('profiles').select('id, email, full_name').in('id', ids).then(function (pr) {
+          (pr.data || []).forEach(function (u) { nrOwners[u.id] = u; });
+          renderAdminNursery();
+        }, function () { renderAdminNursery(); });
+      });
+  }
+
+  // মালিক নির্ধারণ/বদল: ইউজারের ইমেইল দিয়ে profiles থেকে খুঁজে nursery_entries.user_id বসায়।
+  // পুরনো (লগইন-বাধ্যতামূলক হওয়ার আগে জমা দেওয়া) এন্ট্রিের মালিক নেই — এখান থেকে মালিক ঠিক করলে সেই ইউজারই
+  // nursery.html-এর বিস্তারিত পেজ থেকে ছবিসহ এডিট করতে পারবে।
+  function assignNurseryOwner(o) {
+    var email = prompt('এই এন্ট্রিের মালিকের ইমেইল লিখুন (সাইটে যে ইমেইলে অ্যাকাউন্ট আছে):');
+    if (email === null) return;
+    email = email.trim().toLowerCase();
+    if (!email) return;
+    client.from('profiles').select('id, email, full_name').ilike('email', email).limit(2).then(function (r) {
+      if (r.error) { alert('খুঁজতে ব্যর্থ: ' + r.error.message); return; }
+      var rows = r.data || [];
+      if (rows.length !== 1) { alert(rows.length ? 'একাধিক অ্যাকাউন্ট মিলেছে — ইমেইল সঠিকভাবে লিখুন।' : 'এই ইমেইলে কোনো অ্যাকাউন্ট পাওয়া যায়নি। ইউজারকে আগে সাইটে রেজিস্টার করতে বলুন।'); return; }
+      var u = rows[0];
+      if (!confirm('"' + (o.name || '') + '" এন্ট্রিের মালিক করা হবে: ' + (u.full_name || '') + ' (' + u.email + ')। নিশ্চিত?')) return;
+      nurseryUpdate(o.id, { user_id: u.id });
+    });
+  }
+
+  function nurseryUpdate(id, patch) {
+    client.from('nursery_entries').update(patch).eq('id', id).then(function (res) {
+      if (res.error) { alert('ব্যর্থ: ' + res.error.message); return; }
+      loadAdminNursery();
+    });
+  }
+
+  function renderAdminNursery() {
+    var filter = nrFilterSelect ? nrFilterSelect.value : 'pending';
+    var filtered = filter === 'all' ? adminNursery
+      : (filter === 'demo' ? adminNursery.filter(function (o) { return o.is_demo; })
+        : adminNursery.filter(function (o) { return o.status === filter; }));
+
+    nrCountEl.textContent = bnNum2(filtered.length) + 'টি';
+
+    if (filtered.length === 0) {
+      nrListEl.innerHTML = '<p class="admin-empty">' + (filter === 'pending' ? 'কোনো পেন্ডিং আবেদন নেই।' : 'এখনো কোনো নার্সারি নেই।') + '</p>';
+      return;
+    }
+
+    nrListEl.innerHTML = '';
+    filtered.forEach(function (o) {
+      var isPending = o.status === 'pending';
+      var isRejected = o.status === 'rejected';
+      var isApproved = o.status === 'approved';
+      var t = nrAdminType(o.type);
+      var card = document.createElement('div');
+      card.className = 'banner-card' + (isRejected ? ' disabled' : '') + (isPending ? ' pending' : '');
+      var statusNote = isPending
+        ? ' · <strong style="color:#b26a00;">পেন্ডিং</strong>'
+        : (isApproved ? ' · <strong style="color:#1a7f37;">অনুমোদিত (পেজে প্রকাশিত)</strong>' : ' · <strong style="color:#b42318;">বাতিল</strong>');
+      if (o.is_demo) statusNote += ' · <strong style="color:#6d5fd6;">ডেমো</strong>';
+      var isVerified = o.is_verified === true;
+      if (isVerified) statusNote += ' · <strong style="color:#a06f00;"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> ভেরিফাইড</strong>';
+
+      var shortLine = NR_ADMIN_SHORT.filter(function (f) { return nrAdminHas(o[f[0]]); })
+        .map(function (f) { return f[1] + ': <strong>' + nrAdminEsc(o[f[0]]) + '</strong>'; }).join(' &nbsp;·&nbsp; ');
+      var longLines = NR_ADMIN_LONG.filter(function (f) { return nrAdminHas(o[f[0]]); })
+        .map(function (f) { return '<p style="font-size:0.85rem;color:var(--ink-soft);margin:4px 0;">' + f[1] + ': ' + nrAdminEsc(o[f[0]]) + '</p>'; }).join('');
+      var photoOk = /^https?:\/\//i.test(o.photo_url || '');
+      var phoneNote = o.phone_public
+        ? '<span style="color:#1a7f37;">নম্বর প্রকাশে সম্মত</span>'
+        : '<span style="color:#b42318;">নম্বর প্রকাশে সম্মত নয়</span>';
+
+      card.innerHTML =
+        '<div class="banner-card-head"><strong>' + nrAdminEsc(o.name) + '</strong> ' +
+          '<span style="display:inline-block;padding:1px 8px;border-radius:10px;font-size:0.78rem;font-weight:700;background:' + nrAdminEsc(t.color) + '1f;color:' + nrAdminEsc(t.color) + ';">' + nrAdminEsc(t.label) + '</span>' +
+          '<span style="font-size:0.8rem;color:var(--ink-soft);"> ' + postTimeStr(o.created_at) + statusNote + '</span></div>' +
+        '<p style="font-size:0.92rem;margin:6px 0;">' +
+          '<i class="fa-solid fa-phone" aria-hidden="true"></i> ' + nrAdminEsc(o.phone) + ' (' + phoneNote + ') &nbsp; ' +
+          '<i class="fa-solid fa-location-dot" aria-hidden="true"></i> ' + nrAdminEsc(nrAdminUpazila(o.upazila)) +
+        '</p>' +
+        (shortLine ? '<p style="font-size:0.88rem;margin:4px 0;">' + shortLine + '</p>' : '') +
+        longLines +
+        (photoOk ? '<div style="margin:6px 0;"><img class="banner-image-preview" src="' + nrAdminEsc(o.photo_url) + '" alt="" style="max-width:120px;max-height:150px;"></div>' : '') +
+        (nrAdminExtras(o).length ? '<div style="margin:6px 0;display:flex;flex-wrap:wrap;gap:6px;align-items:center;"><span style="font-size:0.8rem;color:var(--ink-soft);">আরও ছবি (' + nrAdminExtras(o).length + 'টি):</span>' +
+          nrAdminExtras(o).map(function (u) { return '<a href="' + nrAdminEsc(u) + '" target="_blank" rel="noopener"><img src="' + nrAdminEsc(u) + '" alt="" style="width:64px;height:64px;object-fit:cover;border-radius:8px;border:1px solid var(--line);"></a>'; }).join('') + '</div>' : '') +
+        (o.is_demo ? '' : '<p style="font-size:0.82rem;margin:6px 0;color:var(--ink-soft);"><i class="fa-solid fa-user-pen" aria-hidden="true"></i> মালিক (এডিটের অধিকার): ' +
+          (o.user_id
+            ? '<strong>' + nrAdminEsc((nrOwners[o.user_id] && (nrOwners[o.user_id].email || nrOwners[o.user_id].full_name)) || 'নির্ধারিত') + '</strong>'
+            : '<strong style="color:#b42318;">নেই</strong> (পুরনো এন্ট্রি — মালিক নির্ধারণ না করলে কেউ এডিট করতে পারবে না)') + '</p>') +
+        '<div class="banner-card-actions">' +
+          (o.is_demo ? '' : '<button type="button" class="ghost" data-act="owner"><i class="fa-solid fa-user-pen" aria-hidden="true"></i> ' + (o.user_id ? 'মালিক বদলান' : 'মালিক নির্ধারণ করুন') + '</button>') +
+          (isPending
+            ? '<button type="button" class="primary" data-act="approve"><i class="fa-solid fa-check" aria-hidden="true"></i> অনুমোদন করুন</button>' +
+              '<button type="button" class="ghost" data-act="reject">বাতিল করুন</button>'
+            : (isApproved
+                ? '<button type="button" class="ghost" data-act="reject">তালিকা থেকে সরান</button>'
+                : '<button type="button" class="primary" data-act="approve"><i class="fa-solid fa-check" aria-hidden="true"></i> অনুমোদন করুন</button>')) +
+          // ভেরিফাইড ব্যাজ: শুধু অনুমোদিত (পেজে প্রকাশিত) আসল এন্ট্রিে দেওয়া যায়
+          ((isApproved && !o.is_demo)
+            ? (isVerified
+                ? '<button type="button" class="ghost" data-act="unverify"><i class="fa-solid fa-circle-xmark" aria-hidden="true"></i> ভেরিফাইড বাতিল</button>'
+                : '<button type="button" class="primary" data-act="verify" style="background:#a06f00;"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> ভেরিফাইড করুন</button>')
+            : '') +
+          '<button type="button" class="danger" data-act="delete"><i class="fa-solid fa-trash" aria-hidden="true"></i> মুছুন</button>' +
+        '</div>';
+
+      var ownerBtn = card.querySelector('[data-act="owner"]');
+      if (ownerBtn) ownerBtn.addEventListener('click', function () { assignNurseryOwner(o); });
+
+      var verifyBtn = card.querySelector('[data-act="verify"]');
+      if (verifyBtn) verifyBtn.addEventListener('click', function () {
+        if (!confirm('"' + (o.name || '') + '" এন্ট্রিকে ভেরিফাইড হিসেবে চিহ্নিত করবেন? পাবলিক পেজে "ভেরিফাইড" ব্যাজ দেখাবে।')) return;
+        nurseryUpdate(o.id, { is_verified: true });
+      });
+      var unverifyBtn = card.querySelector('[data-act="unverify"]');
+      if (unverifyBtn) unverifyBtn.addEventListener('click', function () { nurseryUpdate(o.id, { is_verified: false }); });
+
+      var approveBtn = card.querySelector('[data-act="approve"]');
+      if (approveBtn) approveBtn.addEventListener('click', function () { nurseryUpdate(o.id, { status: 'approved' }); });
+      var rejectBtn = card.querySelector('[data-act="reject"]');
+      if (rejectBtn) rejectBtn.addEventListener('click', function () { nurseryUpdate(o.id, { status: 'rejected', is_verified: false }); });
+
+      card.querySelector('[data-act="delete"]').addEventListener('click', function () {
+        if (!confirm('এই এন্ট্রিের তথ্য স্থায়ীভাবে মুছে ফেলতে চান?')) return;
+        client.from('nursery_entries').delete().eq('id', o.id).then(function (res) {
+          if (res.error) { alert('মুছতে ব্যর্থ: ' + res.error.message); return; }
+          if (o.photo_url) deleteStorageFileByUrl('market-media', o.photo_url);
+          nrAdminExtras(o).forEach(function (u) { deleteStorageFileByUrl('market-media', u); });
+          loadAdminNursery();
+        });
+      });
+
+      nrListEl.appendChild(card);
+    });
+  }
+
+  if (nrPurgeDemoBtn) nrPurgeDemoBtn.addEventListener('click', function () {
+    var n = adminNursery.filter(function (o) { return o.is_demo; }).length;
+    if (!n) { alert('কোনো ডেমো এন্ট্রি নেই।'); return; }
+    if (!confirm('সব ' + bnNum2(n) + 'টি ডেমো এন্ট্রি স্থায়ীভাবে মুছে ফেলতে চান? আসল এন্ট্রি মুছবে না।')) return;
+    client.from('nursery_entries').delete().eq('is_demo', true).then(function (res) {
+      if (res.error) { alert('মুছতে ব্যর্থ: ' + res.error.message); return; }
+      loadAdminNursery();
+    });
+  });
+
+  nrRefreshBtn.addEventListener('click', loadAdminNursery);
+  if (nrFilterSelect) nrFilterSelect.addEventListener('change', renderAdminNursery);
+
+
+  // ---------- জনপ্রতিনিধি অনুমোদন — public_representatives টেবিল (public-representative.html "+" ফর্ম থেকে জমা) ----------
+  var prListEl = document.getElementById('prAdminList');
+  var prCountEl = document.getElementById('prAdminCount');
+  var prRefreshBtn = document.getElementById('prAdminRefreshBtn');
+  var prFilterSelect = document.getElementById('prAdminFilterSelect');
+  var prPurgeDemoBtn = document.getElementById('prAdminPurgeDemoBtn');
+  var adminPublicRep = [];
+
+  function prAdminEsc(s) {
+    return (s === null || s === undefined ? '' : String(s)).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function prAdminLookup(list, key) {
+    list = list || [];
+    for (var i = 0; i < list.length; i++) { if (list[i][0] === key) return list[i][1]; }
+    return key;
+  }
+  function prAdminType(key) {
+    var list = window.PR_TYPES || [];
+    for (var i = 0; i < list.length; i++) { if (list[i].key === key) return list[i]; }
+    return { key: key, label: key, emoji: '' };
+  }
+
+  function loadAdminPublicRep() {
+    prListEl.innerHTML = '<p class="admin-empty">লোড হচ্ছে…</p>';
+    client.from('public_representatives').select('*').order('created_at', { ascending: false })
+      .then(function (res) {
+        if (res.error) { prListEl.innerHTML = '<p class="admin-empty">লোড করতে সমস্যা হয়েছে: ' + prAdminEsc(res.error.message) + '</p>'; return; }
+        adminPublicRep = res.data || [];
+        renderAdminPublicRep();
+      });
+  }
+
+  function publicRepUpdate(id, patch) {
+    client.from('public_representatives').update(patch).eq('id', id).then(function (res) {
+      if (res.error) { alert('ব্যর্থ: ' + res.error.message); return; }
+      loadAdminPublicRep();
+    });
+  }
+
+  function renderAdminPublicRep() {
+    var filter = prFilterSelect ? prFilterSelect.value : 'pending';
+    var filtered = filter === 'all' ? adminPublicRep
+      : (filter === 'demo' ? adminPublicRep.filter(function (o) { return o.is_demo; })
+        : adminPublicRep.filter(function (o) { return o.status === filter; }));
+
+    prCountEl.textContent = bnNum2(filtered.length) + 'টি';
+
+    if (filtered.length === 0) {
+      prListEl.innerHTML = '<p class="admin-empty">' + (filter === 'pending' ? 'কোনো পেন্ডিং আবেদন নেই।' : 'এখনো কোনো জনপ্রতিনিধির তথ্য নেই।') + '</p>';
+      return;
+    }
+
+    prListEl.innerHTML = '';
+    filtered.forEach(function (o) {
+      var isPending = o.status === 'pending';
+      var isRejected = o.status === 'rejected';
+      var isApproved = o.status === 'approved';
+      var t = prAdminType(o.type);
+      var card = document.createElement('div');
+      card.className = 'banner-card' + (isRejected ? ' disabled' : '') + (isPending ? ' pending' : '');
+      var statusNote = isPending
+        ? ' · <strong style="color:#b26a00;">পেন্ডিং</strong>'
+        : (isApproved ? ' · <strong style="color:#1a7f37;">অনুমোদিত (পেজে প্রকাশিত)</strong>' : ' · <strong style="color:#b42318;">বাতিল</strong>');
+      if (o.is_demo) statusNote += ' · <strong style="color:#6d5fd6;">ডেমো</strong>';
+
+      var bits = [];
+      if (o.post) bits.push('পদবী: <strong>' + prAdminEsc(o.post) + '</strong>');
+      if (o.seat) bits.push('আসন: <strong>' + prAdminEsc(prAdminLookup(window.PR_SEATS, o.seat)) + '</strong>');
+      if (o.upazila) bits.push('উপজেলা/পৌরসভা: <strong>' + prAdminEsc(prAdminLookup(window.PR_UPAZILAS, o.upazila)) + '</strong>');
+      if (o.union_name) bits.push('ইউনিয়ন: <strong>' + prAdminEsc(o.union_name) + '</strong>');
+      if (o.ward) bits.push('ওয়ার্ড: <strong>' + prAdminEsc(o.ward) + '</strong>');
+      if (o.ward_group) bits.push('ওয়ার্ড: <strong>' + prAdminEsc(prAdminLookup(window.PR_WARD_GROUPS, o.ward_group)) + '</strong>');
+      if (o.party) bits.push('দল: <strong>' + prAdminEsc(o.party) + '</strong>');
+      var photoOk = /^https?:\/\//i.test(o.photo_url || '');
+      var mapOk = /^https?:\/\//i.test(o.maps_url || '');
+
+      card.innerHTML =
+        '<div class="banner-card-head"><strong>' + prAdminEsc(o.name) + '</strong> ' +
+          '<span style="display:inline-block;padding:1px 8px;border-radius:10px;font-size:0.78rem;font-weight:700;background:#0F6B3D1f;color:#0F6B3D;">' + prAdminEsc(t.emoji + ' ' + t.label) + '</span>' +
+          '<span style="font-size:0.8rem;color:var(--ink-soft);"> ' + postTimeStr(o.created_at) + statusNote + '</span></div>' +
+        '<p style="font-size:0.92rem;margin:6px 0;">' +
+          '<i class="fa-solid fa-phone" aria-hidden="true"></i> ' + prAdminEsc(o.phone) +
+          (mapOk ? ' &nbsp; <a href="' + prAdminEsc(o.maps_url) + '" target="_blank" rel="noopener"><i class="fa-solid fa-map-location-dot" aria-hidden="true"></i> ম্যাপ লিংক</a>' : '') +
+        '</p>' +
+        (bits.length ? '<p style="font-size:0.88rem;margin:4px 0;">' + bits.join(' &nbsp;·&nbsp; ') + '</p>' : '') +
+        (o.address ? '<p style="font-size:0.85rem;color:var(--ink-soft);margin:4px 0;">ঠিকানা: ' + prAdminEsc(o.address) + '</p>' : '') +
+        (photoOk ? '<div style="margin:6px 0;"><img class="banner-image-preview" src="' + prAdminEsc(o.photo_url) + '" alt="" style="max-width:120px;max-height:150px;"></div>' : '') +
+        '<div class="banner-card-actions">' +
+          (isPending
+            ? '<button type="button" class="primary" data-act="approve"><i class="fa-solid fa-check" aria-hidden="true"></i> অনুমোদন করুন</button>' +
+              '<button type="button" class="ghost" data-act="reject">বাতিল করুন</button>'
+            : (isApproved
+                ? '<button type="button" class="ghost" data-act="reject">তালিকা থেকে সরান</button>'
+                : '<button type="button" class="primary" data-act="approve"><i class="fa-solid fa-check" aria-hidden="true"></i> অনুমোদন করুন</button>')) +
+          '<button type="button" class="danger" data-act="delete"><i class="fa-solid fa-trash" aria-hidden="true"></i> মুছুন</button>' +
+        '</div>';
+
+      var approveBtn = card.querySelector('[data-act="approve"]');
+      if (approveBtn) approveBtn.addEventListener('click', function () { publicRepUpdate(o.id, { status: 'approved' }); });
+      var rejectBtn = card.querySelector('[data-act="reject"]');
+      if (rejectBtn) rejectBtn.addEventListener('click', function () { publicRepUpdate(o.id, { status: 'rejected' }); });
+
+      card.querySelector('[data-act="delete"]').addEventListener('click', function () {
+        if (!confirm('এই জনপ্রতিনিধির তথ্য স্থায়ীভাবে মুছে ফেলতে চান?')) return;
+        client.from('public_representatives').delete().eq('id', o.id).then(function (res) {
+          if (res.error) { alert('মুছতে ব্যর্থ: ' + res.error.message); return; }
+          if (o.photo_url) deleteStorageFileByUrl('market-media', o.photo_url);
+          loadAdminPublicRep();
+        });
+      });
+
+      prListEl.appendChild(card);
+    });
+  }
+
+  if (prPurgeDemoBtn) prPurgeDemoBtn.addEventListener('click', function () {
+    var n = adminPublicRep.filter(function (o) { return o.is_demo; }).length;
+    if (!n) { alert('কোনো ডেমো এন্ট্রি নেই।'); return; }
+    if (!confirm('সব ' + bnNum2(n) + 'টি ডেমো এন্ট্রি স্থায়ীভাবে মুছে ফেলতে চান? আসল এন্ট্রি মুছবে না।')) return;
+    client.from('public_representatives').delete().eq('is_demo', true).then(function (res) {
+      if (res.error) { alert('মুছতে ব্যর্থ: ' + res.error.message); return; }
+      loadAdminPublicRep();
+    });
+  });
+
+  prRefreshBtn.addEventListener('click', loadAdminPublicRep);
+  if (prFilterSelect) prFilterSelect.addEventListener('change', renderAdminPublicRep);
+
 
   // ---------- আইনজীবী অনুমোদন — lawyer_entries টেবিল (lawyer.html "+" ফর্ম থেকে জমা) ----------
   var lwListEl = document.getElementById('lwAdminList');
@@ -4309,7 +5343,7 @@
   });
 })();
 </script>
-<script src="js/auto-update.js?v=20260924073609"></script>
-<script src="js/floating-buttons.js?v=20260924073609"></script>
+<script src="js/auto-update.js?v=20260930045009"></script>
+<script src="js/floating-buttons.js?v=20260930045009"></script>
 </body>
 </html>

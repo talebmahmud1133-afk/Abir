@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>রক্তের দরকার — টাঙ্গাইল জেলা</title>
+<meta name="description" content="থানা ও রক্তের গ্রুপ অনুযায়ী রক্তের দরকারের তালিকা দেখুন, অথবা নিজের রোগীর জন্য রক্তের দরকার জানান।">
+<meta property="og:title" content="রক্তের দরকার — টাঙ্গাইল জেলা">
+<meta property="og:description" content="থানা ও রক্তের গ্রুপ অনুযায়ী রক্তের দরকারের তালিকা।">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0E6B3A">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="css/style.css?v=20260930045009">
+<link rel="stylesheet" href="css/blood.css?v=20260930045009">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body class="bd-page" data-bd-mode="request">
+
+<main>
+  <div class="post-detail-topbar list-back-topbar">
+    <button type="button" class="post-detail-back" onclick="if(window.history.length>1){history.back();}else{window.location.href='index.html';}" aria-label="পেছনে যান"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i></button>
+    <span>রক্তের দরকার</span>
+  </div>
+
+  <div class="wrap bd-wrap">
+    <!-- অপশন: রক্তদাতা / রক্তের দরকার (আলাদা পেজ) -->
+    <nav class="bd-tabs" aria-label="রক্তদাতা ও রক্তের দরকার">
+      <a href="blood-donors.html" class="bd-tab">রক্তদাতা</a>
+      <a href="blood-requests.html" class="bd-tab is-active" aria-current="page">রক্তের দরকার</a>
+    </nav>
+
+    <!-- থানা ড্রপডাউন (জেলার ১২ থানা) -->
+    <section class="bd-filter">
+      <label class="bd-filter-label" for="bdThana">থানা নির্বাচন করুন</label>
+      <div class="bd-select-wrap">
+        <i class="fa-solid fa-location-dot bd-pin" aria-hidden="true"></i>
+        <select id="bdThana"></select>
+        <i class="fa-solid fa-chevron-down bd-caret" aria-hidden="true"></i>
+      </div>
+    </section>
+
+    <!-- ব্লাড গ্রুপ চিপ (বামে-ডানে স্ক্রল) -->
+    <nav class="bd-chips" aria-label="রক্তের গ্রুপ">
+      <div class="bd-chips-scroll" id="bdChips" role="group"></div>
+    </nav>
+
+    <!-- রক্তদাতার কার্ড -->
+    <section class="donor-list" id="bdList" aria-live="polite"></section>
+  </div>
+</main>
+
+<!-- ফ্লোটিং + -->
+<button type="button" class="bd-fab" id="bdFab" aria-haspopup="dialog" aria-label="রক্তের দরকার জানান"><i class="fa-solid fa-plus" aria-hidden="true"></i></button>
+
+<!-- থানা ও ব্লাড গ্রুপ ভিত্তিক ফর্ম -->
+<div class="modal-overlay" id="bdModal">
+  <div class="modal-box icon-modal-box" role="dialog" aria-modal="true" aria-labelledby="bdFormTitle">
+    <h2 id="bdFormTitle">রক্তের দরকার</h2>
+    <form class="contact-form icon-form" id="bdForm" novalidate>
+      <div class="icon-field icon-field-select">
+        <i class="fa-solid fa-building-shield field-icon" aria-hidden="true"></i>
+        <label for="bdfThana" class="sr-only">থানা</label>
+        <select id="bdfThana"></select>
+      </div>
+      <div class="icon-field icon-field-select">
+        <i class="fa-solid fa-droplet field-icon" aria-hidden="true"></i>
+        <label for="bdfGroup" class="sr-only">রক্তের গ্রুপ</label>
+        <select id="bdfGroup"></select>
+      </div>
+
+      <div id="bdReqFields">
+        <div class="icon-field">
+          <i class="fa-solid fa-user field-icon" aria-hidden="true"></i>
+          <label for="bdrPatient" class="sr-only">রোগীর নাম</label>
+          <input type="text" id="bdrPatient" maxlength="80" autocomplete="off" placeholder="রোগীর পূর্ণ নাম">
+        </div>
+        <div class="icon-field">
+          <i class="fa-solid fa-briefcase-medical field-icon" aria-hidden="true"></i>
+          <label for="bdrBags" class="sr-only">কত ব্যাগ প্রয়োজন</label>
+          <input type="number" id="bdrBags" min="1" step="1" placeholder="কত ব্যাগ প্রয়োজন">
+        </div>
+        <div class="icon-field icon-field-select">
+          <i class="fa-solid fa-triangle-exclamation field-icon" aria-hidden="true"></i>
+          <label for="bdrUrgency" class="sr-only">জরুরি মাত্রা</label>
+          <select id="bdrUrgency">
+            <option value="urgent">জরুরি (আজ/এখনই দরকার)</option>
+            <option value="normal">সাধারণ (কয়েকদিনের মধ্যে)</option>
+          </select>
+        </div>
+        <div class="icon-field">
+          <i class="fa-solid fa-hospital field-icon" aria-hidden="true"></i>
+          <label for="bdrHospital" class="sr-only">হাসপাতাল / স্থান</label>
+          <input type="text" id="bdrHospital" maxlength="200" autocomplete="off" placeholder="হাসপাতাল / স্থান">
+        </div>
+        <div class="icon-field">
+          <i class="fa-solid fa-mobile-screen field-icon" aria-hidden="true"></i>
+          <label for="bdrPhone" class="sr-only">যোগাযোগের মোবাইল নাম্বার</label>
+          <input type="tel" id="bdrPhone" inputmode="numeric" maxlength="14" autocomplete="off" placeholder="যোগাযোগের মোবাইল নাম্বার (01XXXXXXXXX)">
+        </div>
+        <div class="icon-field">
+          <i class="fa-solid fa-file-lines field-icon" aria-hidden="true"></i>
+          <label for="bdrNotes" class="sr-only">মন্তব্য</label>
+          <input type="text" id="bdrNotes" maxlength="200" autocomplete="off" placeholder="মন্তব্য লিখুন (ঐচ্ছিক)">
+        </div>
+      </div>
+
+      <div class="bd-hp" aria-hidden="true"><input type="text" id="bdHp" tabindex="-1" autocomplete="off"></div>
+      <p class="auth-msg" id="bdFormMsg"></p>
+      <div class="modal-actions">
+        <button type="button" class="modal-cancel" id="bdCancel">বাতিল করুন</button>
+        <button type="submit" class="modal-submit" id="bdSubmit">সাবমিট করুন</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="js/supabase-config.js?v=20260930045009"></script>
+<script src="js/blood.js?v=20260930045009"></script>
+<script src="js/auto-update.js?v=20260930045009"></script>
+<script src="js/floating-buttons.js?v=20260930045009"></script>
+</body>
+</html>

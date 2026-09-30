@@ -116,6 +116,7 @@
     var bioEl = $('ppBio');
     bioEl.textContent = p.bio || '';
     bioEl.hidden = !p.bio;
+    if (p.bio && window.tzBioClamp) window.tzBioClamp(bioEl, p.bio);
 
     var addrEl = $('ppAddress');
     addrEl.lastElementChild.textContent = p.address_summary || '';

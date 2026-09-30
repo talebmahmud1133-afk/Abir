@@ -3,262 +3,116 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>রক্তদাতা — বিভাগ — টাঙ্গাইল জেলা</title>
-<meta name="description" content="জরুরি প্রয়োজনে নিকটস্থ রক্তদাতার সাথে দ্রুত যোগাযোগের তালিকা।">
+<title>রক্তদাতা — টাঙ্গাইল জেলা</title>
+<meta name="description" content="জরুরি প্রয়োজনে থানা ও রক্তের গ্রুপ অনুযায়ী নিকটস্থ রক্তদাতার সাথে দ্রুত যোগাযোগ করুন।">
 <meta property="og:title" content="রক্তদাতা — টাঙ্গাইল জেলা">
-<meta property="og:description" content="জরুরি প্রয়োজনে নিকটস্থ রক্তদাতার সাথে দ্রুত যোগাযোগের তালিকা।">
+<meta property="og:description" content="জরুরি প্রয়োজনে থানা ও রক্তের গ্রুপ অনুযায়ী নিকটস্থ রক্তদাতার তালিকা।">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#0E6B3A">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
 <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
 <link rel="manifest" href="manifest.json">
-<link rel="stylesheet" href="css/style.css?v=20260924073609">
+<link rel="stylesheet" href="css/style.css?v=20260930045009">
+<link rel="stylesheet" href="css/blood.css?v=20260930045009">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
-<body data-banner-category="blood-donors">
+<body class="bd-page" data-bd-mode="donor">
 
-<header class="site-header app-header">
-  <div class="header-inner">
-    <button class="menu-toggle icon-btn" id="menuToggle" data-i18n-aria="menu.open" aria-label="মেনু খুলুন"><i class="fa-solid fa-bars" aria-hidden="true"></i></button>
-    <div class="brand-block">
-      <a href="index.html" class="brand app-brand">টাঙ্গাইল <span class="brand-accent">জেলা</span></a>
-    </div>
-    <div class="header-actions">
-      <a href="notifications.html" class="icon-btn" data-i18n-aria="menu.notifications" aria-label="বিজ্ঞপ্তি"><i class="fa-solid fa-bell" aria-hidden="true"></i></a>
-      <div class="more-menu-wrap">
-        <button type="button" class="icon-btn" id="moreMenuToggle" data-i18n-aria="menu.more" aria-label="আরও"><i class="fa-solid fa-ellipsis-vertical" aria-hidden="true"></i></button>
-        <div class="more-menu" id="moreMenu">
-          <div class="more-menu-section-title" data-i18n="menu.language">ভাষা</div>
-          <div class="lang-switcher">
-            <button type="button" class="lang-option" data-lang-choice="bn">বাংলা</button>
-            <button type="button" class="lang-option" data-lang-choice="en">English</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <nav class="main-nav" id="mainNav">
-      <a href="index.html" data-i18n="nav.home">হোম</a>
-      <a href="about.html" data-i18n="nav.about">পরিচিতি</a>
-      <a href="faq.html" data-i18n="nav.faq">সাধারণ প্রশ্ন</a>
-      <a href="contact.html" data-i18n="nav.contact">যোগাযোগ</a>
-    </nav>
-  </div>
-</header>
 <main>
-  <div class="wrap">
-    <div class="sticky-top-stack">
-    <div class="post-detail-topbar list-back-topbar">
-      <button type="button" class="post-detail-back" onclick="if(window.history.length>1){history.back();}else{window.location.href='index.html';}" aria-label="পেছনে যান"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i></button>
-      <span>রক্তদাতা</span>
-    </div>
-    <div class="notice-bar app-notice">
-      <span class="notice-tag">তথ্য</span>
-      <span class="notice-text">রক্তের গ্রুপ বেছে নিয়ে ডোনারদের তালিকা দেখুন</span>
-    </div>
-    </div>
+  <div class="post-detail-topbar list-back-topbar">
+    <button type="button" class="post-detail-back" onclick="if(window.history.length>1){history.back();}else{window.location.href='index.html';}" aria-label="পেছনে যান"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i></button>
+    <span>রক্তদাতা</span>
+  </div>
 
-    <div class="donor-all-link-wrap">
-      <a href="blood-donor-list.html" class="donor-all-link"><i class="fa-solid fa-users" aria-hidden="true"></i> সব রক্তদাতা দেখুন</a>
-    </div>
-    <div class="donor-all-link-wrap">
-      <a href="blood-bank-list.html" class="donor-all-link"><i class="fa-solid fa-hospital" aria-hidden="true"></i> ব্লাড ব্যাংক দেখুন</a>
-    </div>
-    <div class="req-cta-wrap">
-      <button type="button" class="req-cta-btn" id="openReqFormBtn"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> রক্তের প্রয়োজন? রিকোয়েস্ট করুন</button>
-    </div>
+  <div class="wrap bd-wrap">
+    <!-- অপশন: রক্তদাতা / রক্তের দরকার (আলাদা পেজ) -->
+    <nav class="bd-tabs" aria-label="রক্তদাতা ও রক্তের দরকার">
+      <a href="blood-donors.html" class="bd-tab is-active" aria-current="page">রক্তদাতা</a>
+      <a href="blood-requests.html" class="bd-tab">রক্তের দরকার</a>
+    </nav>
 
-    <section class="req-list-section" id="openRequestsSection">
-      <div class="home-posts-head">
-        <h2><i class="fa-solid fa-droplet" aria-hidden="true"></i> চলমান রক্তের রিকোয়েস্ট</h2>
-      </div>
-      <div class="donor-list" id="openRequestsList">
-        <p class="donor-empty">লোড হচ্ছে…</p>
+    <!-- থানা ড্রপডাউন (জেলার ১২ থানা) -->
+    <section class="bd-filter">
+      <label class="bd-filter-label" for="bdThana">থানা নির্বাচন করুন</label>
+      <div class="bd-select-wrap">
+        <i class="fa-solid fa-location-dot bd-pin" aria-hidden="true"></i>
+        <select id="bdThana"></select>
+        <i class="fa-solid fa-chevron-down bd-caret" aria-hidden="true"></i>
       </div>
     </section>
 
-    <div class="banner-slider-wrap" id="catBannerWrap" style="display:none">
-      <section class="banner-slider" id="catBannerSlider" aria-label="বিভাগ ব্যানার">
-        <div class="banner-track" id="catBannerTrack"></div>
-      </section>
-      <div class="banner-dots" id="catBannerDots"></div>
-    </div>
+    <!-- ব্লাড গ্রুপ চিপ (বামে-ডানে স্ক্রল) -->
+    <nav class="bd-chips" aria-label="রক্তের গ্রুপ">
+      <div class="bd-chips-scroll" id="bdChips" role="group"></div>
+    </nav>
 
-    <section class="cat-grid">
-      <a class="cat-card cat-blood" href="blood-donor-list.html?group=A%2B&name=A%2B%20%28%E0%A6%8F%20%E0%A6%AA%E0%A6%9C%E0%A6%BF%E0%A6%9F%E0%A6%BF%E0%A6%AD%29">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🩸</span></div>
-        <h3>A+</h3>
-      </a>
-      <a class="cat-card cat-blood" href="blood-donor-list.html?group=A-&name=A-%20%28%E0%A6%8F%20%E0%A6%A8%E0%A7%87%E0%A6%97%E0%A7%87%E0%A6%9F%E0%A6%BF%E0%A6%AD%29">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🩸</span></div>
-        <h3>A-</h3>
-      </a>
-      <a class="cat-card cat-blood" href="blood-donor-list.html?group=B%2B&name=B%2B%20%28%E0%A6%AC%E0%A6%BF%20%E0%A6%AA%E0%A6%9C%E0%A6%BF%E0%A6%9F%E0%A6%BF%E0%A6%AD%29">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🩸</span></div>
-        <h3>B+</h3>
-      </a>
-      <a class="cat-card cat-blood" href="blood-donor-list.html?group=B-&name=B-%20%28%E0%A6%AC%E0%A6%BF%20%E0%A6%A8%E0%A7%87%E0%A6%97%E0%A7%87%E0%A6%9F%E0%A6%BF%E0%A6%AD%29">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🩸</span></div>
-        <h3>B-</h3>
-      </a>
-      <a class="cat-card cat-blood" href="blood-donor-list.html?group=AB%2B&name=AB%2B%20%28%E0%A6%8F%E0%A6%AC%E0%A6%BF%20%E0%A6%AA%E0%A6%9C%E0%A6%BF%E0%A6%9F%E0%A6%BF%E0%A6%AD%29">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🩸</span></div>
-        <h3>AB+</h3>
-      </a>
-      <a class="cat-card cat-blood" href="blood-donor-list.html?group=AB-&name=AB-%20%28%E0%A6%8F%E0%A6%AC%E0%A6%BF%20%E0%A6%A8%E0%A7%87%E0%A6%97%E0%A7%87%E0%A6%9F%E0%A6%BF%E0%A6%AD%29">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🩸</span></div>
-        <h3>AB-</h3>
-      </a>
-      <a class="cat-card cat-blood" href="blood-donor-list.html?group=O%2B&name=O%2B%20%28%E0%A6%93%20%E0%A6%AA%E0%A6%9C%E0%A6%BF%E0%A6%9F%E0%A6%BF%E0%A6%AD%29">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🩸</span></div>
-        <h3>O+</h3>
-      </a>
-      <a class="cat-card cat-blood" href="blood-donor-list.html?group=O-&name=O-%20%28%E0%A6%93%20%E0%A6%A8%E0%A7%87%E0%A6%97%E0%A7%87%E0%A6%9F%E0%A6%BF%E0%A6%AD%29">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🩸</span></div>
-        <h3>O-</h3>
-      </a>
-    </section>
-
-    <section class="home-posts-section" id="dueDonorsSection">
-      <div class="home-posts-head">
-        <h2><i class="fa-solid fa-droplet" aria-hidden="true"></i> যাদের রক্ত দেওয়ার সময় হয়েছে</h2>
-        <a href="blood-donor-list.html" class="home-posts-viewall">সব দেখুন <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
-      </div>
-      <div class="donor-list" id="dueDonorsList">
-        <p class="donor-empty">লোড হচ্ছে…</p>
-      </div>
-    </section>
+    <!-- রক্তদাতার কার্ড -->
+    <section class="donor-list" id="bdList" aria-live="polite"></section>
   </div>
 </main>
 
-<footer class="site-footer">
-  <div class="footer-inner">
-    <div>
-      <h4>টাঙ্গাইল জেলা</h4>
-      <p>টাঙ্গাইল জেলার বাসিন্দা, নতুন আগন্তুক ও ব্যবসায়ীদের জন্য তৈরি একটি স্থানীয় সেবা প্ল্যাটফর্ম।</p>
-    </div>
-    <div>
-      <h4>পেজ</h4>
-      <ul class="footer-links">
-        <li><a href="index.html">হোম</a></li>
-        <li><a href="about.html">পরিচিতি</a></li>
-        <li><a href="add-listing.html">তথ্য যোগ করুন</a></li>
-        <li><a href="faq.html">সাধারণ প্রশ্ন</a></li>
-        <li><a href="contact.html">যোগাযোগ</a></li>
-        <li><a href="sitemap.html">সাইটম্যাপ</a></li>
-        <li><a href="privacy-policy.html">প্রাইভেসি পলিসি</a></li>
-        <li><a href="terms.html">শর্তাবলী</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">© ২০২৬ টাঙ্গাইল জেলা। সর্বস্বত্ব সংরক্ষিত।</div>
-</footer>
+<!-- ফ্লোটিং + -->
+<button type="button" class="bd-fab" id="bdFab" aria-haspopup="dialog" aria-label="রক্তদাতা হিসেবে যোগ করুন"><i class="fa-solid fa-plus" aria-hidden="true"></i></button>
 
+<!-- থানা ও ব্লাড গ্রুপ ভিত্তিক ফর্ম -->
+<div class="modal-overlay" id="bdModal">
+  <div class="modal-box icon-modal-box" role="dialog" aria-modal="true" aria-labelledby="bdFormTitle">
+    <h2 id="bdFormTitle">রক্তদাতা হোন</h2>
+    <form class="contact-form icon-form" id="bdForm" novalidate>
+      <div class="icon-field icon-field-select">
+        <i class="fa-solid fa-building-shield field-icon" aria-hidden="true"></i>
+        <label for="bdfThana" class="sr-only">থানা</label>
+        <select id="bdfThana"></select>
+      </div>
+      <div class="icon-field icon-field-select">
+        <i class="fa-solid fa-droplet field-icon" aria-hidden="true"></i>
+        <label for="bdfGroup" class="sr-only">রক্তের গ্রুপ</label>
+        <select id="bdfGroup"></select>
+      </div>
 
-<!-- রক্তের রিকোয়েস্ট ফর্ম মোডাল -->
-<div class="modal-overlay" id="reqModal">
-  <div class="modal-box req-modal-box">
-    <h2>রক্তের রিকোয়েস্ট করুন</h2>
-    <form class="contact-form req-form" id="reqForm">
-      <div class="req-field">
-        <i class="fa-solid fa-user req-icon" aria-hidden="true"></i>
-        <label for="reqPatientName" class="sr-only">রোগীর নাম</label>
-        <input type="text" id="reqPatientName" placeholder="রোগীর পূর্ণ নাম">
+      <div id="bdDonorFields">
+        <div class="icon-field">
+          <i class="fa-solid fa-user field-icon" aria-hidden="true"></i>
+          <label for="bdfName" class="sr-only">আপনার নাম</label>
+          <input type="text" id="bdfName" maxlength="80" autocomplete="off" placeholder="আপনার নাম">
+        </div>
+        <div class="icon-field">
+          <i class="fa-solid fa-mobile-screen field-icon" aria-hidden="true"></i>
+          <label for="bdfPhone" class="sr-only">মোবাইল নাম্বার</label>
+          <input type="tel" id="bdfPhone" inputmode="numeric" maxlength="14" autocomplete="off" placeholder="মোবাইল নাম্বার (01XXXXXXXXX)">
+        </div>
+        <div class="icon-field">
+          <i class="fa-solid fa-location-dot field-icon" aria-hidden="true"></i>
+          <label for="bdfAddress" class="sr-only">ঠিকানা</label>
+          <input type="text" id="bdfAddress" maxlength="200" autocomplete="off" placeholder="ঠিকানা (গ্রাম / এলাকা)">
+        </div>
+        <div class="icon-field">
+          <i class="fa-solid fa-hand-holding-droplet field-icon" aria-hidden="true"></i>
+          <label for="bdfTotal" class="sr-only">মোট রক্তদান (বার)</label>
+          <input type="number" id="bdfTotal" min="0" step="1" placeholder="মোট রক্তদান (বার) — ঐচ্ছিক">
+        </div>
+        <div class="icon-field">
+          <i class="fa-solid fa-file-lines field-icon" aria-hidden="true"></i>
+          <label for="bdfComment" class="sr-only">মন্তব্য</label>
+          <input type="text" id="bdfComment" maxlength="200" autocomplete="off" placeholder="মন্তব্য লিখুন (ঐচ্ছিক)">
+        </div>
       </div>
-      <div class="req-field req-field-select">
-        <i class="fa-solid fa-droplet req-icon" aria-hidden="true"></i>
-        <label for="reqGroup" class="sr-only">রক্তের গ্রুপ</label>
-        <select id="reqGroup">
-          <option value="">রক্তের গ্রুপ সিলেক্ট করুন</option>
-          <option value="A+">A+</option>
-          <option value="A-">A-</option>
-          <option value="B+">B+</option>
-          <option value="B-">B-</option>
-          <option value="AB+">AB+</option>
-          <option value="AB-">AB-</option>
-          <option value="O+">O+</option>
-          <option value="O-">O-</option>
-        </select>
-      </div>
-      <div class="req-field">
-        <i class="fa-solid fa-briefcase-medical req-icon" aria-hidden="true"></i>
-        <label for="reqBags" class="sr-only">কত ব্যাগ প্রয়োজন</label>
-        <input type="number" id="reqBags" min="1" step="1" placeholder="কত ব্যাগ প্রয়োজন">
-      </div>
-      <div class="req-field req-field-select">
-        <i class="fa-solid fa-triangle-exclamation req-icon" aria-hidden="true"></i>
-        <label for="reqUrgency" class="sr-only">জরুরি মাত্রা</label>
-        <select id="reqUrgency">
-          <option value="urgent">জরুরি (আজ/এখনই দরকার)</option>
-          <option value="normal">সাধারণ (কয়েকদিনের মধ্যে)</option>
-        </select>
-      </div>
-      <div class="req-field">
-        <i class="fa-solid fa-location-dot req-icon" aria-hidden="true"></i>
-        <label for="reqHospital" class="sr-only">হাসপাতাল / স্থান</label>
-        <input type="text" id="reqHospital" placeholder="হাসপাতাল / স্থান">
-      </div>
-      <div class="req-field req-field-select">
-        <i class="fa-solid fa-building-shield req-icon" aria-hidden="true"></i>
-        <label for="reqThana" class="sr-only">থানা</label>
-        <select id="reqThana">
-          <option value="">থানা সিলেক্ট করুন</option>
-          <option>টাঙ্গাইল সদর</option>
-          <option>বাসাইল</option>
-          <option>ভূঞাপুর</option>
-          <option>দেলদুয়ার</option>
-          <option>ধনবাড়ী</option>
-          <option>ঘাটাইল</option>
-          <option>গোপালপুর</option>
-          <option>কালিহাতী</option>
-          <option>মধুপুর</option>
-          <option>মির্জাপুর</option>
-          <option>নাগরপুর</option>
-          <option>সখীপুর</option>
-        </select>
-      </div>
-      <div class="req-field">
-        <i class="fa-solid fa-mobile-screen req-icon" aria-hidden="true"></i>
-        <label for="reqPhone" class="sr-only">যোগাযোগের মোবাইল নাম্বার</label>
-        <input type="tel" id="reqPhone" inputmode="numeric" placeholder="যোগাযোগের মোবাইল নাম্বার">
-      </div>
-      <div class="req-field">
-        <i class="fa-solid fa-file-lines req-icon" aria-hidden="true"></i>
-        <label for="reqNotes" class="sr-only">মন্তব্য লিখুন (ঐচ্ছিক)</label>
-        <input type="text" id="reqNotes" placeholder="মন্তব্য লিখুন (ঐচ্ছিক)">
-      </div>
-      <p class="auth-msg" id="reqFormMsg"></p>
+
+      <div class="bd-hp" aria-hidden="true"><input type="text" id="bdHp" tabindex="-1" autocomplete="off"></div>
+      <p class="auth-msg" id="bdFormMsg"></p>
       <div class="modal-actions">
-        <button type="button" class="modal-cancel" id="reqCancelBtn">বাতিল করুন</button>
-        <button type="submit" class="modal-submit" id="reqSubmitBtn">সাবমিট করুন</button>
+        <button type="button" class="modal-cancel" id="bdCancel">বাতিল করুন</button>
+        <button type="submit" class="modal-submit" id="bdSubmit">সাবমিট করুন</button>
       </div>
     </form>
   </div>
 </div>
 
-<nav class="bottom-nav">
-  <a href="index.html"><span class="bn-icon"><i class="fa-solid fa-house" aria-hidden="true"></i></span><span data-i18n="bottomnav.home">Home</span></a>
-  <a href="members.html"><span class="bn-icon"><i class="fa-solid fa-users" aria-hidden="true"></i></span><span data-i18n="bottomnav.members">Members</span></a>
-  <a href="posts.html"><span class="bn-icon"><i class="fa-solid fa-plus" aria-hidden="true"></i></span><span data-i18n="bottomnav.post">Post</span></a>
-  <a href="profile.html"><span class="bn-icon"><i class="fa-solid fa-user" aria-hidden="true"></i></span><span data-i18n="bottomnav.profile">Profile</span></a>
-</nav>
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-<script src="js/supabase-config.js?v=20260924073609"></script>
-<script src="js/nav-avatar.js?v=20260924073609"></script>
-<script src="js/call.js?v=20260924073609"></script>
-<script src="js/sticky-header.js?v=20260924073609"></script>
-<script src="js/banner-slider.js?v=20260924073609"></script>
-<script src="js/category-banners.js?v=20260924073609"></script>
-<script src="js/notice-bar.js?v=20260924073609"></script>
-<script src="js/i18n.js?v=20260924073609"></script>
-<script src="js/search-index.js?v=20260924073609"></script>
-<script src="js/smart-search.js?v=20260924073609"></script>
-<script src="js/search-ui.js?v=20260924073609"></script>
-<script src="js/script.js?v=20260924073609"></script>
-<script src="js/blood-requests.js?v=20260924073609"></script>
-<script src="js/due-donors.js?v=20260924073609"></script>
-<script src="js/auto-update.js?v=20260924073609"></script>
-<script src="js/floating-buttons.js?v=20260924073609"></script>
+<script src="js/supabase-config.js?v=20260930045009"></script>
+<script src="js/blood.js?v=20260930045009"></script>
+<script src="js/auto-update.js?v=20260930045009"></script>
+<script src="js/floating-buttons.js?v=20260930045009"></script>
 </body>
 </html>

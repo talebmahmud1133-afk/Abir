@@ -348,3 +348,22 @@ Run `python3 bump-version.py` before deploying (your normal routine). It was del
 - **Compatibility:** বিদ্যমান Friend/Unfriend, Notification, বেল-ব্যাজ, Chat, Call, Friend List, Mutual Friends, Profile ফ্লো অপরিবর্তিত — শুধু "প্রথমবার Add Friend চাপা" মুহূর্তে RPC বদলেছে; বাকি সব পাথ (Accept/Reject/Unfriend/Cancel) আগের মতোই।
 - **যাচাই এই সেশনে:** তিনটি ফাইলের JS/HTML সিনট্যাক্স চেক (Node `-c`) পাস; লাইভ ডাটাবেসে ফাংশন/ট্রিগার সংজ্ঞা পড়ে নিশ্চিত করা হয়েছে যে ব্যাকএন্ড লজিক নিয়মের সাথে মেলে। **আসল দুই অ্যাকাউন্টে বাস্তব যাচাই বাকি:** A ও B আগে একবার Friend হোন → Unfriend করুন → B-র প্রোফাইলে/চ্যাটে/A-র "Add Friend" ট্যাবে A থেকে আবার Add Friend চাপুন → সঙ্গে সঙ্গে "Friend" দেখায় কি না, B-র বেলে কোনো নতুন Friend Request notification আসে কি না, দুজনের Friend List/চ্যাট সঙ্গে সঙ্গে আপডেট হয় কি না।
 - **পরিবর্তিত ফাইল:** `js/public-profile.js`, `js/chat.js`, `profile.html` (JS-only পরিবর্তন, কোনো CSS/DB ফাইল বদলায়নি এই সেশনে)। সাইটব্যাপী `?v=` bump (`20260922123933`)।
+
+## v208 — প্রোফাইল বায়ো ২ লাইনে সীমাবদ্ধ + "বিস্তারিত" (শুধু ফ্রন্টএন্ড, কোনো DB পরিবর্তন নেই)
+- বায়ো বড় হলেও প্রথমে সর্বোচ্চ ২ লাইন দেখায়; ২য় লাইনের শেষে "… বিস্তারিত" থাকে, চাপলে পুরো বায়ো খোলে। ছোট বায়ো অপরিবর্তিত।
+- নতুন `js/bio-clamp.js` (`window.tzBioClamp(el, text)`); CSS `.bio-more` (`css/style.css`-এর শেষে)।
+- ব্যবহৃত: `public-profile.html` (`js/public-profile.js`-এর `render()`), `profile.html` (`renderSocial()`)।
+- যাচাই: headless Chromium (৩৬০px) — ছোট বায়ো ১ লাইন, বড় বায়ো ২ লাইন + বিস্তারিত, ক্লিকে পুরো খোলে। আসল ডিভাইসে যাচাই বাকি। `?v=` bump: `20260924173753`।
+
+## v209 — প্রোফাইলের লেখা আরও স্পষ্ট ও পেশাদার (শুধু CSS, কোনো DB/JS লজিক বদল নেই)
+- নতুন `css/profile-text.css` (`public-profile.html` ও `profile.html`-এ লিংক): নাম/সংখ্যা গাঢ় (#10241a), বায়ো ১rem + লাইন-গ্যাপ ১.৬৫ (বাংলার জন্য) + সর্বোচ্চ ৪২০px, ঠিকানা/যোগদান/ফলোয়ার-লেবেল আগের চেয়ে গাঢ় (#3d4b53) ও ০.৯৫rem, ইউজারনেম/ভেরিফাইড ব্যাজ সামান্য বড়। বাটন/লেআউট অপরিবর্তিত।
+- v208-এর বায়ো ২-লাইন + "বিস্তারিত" এই স্টাইলের সাথে যাচাই করা হয়েছে। `?v=` bump: `20260924174016`।
+
+### technician (টেকনিশিয়ান) — ২০২৬-০৯-২৯
+`technician.html` + `css/technician.css` + `js/technician{,-data,-submit,-lightbox}.js` + `supabase/technician-schema.sql` যোগ; admin.html-এ `technician` ট্যাব; my-activity.js-এ যোগ। Supabase (ধাপ ৪) ও হোম সংযোগ (ধাপ ৫) বাকি — বিস্তারিত `CATEGORY_ROADMAP.md`।
+
+### technician (টেকনিশিয়ান) · ধাপ ৪+৫ — ২০২৬-০৯-২৯
+Supabase লাইভে প্রয়োগ (`technician_entries`, `technician_public`, RLS, ট্রিগার) ও রোলব্যাক-টেস্টে যাচাই। হোম কার্ড/`favorite-categories.js`, `sitemap.html/xml`, `js/search-index.js` এখন `technician.html`-এ; `mechanic.html`-এ redirect স্টাব ও `firebase.json`-এ 302। বাকি: লাইভ end-to-end, হোম কার্ডের নাম/ছবি।
+
+### viral (ভাইরাল প্লেস) · ধাপ ১+২+৩ — ২০২৬-০৯-৩০
+- পুরনো `handloom.html` (১২ উপজেলা-কার্ড) বাদ দিয়ে কুরিয়ার-প্যাটার্নের নতুন `viral.html` (১২ চিপ, চিপ-ভিত্তিক ফর্ম, ছবি+আরও ছবি, অ্যাডমিন ট্যাব `viral`)। হোম কার্ড এখনো `handloom.html`-এ — Supabase (`viral_entries`) ধাপ ৪ + লিংক বদল ধাপ ৫ বাকি। বিস্তারিত `CATEGORY_ROADMAP.md`।

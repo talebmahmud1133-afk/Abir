@@ -1,0 +1,1267 @@
+/* ==========================================================================
+   ভাইরাল প্লেস পেজ — dedicated styles (viral.html) — কুরিয়ারের ডিজাইন ভাষা, সবুজ থিমে
+   Uses the site's shared design tokens from css/style.css (--maroon, --gold,
+   --cream, --ink, --shadow-*, --radius, --line) so it matches the rest of
+   the site while giving this page its own modern layout.
+   Phase 2: back-only app bar + illustrated hero + toolbar (selector/info bar).
+   Phase 3: courier cards (logo tile, labelled rows, green map / blue call buttons).
+   Phase 4: footer strip, empty state, keyboard-focus ring, reduced-motion.
+   ========================================================================== */
+
+/* ---------- Page shell (this page has its own back-only app bar + footer strip) ---------- */
+body.vr-page{ padding-bottom: 24px; }
+body.vr-page .global-fab-stack{ bottom: 20px; }
+.vr-wrap{
+  max-width: 1240px;
+  padding: 0 16px 8px;
+}
+@media (min-width: 640px){ .vr-wrap{ padding-left: 24px; padding-right: 24px; } }
+
+/* keyboard focus: dark navy ring, clearly visible on the sky hero, white cards and coloured buttons */
+.vr-page a:focus-visible,
+.vr-page button:focus-visible{
+  outline: 3px solid #0A4A34;
+  outline-offset: 2px;
+}
+
+/* ---------- Top app bar (back only) + hero ---------- */
+.vr-hero{
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: linear-gradient(180deg, #effaf3 0%, #d7f0e1 55%, #c1e6d1 100%);
+  border-radius: 0 0 26px 26px;
+  margin-bottom: 16px;
+}
+.vr-hero-art{
+  position: absolute;
+  right: 0; bottom: 0;
+  width: min(100%, 460px);
+  height: auto;                 /* keeps the viewBox aspect ratio: never cropped */
+  z-index: 0;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 12%);
+          mask-image: linear-gradient(90deg, transparent 0, #000 12%);
+}
+.vr-hero-inner{
+  position: relative;
+  z-index: 2;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 14px 16px calc(6px + 0.21 * min(100vw, 460px));
+}
+/* পুরনো ভাসমান "cr-back / cr-back-float" পিল সরিয়ে সাইটের স্ট্যান্ডার্ড sticky
+   টপবার (.post-detail-topbar.list-back-topbar, css/style.css) ব্যবহার হচ্ছে —
+   viral.html-এ দেখো, এই ফাইলে আর নতুন করে স্টাইল করার দরকার নেই। */
+
+.vr-hero-body{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 18px;
+}
+.vr-hero-pin{ flex: 0 0 auto; width: 40px; height: auto; }
+.vr-hero-text h1{
+  margin: 0;
+  font-family: 'Hind Siliguri', sans-serif;
+  font-weight: 700;
+  color: #0A4A34;
+  line-height: 1.3;
+}
+.vr-t1{ display: block; font-size: clamp(1.3rem, 1rem + 1.6vw, 2rem); }
+.vr-t2{ display: block; font-size: clamp(1.95rem, 1.2rem + 3.2vw, 3.1rem); }
+.vr-hero-text p{
+  margin: 4px 0 0;
+  font-size: clamp(0.88rem, 0.8rem + 0.5vw, 1.1rem);
+  font-weight: 600;
+  color: var(--maroon-dark);
+  line-height: 1.5;
+}
+
+@media (min-width: 640px){
+  .vr-hero-pin{ width: 50px; }
+}
+@media (min-width: 768px){
+  /* side-by-side: text left, illustration right */
+  .vr-hero-inner{ padding: 18px 24px 34px; }
+  .vr-hero-art{ width: 500px; }
+}
+@media (min-width: 1024px){
+  .vr-hero-inner{ padding-bottom: 44px; }
+  .vr-hero-art{ width: auto; height: 100%; }
+  .vr-hero-pin{ width: 58px; }
+}
+
+/* ---------- Toolbar: upazila selector + info chips ---------- */
+.vr-toolbar{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+@media (min-width: 900px){
+  .vr-toolbar{ flex-direction: row; align-items: stretch; gap: 12px; }
+  .vr-filter-bar{ flex: 1 1 46%; }
+  .vr-info-bar{ flex: 1 1 54%; }
+}
+
+.vr-filter-bar{
+  background: #fff;
+  border: 1px solid rgba(15,122,82,0.22);
+  border-radius: 14px;
+  box-shadow: var(--shadow-sm);
+  padding: 10px 12px;               /* উপরের লেবেল বাদ — সমান প্যাডিং */
+  position: relative;
+}
+.vr-filter-label{
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+  margin: 0 2px 6px;
+}
+.vr-select-wrap{ position: relative; }
+.vr-select-wrap i.vr-select-pin{
+  position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+  color: #0F7A52; font-size: 1rem; pointer-events: none;
+}
+.vr-select-wrap i.vr-select-caret{
+  position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+  color: var(--ink-soft); font-size: 0.85rem; pointer-events: none;
+}
+#viralUpazilaSelect{
+  width: 100%;
+  min-height: 45px;
+  appearance: none;
+  -webkit-appearance: none;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ink);
+  background: #f5fbf8;
+  border: 1px solid rgba(15,122,82,0.22);
+  border-radius: 10px;
+  padding: 9px 38px 9px 40px;
+  cursor: pointer;
+  transition: border-color .15s, box-shadow .15s;
+}
+#viralUpazilaSelect:hover{ border-color: #0F7A52; }
+#viralUpazilaSelect:focus-visible{
+  outline: 3px solid #0A4A34;
+  outline-offset: 2px;
+  border-color: #0F7A52;
+}
+
+/* ---------- Info bar ---------- */
+.vr-info-bar{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.vr-info-chip{
+  flex: 1 1 220px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  border: 1px solid rgba(15,122,82,0.22);
+  border-radius: 14px;
+  box-shadow: var(--shadow-sm);
+  padding: 10px 14px;
+  min-height: 48px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.4;
+}
+.vr-chip-ic{
+  flex: 0 0 auto;
+  width: 32px; height: 32px;
+  border-radius: 9px;
+  background: #0F7A52;
+  color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.9rem;
+}
+.vr-info-chip b{ font-weight: 700; color: #0A4A34; }
+
+/* ---------- সাব-ক্যাটাগরি চিপ বার (Phase 5) ---------- */
+.vr-cats{ margin-bottom: 10px; }
+.vr-cats-scroll{
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 12px;                        /* চিপগুলোর মাঝের ফাঁক (আগে 8px) */
+  overflow-x: auto;                 /* phones: swipe left / right */
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: none;           /* snap বন্ধ: ২৪টা চিপে সোয়াইপ যেন আটকে না যায় */
+  scrollbar-width: none;
+  padding: 2px 2px 6px;
+  overscroll-behavior-x: contain;
+}
+.vr-cats-scroll::-webkit-scrollbar{ display: none; }
+.vr-cat{
+  flex: 0 0 auto;
+  min-height: 44px;                 /* touch target */
+  padding: 8px 18px;
+  border: 1px solid rgba(15,122,82,0.35);
+  border-radius: 999px;
+  background: #fff;
+  color: #0A4A34;
+  font-family: inherit;
+  font-size: 0.92rem;
+  font-weight: 700;
+  line-height: 1.2;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color .15s, color .15s, border-color .15s;
+}
+.vr-cat:hover{ border-color: #0F7A52; background: #eefaf3; }
+.vr-cat.is-active{ background: #0F7A52; border-color: #0F7A52; color: #fff; }
+.vr-cat.is-active:hover{ background: #0D6B45; }
+@media (min-width: 768px){
+  /* tablet / desktop: chips wrap onto a second row instead of hiding off-screen */
+  .vr-cats-scroll{ flex-wrap: wrap; overflow-x: visible; scroll-snap-type: none; padding-bottom: 2px; }
+}
+
+/* ---------- Card grid ---------- */
+.vr-grid{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+@media (min-width: 640px){
+  .vr-grid{ grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1024px){
+  .vr-grid{ grid-template-columns: repeat(3, 1fr); }
+}
+@media (min-width: 1320px){
+  .vr-grid{ grid-template-columns: repeat(4, 1fr); }
+}
+
+.vr-card{
+  background: #fff;
+  border: 1px solid rgba(15,122,82,0.16);
+  border-radius: var(--vr-radius, 16px);
+  box-shadow: 0 3px 16px rgba(20,50,45,0.04);   /* আরও সফট শ্যাডো: বড় blur, কম opacity */
+  padding: var(--vr-pad);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+  transition: box-shadow .15s;
+}
+.vr-card:hover{ box-shadow: 0 8px 24px rgba(20,50,45,0.07); }
+
+.vr-card-main{ display: flex; align-items: flex-start; gap: 12px; }
+.vr-card-body{ flex: 1 1 auto; min-width: 0; }
+
+/* অফিসের ছবি: কার্ডের বাম কিনারা ও উপরের কিনারা থেকে শুরু হয়ে নিচে Google Map বাটনের ঠিক উপর পর্যন্ত
+   পুরো বাম পাশ জুড়ে বসে (বামে/উপরে কোনো ফাঁকা নেই)। ছবি না থাকলে রঙিন আদ্যক্ষর একই জায়গা নেয়।
+   ছবির চওড়া বদলাতে চাইলে শুধু --vr-photo-size এর মান বদলান (যেমন 104px / 116px / 128px) */
+.vr-card{ --vr-photo-size: 116px; --vr-pad: 17px; --vr-radius: 16px; overflow: hidden; }   /* --vr-pad: কার্ডের চারপাশের প্যাডিং (আগে 14px) */
+.vr-logo{
+  position: relative;
+  flex: 0 0 auto;
+  align-self: stretch;                /* ছবি উপর থেকে নিচে Google Map বাটনের ঠিক উপর পর্যন্ত নামে */
+  width: var(--vr-photo-size);
+  min-height: var(--vr-photo-size);
+  margin: calc(-1 * var(--vr-pad)) 0 0 calc(-1 * var(--vr-pad));   /* কার্ডের প্যাডিং ভেদ করে বাম ও উপরের কিনারায় লাগে */
+  /* চার কোণই কার্ডের radius-এর সাথে মেলানো (কার্ডের ১px বর্ডার বাদ দিয়ে উপরের-বাম কোণ ১px কম) */
+  border-radius: calc(var(--vr-radius) - 1px) var(--vr-radius) var(--vr-radius) var(--vr-radius);
+  overflow: hidden;
+  background: #fff;
+  border: 0;
+}
+.vr-logo.has-img{ padding: 0; }
+.vr-logo img{
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+  display: block;
+}
+.vr-logo-fallback{
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2.6rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+}
+@media (max-width: 340px){
+  .vr-card{ --vr-photo-size: 96px; }
+  .vr-logo-fallback{ font-size: 2rem; }
+}
+
+.vr-card-head{
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+.vr-card-name{
+  margin: 0;
+  font-family: 'Hind Siliguri', sans-serif;
+  font-size: 1.07rem;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+.vr-status{
+  flex: 0 0 auto;
+  font-size: 0.74rem;
+  font-weight: 700;
+  line-height: 1.2;
+  padding: 4px 11px;
+  border-radius: 999px;
+  color: #fff;
+  white-space: nowrap;
+}
+.vr-status.is-open{
+  background: #0e9440;                       /* Google Map বাটনের সাথে একই সবুজ */
+  font-size: 0.68rem;
+  padding: 3px 9px;
+  border: 1px solid #0a7433;
+  box-shadow: 0 1px 3px rgba(14,148,64,0.35);
+}
+.vr-status.is-closed{ background: #b42318; }
+
+.vr-card-meta{
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--ink);
+}
+.vr-card-meta li{ display: flex; align-items: flex-start; gap: 5px; min-width: 0; }
+.vr-card-meta li > span{ min-width: 0; overflow-wrap: anywhere; }
+.vr-card-meta i{ color: #0F7A52; font-size: 0.82rem; flex: 0 0 auto; width: 16px; height: 1.32rem; display: flex; align-items: center; justify-content: center; }   /* আইকন প্রথম লাইনের ঠিক মাঝে */
+.vr-lbl{ color: var(--ink-soft); }
+
+.vr-card-actions{
+  display: flex;
+  gap: 10px;
+  margin-top: auto;
+}
+.vr-card-actions a,
+.vr-card-actions button.vr-btn-call,
+.vr-card-actions button.vr-btn-edit{
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-sizing: border-box;
+  height: 46px;                     /* দুই বাটনের উচ্চতা হুবহু সমান (লেখা ভাঙলেও বদলাবে না) */
+  text-decoration: none;
+  font-family: inherit;
+  font-size: 0.92rem;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+  color: #fff;
+  border-radius: 10px;
+  padding: 0 12px;
+  transition: background-color .15s, transform .12s;
+}
+.vr-card-actions a i,
+.vr-card-actions button.vr-btn-call i,
+.vr-card-actions button.vr-btn-edit i{ flex: 0 0 auto; width: 1em; text-align: center; line-height: 1; font-size: 0.95rem; }
+.vr-card-actions a span,
+.vr-card-actions button.vr-btn-call span,
+.vr-card-actions button.vr-btn-edit span{ display: block; line-height: 1.2; padding-top: 1px; overflow: hidden; text-overflow: ellipsis; }
+.vr-card-actions a:active,
+.vr-card-actions button.vr-btn-call:active,
+.vr-card-actions button.vr-btn-edit:active{ transform: scale(0.97); }
+.vr-btn-map{ background: #0e9440; }
+.vr-btn-map:hover{ background: #0b7a36; }
+.vr-btn-call{ background: #0F7A52; }
+.vr-card-actions button.vr-btn-edit{ background: #7a4d08; border: 0; margin: 0; cursor: pointer; -webkit-appearance: none; appearance: none; }   /* শুধু প্রোফাইলের মালিক দেখে (বিস্তারিত পেজে) */
+.vr-card-actions button.vr-btn-edit:focus-visible{ outline: 3px solid #0A4A34; outline-offset: 2px; }
+/* বিস্তারিত পেজ (২০০) খোলা অবস্থায় এডিট শিট ও ক্রপ তার উপরে আসে */
+html.vr-detail-open .vr-sheet-backdrop{ z-index: 250; }
+html.vr-detail-open .vr-crop-backdrop{ z-index: 260; }
+.vr-btn-call:hover{ background: #0D6B45; }
+.vr-btn-whatsapp{ background: #25b358; }
+.vr-btn-whatsapp:hover{ background: #1f9a4b; }
+
+/* ---------- Empty state ---------- */
+.vr-empty{
+  grid-column: 1 / -1;          /* span the whole grid, whatever the column count */
+  text-align: center;
+  background: #fff;
+  border: 1px dashed rgba(15,122,82,0.35);
+  border-radius: 16px;
+  padding: 32px 16px 28px;
+  color: var(--ink-soft);
+}
+.vr-empty i{ font-size: 1.8rem; color: #0F7A52; margin-bottom: 8px; display: block; }
+.vr-empty p{ margin: 0 auto 16px; max-width: 32em; font-size: 0.95rem; line-height: 1.6; }
+.vr-empty-btn{
+  min-height: 46px;
+  padding: 10px 22px;
+  border: none;
+  border-radius: 10px;
+  background: #0F7A52;
+  color: #fff;
+  font-family: inherit;
+  font-size: 0.92rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color .15s;
+}
+.vr-empty-btn:hover{ background: #0D6B45; }
+
+/* ---------- Footer strip ---------- */
+.vr-footer-strip{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px 16px;
+  margin-top: 20px;
+  padding: 6px 8px 6px 16px;
+  background: #fff;
+  border: 1px solid rgba(15,122,82,0.16);
+  border-radius: 14px;
+  box-shadow: var(--shadow-sm);
+  font-size: 0.86rem;
+  color: var(--ink);
+}
+.vr-foot-updated{ display: inline-flex; align-items: center; gap: 8px; padding: 8px 0; line-height: 1.4; }
+.vr-foot-updated i{ color: #0F7A52; }
+.vr-foot-updated b{ font-weight: 700; color: #0A4A34; }
+.vr-report{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;             /* large touch target */
+  padding: 0 12px;
+  border-radius: 10px;
+  color: var(--ink);
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: background-color .15s;
+}
+.vr-report i{ color: #c2410c; }
+.vr-report:hover{ background: #edf8f2; }
+@media (max-width: 380px){
+  .vr-footer-strip{ padding-left: 12px; }
+}
+
+/* ---------- Floating "+" and add-office bottom sheet (Phase 6) ---------- */
+.vr-fab{
+  position: fixed;
+  right: 19px;
+  bottom: calc(19px + env(safe-area-inset-bottom, 0px));   /* কিনারা থেকে আরও ৭px দূরে (আগে 12px / 12px) */
+  z-index: 60;
+  width: 54px; height: 54px;
+  border: none;
+  border-radius: 50%;
+  background: #0F7A52;
+  color: #fff;
+  font-size: 1.4rem;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 8px 22px rgba(15,122,82,0.45);
+  cursor: pointer;
+  transition: background-color .15s, transform .15s;
+}
+.vr-fab:hover{ background: #0D6B45; }
+.vr-fab:active{ transform: scale(0.94); }
+@media (min-width: 1024px){ .vr-fab{ right: 31px; bottom: 29px; } }
+body.vr-lock{ overflow: hidden; }
+
+.vr-sheet-backdrop{
+  position: fixed; inset: 0;
+  z-index: 100;
+  background: rgba(10,30,50,0.5);
+  display: flex;
+  align-items: flex-end;            /* phones: sheet rises from the bottom */
+  justify-content: center;
+  opacity: 0;
+  transition: opacity .2s;
+}
+.vr-sheet-backdrop[hidden]{ display: none; }
+.vr-sheet-backdrop.is-open{ opacity: 1; }
+.vr-sheet{
+  width: 100%;
+  max-width: 560px;
+  max-height: 92vh;
+  max-height: 92dvh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: #fff;
+  border-radius: 20px 20px 0 0;
+  padding: 8px 16px calc(18px + env(safe-area-inset-bottom, 0px));
+  box-shadow: 0 -10px 40px rgba(0,0,0,0.25);
+  transform: translateY(40px);
+  transition: transform .22s ease-out;
+}
+.vr-sheet-backdrop.is-open .vr-sheet{ transform: translateY(0); }
+.vr-sheet-grip{ width: 44px; height: 5px; border-radius: 3px; background: #cfd9e2; margin: 4px auto 10px; }
+@media (min-width: 768px){
+  .vr-sheet-backdrop{ align-items: center; padding: 24px; }
+  .vr-sheet{ border-radius: 20px; padding: 22px 26px 24px; max-height: 90vh; max-height: 90dvh; }
+  .vr-sheet-grip{ display: none; }
+}
+.vr-sheet-head h2{ margin: 0 0 4px; font-family: 'Hind Siliguri', sans-serif; font-size: 1.2rem; color: #0A4A34; line-height: 1.35; }
+.vr-sheet-head p{ margin: 0 0 14px; font-size: 0.88rem; color: var(--ink-soft); line-height: 1.5; }
+
+.vr-field{ margin-bottom: 12px; }
+.vr-field label{ display: block; font-size: 0.86rem; font-weight: 600; color: var(--ink); margin: 0 2px 5px; }
+.vr-req{ color: #b42318; }
+.vr-opt{ font-weight: 500; color: var(--ink-soft); }
+.vr-field input[type="text"], .vr-field input[type="tel"], .vr-field input[type="url"], .vr-field select{
+  width: 100%;
+  min-height: 46px;
+  padding: 10px 12px;
+  border: 1.5px solid rgba(15,122,82,0.35);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 16px;                  /* stops iOS zoom-on-focus */
+  box-sizing: border-box;
+}
+.vr-field input:focus-visible, .vr-field select:focus-visible{ outline: 3px solid #0A4A34; outline-offset: 1px; border-color: #0F7A52; }
+.vr-field [aria-invalid="true"]{ border-color: #b42318; }
+.vr-field input[type="number"], .vr-field textarea{
+  width: 100%;
+  padding: 10px 12px;
+  border: 1.5px solid rgba(15,122,82,0.35);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 16px;                  /* stops iOS zoom-on-focus */
+  box-sizing: border-box;
+}
+.vr-field input[type="number"]{ min-height: 46px; }
+.vr-field textarea{ min-height: 84px; resize: vertical; }
+.vr-field input[type="number"]:focus-visible, .vr-field textarea:focus-visible{ outline: 3px solid #0A4A34; outline-offset: 1px; border-color: #0F7A52; }
+.vr-field-check{ margin-bottom: 12px; }
+.vr-field-check label{ display: flex; align-items: flex-start; gap: 10px; font-size: 0.86rem; font-weight: 600; color: var(--ink); cursor: pointer; line-height: 1.45; }
+.vr-field-check input[type="checkbox"]{ width: 20px; height: 20px; flex: 0 0 auto; margin-top: 1px; accent-color: #0F7A52; }
+.vr-field-check.is-invalid label{ color: #b42318; }
+.vr-hint{ margin: -6px 2px 12px; font-size: 0.8rem; color: var(--ink-soft); }
+.vr-file{ width: 100%; font-size: 0.9rem; font-family: inherit; box-sizing: border-box; }
+.vr-photo-preview{ margin-top: 8px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.vr-photo-preview[hidden]{ display: none; }
+.vr-photo-preview img{ display: block; width: 104px; height: 104px; border-radius: 16px; object-fit: cover; border: 1px solid rgba(15,122,82,0.25); }
+.vr-photo-edit{
+  display: inline-flex; align-items: center; gap: 8px;
+  min-height: 44px; padding: 8px 14px;
+  border: 1.5px solid rgba(15,122,82,0.45); border-radius: 10px;
+  background: #fff; color: #0A4A34;
+  font-family: inherit; font-size: 0.92rem; font-weight: 700; cursor: pointer;
+}
+.vr-photo-edit:hover{ background: #eefaf3; }
+.vr-photo-edit[hidden]{ display: none; }
+.vr-hp{ position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+.vr-form-msg{ margin: 0 0 12px; padding: 10px 12px; border-radius: 10px; background: #fdecea; color: #8a1c12; font-size: 0.9rem; font-weight: 600; line-height: 1.5; }
+.vr-form-msg[hidden], .vr-sheet-done[hidden]{ display: none; }
+.vr-sheet-actions{ display: flex; gap: 10px; margin-top: 4px; }
+.vr-btn-cancel, .vr-btn-submit{
+  flex: 1 1 0;
+  min-height: 48px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 0.98rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color .15s;
+}
+.vr-btn-cancel{ background: #fff; color: #0A4A34; border: 1.5px solid rgba(15,122,82,0.45); }
+.vr-btn-cancel:hover{ background: #eefaf3; }
+.vr-btn-submit{ background: #0F7A52; color: #fff; border: none; }
+.vr-btn-submit:hover{ background: #0D6B45; }
+.vr-btn-submit:disabled, .vr-btn-cancel:disabled{ opacity: 0.65; cursor: default; }
+.vr-sheet-done{ text-align: center; padding: 18px 4px 6px; }
+.vr-sheet-done i{ font-size: 2.4rem; color: var(--maroon); }
+.vr-sheet-done h3{ margin: 10px 0 6px; font-family: 'Hind Siliguri', sans-serif; font-size: 1.15rem; color: #0A4A34; }
+.vr-sheet-done p{ margin: 0 0 16px; color: var(--ink-soft); font-size: 0.92rem; line-height: 1.6; }
+.vr-sheet-done .vr-btn-submit{ width: 100%; flex: none; }
+
+/* ---------- ছবি বসানোর (crop) ধাপ: জুম ইন/আউট + টেনে সরানো ---------- */
+.vr-crop-backdrop{ z-index: 110; }               /* "+" শিটের (১০০) উপরে */
+.vr-crop-viewport{
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  aspect-ratio: 4 / 5;                            /* কার্ডের ছবির টাইলের অনুপাতে (লম্বাটে) */
+  margin: 0 auto 14px;
+  overflow: hidden;
+  border-radius: 16px;
+  background: #10202b;
+  touch-action: none;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.vr-crop-viewport.dragging{ cursor: grabbing; }
+.vr-crop-viewport img{
+  position: absolute; top: 0; left: 0;
+  transform-origin: 0 0;
+  max-width: none; max-height: none;
+  user-select: none; -webkit-user-drag: none;
+  pointer-events: none;
+}
+.vr-crop-zoom{ display: flex; align-items: center; gap: 10px; margin: 0 auto 14px; max-width: 320px; }
+.vr-crop-zoom input[type="range"]{ flex: 1; min-width: 0; }
+.vr-crop-zbtn{
+  flex: 0 0 auto; width: 44px; height: 44px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 0; border-radius: 50%;
+  background: #e4ebef; color: #0A4A34; font-size: 1.05rem; cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.vr-crop-zbtn:active{ background: #d3dde3; }
+.vr-crop .vr-sheet-head p{ margin-bottom: 12px; }
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce){
+  .vr-page *, .vr-page *::before, .vr-page *::after{
+    transition: none !important;
+    animation: none !important;
+  }
+  .vr-card-actions a:active, .vr-back:active, .vr-fab:active{ transform: none; }
+  .vr-sheet{ transform: none; }
+}
+
+/* keep the last card / footer clear of the floating "+" (Phase 6) */
+.vr-wrap{ padding-bottom: 88px; }
+
+/* ---------- অ্যাডমিন থেকে যোগ করা ব্যানার স্লাইডার থাকলে ডিফল্ট হিরো লুকানো ---------- */
+body.has-cat-banners .vr-hero{ display: none; }
+
+/* ---------- "ফিরে যান" এখন viral.html-এর একদম উপরে সাইটের স্ট্যান্ডার্ড sticky
+   টপবার হিসেবে বসে (.post-detail-topbar.list-back-topbar, css/style.css-এ
+   সংজ্ঞায়িত) — ব্যানার/হিরোর উপরে ভাসমান পিল হিসেবে নয়, বরং তার উপরে আলাদা,
+   সবসময়-দৃশ্যমান একটা বার হিসেবে। এখানে আর অতিরিক্ত পজিশনিং দরকার নেই। ---------- */
+.vr-top-area{ position: relative; }
+
+/* ---------- অ্যাডমিন থেকে আপলোড করা ব্যানার ছবি ----------
+   ছবি পুরো ব্যানার জায়গা ভরে বসবে (cover) — উপরে/নিচে কোনো ফাঁকা বা ব্লার অংশ থাকবে না।
+   ব্যানারের অনুপাত সব স্ক্রিনে ২১:৯ (চওড়া ছবির জন্য সবচেয়ে মানানসই); বেশি লম্বা/অন্য
+   অনুপাতের ছবি হলে শুধু কিনারার সামান্য অংশ ছাঁটা যাবে। */
+body[data-banner-category="handloom"] .banner-slide.has-image{
+  position: relative;
+  overflow: hidden;
+  background-image: none;
+  background-color: #0F7A52;
+  aspect-ratio: 21 / 9;
+}
+body[data-banner-category="handloom"] .banner-slide.has-image::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--banner-img);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: 1;
+}
+body[data-banner-category="handloom"] .banner-slide.has-image .banner-inner{
+  position: relative;
+  z-index: 2;
+  text-shadow: 0 1px 5px rgba(0,0,0,0.6);
+}
+
+
+/* ---------- মোবাইলে ব্যাক-বার + ব্যানার স্থির (স্ক্রল করলেও উপরেই থাকবে) ----------
+   ব্যাক-বার (.list-back-topbar) আগে থেকেই sticky top:0। এখন ব্যানারও তার ঠিক নিচে sticky —
+   উচ্চতা --vr-topbar-h থেকে আসে (viral.html-এর ছোট স্ক্রিপ্ট বারের প্রকৃত উচ্চতা মেপে বসায়)।
+   ডেস্কটপে ব্যানার ২১:৯ full-width হওয়ায় খুব বড়, তাই শুধু ≤700px স্ক্রিনে প্রযোজ্য। */
+@media (max-width: 700px){
+  /* .vr-top-area শুধু ব্যানার+হিরো ধরে রাখে (উচ্চতা ~ব্যানারের সমান), তাই sticky এর "ভেসে থাকার"
+     জায়গা পেত না। display:contents দিয়ে এর বক্স সরানো হলো — ফলে ব্যানারের প্যারেন্ট হয় <main>
+     (পুরো পেজ জুড়ে লম্বা) এবং স্ক্রল করলেও ব্যানার আটকে থাকে। */
+  body[data-banner-category="handloom"] .vr-top-area{ display: contents; }
+  body[data-banner-category="handloom"] #catBannerWrap{
+    position: sticky;
+    top: var(--vr-topbar-h, 53px);
+    z-index: 40;
+    background: var(--cream, #f1f5f8);
+    padding-bottom: 4px;
+  }
+}
+
+/* ---------- মোবাইলে কার্ডের বাম পাশ "উপজেলা নির্বাচন করুন" বক্সের লাইনে (বর্ডারসহ), ডান পাশ কিনারা পর্যন্ত ----------
+   ডানে পেজের ১৬px/২৪px ফাঁক ভেদ করে কিনারা পর্যন্ত (ব্যানারের লাইনে), বামে স্বাভাবিক ফাঁক ও বর্ডার।
+   বাম কোণ গোল (কার্ডের radius), ডান কোণ সোজা। ছবির বাম কোণ কার্ডের সাথে মিলেই থাকে। */
+@media (max-width: 700px){
+  .vr-grid{ margin-right: -16px; gap: 12px; }
+  .vr-card{ border-radius: var(--vr-radius) 0 0 var(--vr-radius); border-right: 0; }
+}
+@media (min-width: 640px) and (max-width: 700px){
+  .vr-grid{ margin-right: -24px; }
+}
+
+/* ==========================================================================
+   ভাইরাল প্লেস নিজস্ব সংযোজন (ধাপ ১) — কুরিয়ার থেকে আলাদা অংশ
+   ========================================================================== */
+
+/* সক্রিয় চিপ নিজের সাব-ক্যাটাগরির রঙে (--acc); "সব" চিপ ও ডিফল্ট: সবুজ */
+.vr-cat[style*="--acc"]{ border-color: var(--acc); color: var(--acc); }
+.vr-cat[style*="--acc"]:hover{ background: #fff; box-shadow: inset 0 0 0 1px var(--acc); }
+.vr-cat.is-active[style*="--acc"]{ background: var(--acc); border-color: var(--acc); color: #fff; }
+.vr-cat.is-active[style*="--acc"]:hover{ background: var(--acc); filter: brightness(.94); }
+
+/* "বর্তমানে দেখা হচ্ছে" স্ট্যাটাস ব্যান্ড (aria-live) */
+.vr-band{
+  display: flex; align-items: flex-start; gap: 9px;
+  margin: 2px 0 12px;
+  padding: 9px 14px;
+  background: #eefaf3;
+  border: 1px solid rgba(15,122,82,0.22);
+  border-radius: 12px;
+  font-size: 0.9rem; font-weight: 600; line-height: 1.45;
+  color: var(--ink);
+}
+.vr-band i{ color: #0F7A52; margin-top: 0.28rem; flex: 0 0 auto; }
+.vr-band b{ color: #0A4A34; font-weight: 700; }
+
+/* নিরাপত্তা নোট */
+.vr-safe{
+  display: flex; align-items: flex-start; gap: 9px;
+  margin: 0 0 14px;
+  padding: 9px 14px;
+  background: #fff8e6;
+  border: 1px solid rgba(183,121,31,0.35);
+  border-radius: 12px;
+  font-size: 0.84rem; line-height: 1.55;
+  color: #5c3b06;
+}
+.vr-safe i{ color: #8a5a0b; margin-top: 0.22rem; flex: 0 0 auto; }
+
+/* কার্ড: উপরের রঙিন সাব-ক্যাটাগরি রেখা */
+.vr-card{ border-top: 3px solid var(--acc, #0F7A52); }
+.vr-card-name{ font-size: 1.05rem; }
+.vr-tags{ display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.vr-tag, .vr-demo{
+  display: inline-flex; align-items: center;
+  font-size: 0.74rem; font-weight: 700; line-height: 1.2;
+  padding: 3px 10px; border-radius: 999px;
+  white-space: nowrap;
+}
+.vr-demo{ background: #eceff2; color: #4a5560; }
+.vr-clamp{
+  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+.vr-logo-fallback i{ font-size: 2.2rem; }
+.vr-card-meta i{ color: var(--acc, #0F7A52); }
+
+/* কার্ডের নিচের অংশ: হোয়াটসঅ্যাপ + কল বাটন (থাকলে পাশাপাশি) বা নোট */
+.vr-card-actions .vr-btn-call{ background: #0B6B8C; }
+.vr-card-actions .vr-btn-call:hover{ background: #0A5570; }
+.vr-card-actions .vr-btn-whatsapp{ background: #25b358; }
+.vr-card-actions .vr-btn-whatsapp:hover{ background: #1f9a4b; }
+.vr-nophone{
+  margin: 0; width: 100%;
+  display: flex; align-items: center; gap: 8px;
+  min-height: 46px; padding: 0 12px;
+  background: #f1f5f8; border-radius: 10px;
+  font-size: 0.84rem; font-weight: 600; color: #4a5560; line-height: 1.35;
+}
+.vr-nophone i{ color: #6b7783; }
+
+/* হিরো: ভাইরাল প্লেস থিম (মিন্ট-সবুজ) */
+.vr-hero-pin{ width: 40px; }
+
+/* মোবাইলে দুটো ইনফো চিপ পাশাপাশি (জায়গা বাঁচাতে) */
+.vr-info-chip{ flex: 1 1 150px; padding: 8px 10px; gap: 8px; font-size: 0.84rem; }
+@media (min-width: 640px){ .vr-info-chip{ flex-basis: 220px; padding: 10px 14px; font-size: 0.9rem; } }
+
+
+/* ---------- ছবিতে ক্লিক করলে পুরো ছবি (লাইটবক্স) + জুম (ধাপ ২) ---------- */
+/* ---------- ছবিতে ক্লিক করলে পুরো ছবি (লাইটবক্স) + জুম ---------- */
+.vr-logo.has-img{ cursor: zoom-in; -webkit-tap-highlight-color: transparent; }
+.vr-logo.has-img:focus-visible{ outline: 3px solid #0F7A52; outline-offset: -3px; }
+html.vr-lb-open, html.vr-lb-open body{ overflow: hidden; overscroll-behavior: none; }
+
+.vr-lb{
+  position: fixed; inset: 0;
+  z-index: 300;                       /* "+" শিট (১০০) ও ক্রপ (১১০) এর উপরে */
+  display: flex; flex-direction: column;
+  background: #070a10;
+  color: #fff;
+  animation: vrLbIn .18s ease-out;
+}
+.vr-lb[hidden]{ display: none; }
+@keyframes vrLbIn{ from{ opacity: 0; } to{ opacity: 1; } }
+.vr-lb-bar{
+  flex: 0 0 auto;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 10px 12px 6px 16px;
+  padding-top: max(10px, env(safe-area-inset-top));
+}
+.vr-lb-title{
+  font-family: 'Hind Siliguri', sans-serif;
+  font-size: 1rem; font-weight: 700;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  min-width: 0;
+}
+.vr-lb-btn{
+  flex: 0 0 auto;
+  width: 44px; height: 44px;
+  border: 0; border-radius: 50%;
+  background: rgba(255,255,255,0.16);
+  color: #fff; font-size: 1.05rem;
+  display: inline-flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.vr-lb-btn:hover{ background: rgba(255,255,255,0.28); }
+.vr-lb-btn:active{ background: rgba(255,255,255,0.36); }
+.vr-lb-stage{
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+  touch-action: none;                 /* পিঞ্চ/পান আমরা নিজেরা সামলাই, ব্রাউজারের পেজ-জুম নয় */
+  user-select: none; -webkit-user-select: none;
+  cursor: zoom-in;
+}
+.vr-lb.is-zoomed .vr-lb-stage{ cursor: grab; }
+.vr-lb.is-dragging .vr-lb-stage{ cursor: grabbing; }
+.vr-lb-img{
+  max-width: 100%; max-height: 100%;
+  width: auto; height: auto;
+  object-fit: contain;
+  display: block;
+  transform-origin: center center;
+  will-change: transform;
+  opacity: 0;
+  transition: opacity .18s ease;
+  -webkit-user-drag: none;
+}
+.vr-lb.is-loaded .vr-lb-img{ opacity: 1; }
+.vr-lb:not(.is-loaded) .vr-lb-stage::after{
+  content: ""; position: absolute; width: 34px; height: 34px;
+  border: 3px solid rgba(255,255,255,0.3); border-top-color: #fff; border-radius: 50%;
+  animation: crLbSpin .8s linear infinite;
+}
+@keyframes crLbSpin{ to{ transform: rotate(360deg); } }
+.vr-lb-controls{
+  flex: 0 0 auto;
+  display: flex; align-items: center; justify-content: center; gap: 12px;
+  padding: 8px 12px 6px;
+}
+.vr-lb-zoom{
+  min-width: 68px; height: 44px; padding: 0 12px;
+  border: 0; border-radius: 22px;
+  background: rgba(255,255,255,0.16); color: #fff;
+  font-family: 'Hind Siliguri', sans-serif; font-size: 0.95rem; font-weight: 700;
+  cursor: pointer; -webkit-tap-highlight-color: transparent;
+}
+.vr-lb-zoom:hover{ background: rgba(255,255,255,0.28); }
+.vr-lb-hint{
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 0 16px max(12px, env(safe-area-inset-bottom));
+  text-align: center;
+  font-size: 0.78rem; opacity: 0.65;
+}
+.vr-lb.is-zoomed .vr-lb-hint{ visibility: hidden; }
+@media (prefers-reduced-motion: reduce){
+  .vr-lb, .vr-lb-img{ animation: none; transition: none; }
+}
+
+/* উপরের ব্যানারের ছবিতেও ক্লিক করলে পুরো ছবি খোলে */
+body[data-banner-category="handloom"] .banner-slide.has-image{ cursor: zoom-in; -webkit-tap-highlight-color: transparent; }
+.vr-lb-link{
+  flex: 0 0 auto;
+  max-width: 44%;
+  margin-left: auto;
+  padding: 9px 16px;
+  border-radius: 22px;
+  background: #0F7A52; color: #fff;
+  font-family: 'Hind Siliguri', sans-serif; font-size: 0.86rem; font-weight: 700;
+  text-decoration: none;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.vr-lb-link[hidden]{ display: none; }
+.vr-lb-link:active{ background: #0D6B45; }
+
+
+
+/* ==========================================================================
+   ধাপ ২ — চিপ অনুযায়ী আলাদা কার্ড লেআউট
+   person   : বাম কিনারায় ছবি-টাইল (সব চিপ)
+   agent    : (ব্যবহৃত নয়)
+   guardian : অভিভাবক — ছবি নেই, হাইলাইট উদ্ধৃতি-ব্লক
+   ========================================================================== */
+.vr-facts{ display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.vr-fact{
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 0.82rem; font-weight: 700; line-height: 1.2;
+  padding: 4px 10px; border-radius: 8px;
+  background: #f1f5f8; color: var(--ink);
+}
+.vr-fact i{ color: var(--acc, #0F7A52); font-size: 0.8rem; }
+
+/* agent + guardian: বড় ছবি-টাইল নেই, তাই কার্ডের ভেতরের প্যাডিং স্বাভাবিক */
+.vr-card--agent .vr-card-main,
+.vr-card--guardian .vr-card-main{ gap: 12px; }
+.vr-avatar{
+  flex: 0 0 auto;
+  width: 60px; height: 60px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem;
+  position: relative; overflow: hidden;
+}
+.vr-avatar.vr-logo{ align-self: flex-start; min-height: 0; margin: 0; border-radius: 50%; }
+.vr-avatar.vr-logo img{ border-radius: 50%; }
+.vr-card--agent .vr-card-actions,
+.vr-card--guardian .vr-card-actions{ margin-top: 2px; }
+
+.vr-quote{
+  margin: 10px 0 0;
+  padding: 9px 12px;
+  border-left: 3px solid var(--acc, #0F7A52);
+  background: #f5faf7;
+  border-radius: 0 10px 10px 0;
+  font-size: 0.92rem; font-weight: 600; line-height: 1.55;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+
+/* person কার্ডে ছবি ক্লিকযোগ্য: ফোকাস রিং */
+.vr-card .vr-logo.has-img:focus-visible{ outline: 3px solid #0A4A34; outline-offset: -3px; }
+
+/* কল করুন বাটন এখন <button>: ব্রাউজারের ডিফল্ট স্টাইল রিসেট */
+.vr-card-actions button.vr-btn-call{
+  border: 0; margin: 0; cursor: pointer;
+  -webkit-appearance: none; appearance: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.vr-card-actions button.vr-btn-call:focus-visible{ outline: 3px solid #0A4A34; outline-offset: 2px; }
+
+/* ---------- কল-শিট ("কল করুন" চাপলে নিচ থেকে উঠে আসে) ---------- */
+html.vr-call-open, html.vr-call-open body{ overflow: hidden; overscroll-behavior: none; }
+.vr-call{
+  position: fixed; inset: 0;
+  z-index: 400;                       /* লাইটবক্স (৩০০) ও "+" শিটের উপরে */
+  display: flex; align-items: flex-end; justify-content: center;
+}
+.vr-call[hidden]{ display: none; }
+.vr-call-backdrop{
+  position: absolute; inset: 0;
+  background: rgba(10, 20, 28, 0.55);
+  opacity: 0; transition: opacity .18s ease;
+}
+.vr-call.is-open .vr-call-backdrop{ opacity: 1; }
+.vr-call-sheet{
+  position: relative;
+  width: 100%; max-width: 480px;
+  box-sizing: border-box;
+  background: #fff;
+  border-radius: 20px 20px 0 0;
+  padding: 10px 20px 20px;
+  padding-bottom: max(20px, env(safe-area-inset-bottom));
+  font-family: 'Hind Siliguri', sans-serif;
+  text-align: center;
+  box-shadow: 0 -10px 30px rgba(0,0,0,.18);
+  transform: translateY(100%);
+  transition: transform .2s ease-out;
+}
+.vr-call.is-open .vr-call-sheet{ transform: translateY(0); }
+.vr-call-grab{ width: 42px; height: 4px; border-radius: 4px; background: #d3dbe0; margin: 0 auto 10px; }
+.vr-call-x{
+  position: absolute; top: 10px; right: 12px;
+  width: 36px; height: 36px; border: 0; border-radius: 50%;
+  background: #f1f5f8; color: var(--ink, #22303a);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 1rem;
+}
+.vr-call-hint{ margin: 6px 0 2px; font-size: 0.85rem; color: var(--ink-soft, #5b6b73); font-weight: 600; }
+.vr-call-name{
+  margin: 0; font-size: 1.2rem; font-weight: 800; color: var(--ink, #22303a);
+  overflow-wrap: anywhere; padding: 0 40px;
+}
+.vr-call-num{
+  margin: 8px 0 16px;
+  font-size: 1.55rem; font-weight: 800; letter-spacing: .5px;
+  color: #0B6B8C;
+  font-variant-numeric: tabular-nums;
+}
+.vr-call-go, .vr-call-copy{
+  display: flex; align-items: center; justify-content: center; gap: 9px;
+  box-sizing: border-box; width: 100%; height: 50px;
+  border-radius: 12px; border: 0;
+  font-family: inherit; font-size: 1rem; font-weight: 700; line-height: 1;
+  text-decoration: none; cursor: pointer;
+  transition: background-color .15s, transform .12s;
+}
+.vr-call-go{ background: #0F7A52; color: #fff; }
+.vr-call-go:hover{ background: #0D6B45; }
+.vr-call-copy{ background: #eef3f6; color: var(--ink, #22303a); margin-top: 10px; }
+.vr-call-copy:hover{ background: #e2eaef; }
+.vr-call-copy.is-done{ background: #e3f6ea; color: #0F7A52; }
+.vr-call-go:active, .vr-call-copy:active{ transform: scale(0.98); }
+.vr-call-go:focus-visible, .vr-call-copy:focus-visible, .vr-call-x:focus-visible{ outline: 3px solid #0A4A34; outline-offset: 2px; }
+@media (min-width: 640px){
+  .vr-call{ align-items: center; }
+  .vr-call-sheet{ border-radius: 20px; transform: translateY(24px); opacity: 0; transition: transform .2s ease-out, opacity .2s; }
+  .vr-call.is-open .vr-call-sheet{ transform: none; opacity: 1; }
+  .vr-call-grab{ display: none; }
+}
+@media (prefers-reduced-motion: reduce){
+  .vr-call-sheet, .vr-call-backdrop{ transition: none; }
+}
+
+/* ---------- আরও ছবি (ঐচ্ছিক): ফর্মে ৪টি স্লট ---------- */
+.vr-xfield{ margin-bottom: 14px; }
+.vr-xlabel{ display: block; font-size: 0.86rem; font-weight: 600; color: var(--ink); margin: 0 2px 4px; }
+.vr-xhint{ margin: 0 2px 8px; font-size: 0.8rem; color: var(--ink-soft); line-height: 1.45; }
+.vr-xgrid{ display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.vr-xslot{ position: relative; aspect-ratio: 1 / 1; border-radius: 12px; overflow: hidden; }
+.vr-xadd{
+  width: 100%; height: 100%; box-sizing: border-box;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+  border: 1.5px dashed rgba(15,122,82,0.5); border-radius: 12px;
+  background: #f5fbf8; color: #0F7A52;
+  font-family: inherit; font-size: 0.72rem; font-weight: 700; line-height: 1.2;
+  cursor: pointer; -webkit-tap-highlight-color: transparent;
+}
+.vr-xadd i{ font-size: 1rem; }
+.vr-xadd:hover{ background: #eaf7f0; }
+.vr-xadd:focus-visible, .vr-xrm:focus-visible{ outline: 3px solid #0A4A34; outline-offset: 2px; }
+.vr-xslot.has-photo .vr-xadd{ display: none; }
+.vr-xthumb{
+  display: block; width: 100%; height: 100%; object-fit: cover;
+  border-radius: 12px; border: 1px solid rgba(15,122,82,0.25); box-sizing: border-box;
+}
+.vr-xthumb[hidden], .vr-xrm[hidden]{ display: none; }
+.vr-xrm{
+  position: absolute; top: 4px; right: 4px;
+  width: 26px; height: 26px; padding: 0;
+  display: flex; align-items: center; justify-content: center;
+  border: 0; border-radius: 50%;
+  background: rgba(0,0,0,0.68); color: #fff; font-size: 0.78rem;
+  cursor: pointer;
+}
+
+/* ---------- কার্ডের ছবিতে "আরও ছবি আছে" ব্যাজ ---------- */
+.vr-photo-count{
+  position: absolute; right: 6px; bottom: 6px;
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 2px 8px; border-radius: 999px;
+  background: rgba(0,0,0,0.65); color: #fff;
+  font-family: 'Hind Siliguri', sans-serif; font-size: 0.74rem; font-weight: 700; line-height: 1.4;
+  pointer-events: none;
+}
+.vr-photo-count i{ font-size: 0.72rem; }
+
+/* ---------- লাইটবক্স গ্যালারি: ◀ ▶ বাটন, ক্রমিক নম্বর, থাম্বনেইল ---------- */
+.vr-lb-count{
+  flex: 0 0 auto;
+  font-family: 'Hind Siliguri', sans-serif; font-size: 0.86rem; font-weight: 700;
+  padding: 2px 10px; border-radius: 999px; background: rgba(255,255,255,0.16);
+}
+.vr-lb-count[hidden], .vr-lb-nav[hidden], .vr-lb-thumbs[hidden]{ display: none; }
+.vr-lb-nav{
+  position: absolute; top: 50%; transform: translateY(-50%);
+  z-index: 2;
+  width: 44px; height: 44px; padding: 0;
+  display: flex; align-items: center; justify-content: center;
+  border: 0; border-radius: 50%;
+  background: rgba(255,255,255,0.16); color: #fff; font-size: 1.05rem;
+  cursor: pointer; -webkit-tap-highlight-color: transparent;
+}
+.vr-lb-nav:hover{ background: rgba(255,255,255,0.28); }
+.vr-lb-prev{ left: 8px; }
+.vr-lb-next{ right: 8px; }
+.vr-lb.is-zoomed .vr-lb-nav{ display: none; }
+.vr-lb-thumbs{
+  flex: 0 0 auto;
+  display: flex; gap: 8px; justify-content: center;
+  padding: 8px 12px 2px;
+  overflow-x: auto;
+}
+.vr-lb-thumbs button{
+  flex: 0 0 auto; width: 52px; height: 52px; padding: 0;
+  border: 2px solid transparent; border-radius: 8px; overflow: hidden;
+  background: #1d232c; opacity: 0.6; cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.vr-lb-thumbs button.is-active{ border-color: #fff; opacity: 1; }
+.vr-lb-thumbs img{ display: block; width: 100%; height: 100%; object-fit: cover; }
+.vr-lb.is-zoomed .vr-lb-thumbs{ visibility: hidden; }
+
+/* ---------- "ভেরিফাইড" ব্যাজ (অ্যাডমিন যাচাইকৃত) — সোনালি ---------- */
+.vr-verified{
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 3px 10px; border-radius: 999px;
+  background: linear-gradient(135deg, #fbe08a 0%, #f0b429 55%, #d99a0b 100%);
+  color: #3d2b00;                                   /* সোনালি ব্যাকগ্রাউন্ডে গাঢ় বাদামি লেখা — WCAG AA কনট্রাস্ট */
+  border: 1px solid #c58f00;
+  font-size: 0.78rem; font-weight: 700; line-height: 1.3;
+  box-shadow: 0 1px 4px rgba(197,143,0,0.4), inset 0 1px 0 rgba(255,255,255,0.45);
+  white-space: nowrap;
+}
+.vr-verified i{ font-size: 0.85rem; color: #6b4a00; }
+.vr-sr{ position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.vr-card.is-verified{ box-shadow: 0 0 0 1.5px rgba(217,154,11,0.55), var(--shadow-sm, 0 2px 8px rgba(0,0,0,.06)); }
+
+/* ---------- ব্যানারের উপরের ফাঁকা জায়গা বাদ: ব্যাক-বারের ঠিক নিচেই ব্যানার ----------
+   css/style.css-এর `body[data-banner-category="handloom"] #catBannerWrap { margin: 14px 0 6px }`
+   (মোবাইলে 10px 0 4px) উপরে ১০–১৪px ফাঁক রাখছিল; এখানে শুধু উপরের মার্জিন ০ করা হলো (নিচের মার্জিন অপরিবর্তিত)। */
+body[data-banner-category="handloom"] #catBannerWrap{ margin-top: 0; }
+/* উপরের ফাঁক না থাকায় উপরের কোণ সোজা (ব্যাক-বারের সাথে লেগে থাকে), নিচের কোণ গোলই থাকে */
+body[data-banner-category="handloom"] #catBannerSlider{ border-radius: 0 0 18px 18px; }
+@media (max-width: 700px){
+  body[data-banner-category="handloom"] #catBannerSlider{ border-radius: 0 0 14px 14px; }
+}
+
+/* ==========================================================================
+   কার্ডের লেখা ক্লিকযোগ্য + "বিস্তারিত পেজ" (কার্ডের লেখায় ক্লিক করলে খোলে)
+   ========================================================================== */
+.vr-card-body[data-vr-open]{ cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.vr-card-body[data-vr-open]:focus-visible{ outline: 3px solid #0A4A34; outline-offset: 3px; border-radius: 8px; }
+.vr-more{
+  display: inline-flex; align-items: center; gap: 5px;
+  margin: 8px 0 10px;
+  font-size: 0.86rem; font-weight: 700; line-height: 1.2;
+  color: var(--acc, #0F7A52);
+}
+.vr-more i{ font-size: 0.7rem; }
+
+html.vr-detail-open, html.vr-detail-open body{ overflow: hidden; overscroll-behavior: none; }
+.vr-detail{
+  position: fixed; inset: 0;
+  z-index: 200;                       /* "+" শিট (১০০) এর উপরে; লাইটবক্স (৩০০) ও কল-শিট (৪০০) এর নিচে */
+  display: flex; flex-direction: column;
+  overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain;
+  background: var(--cream, #f1f5f8);
+  font-family: 'Hind Siliguri', sans-serif;
+  animation: vrDetailIn .2s ease-out;
+}
+.vr-detail[hidden]{ display: none; }
+@keyframes vrDetailIn{ from{ opacity: 0; transform: translateY(14px); } to{ opacity: 1; transform: none; } }
+
+.vr-detail-bar{
+  position: sticky; top: 0; z-index: 3;
+  flex: 0 0 auto;
+  display: flex; align-items: center; gap: 12px;
+  padding: 8px 16px;
+  padding-top: max(8px, env(safe-area-inset-top));
+  background: #fff;
+  border-bottom: 1px solid var(--line, rgba(34,48,58,0.12));
+}
+.vr-detail-back{
+  flex: 0 0 auto;
+  width: 44px; height: 44px; padding: 0;
+  display: flex; align-items: center; justify-content: center;
+  border: 0; border-radius: 50%;
+  background: #f1f5f8; color: var(--ink, #22303a); font-size: 1.05rem;
+  cursor: pointer; -webkit-tap-highlight-color: transparent;
+}
+.vr-detail-back:hover{ background: #e6ecf0; }
+.vr-detail-title{ font-size: 1.05rem; font-weight: 700; color: var(--ink, #22303a); }
+
+.vr-detail-inner{
+  flex: 1 0 auto;
+  width: 100%; max-width: 640px; margin: 0 auto; box-sizing: border-box;
+  padding-bottom: 20px;
+}
+
+/* উপরে বড় ছবি */
+.vr-dhero{
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  max-height: 54vh;
+  overflow: hidden;
+  background: #dfe7ec;
+  border-radius: 0 0 22px 22px;
+}
+.vr-dhero img{ display: block; width: 100%; height: 100%; object-fit: cover; }
+.vr-dhero.vr-dph{ cursor: zoom-in; -webkit-tap-highlight-color: transparent; }
+.vr-dhero .vr-photo-count{ right: 12px; bottom: 12px; font-size: 0.82rem; padding: 3px 10px; }
+.vr-dhero--none{
+  aspect-ratio: auto; height: 150px;
+  display: flex; align-items: center; justify-content: center;
+}
+.vr-dhero--none i{ font-size: 3.4rem; }
+.vr-dph:focus-visible{ outline: 3px solid #0A4A34; outline-offset: -3px; }
+
+.vr-dthumbs{
+  display: flex; gap: 8px;
+  padding: 12px 16px 2px;
+  overflow-x: auto; -webkit-overflow-scrolling: touch;
+}
+.vr-dthumb{
+  flex: 0 0 auto; width: 64px; height: 64px;
+  border-radius: 10px; overflow: hidden;
+  border: 2px solid #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.18);
+  cursor: pointer; background: #dfe7ec;
+  -webkit-tap-highlight-color: transparent;
+}
+.vr-dthumb img{ display: block; width: 100%; height: 100%; object-fit: cover; }
+
+.vr-dhead{ padding: 14px 16px 4px; }
+.vr-dname{ margin: 0; font-size: 1.45rem; font-weight: 800; line-height: 1.3; color: var(--ink, #22303a); overflow-wrap: anywhere; }
+.vr-dhead .vr-tags{ margin-top: 8px; }
+
+/* বিস্তারিত তথ্য */
+.vr-dsec{
+  margin: 12px 16px 0;
+  padding: 6px 14px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 1px 8px rgba(20,40,60,0.06);
+}
+.vr-dsec .vr-quote{ margin: 8px 0; }
+.vr-dsec-title{ margin: 8px 0 2px; font-size: 0.95rem; font-weight: 800; color: var(--ink, #22303a); }
+.vr-drow{
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--line, rgba(34,48,58,0.1));
+}
+.vr-drow:last-child{ border-bottom: 0; }
+.vr-dico{
+  flex: 0 0 auto; width: 34px; height: 34px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 10px;
+  background: #eef5f1; color: var(--acc, #0F7A52); font-size: 0.95rem;
+}
+.vr-dtxt{ display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.vr-dlbl{ font-size: 0.8rem; font-weight: 600; color: var(--ink-soft, #5b6b73); }
+.vr-dval{ font-size: 1rem; font-weight: 600; line-height: 1.55; color: var(--ink, #22303a); white-space: pre-line; overflow-wrap: anywhere; }
+
+/* নিচে আটকে থাকা যোগাযোগ বাটন */
+.vr-detail-actions{
+  position: sticky; bottom: 0; z-index: 3;
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 10px 16px;
+  padding-bottom: max(10px, env(safe-area-inset-bottom));
+  background: #fff;
+  border-top: 1px solid var(--line, rgba(34,48,58,0.12));
+  box-shadow: 0 -4px 14px rgba(20,40,60,0.06);
+}
+.vr-detail-actions:empty{ display: none; }
+.vr-detail-actions .vr-nophone{ width: 100%; }
+
+@media (min-width: 700px){
+  .vr-detail-inner{ padding-top: 14px; }
+  .vr-dhero{ border-radius: 22px; max-height: 54vh; }
+  .vr-detail-actions{ padding-left: max(16px, calc(50% - 320px)); padding-right: max(16px, calc(50% - 320px)); }
+}
+@media (prefers-reduced-motion: reduce){
+  .vr-detail{ animation: none; }
+}

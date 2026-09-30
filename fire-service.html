@@ -13,7 +13,8 @@
 <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
 <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
 <link rel="manifest" href="manifest.json">
-<link rel="stylesheet" href="css/style.css?v=20260924073609">
+<link rel="stylesheet" href="css/style.css?v=20260930045009">
+<link rel="stylesheet" href="css/fire-service.css?v=20260930045009">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body data-banner-category="fire-service">
@@ -59,65 +60,104 @@
       <span>ফায়ার সার্ভিস</span>
     </div>
 
-    <div class="banner-slider-wrap" id="catBannerWrap" style="display:none">
-      <section class="banner-slider" id="catBannerSlider" aria-label="বিভাগ ব্যানার">
-        <div class="banner-track" id="catBannerTrack"></div>
-      </section>
-      <div class="banner-dots" id="catBannerDots"></div>
-    </div>
-
-    <section class="cat-grid">
-      <a class="cat-card cat-emergency" href="fire-service-sadar.html">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🚒</span></div>
-        <h3>টাঙ্গাইল সদর থানা</h3>
-      </a>
-      <a class="cat-card cat-emergency" href="fire-service-mirzapur.html">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🚒</span></div>
-        <h3>মির্জাপুর থানা</h3>
-      </a>
-      <a class="cat-card cat-emergency" href="fire-service-delduar.html">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🚒</span></div>
-        <h3>দেলদুয়ার থানা</h3>
-      </a>
-      <a class="cat-card cat-emergency" href="fire-service-basail.html">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🚒</span></div>
-        <h3>বাসাইল থানা</h3>
-      </a>
-      <a class="cat-card cat-emergency" href="fire-service-kalihati.html">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🚒</span></div>
-        <h3>কালিহাতী থানা</h3>
-      </a>
-      <a class="cat-card cat-emergency" href="fire-service-ghatail.html">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🚒</span></div>
-        <h3>ঘাটাইল থানা</h3>
-      </a>
-      <a class="cat-card cat-emergency" href="fire-service-gopalpur.html">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🚒</span></div>
-        <h3>গোপালপুর থানা</h3>
-      </a>
-      <a class="cat-card cat-emergency" href="fire-service-madhupur.html">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🚒</span></div>
-        <h3>মধুপুর থানা</h3>
-      </a>
-      <a class="cat-card cat-emergency" href="fire-service-dhanbari.html">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🚒</span></div>
-        <h3>ধনবাড়ী থানা</h3>
-      </a>
-      <a class="cat-card cat-emergency" href="fire-service-bhuapur.html">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🚒</span></div>
-        <h3>ভূঞাপুর থানা</h3>
-      </a>
-      <a class="cat-card cat-emergency" href="fire-service-nagarpur.html">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🚒</span></div>
-        <h3>নাগরপুর থানা</h3>
-      </a>
-      <a class="cat-card cat-emergency" href="fire-service-sakhipur.html">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🚒</span></div>
-        <h3>সখীপুর থানা</h3>
-      </a>
+    <section class="fs-chip-row" id="fsChipRow" aria-label="থানা নির্বাচন করুন">
+      <button type="button" class="fs-chip is-active" data-fs="sadar">টাঙ্গাইল সদর</button>
+      <button type="button" class="fs-chip" data-fs="mirzapur">মির্জাপুর</button>
+      <button type="button" class="fs-chip" data-fs="delduar">দেলদুয়ার</button>
+      <button type="button" class="fs-chip" data-fs="basail">বাসাইল</button>
+      <button type="button" class="fs-chip" data-fs="kalihati">কালিহাতী</button>
+      <button type="button" class="fs-chip" data-fs="ghatail">ঘাটাইল</button>
+      <button type="button" class="fs-chip" data-fs="gopalpur">গোপালপুর</button>
+      <button type="button" class="fs-chip" data-fs="madhupur">মধুপুর</button>
+      <button type="button" class="fs-chip" data-fs="dhanbari">ধনবাড়ী</button>
+      <button type="button" class="fs-chip" data-fs="bhuapur">ভূঞাপুর</button>
+      <button type="button" class="fs-chip" data-fs="nagarpur">নাগরপুর</button>
+      <button type="button" class="fs-chip" data-fs="sakhipur">সখীপুর</button>
     </section>
+
+    <section class="fs-card" id="fsCard">
+      <div class="fs-poster-head">
+        <div class="fs-poster-badge"><i class="fa-solid fa-fire-flame-curved" aria-hidden="true"></i></div>
+        <div class="fs-poster-headtext">
+          <span class="fs-poster-org">ফায়ার সার্ভিস ও সিভিল ডিফেন্স</span>
+          <h3 id="fsStationName">টাঙ্গাইল সদর ফায়ার স্টেশন</h3>
+        </div>
+      </div>
+
+      <div class="fs-emergency-bar"><i class="fa-solid fa-phone-volume" aria-hidden="true"></i> জরুরি যোগাযোগ</div>
+
+      <div class="fs-contact-list">
+        <div class="fs-contact-row">
+          <div class="fs-contact-icon fs-icon-red"><i class="fa-solid fa-phone" aria-hidden="true"></i></div>
+          <div class="fs-contact-text"><span class="fs-contact-label">জাতীয় হটলাইন</span><span class="fs-contact-num">১০২</span></div>
+          <a class="fs-call-round" href="tel:102" aria-label="জাতীয় হটলাইনে কল করুন"><i class="fa-solid fa-phone" aria-hidden="true"></i></a>
+        </div>
+        <div class="fs-contact-row">
+          <div class="fs-contact-icon fs-icon-green"><i class="fa-solid fa-mobile-screen-button" aria-hidden="true"></i></div>
+          <div class="fs-contact-text"><span class="fs-contact-label">স্টেশন মোবাইল</span><span class="fs-contact-num" id="fsStationPhonePill">01901-020962</span></div>
+          <a class="fs-call-round" id="fsStationCallBtn" href="tel:01901020962" aria-label="স্টেশন মোবাইলে কল করুন"><i class="fa-solid fa-phone" aria-hidden="true"></i></a>
+        </div>
+        <div class="fs-contact-row">
+          <div class="fs-contact-icon fs-icon-navy"><i class="fa-solid fa-headset" aria-hidden="true"></i></div>
+          <div class="fs-contact-text"><span class="fs-contact-label">জাতীয় জরুরি সেবা</span><span class="fs-contact-num">৯৯৯</span></div>
+          <a class="fs-call-round" href="tel:999" aria-label="৯৯৯ নাম্বারে কল করুন"><i class="fa-solid fa-phone" aria-hidden="true"></i></a>
+        </div>
+      </div>
+    </section>
+
   </div>
 </main>
+
+<script>
+(function () {
+  var FS_DATA = {
+    sadar:    { name: 'টাঙ্গাইল সদর ফায়ার স্টেশন', phone: '01901020962', page: 'fire-service-sadar.html' },
+    mirzapur: { name: 'মির্জাপুর ফায়ার স্টেশন',      phone: '01901020980', page: 'fire-service-mirzapur.html' },
+    delduar:  { name: 'দেলদুয়ার ফায়ার স্টেশন',       phone: '01901020992', page: 'fire-service-delduar.html' },
+    basail:   { name: 'বাসাইল ফায়ার স্টেশন',         phone: '01901020964', page: 'fire-service-basail.html' },
+    kalihati: { name: 'কালিহাতী ফায়ার স্টেশন',       phone: '01901020970', page: 'fire-service-kalihati.html' },
+    ghatail:  { name: 'ঘাটাইল ফায়ার স্টেশন',         phone: '01901020988', page: 'fire-service-ghatail.html' },
+    gopalpur: { name: 'গোপালপুর ফায়ার স্টেশন',       phone: '01901020968', page: 'fire-service-gopalpur.html' },
+    madhupur: { name: 'মধুপুর ফায়ার স্টেশন',         phone: '01901020976', page: 'fire-service-madhupur.html' },
+    dhanbari: { name: 'ধনবাড়ী ফায়ার স্টেশন',        phone: '01901020978', page: 'fire-service-dhanbari.html' },
+    bhuapur:  { name: 'ভূঞাপুর ফায়ার স্টেশন',        phone: '01901020966', page: 'fire-service-bhuapur.html' },
+    nagarpur: { name: 'নাগরপুর ফায়ার স্টেশন',        phone: '01901020984', page: 'fire-service-nagarpur.html' },
+    sakhipur: { name: 'সখীপুর ফায়ার স্টেশন',         phone: '01901020986', page: 'fire-service-sakhipur.html' }
+  };
+
+  var chipRow = document.getElementById('fsChipRow');
+  var nameEl = document.getElementById('fsStationName');
+  var phonePillEl = document.getElementById('fsStationPhonePill');
+  var callBtnEl = document.getElementById('fsStationCallBtn');
+  var poserHeadText = document.querySelector('.fs-poster-headtext');
+
+  function formatPhone(p) {
+    return p.length === 11 ? p.slice(0, 5) + '-' + p.slice(5) : p;
+  }
+
+  function renderStation(key) {
+    var st = FS_DATA[key];
+    if (!st) return;
+    poserHeadText.classList.add('fs-card-fade');
+    setTimeout(function () {
+      nameEl.textContent = st.name;
+      phonePillEl.textContent = formatPhone(st.phone);
+      callBtnEl.setAttribute('href', 'tel:' + st.phone);
+      poserHeadText.classList.remove('fs-card-fade');
+    }, 120);
+  }
+
+  chipRow.addEventListener('click', function (e) {
+    var chip = e.target.closest('.fs-chip');
+    if (!chip) return;
+    var chips = chipRow.querySelectorAll('.fs-chip');
+    for (var i = 0; i < chips.length; i++) chips[i].classList.remove('is-active');
+    chip.classList.add('is-active');
+    chip.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    renderStation(chip.getAttribute('data-fs'));
+  });
+})();
+</script>
 
 <footer class="site-footer">
   <div class="footer-inner">
@@ -138,6 +178,14 @@
         <li><a href="terms.html">শর্তাবলী</a></li>
       </ul>
     </div>
+    <div>
+      <h4 data-i18n="footer.contactHeading">যোগাযোগ</h4>
+      <ul class="footer-contact">
+        <li><i class="fa-solid fa-envelope" aria-hidden="true"></i><a href="mailto:info@tangailzila.com">info@tangailzila.com</a></li>
+        <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i><span>টাঙ্গাইল সদর, টাঙ্গাইল, বাংলাদেশ</span></li>
+        <li><i class="fa-solid fa-message" aria-hidden="true"></i><a href="contact.html">বার্তা পাঠান</a></li>
+      </ul>
+    </div>
   </div>
   <div class="footer-bottom">© ২০২৬ টাঙ্গাইল জেলা। সর্বস্বত্ব সংরক্ষিত।</div>
 </footer>
@@ -151,19 +199,19 @@
 </nav>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-<script src="js/supabase-config.js?v=20260924073609"></script>
-    <script src="js/nav-avatar.js?v=20260924073609"></script>
-    <script src="js/call.js?v=20260924073609"></script>
-<script src="js/sticky-header.js?v=20260924073609"></script>
-<script src="js/banner-slider.js?v=20260924073609"></script>
-<script src="js/category-banners.js?v=20260924073609"></script>
-<script src="js/notice-bar.js?v=20260924073609"></script>
-<script src="js/i18n.js?v=20260924073609"></script>
-<script src="js/search-index.js?v=20260924073609"></script>
-<script src="js/smart-search.js?v=20260924073609"></script>
-<script src="js/search-ui.js?v=20260924073609"></script>
-<script src="js/script.js?v=20260924073609"></script>
-<script src="js/auto-update.js?v=20260924073609"></script>
-<script src="js/floating-buttons.js?v=20260924073609"></script>
+<script src="js/supabase-config.js?v=20260930045009"></script>
+    <script src="js/nav-avatar.js?v=20260930045009"></script>
+    <script src="js/call.js?v=20260930045009"></script>
+<script src="js/sticky-header.js?v=20260930045009"></script>
+<script src="js/banner-slider.js?v=20260930045009"></script>
+<script src="js/category-banners.js?v=20260930045009"></script>
+<script src="js/notice-bar.js?v=20260930045009"></script>
+<script src="js/i18n.js?v=20260930045009"></script>
+<script src="js/search-index.js?v=20260930045009"></script>
+<script src="js/smart-search.js?v=20260930045009"></script>
+<script src="js/search-ui.js?v=20260930045009"></script>
+<script src="js/script.js?v=20260930045009"></script>
+<script src="js/auto-update.js?v=20260930045009"></script>
+<script src="js/floating-buttons.js?v=20260930045009"></script>
 </body>
 </html>

@@ -1,0 +1,824 @@
+/* ==========================================================================
+   জনপ্রতিনিধি পেজ — dedicated styles (public-representative.html) — courier.css এর কাঠামো, সবুজ থিম
+   Uses the site's shared design tokens from css/style.css (--maroon, --gold,
+   --cream, --ink, --shadow-*, --radius, --line) so it matches the rest of
+   the site while giving this page its own modern layout.
+   Phase 2: back-only app bar + illustrated hero + toolbar (selector/info bar).
+   Phase 3: courier cards (logo tile, labelled rows, green map / blue call buttons).
+   Phase 4: footer strip, empty state, keyboard-focus ring, reduced-motion.
+   ========================================================================== */
+
+/* ---------- Page shell (this page has its own back-only app bar + footer strip) ---------- */
+body.pr-page{ padding-bottom: 24px; }
+body.pr-page .global-fab-stack{ bottom: 20px; }
+.pr-wrap{
+  max-width: 1240px;
+  padding: 0 16px 8px;
+}
+@media (min-width: 640px){ .pr-wrap{ padding-left: 24px; padding-right: 24px; } }
+
+/* keyboard focus: dark navy ring, clearly visible on the sky hero, white cards and coloured buttons */
+.pr-page a:focus-visible,
+.pr-page button:focus-visible{
+  outline: 3px solid #0A3B22;
+  outline-offset: 2px;
+}
+
+/* ---------- Top app bar (back only) + hero ---------- */
+.pr-hero{
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: linear-gradient(180deg, #eaf7ee 0%, #d4edda 55%, #c0e4cc 100%);
+  border-radius: 0 0 26px 26px;
+  margin-bottom: 16px;
+}
+.pr-hero-art{
+  position: absolute;
+  right: 0; bottom: 0;
+  width: min(100%, 460px);
+  height: auto;                 /* keeps the viewBox aspect ratio: never cropped */
+  z-index: 0;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 12%);
+          mask-image: linear-gradient(90deg, transparent 0, #000 12%);
+}
+.pr-hero-inner{
+  position: relative;
+  z-index: 2;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 14px 16px calc(6px + 0.21 * min(100vw, 460px));
+}
+/* পুরনো ভাসমান "pr-back / pr-back-float" পিল সরিয়ে সাইটের স্ট্যান্ডার্ড sticky
+   টপবার (.post-detail-topbar.list-back-topbar, css/style.css) ব্যবহার হচ্ছে —
+   courier.html-এ দেখো, এই ফাইলে আর নতুন করে স্টাইল করার দরকার নেই। */
+
+.pr-hero-body{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 18px;
+}
+.pr-hero-pin{ flex: 0 0 auto; width: 40px; height: auto; }
+.pr-hero-text h1{
+  margin: 0;
+  font-family: 'Hind Siliguri', sans-serif;
+  font-weight: 700;
+  color: #0A3B22;
+  line-height: 1.3;
+}
+.pr-t1{ display: block; font-size: clamp(1.3rem, 1rem + 1.6vw, 2rem); }
+.pr-t2{ display: block; font-size: clamp(1.95rem, 1.2rem + 3.2vw, 3.1rem); }
+.pr-hero-text p{
+  margin: 4px 0 0;
+  font-size: clamp(0.88rem, 0.8rem + 0.5vw, 1.1rem);
+  font-weight: 600;
+  color: var(--maroon-dark);
+  line-height: 1.5;
+}
+
+@media (min-width: 640px){
+  .pr-hero-pin{ width: 50px; }
+}
+@media (min-width: 768px){
+  /* side-by-side: text left, illustration right */
+  .pr-hero-inner{ padding: 18px 24px 34px; }
+  .pr-hero-art{ width: 500px; }
+}
+@media (min-width: 1024px){
+  .pr-hero-inner{ padding-bottom: 44px; }
+  .pr-hero-art{ width: auto; height: 100%; }
+  .pr-hero-pin{ width: 58px; }
+}
+
+/* ---------- Toolbar: upazila selector + info chips ---------- */
+.pr-toolbar{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+@media (min-width: 900px){
+  .pr-toolbar{ flex-direction: row; align-items: stretch; gap: 12px; }
+  .pr-filter-bar{ flex: 1 1 46%; }
+  .pr-info-bar{ flex: 1 1 54%; }
+}
+
+.pr-filter-bar{
+  background: #fff;
+  border: 1px solid rgba(15,107,61,0.22);
+  border-radius: 14px;
+  box-shadow: var(--shadow-sm);
+  padding: 10px 12px 12px;
+}
+.pr-filter-label{
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+  margin: 0 2px 6px;
+}
+.pr-select-wrap{ position: relative; }
+.pr-select-wrap i.pr-select-pin{
+  position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+  color: #0F6B3D; font-size: 1rem; pointer-events: none;
+}
+.pr-select-wrap i.pr-select-caret{
+  position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+  color: var(--ink-soft); font-size: 0.85rem; pointer-events: none;
+}
+#prUpazilaSelect{
+  width: 100%;
+  min-height: 45px;
+  appearance: none;
+  -webkit-appearance: none;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ink);
+  background: #f6fbf8;
+  border: 1px solid rgba(15,107,61,0.22);
+  border-radius: 10px;
+  padding: 9px 38px 9px 40px;
+  cursor: pointer;
+  transition: border-color .15s, box-shadow .15s;
+}
+#prUpazilaSelect:hover{ border-color: #0F6B3D; }
+#prUpazilaSelect:focus-visible{
+  outline: 3px solid #0A3B22;
+  outline-offset: 2px;
+  border-color: #0F6B3D;
+}
+
+/* ---------- Info bar ---------- */
+.pr-info-bar{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.pr-info-chip{
+  flex: 1 1 220px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  border: 1px solid rgba(15,107,61,0.22);
+  border-radius: 14px;
+  box-shadow: var(--shadow-sm);
+  padding: 10px 14px;
+  min-height: 48px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.4;
+}
+.pr-chip-ic{
+  flex: 0 0 auto;
+  width: 32px; height: 32px;
+  border-radius: 9px;
+  background: #0F6B3D;
+  color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.9rem;
+}
+.pr-info-chip b{ font-weight: 700; color: #0A3B22; }
+
+/* ---------- Courier company category bar (Phase 5) ---------- */
+.pr-cats{ margin-bottom: 10px; }
+.pr-cats-scroll{
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 12px;                        /* চিপগুলোর মাঝের ফাঁক (আগে 8px) */
+  overflow-x: auto;                 /* phones: swipe left / right */
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: none;
+  scrollbar-width: none;
+  padding: 2px 2px 6px;
+  overscroll-behavior-x: contain;
+}
+.pr-cats-scroll::-webkit-scrollbar{ display: none; }
+.pr-cat{
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  min-height: 44px;                 /* touch target */
+  padding: 8px 18px;
+  border: 1px solid rgba(15,107,61,0.35);
+  border-radius: 999px;
+  background: #fff;
+  color: #0A3B22;
+  font-family: inherit;
+  font-size: 0.92rem;
+  font-weight: 700;
+  line-height: 1.2;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color .15s, color .15s, border-color .15s;
+}
+.pr-cat:hover{ border-color: #0F6B3D; background: #eef8f1; }
+.pr-cat.is-active{ background: #0F6B3D; border-color: #0F6B3D; color: #fff; }
+.pr-cat.is-active:hover{ background: #0B5230; }
+@media (min-width: 768px){
+  /* tablet / desktop: chips wrap onto a second row instead of hiding off-screen */
+  .pr-cats-scroll{ flex-wrap: wrap; overflow-x: visible; scroll-snap-type: none; padding-bottom: 2px; }
+}
+
+/* ---------- Card grid ---------- */
+.pr-grid{
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 14px;
+}
+@media (min-width: 640px){
+  .pr-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 1024px){
+  .pr-grid{ grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (min-width: 1320px){
+  .pr-grid{ grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+.pr-card{
+  background: #fff;
+  border: 1px solid rgba(15,107,61,0.16);
+  border-radius: var(--pr-radius, 16px);
+  box-shadow: 0 3px 16px rgba(20,50,45,0.04);   /* আরও সফট শ্যাডো: বড় blur, কম opacity */
+  padding: var(--pr-pad);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+  transition: box-shadow .15s;
+}
+.pr-card:hover{ box-shadow: 0 8px 24px rgba(20,50,45,0.07); }
+
+.pr-card-main{ display: flex; align-items: flex-start; gap: 12px; }
+.pr-card-body{ flex: 1 1 auto; min-width: 0; }
+
+/* অফিসের ছবি: কার্ডের বাম কিনারা ও উপরের কিনারা থেকে শুরু হয়ে নিচে Google Map বাটনের ঠিক উপর পর্যন্ত
+   পুরো বাম পাশ জুড়ে বসে (বামে/উপরে কোনো ফাঁকা নেই)। ছবি না থাকলে রঙিন আদ্যক্ষর একই জায়গা নেয়।
+   ছবির চওড়া বদলাতে চাইলে শুধু --pr-photo-size এর মান বদলান (যেমন 104px / 116px / 128px) */
+.pr-card{ --pr-photo-size: 116px; --pr-pad: 17px; --pr-radius: 16px; overflow: hidden; }   /* --pr-pad: কার্ডের চারপাশের প্যাডিং (আগে 14px) */
+.pr-logo{
+  position: relative;
+  flex: 0 0 auto;
+  align-self: stretch;                /* ছবি উপর থেকে নিচে Google Map বাটনের ঠিক উপর পর্যন্ত নামে */
+  width: var(--pr-photo-size);
+  min-height: var(--pr-photo-size);
+  margin: calc(-1 * var(--pr-pad)) 0 0 calc(-1 * var(--pr-pad));   /* কার্ডের প্যাডিং ভেদ করে বাম ও উপরের কিনারায় লাগে */
+  /* চার কোণই কার্ডের radius-এর সাথে মেলানো (কার্ডের ১px বর্ডার বাদ দিয়ে উপরের-বাম কোণ ১px কম) */
+  border-radius: calc(var(--pr-radius) - 1px) var(--pr-radius) var(--pr-radius) var(--pr-radius);
+  overflow: hidden;
+  background: #fff;
+  border: 0;
+}
+.pr-logo.has-img{ padding: 0; }
+.pr-logo img{
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+  display: block;
+}
+.pr-logo-fallback{
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2.6rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+}
+@media (max-width: 340px){
+  .pr-card{ --pr-photo-size: 96px; }
+  .pr-logo-fallback{ font-size: 2rem; }
+}
+
+.pr-card-head{
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+.pr-card-name{
+  margin: 0;
+  font-family: 'Hind Siliguri', sans-serif;
+  font-size: 1.07rem;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+.pr-status{
+  flex: 0 0 auto;
+  font-size: 0.74rem;
+  font-weight: 700;
+  line-height: 1.2;
+  padding: 4px 11px;
+  border-radius: 999px;
+  color: #fff;
+  white-space: nowrap;
+}
+.pr-status.is-open{
+  background: #0B6B8C;                       /* Google Map বাটনের সাথে একই সবুজ */
+  font-size: 0.68rem;
+  padding: 3px 9px;
+  border: 1px solid #0A5570;
+  box-shadow: 0 1px 3px rgba(11,107,140,0.35);
+}
+.pr-status.is-closed{ background: #b42318; }
+
+.pr-card-meta{
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--ink);
+}
+.pr-card-meta li{ display: flex; align-items: flex-start; gap: 5px; min-width: 0; }
+.pr-card-meta li > span{ min-width: 0; overflow-wrap: anywhere; }
+.pr-card-meta i{ color: #0F6B3D; font-size: 0.82rem; flex: 0 0 auto; width: 16px; height: 1.32rem; display: flex; align-items: center; justify-content: center; }   /* আইকন প্রথম লাইনের ঠিক মাঝে */
+.pr-lbl{ color: var(--ink-soft); }
+
+.pr-card-actions{
+  display: flex;
+  gap: 10px;
+  margin-top: auto;
+}
+.pr-card-actions a{
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-sizing: border-box;
+  height: 46px;                     /* দুই বাটনের উচ্চতা হুবহু সমান (লেখা ভাঙলেও বদলাবে না) */
+  text-decoration: none;
+  font-family: inherit;
+  font-size: 0.92rem;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+  color: #fff;
+  border-radius: 10px;
+  padding: 0 12px;
+  transition: background-color .15s, transform .12s;
+}
+.pr-card-actions a i{ flex: 0 0 auto; width: 1em; text-align: center; line-height: 1; font-size: 0.95rem; }
+.pr-card-actions a span{ display: block; line-height: 1.2; padding-top: 1px; overflow: hidden; text-overflow: ellipsis; }
+.pr-card-actions a:active{ transform: scale(0.97); }
+.pr-btn-map{ background: #0B6B8C; }
+.pr-btn-map:hover{ background: #0A5570; }
+.pr-btn-call{ background: #0F6B3D; }
+.pr-btn-call:hover{ background: #0B5230; }
+
+/* ---------- Empty state ---------- */
+.pr-empty{
+  grid-column: 1 / -1;          /* span the whole grid, whatever the column count */
+  text-align: center;
+  background: #fff;
+  border: 1px dashed rgba(15,107,61,0.35);
+  border-radius: 16px;
+  padding: 32px 16px 28px;
+  color: var(--ink-soft);
+}
+.pr-empty i{ font-size: 1.8rem; color: #0F6B3D; margin-bottom: 8px; display: block; }
+.pr-empty p{ margin: 0 auto 16px; max-width: 32em; font-size: 0.95rem; line-height: 1.6; }
+.pr-empty-btn{
+  min-height: 46px;
+  padding: 10px 22px;
+  border: none;
+  border-radius: 10px;
+  background: #0F6B3D;
+  color: #fff;
+  font-family: inherit;
+  font-size: 0.92rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color .15s;
+}
+.pr-empty-btn:hover{ background: #0B5230; }
+
+/* ---------- Footer strip ---------- */
+.pr-footer-strip{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px 16px;
+  margin-top: 20px;
+  padding: 6px 8px 6px 16px;
+  background: #fff;
+  border: 1px solid rgba(15,107,61,0.16);
+  border-radius: 14px;
+  box-shadow: var(--shadow-sm);
+  font-size: 0.86rem;
+  color: var(--ink);
+}
+.pr-foot-updated{ display: inline-flex; align-items: center; gap: 8px; padding: 8px 0; line-height: 1.4; }
+.pr-foot-updated i{ color: #0F6B3D; }
+.pr-foot-updated b{ font-weight: 700; color: #0A3B22; }
+.pr-report{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;             /* large touch target */
+  padding: 0 12px;
+  border-radius: 10px;
+  color: var(--ink);
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: background-color .15s;
+}
+.pr-report i{ color: #c2410c; }
+.pr-report:hover{ background: #eef8f1; }
+@media (max-width: 380px){
+  .pr-footer-strip{ padding-left: 12px; }
+}
+
+/* ---------- Floating "+" and add-office bottom sheet (Phase 6) ---------- */
+.pr-fab{
+  position: fixed;
+  right: 19px;
+  bottom: calc(19px + env(safe-area-inset-bottom, 0px));   /* কিনারা থেকে আরও ৭px দূরে (আগে 12px / 12px) */
+  z-index: 60;
+  width: 54px; height: 54px;
+  border: none;
+  border-radius: 50%;
+  background: #0F6B3D;
+  color: #fff;
+  font-size: 1.4rem;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 8px 22px rgba(15,107,61,0.45);
+  cursor: pointer;
+  transition: background-color .15s, transform .15s;
+}
+.pr-fab:hover{ background: #0B5230; }
+.pr-fab:active{ transform: scale(0.94); }
+@media (min-width: 1024px){ .pr-fab{ right: 31px; bottom: 29px; } }
+body.pr-lock{ overflow: hidden; }
+
+.pr-sheet-backdrop{
+  position: fixed; inset: 0;
+  z-index: 100;
+  background: rgba(10,30,50,0.5);
+  display: flex;
+  align-items: flex-end;            /* phones: sheet rises from the bottom */
+  justify-content: center;
+  opacity: 0;
+  transition: opacity .2s;
+}
+.pr-sheet-backdrop[hidden]{ display: none; }
+.pr-sheet-backdrop.is-open{ opacity: 1; }
+.pr-sheet{
+  width: 100%;
+  max-width: 560px;
+  max-height: 92vh;
+  max-height: 92dvh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: #fff;
+  border-radius: 20px 20px 0 0;
+  padding: 8px 16px calc(18px + env(safe-area-inset-bottom, 0px));
+  box-shadow: 0 -10px 40px rgba(0,0,0,0.25);
+  transform: translateY(40px);
+  transition: transform .22s ease-out;
+}
+.pr-sheet-backdrop.is-open .pr-sheet{ transform: translateY(0); }
+.pr-sheet-grip{ width: 44px; height: 5px; border-radius: 3px; background: #cfd9e2; margin: 4px auto 10px; }
+@media (min-width: 768px){
+  .pr-sheet-backdrop{ align-items: center; padding: 24px; }
+  .pr-sheet{ border-radius: 20px; padding: 22px 26px 24px; max-height: 90vh; max-height: 90dvh; }
+  .pr-sheet-grip{ display: none; }
+}
+.pr-sheet-head h2{ margin: 0 0 4px; font-family: 'Hind Siliguri', sans-serif; font-size: 1.2rem; color: #0A3B22; line-height: 1.35; }
+.pr-sheet-head p{ margin: 0 0 14px; font-size: 0.88rem; color: var(--ink-soft); line-height: 1.5; }
+
+.pr-field{ margin-bottom: 12px; }
+.pr-field label{ display: block; font-size: 0.86rem; font-weight: 600; color: var(--ink); margin: 0 2px 5px; }
+.pr-req{ color: #b42318; }
+.pr-opt{ font-weight: 500; color: var(--ink-soft); }
+.pr-field input[type="text"], .pr-field input[type="tel"], .pr-field input[type="url"], .pr-field select{
+  width: 100%;
+  min-height: 46px;
+  padding: 10px 12px;
+  border: 1.5px solid rgba(15,107,61,0.35);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 16px;                  /* stops iOS zoom-on-focus */
+  box-sizing: border-box;
+}
+.pr-field input:focus-visible, .pr-field select:focus-visible{ outline: 3px solid #0A3B22; outline-offset: 1px; border-color: #0F6B3D; }
+.pr-field [aria-invalid="true"]{ border-color: #b42318; }
+.pr-file{ width: 100%; font-size: 0.9rem; font-family: inherit; box-sizing: border-box; }
+.pr-photo-preview{ margin-top: 8px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.pr-photo-preview[hidden]{ display: none; }
+.pr-photo-preview img{ display: block; width: 104px; height: 104px; border-radius: 16px; object-fit: cover; border: 1px solid rgba(15,107,61,0.25); }
+.pr-photo-edit{
+  display: inline-flex; align-items: center; gap: 8px;
+  min-height: 44px; padding: 8px 14px;
+  border: 1.5px solid rgba(15,107,61,0.45); border-radius: 10px;
+  background: #fff; color: #0A3B22;
+  font-family: inherit; font-size: 0.92rem; font-weight: 700; cursor: pointer;
+}
+.pr-photo-edit:hover{ background: #eef8f1; }
+.pr-hp{ position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+.pr-form-msg{ margin: 0 0 12px; padding: 10px 12px; border-radius: 10px; background: #fdecea; color: #8a1c12; font-size: 0.9rem; font-weight: 600; line-height: 1.5; }
+.pr-form-msg[hidden], .pr-sheet-done[hidden]{ display: none; }
+.pr-sheet-actions{ display: flex; gap: 10px; margin-top: 4px; }
+.pr-btn-cancel, .pr-btn-submit{
+  flex: 1 1 0;
+  min-height: 48px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 0.98rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color .15s;
+}
+.pr-btn-cancel{ background: #fff; color: #0A3B22; border: 1.5px solid rgba(15,107,61,0.45); }
+.pr-btn-cancel:hover{ background: #eef8f1; }
+.pr-btn-submit{ background: #0F6B3D; color: #fff; border: none; }
+.pr-btn-submit:hover{ background: #0B5230; }
+.pr-btn-submit:disabled, .pr-btn-cancel:disabled{ opacity: 0.65; cursor: default; }
+.pr-sheet-done{ text-align: center; padding: 18px 4px 6px; }
+.pr-sheet-done i{ font-size: 2.4rem; color: var(--maroon); }
+.pr-sheet-done h3{ margin: 10px 0 6px; font-family: 'Hind Siliguri', sans-serif; font-size: 1.15rem; color: #0A3B22; }
+.pr-sheet-done p{ margin: 0 0 16px; color: var(--ink-soft); font-size: 0.92rem; line-height: 1.6; }
+.pr-sheet-done .pr-btn-submit{ width: 100%; flex: none; }
+
+/* ---------- ছবি বসানোর (crop) ধাপ: জুম ইন/আউট + টেনে সরানো ---------- */
+.pr-crop-backdrop{ z-index: 110; }               /* "+" শিটের (১০০) উপরে */
+.pr-crop-viewport{
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  aspect-ratio: 4 / 5;                            /* কার্ডের ছবির টাইলের অনুপাতে (লম্বাটে) */
+  margin: 0 auto 14px;
+  overflow: hidden;
+  border-radius: 16px;
+  background: #10202b;
+  touch-action: none;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.pr-crop-viewport.dragging{ cursor: grabbing; }
+.pr-crop-viewport img{
+  position: absolute; top: 0; left: 0;
+  transform-origin: 0 0;
+  max-width: none; max-height: none;
+  user-select: none; -webkit-user-drag: none;
+  pointer-events: none;
+}
+.pr-crop-zoom{ display: flex; align-items: center; gap: 10px; margin: 0 auto 14px; max-width: 320px; }
+.pr-crop-zoom input[type="range"]{ flex: 1; min-width: 0; }
+.pr-crop-zbtn{
+  flex: 0 0 auto; width: 44px; height: 44px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 0; border-radius: 50%;
+  background: #e4ebef; color: #0A3B22; font-size: 1.05rem; cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.pr-crop-zbtn:active{ background: #d3dde3; }
+.pr-crop .pr-sheet-head p{ margin-bottom: 12px; }
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce){
+  .pr-page *, .pr-page *::before, .pr-page *::after{
+    transition: none !important;
+    animation: none !important;
+  }
+  .pr-card-actions a:active, .pr-back:active, .pr-fab:active{ transform: none; }
+  .pr-sheet{ transform: none; }
+}
+
+/* keep the last card / footer clear of the floating "+" (Phase 6) */
+.pr-wrap{ padding-bottom: 88px; }
+
+/* ---------- অ্যাডমিন থেকে যোগ করা ব্যানার স্লাইডার থাকলে ডিফল্ট হিরো লুকানো ---------- */
+body.has-cat-banners .pr-hero{ display: none; }
+
+/* ---------- "ফিরে যান" এখন courier.html-এর একদম উপরে সাইটের স্ট্যান্ডার্ড sticky
+   টপবার হিসেবে বসে (.post-detail-topbar.list-back-topbar, css/style.css-এ
+   সংজ্ঞায়িত) — ব্যানার/হিরোর উপরে ভাসমান পিল হিসেবে নয়, বরং তার উপরে আলাদা,
+   সবসময়-দৃশ্যমান একটা বার হিসেবে। এখানে আর অতিরিক্ত পজিশনিং দরকার নেই। ---------- */
+.pr-top-area{ position: relative; }
+
+/* ---------- অ্যাডমিন থেকে আপলোড করা ব্যানার ছবি ----------
+   ছবি পুরো ব্যানার জায়গা ভরে বসবে (cover) — উপরে/নিচে কোনো ফাঁকা বা ব্লার অংশ থাকবে না।
+   ব্যানারের অনুপাত সব স্ক্রিনে ২১:৯ (চওড়া ছবির জন্য সবচেয়ে মানানসই); বেশি লম্বা/অন্য
+   অনুপাতের ছবি হলে শুধু কিনারার সামান্য অংশ ছাঁটা যাবে। */
+body[data-banner-category="public-representative"] .banner-slide.has-image{
+  position: relative;
+  overflow: hidden;
+  background-image: none;
+  background-color: #0F6B3D;
+  aspect-ratio: 21 / 9;
+}
+body[data-banner-category="public-representative"] .banner-slide.has-image::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--banner-img);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: 1;
+}
+body[data-banner-category="public-representative"] .banner-slide.has-image .banner-inner{
+  position: relative;
+  z-index: 2;
+  text-shadow: 0 1px 5px rgba(0,0,0,0.6);
+}
+
+
+/* ---------- ছবিতে ক্লিক করলে পুরো ছবি (লাইটবক্স) + জুম ---------- */
+.pr-logo.has-img{ cursor: zoom-in; -webkit-tap-highlight-color: transparent; }
+.pr-logo.has-img:focus-visible{ outline: 3px solid #0F6B3D; outline-offset: -3px; }
+html.pr-lb-open, html.pr-lb-open body{ overflow: hidden; overscroll-behavior: none; }
+
+.pr-lb{
+  position: fixed; inset: 0;
+  z-index: 300;                       /* "+" শিট (১০০) ও ক্রপ (১১০) এর উপরে */
+  display: flex; flex-direction: column;
+  background: #070a10;
+  color: #fff;
+  animation: crLbIn .18s ease-out;
+}
+.pr-lb[hidden]{ display: none; }
+@keyframes crLbIn{ from{ opacity: 0; } to{ opacity: 1; } }
+.pr-lb-bar{
+  flex: 0 0 auto;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 10px 12px 6px 16px;
+  padding-top: max(10px, env(safe-area-inset-top));
+}
+.pr-lb-title{
+  font-family: 'Hind Siliguri', sans-serif;
+  font-size: 1rem; font-weight: 700;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  min-width: 0;
+}
+.pr-lb-btn{
+  flex: 0 0 auto;
+  width: 44px; height: 44px;
+  border: 0; border-radius: 50%;
+  background: rgba(255,255,255,0.16);
+  color: #fff; font-size: 1.05rem;
+  display: inline-flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.pr-lb-btn:hover{ background: rgba(255,255,255,0.28); }
+.pr-lb-btn:active{ background: rgba(255,255,255,0.36); }
+.pr-lb-stage{
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+  touch-action: none;                 /* পিঞ্চ/পান আমরা নিজেরা সামলাই, ব্রাউজারের পেজ-জুম নয় */
+  user-select: none; -webkit-user-select: none;
+  cursor: zoom-in;
+}
+.pr-lb.is-zoomed .pr-lb-stage{ cursor: grab; }
+.pr-lb.is-dragging .pr-lb-stage{ cursor: grabbing; }
+.pr-lb-img{
+  max-width: 100%; max-height: 100%;
+  width: auto; height: auto;
+  object-fit: contain;
+  display: block;
+  transform-origin: center center;
+  will-change: transform;
+  opacity: 0;
+  transition: opacity .18s ease;
+  -webkit-user-drag: none;
+}
+.pr-lb.is-loaded .pr-lb-img{ opacity: 1; }
+.pr-lb:not(.is-loaded) .pr-lb-stage::after{
+  content: ""; position: absolute; width: 34px; height: 34px;
+  border: 3px solid rgba(255,255,255,0.3); border-top-color: #fff; border-radius: 50%;
+  animation: crLbSpin .8s linear infinite;
+}
+@keyframes crLbSpin{ to{ transform: rotate(360deg); } }
+.pr-lb-controls{
+  flex: 0 0 auto;
+  display: flex; align-items: center; justify-content: center; gap: 12px;
+  padding: 8px 12px 6px;
+}
+.pr-lb-zoom{
+  min-width: 68px; height: 44px; padding: 0 12px;
+  border: 0; border-radius: 22px;
+  background: rgba(255,255,255,0.16); color: #fff;
+  font-family: 'Hind Siliguri', sans-serif; font-size: 0.95rem; font-weight: 700;
+  cursor: pointer; -webkit-tap-highlight-color: transparent;
+}
+.pr-lb-zoom:hover{ background: rgba(255,255,255,0.28); }
+.pr-lb-hint{
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 0 16px max(12px, env(safe-area-inset-bottom));
+  text-align: center;
+  font-size: 0.78rem; opacity: 0.65;
+}
+.pr-lb.is-zoomed .pr-lb-hint{ visibility: hidden; }
+@media (prefers-reduced-motion: reduce){
+  .pr-lb, .pr-lb-img{ animation: none; transition: none; }
+}
+
+/* উপরের ব্যানারের ছবিতেও ক্লিক করলে পুরো ছবি খোলে */
+body[data-banner-category="public-representative"] .banner-slide.has-image{ cursor: zoom-in; -webkit-tap-highlight-color: transparent; }
+.pr-lb-link{
+  flex: 0 0 auto;
+  max-width: 44%;
+  margin-left: auto;
+  padding: 9px 16px;
+  border-radius: 22px;
+  background: #0F6B3D; color: #fff;
+  font-family: 'Hind Siliguri', sans-serif; font-size: 0.86rem; font-weight: 700;
+  text-decoration: none;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.pr-lb-link[hidden]{ display: none; }
+.pr-lb-link:active{ background: #0B5230; }
+
+/* ---------- মোবাইলে ব্যাক-বার + ব্যানার স্থির (স্ক্রল করলেও উপরেই থাকবে) ----------
+   ব্যাক-বার (.list-back-topbar) আগে থেকেই sticky top:0। এখন ব্যানারও তার ঠিক নিচে sticky —
+   উচ্চতা --pr-topbar-h থেকে আসে (courier.html-এর ছোট স্ক্রিপ্ট বারের প্রকৃত উচ্চতা মেপে বসায়)।
+   ডেস্কটপে ব্যানার ২১:৯ full-width হওয়ায় খুব বড়, তাই শুধু ≤700px স্ক্রিনে প্রযোজ্য। */
+@media (max-width: 700px){
+  /* .pr-top-area শুধু ব্যানার+হিরো ধরে রাখে (উচ্চতা ~ব্যানারের সমান), তাই sticky এর "ভেসে থাকার"
+     জায়গা পেত না। display:contents দিয়ে এর বক্স সরানো হলো — ফলে ব্যানারের প্যারেন্ট হয় <main>
+     (পুরো পেজ জুড়ে লম্বা) এবং স্ক্রল করলেও ব্যানার আটকে থাকে। */
+  body[data-banner-category="public-representative"] .pr-top-area{ display: contents; }
+  body[data-banner-category="public-representative"] #catBannerWrap{
+    position: sticky;
+    top: var(--pr-topbar-h, 53px);
+    z-index: 40;
+    background: var(--cream, #f1f5f8);
+    padding-bottom: 4px;
+  }
+}
+
+/* ---------- মোবাইলে কার্ডের বাম পাশ "উপজেলা নির্বাচন করুন" বক্সের লাইনে (বর্ডারসহ), ডান পাশ কিনারা পর্যন্ত ----------
+   ডানে পেজের ১৬px/২৪px ফাঁক ভেদ করে কিনারা পর্যন্ত (ব্যানারের লাইনে), বামে স্বাভাবিক ফাঁক ও বর্ডার।
+   বাম কোণ গোল (কার্ডের radius), ডান কোণ সোজা। ছবির বাম কোণ কার্ডের সাথে মিলেই থাকে। */
+@media (max-width: 700px){
+  .pr-grid{ margin-right: -16px; gap: 12px; }
+  .pr-card{ border-radius: var(--pr-radius) 0 0 var(--pr-radius); border-right: 0; }
+}
+@media (min-width: 640px) and (max-width: 700px){
+  .pr-grid{ margin-right: -24px; }
+}
+
+/* ==========================================================================
+   জনপ্রতিনিধি পেজের নিজস্ব সংযোজন (courier.css-এ যা ছিল না)
+   ========================================================================== */
+/* ধরনের চিপ: ইমোজি + নাম; কুরিয়ারের মতোই ডানে-বামে স্ক্রল, চিপগুলো ফিল্টারের উপরে */
+.pr-cats{ margin-top: 2px; }
+.pr-cat{ display: inline-flex; align-items: center; gap: 7px; }
+.pr-cat-emoji{ font-size: 1.1rem; line-height: 1; }
+
+/* উপজেলা/আসন ফিল্টারের পাশে সার্চ বক্স */
+.pr-filter-bar[hidden], .pr-search-wrap[hidden]{ display: none; }
+.pr-search-wrap{
+  position: relative;
+  background: #fff;
+  border: 1px solid rgba(15,107,61,0.22);
+  border-radius: 14px;
+  box-shadow: var(--shadow-sm);
+  padding: 10px 12px;
+}
+.pr-search-ic{ position: absolute; left: 26px; top: 50%; transform: translateY(-50%); color: #0F6B3D; font-size: 0.95rem; pointer-events: none; }
+.pr-search-wrap input{
+  width: 100%; min-height: 45px; box-sizing: border-box;
+  padding: 9px 12px 9px 40px;
+  font-family: inherit; font-size: 16px; font-weight: 600; color: var(--ink);
+  background: #f6fbf8;
+  border: 1px solid rgba(15,107,61,0.22); border-radius: 10px;
+}
+.pr-search-wrap input:focus-visible{ outline: 3px solid #0A3B22; outline-offset: 2px; border-color: #0F6B3D; }
+@media (min-width: 900px){
+  .pr-filter-bar{ flex: 1 1 46%; }
+  .pr-search-wrap{ flex: 1 1 54%; }
+}
+
+/* কার্ড: ছবি না থাকলে ধরনের ইমোজি; পদবীর সারি; নমুনা ব্যাজ */
+.pr-logo-emoji{ font-size: 2.6rem; }
+.pr-card-meta .pr-role{ font-weight: 700; color: #0A3B22; }
+.pr-status.is-demo{ background: #eef2f5; color: #52616b; border: 1px solid #d3dde3; font-size: 0.68rem; padding: 3px 9px; }
+.pr-card-actions.is-single{ grid-template-columns: 1fr; }
+.pr-card-actions.is-single a{ flex: 1 1 100%; }
+.pr-empty i.fa-users-slash{ color: #0F6B3D; }
+.pr-select-wrap i.pr-select-pin{ color: #0F6B3D; }

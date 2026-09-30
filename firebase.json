@@ -14,6 +14,26 @@
     "trailingSlash": false,
     "redirects": [
       {
+        "source": "/handloom",
+        "destination": "/viral",
+        "type": 302
+      },
+      {
+        "source": "/handloom.html",
+        "destination": "/viral",
+        "type": 302
+      },
+      {
+        "source": "/mechanic",
+        "destination": "/technician",
+        "type": 302
+      },
+      {
+        "source": "/mechanic.html",
+        "destination": "/technician",
+        "type": 302
+      },
+      {
         "source": "/matrimonial",
         "destination": "/matrimony",
         "type": 302
@@ -51,6 +71,16 @@
       {
         "source": "/legal-help.html",
         "destination": "/lawyer",
+        "type": 302
+      },
+      {
+        "source": "/hospitals",
+        "destination": "/hospital",
+        "type": 302
+      },
+      {
+        "source": "/hospitals.html",
+        "destination": "/hospital",
         "type": 302
       }
     ],

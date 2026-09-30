@@ -3,62 +3,29 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>আবাসিক হোটেল — বিভাগ — টাঙ্গাইল জেলা</title>
-<meta name="description" content="থাকার জন্য হোটেল ও গেস্ট হাউজের তালিকা।">
+<title>আবাসিক হোটেল — টাঙ্গাইল জেলা</title>
+<meta name="description" content="টাঙ্গাইল জেলার সকল উপজেলার আবাসিক হোটেল ও গেস্ট হাউজের ঠিকানা ও ফোন নম্বর।">
 <meta property="og:title" content="আবাসিক হোটেল — টাঙ্গাইল জেলা">
-<meta property="og:description" content="থাকার জন্য হোটেল ও গেস্ট হাউজের তালিকা।">
+<meta property="og:description" content="টাঙ্গাইল জেলার সকল উপজেলার আবাসিক হোটেল ও গেস্ট হাউজের ঠিকানা ও ফোন নম্বর।">
 <meta property="og:type" content="website">
-<meta name="theme-color" content="#0E6B3A">
+<meta name="theme-color" content="#eaf6ff">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
 <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
 <link rel="manifest" href="manifest.json">
-<link rel="stylesheet" href="css/style.css?v=20260924073609">
+<link rel="stylesheet" href="css/style.css?v=20260930045009">
+<link rel="stylesheet" href="css/hotel.css?v=20260930045009">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
-<body data-banner-category="hotel">
+<body class="ht-page" data-banner-category="hotel">
 
-<header class="site-header app-header">
-  <div class="header-inner">
-    <button class="menu-toggle icon-btn" id="menuToggle" data-i18n-aria="menu.open" aria-label="মেনু খুলুন"><i class="fa-solid fa-bars" aria-hidden="true"></i></button>
-    <div class="brand-block">
-      <a href="index.html" class="brand app-brand">টাঙ্গাইল <span class="brand-accent">জেলা</span></a>
-    </div>
-    <div class="header-actions">
-      <a href="notifications.html" class="icon-btn" data-i18n-aria="menu.notifications" aria-label="বিজ্ঞপ্তি"><i class="fa-solid fa-bell" aria-hidden="true"></i></a>
-      <div class="more-menu-wrap">
-        <button type="button" class="icon-btn" id="moreMenuToggle" data-i18n-aria="menu.more" aria-label="আরও"><i class="fa-solid fa-ellipsis-vertical" aria-hidden="true"></i></button>
-        <div class="more-menu" id="moreMenu">
-          <div class="more-menu-section-title" data-i18n="menu.language">ভাষা</div>
-          <div class="lang-switcher">
-            <button type="button" class="lang-option" data-lang-choice="bn">বাংলা</button>
-            <button type="button" class="lang-option" data-lang-choice="en">English</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <nav class="main-nav" id="mainNav">
-      <a href="index.html" data-i18n="nav.home">হোম</a>
-      <a href="about.html" data-i18n="nav.about">পরিচিতি</a>
-      <a href="faq.html" data-i18n="nav.faq">সাধারণ প্রশ্ন</a>
-      <a href="contact.html" data-i18n="nav.contact">যোগাযোগ</a>
-    </nav>
-  </div>
-</header>
 <main>
-  <div class="wrap">
-    <div class="sticky-top-stack">
-    <div class="notice-bar app-notice">
-      <span class="notice-tag">তথ্য</span>
-      <span class="notice-text">প্রয়োজনীয় উপ-বিভাগ বেছে নিয়ে তালিকা দেখুন</span>
-    </div>
-    </div>
+  <div class="post-detail-topbar list-back-topbar">
+    <button type="button" class="post-detail-back" onclick="if(window.history.length>1){history.back();}else{window.location.href='index.html';}" aria-label="পেছনে যান"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i></button>
+    <span>আবাসিক হোটেল</span>
+  </div>
 
-        <div class="post-detail-topbar list-back-topbar">
-      <button type="button" class="post-detail-back" onclick="if(window.history.length>1){history.back();}else{window.location.href='index.html';}" aria-label="পেছনে যান"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i></button>
-      <span>আবাসিক হোটেল</span>
-    </div>
-
+  <div class="ht-top-area">
     <div class="banner-slider-wrap" id="catBannerWrap" style="display:none">
       <section class="banner-slider" id="catBannerSlider" aria-label="বিভাগ ব্যানার">
         <div class="banner-track" id="catBannerTrack"></div>
@@ -66,104 +33,181 @@
       <div class="banner-dots" id="catBannerDots"></div>
     </div>
 
-    <section class="cat-grid">
-      <a class="cat-card cat-travel" href="listing.html?cat=hotel-sadar&name=%E0%A6%9F%E0%A6%BE%E0%A6%99%E0%A7%8D%E0%A6%97%E0%A6%BE%E0%A6%87%E0%A6%B2%20%E0%A6%B8%E0%A6%A6%E0%A6%B0%20%E0%A6%A5%E0%A6%BE%E0%A6%A8%E0%A6%BE&icon=%F0%9F%8F%A8&back=hotel.html&backName=%E0%A6%B9%E0%A7%8B%E0%A6%9F%E0%A7%87%E0%A6%B2&bannerCat=hotel">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🏨</span></div>
-        <h3>টাঙ্গাইল সদর থানা</h3>
-      </a>
-      <a class="cat-card cat-travel" href="listing.html?cat=hotel-mirzapur&name=%E0%A6%AE%E0%A6%BF%E0%A6%B0%E0%A7%8D%E0%A6%9C%E0%A6%BE%E0%A6%AA%E0%A7%81%E0%A6%B0%20%E0%A6%A5%E0%A6%BE%E0%A6%A8%E0%A6%BE&icon=%F0%9F%8F%A8&back=hotel.html&backName=%E0%A6%B9%E0%A7%8B%E0%A6%9F%E0%A7%87%E0%A6%B2&bannerCat=hotel">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🏨</span></div>
-        <h3>মির্জাপুর থানা</h3>
-      </a>
-      <a class="cat-card cat-travel" href="listing.html?cat=hotel-delduar&name=%E0%A6%A6%E0%A7%87%E0%A6%B2%E0%A6%A6%E0%A7%81%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%B0%20%E0%A6%A5%E0%A6%BE%E0%A6%A8%E0%A6%BE&icon=%F0%9F%8F%A8&back=hotel.html&backName=%E0%A6%B9%E0%A7%8B%E0%A6%9F%E0%A7%87%E0%A6%B2&bannerCat=hotel">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🏨</span></div>
-        <h3>দেলদুয়ার থানা</h3>
-      </a>
-      <a class="cat-card cat-travel" href="listing.html?cat=hotel-basail&name=%E0%A6%AC%E0%A6%BE%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%B2%20%E0%A6%A5%E0%A6%BE%E0%A6%A8%E0%A6%BE&icon=%F0%9F%8F%A8&back=hotel.html&backName=%E0%A6%B9%E0%A7%8B%E0%A6%9F%E0%A7%87%E0%A6%B2&bannerCat=hotel">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🏨</span></div>
-        <h3>বাসাইল থানা</h3>
-      </a>
-      <a class="cat-card cat-travel" href="listing.html?cat=hotel-kalihati&name=%E0%A6%95%E0%A6%BE%E0%A6%B2%E0%A6%BF%E0%A6%B9%E0%A6%BE%E0%A6%A4%E0%A7%80%20%E0%A6%A5%E0%A6%BE%E0%A6%A8%E0%A6%BE&icon=%F0%9F%8F%A8&back=hotel.html&backName=%E0%A6%B9%E0%A7%8B%E0%A6%9F%E0%A7%87%E0%A6%B2&bannerCat=hotel">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🏨</span></div>
-        <h3>কালিহাতী থানা</h3>
-      </a>
-      <a class="cat-card cat-travel" href="listing.html?cat=hotel-ghatail&name=%E0%A6%98%E0%A6%BE%E0%A6%9F%E0%A6%BE%E0%A6%87%E0%A6%B2%20%E0%A6%A5%E0%A6%BE%E0%A6%A8%E0%A6%BE&icon=%F0%9F%8F%A8&back=hotel.html&backName=%E0%A6%B9%E0%A7%8B%E0%A6%9F%E0%A7%87%E0%A6%B2&bannerCat=hotel">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🏨</span></div>
-        <h3>ঘাটাইল থানা</h3>
-      </a>
-      <a class="cat-card cat-travel" href="listing.html?cat=hotel-gopalpur&name=%E0%A6%97%E0%A7%8B%E0%A6%AA%E0%A6%BE%E0%A6%B2%E0%A6%AA%E0%A7%81%E0%A6%B0%20%E0%A6%A5%E0%A6%BE%E0%A6%A8%E0%A6%BE&icon=%F0%9F%8F%A8&back=hotel.html&backName=%E0%A6%B9%E0%A7%8B%E0%A6%9F%E0%A7%87%E0%A6%B2&bannerCat=hotel">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🏨</span></div>
-        <h3>গোপালপুর থানা</h3>
-      </a>
-      <a class="cat-card cat-travel" href="listing.html?cat=hotel-madhupur&name=%E0%A6%AE%E0%A6%A7%E0%A7%81%E0%A6%AA%E0%A7%81%E0%A6%B0%20%E0%A6%A5%E0%A6%BE%E0%A6%A8%E0%A6%BE&icon=%F0%9F%8F%A8&back=hotel.html&backName=%E0%A6%B9%E0%A7%8B%E0%A6%9F%E0%A7%87%E0%A6%B2&bannerCat=hotel">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🏨</span></div>
-        <h3>মধুপুর থানা</h3>
-      </a>
-      <a class="cat-card cat-travel" href="listing.html?cat=hotel-dhanbari&name=%E0%A6%A7%E0%A6%A8%E0%A6%AC%E0%A6%BE%E0%A6%A1%E0%A6%BC%E0%A7%80%20%E0%A6%A5%E0%A6%BE%E0%A6%A8%E0%A6%BE&icon=%F0%9F%8F%A8&back=hotel.html&backName=%E0%A6%B9%E0%A7%8B%E0%A6%9F%E0%A7%87%E0%A6%B2&bannerCat=hotel">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🏨</span></div>
-        <h3>ধনবাড়ী থানা</h3>
-      </a>
-      <a class="cat-card cat-travel" href="listing.html?cat=hotel-bhuapur&name=%E0%A6%AD%E0%A7%82%E0%A6%9E%E0%A6%BE%E0%A6%AA%E0%A7%81%E0%A6%B0%20%E0%A6%A5%E0%A6%BE%E0%A6%A8%E0%A6%BE&icon=%F0%9F%8F%A8&back=hotel.html&backName=%E0%A6%B9%E0%A7%8B%E0%A6%9F%E0%A7%87%E0%A6%B2&bannerCat=hotel">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🏨</span></div>
-        <h3>ভূঞাপুর থানা</h3>
-      </a>
-      <a class="cat-card cat-travel" href="listing.html?cat=hotel-nagarpur&name=%E0%A6%A8%E0%A6%BE%E0%A6%97%E0%A6%B0%E0%A6%AA%E0%A7%81%E0%A6%B0%20%E0%A6%A5%E0%A6%BE%E0%A6%A8%E0%A6%BE&icon=%F0%9F%8F%A8&back=hotel.html&backName=%E0%A6%B9%E0%A7%8B%E0%A6%9F%E0%A7%87%E0%A6%B2&bannerCat=hotel">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🏨</span></div>
-        <h3>নাগরপুর থানা</h3>
-      </a>
-      <a class="cat-card cat-travel" href="listing.html?cat=hotel-sakhipur&name=%E0%A6%B8%E0%A6%96%E0%A7%80%E0%A6%AA%E0%A7%81%E0%A6%B0%20%E0%A6%A5%E0%A6%BE%E0%A6%A8%E0%A6%BE&icon=%F0%9F%8F%A8&back=hotel.html&backName=%E0%A6%B9%E0%A7%8B%E0%A6%9F%E0%A7%87%E0%A6%B2&bannerCat=hotel">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🏨</span></div>
-        <h3>সখীপুর থানা</h3>
-      </a>
+    <section class="ht-hero" aria-labelledby="htTitle">
+      <svg class="ht-hero-art" viewBox="-70 0 590 200" preserveAspectRatio="xMaxYMax slice" aria-hidden="true" focusable="false">
+        <g fill="#fff" opacity=".85">
+          <ellipse cx="70" cy="46" rx="34" ry="11"/><ellipse cx="92" cy="40" rx="24" ry="10"/>
+          <ellipse cx="205" cy="80" rx="30" ry="9"/><ellipse cx="225" cy="74" rx="20" ry="8"/>
+          <ellipse cx="318" cy="46" rx="30" ry="9"/><ellipse cx="335" cy="41" rx="18" ry="8"/>
+        </g>
+        <path d="M-70 176 H0 C60 140 130 132 200 150 C260 164 300 140 360 138 C430 136 480 150 520 146 V180 H-70Z" fill="#a8dba0"/>
+        <path d="M-70 182 H0 C70 160 150 158 230 172 C320 186 420 160 520 170 V190 H-70Z" fill="#6fbf73"/>
+        <rect x="-70" y="176" width="590" height="24" fill="#4d5c66"/>
+        <g>
+          <rect x="300" y="60" width="130" height="116" fill="#e6eef3" stroke="#9fb6c4" stroke-width="1.5"/>
+          <rect x="290" y="52" width="150" height="12" fill="#0B6B8C"/>
+          <g fill="#cfeaf8" stroke="#9fb6c4" stroke-width="1">
+            <rect x="314" y="76" width="22" height="18"/><rect x="348" y="76" width="22" height="18"/><rect x="382" y="76" width="22" height="18"/>
+            <rect x="314" y="106" width="22" height="18"/><rect x="348" y="106" width="22" height="18"/><rect x="382" y="106" width="22" height="18"/>
+            <rect x="314" y="136" width="22" height="18"/><rect x="382" y="136" width="22" height="18"/>
+          </g>
+          <rect x="350" y="140" width="20" height="36" fill="#C9962E"/>
+        </g>
+        <g>
+          <rect x="486" y="146" width="4" height="22" fill="#7a5a3a"/><circle cx="488" cy="142" r="15" fill="#3f9f5a"/><circle cx="499" cy="152" r="10" fill="#4fae66"/>
+          <rect x="262" y="150" width="4" height="18" fill="#7a5a3a"/><circle cx="264" cy="146" r="14" fill="#3f9f5a"/><circle cx="254" cy="155" r="10" fill="#4fae66"/>
+        </g>
+      </svg>
+
+      <div class="ht-hero-inner">
+        <div class="ht-hero-body">
+          <svg class="ht-hero-pin" viewBox="0 0 48 60" aria-hidden="true" focusable="false"><path d="M24 2C12.4 2 3 11.2 3 22.6 3 38 24 58 24 58s21-20 21-35.4C45 11.2 35.6 2 24 2z" fill="#0B6B8C"/><circle cx="24" cy="22" r="8.5" fill="#fff"/></svg>
+          <div class="ht-hero-text">
+            <h1 id="htTitle"><span class="ht-t1">টাঙ্গাইল জেলার</span> <span class="ht-t2">আবাসিক হোটেল</span></h1>
+            <p>টাঙ্গাইল জেলার সকল আবাসিক হোটেলের তথ্য</p>
+          </div>
+        </div>
+      </div>
     </section>
+  </div>
+
+  <div class="wrap ht-wrap">
+    <section class="ht-toolbar">
+      <div class="ht-filter-bar">
+        <label class="ht-filter-label" for="hotelUpazilaSelect">উপজেলা নির্বাচন করুন</label>
+        <div class="ht-select-wrap">
+          <i class="fa-solid fa-location-dot ht-select-pin" aria-hidden="true"></i>
+          <select id="hotelUpazilaSelect"></select>
+          <i class="fa-solid fa-chevron-down ht-select-caret" aria-hidden="true"></i>
+        </div>
+      </div>
+    </section>
+
+    <section class="ht-grid" id="hotelGrid" aria-label="আবাসিক হোটেলের তালিকা"></section>
+
+    <footer class="ht-footer-strip">
+      <a class="ht-report" href="contact.html"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i><span>তথ্য ভুল? রিপোর্ট করুন</span></a>
+    </footer>
   </div>
 </main>
 
-<footer class="site-footer">
-  <div class="footer-inner">
-    <div>
-      <h4>টাঙ্গাইল জেলা</h4>
-      <p>টাঙ্গাইল জেলার বাসিন্দা, নতুন আগন্তুক ও ব্যবসায়ীদের জন্য তৈরি একটি স্থানীয় সেবা প্ল্যাটফর্ম।</p>
+<button type="button" class="ht-fab" id="htFab" aria-haspopup="dialog" aria-controls="htSheet" aria-label="নতুন আবাসিক হোটেল যোগ করুন"><i class="fa-solid fa-plus" aria-hidden="true"></i></button>
+
+<div class="ht-sheet-backdrop" id="htSheetBackdrop" hidden>
+  <div class="ht-sheet" id="htSheet" role="dialog" aria-modal="true" aria-labelledby="htSheetTitle">
+    <div class="ht-sheet-grip" aria-hidden="true"></div>
+    <div class="ht-sheet-head">
+      <h2 id="htSheetTitle">নতুন আবাসিক হোটেল যোগ করুন</h2>
+      <p>জমা দেওয়া তথ্য অ্যাডমিন যাচাই করার পর প্রকাশিত হবে।</p>
     </div>
-    <div>
-      <h4>পেজ</h4>
-      <ul class="footer-links">
-        <li><a href="index.html">হোম</a></li>
-        <li><a href="about.html">পরিচিতি</a></li>
-        <li><a href="add-listing.html">তথ্য যোগ করুন</a></li>
-        <li><a href="faq.html">সাধারণ প্রশ্ন</a></li>
-        <li><a href="contact.html">যোগাযোগ</a></li>
-        <li><a href="sitemap.html">সাইটম্যাপ</a></li>
-        <li><a href="privacy-policy.html">প্রাইভেসি পলিসি</a></li>
-        <li><a href="terms.html">শর্তাবলী</a></li>
-      </ul>
+
+    <form id="htForm" novalidate>
+      <div class="ht-field">
+        <label for="htfUpazila">উপজেলা <span class="ht-req" aria-hidden="true">*</span></label>
+        <select id="htfUpazila" required></select>
+      </div>
+      <div class="ht-field">
+        <label for="htfName">হোটেলের নাম <span class="ht-req" aria-hidden="true">*</span></label>
+        <input id="htfName" type="text" maxlength="120" autocomplete="off" placeholder="যেমন: হোটেল আল-আমিন" required>
+      </div>
+      <div class="ht-field">
+        <label for="htfAddress">ঠিকানা <span class="ht-req" aria-hidden="true">*</span></label>
+        <input id="htfAddress" type="text" maxlength="300" autocomplete="off" placeholder="যেমন: বাসস্ট্যান্ড রোড, টাঙ্গাইল সদর" required>
+      </div>
+      <div class="ht-field">
+        <label for="htfPhone">মোবাইল নম্বর <span class="ht-req" aria-hidden="true">*</span></label>
+        <input id="htfPhone" type="tel" inputmode="tel" maxlength="20" autocomplete="off" placeholder="01XXXXXXXXX" required>
+      </div>
+      <div class="ht-field">
+        <label for="htfMap">Google Map লিংক <span class="ht-opt">(ঐচ্ছিক)</span></label>
+        <input id="htfMap" type="url" inputmode="url" maxlength="500" autocomplete="off" placeholder="https://maps.google.com/…">
+        <button type="button" class="ht-loc-btn" id="htLocBtn"><i class="fa-solid fa-location-crosshairs" aria-hidden="true"></i><span>আমার লোকেশন যোগ করুন</span></button>
+        <p class="ht-loc-note" id="htLocNote" hidden></p>
+      </div>
+      <div class="ht-field">
+        <label for="htfPhoto">প্রধান ছবি <span class="ht-opt">(ঐচ্ছিক)</span></label>
+        <input id="htfPhoto" type="file" accept="image/jpeg,image/png,image/webp,image/gif" class="ht-file">
+        <p class="ht-xhint">ছবি বাছাই করলে জুম ইন/আউট করে ইচ্ছামত বসানোর স্ক্রিন খুলবে।</p>
+        <div class="ht-photo-preview" id="htPhotoPreview" hidden>
+          <img alt="নির্বাচিত ছবির প্রিভিউ">
+          <button type="button" class="ht-photo-edit" id="htPhotoEdit"><i class="fa-solid fa-crop-simple" aria-hidden="true"></i><span>জুম / অবস্থান ঠিক করুন</span></button>
+        </div>
+      </div>
+      <div class="ht-field ht-xfield" id="htExtraWrap">
+        <span class="ht-xlabel">আরও ছবি <span class="ht-opt">— সর্বোচ্চ ৪টি (মোট ৫টি ছবি)</span></span>
+        <p class="ht-xhint">প্রধান ছবিতে ক্লিক করলে এই ছবিগুলোও দেখা যাবে ও জুম করা যাবে। (আগে প্রধান ছবি দিন) প্রতিটি ছবি বাছাইয়ের পর জুম ইন/আউট করে বসাতে পারবেন।</p>
+        <div class="ht-xgrid">
+        <div class="ht-xslot" data-slot="0">
+          <input type="file" class="ht-xfile" id="htfExtra0" accept="image/jpeg,image/png,image/webp,image/gif" hidden>
+          <button type="button" class="ht-xadd" data-slot="0" aria-label="আরও ছবি ১ যোগ করুন"><i class="fa-solid fa-plus" aria-hidden="true"></i><span>ছবি ১</span></button>
+          <img class="ht-xthumb" alt="আরও ছবি ১ এর প্রিভিউ" hidden>
+          <button type="button" class="ht-xrm" data-slot="0" aria-label="আরও ছবি ১ সরান" hidden><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+          <button type="button" class="ht-xadj" data-slot="0" aria-label="আরও ছবি ১ জুম/অবস্থান ঠিক করুন" hidden><i class="fa-solid fa-crop-simple" aria-hidden="true"></i></button>
+        </div>
+        <div class="ht-xslot" data-slot="1">
+          <input type="file" class="ht-xfile" id="htfExtra1" accept="image/jpeg,image/png,image/webp,image/gif" hidden>
+          <button type="button" class="ht-xadd" data-slot="1" aria-label="আরও ছবি ২ যোগ করুন"><i class="fa-solid fa-plus" aria-hidden="true"></i><span>ছবি ২</span></button>
+          <img class="ht-xthumb" alt="আরও ছবি ২ এর প্রিভিউ" hidden>
+          <button type="button" class="ht-xrm" data-slot="1" aria-label="আরও ছবি ২ সরান" hidden><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+          <button type="button" class="ht-xadj" data-slot="1" aria-label="আরও ছবি ২ জুম/অবস্থান ঠিক করুন" hidden><i class="fa-solid fa-crop-simple" aria-hidden="true"></i></button>
+        </div>
+        <div class="ht-xslot" data-slot="2">
+          <input type="file" class="ht-xfile" id="htfExtra2" accept="image/jpeg,image/png,image/webp,image/gif" hidden>
+          <button type="button" class="ht-xadd" data-slot="2" aria-label="আরও ছবি ৩ যোগ করুন"><i class="fa-solid fa-plus" aria-hidden="true"></i><span>ছবি ৩</span></button>
+          <img class="ht-xthumb" alt="আরও ছবি ৩ এর প্রিভিউ" hidden>
+          <button type="button" class="ht-xrm" data-slot="2" aria-label="আরও ছবি ৩ সরান" hidden><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+          <button type="button" class="ht-xadj" data-slot="2" aria-label="আরও ছবি ৩ জুম/অবস্থান ঠিক করুন" hidden><i class="fa-solid fa-crop-simple" aria-hidden="true"></i></button>
+        </div>
+        <div class="ht-xslot" data-slot="3">
+          <input type="file" class="ht-xfile" id="htfExtra3" accept="image/jpeg,image/png,image/webp,image/gif" hidden>
+          <button type="button" class="ht-xadd" data-slot="3" aria-label="আরও ছবি ৪ যোগ করুন"><i class="fa-solid fa-plus" aria-hidden="true"></i><span>ছবি ৪</span></button>
+          <img class="ht-xthumb" alt="আরও ছবি ৪ এর প্রিভিউ" hidden>
+          <button type="button" class="ht-xrm" data-slot="3" aria-label="আরও ছবি ৪ সরান" hidden><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+          <button type="button" class="ht-xadj" data-slot="3" aria-label="আরও ছবি ৪ জুম/অবস্থান ঠিক করুন" hidden><i class="fa-solid fa-crop-simple" aria-hidden="true"></i></button>
+        </div>
+        </div>
+      </div>
+      <div class="ht-hp" aria-hidden="true"><label>Website <input type="text" id="htfHp" tabindex="-1" autocomplete="off"></label></div>
+
+      <p class="ht-form-msg" id="htFormMsg" role="alert" hidden></p>
+
+      <div class="ht-sheet-actions">
+        <button type="button" class="ht-btn-cancel" id="htCancel">বাতিল</button>
+        <button type="submit" class="ht-btn-submit" id="htSubmit">জমা দিন</button>
+      </div>
+    </form>
+
+    <div class="ht-sheet-done" id="htDone" hidden>
+      <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+      <h3>ধন্যবাদ! তথ্য জমা হয়েছে</h3>
+      <p>অ্যাডমিন যাচাই করার পর হোটেলটি তালিকায় প্রকাশিত হবে।</p>
+      <button type="button" class="ht-btn-submit" id="htDoneClose">ঠিক আছে</button>
     </div>
   </div>
-  <div class="footer-bottom">© ২০২৬ টাঙ্গাইল জেলা। সর্বস্বত্ব সংরক্ষিত।</div>
-</footer>
-
-
-<nav class="bottom-nav">
-  <a href="index.html"><span class="bn-icon"><i class="fa-solid fa-house" aria-hidden="true"></i></span><span data-i18n="bottomnav.home">Home</span></a>
-  <a href="members.html"><span class="bn-icon"><i class="fa-solid fa-users" aria-hidden="true"></i></span><span data-i18n="bottomnav.members">Members</span></a>
-  <a href="posts.html"><span class="bn-icon"><i class="fa-solid fa-plus" aria-hidden="true"></i></span><span data-i18n="bottomnav.post">Post</span></a>
-  <a href="profile.html"><span class="bn-icon"><i class="fa-solid fa-user" aria-hidden="true"></i></span><span data-i18n="bottomnav.profile">Profile</span></a>
-</nav>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-<script src="js/supabase-config.js?v=20260924073609"></script>
-    <script src="js/nav-avatar.js?v=20260924073609"></script>
-    <script src="js/call.js?v=20260924073609"></script>
-<script src="js/sticky-header.js?v=20260924073609"></script>
-<script src="js/banner-slider.js?v=20260924073609"></script>
-<script src="js/category-banners.js?v=20260924073609"></script>
-<script src="js/notice-bar.js?v=20260924073609"></script>
-<script src="js/i18n.js?v=20260924073609"></script>
-<script src="js/search-index.js?v=20260924073609"></script>
-<script src="js/smart-search.js?v=20260924073609"></script>
-<script src="js/search-ui.js?v=20260924073609"></script>
-<script src="js/script.js?v=20260924073609"></script>
-<script src="js/auto-update.js?v=20260924073609"></script>
-<script src="js/floating-buttons.js?v=20260924073609"></script>
+<script src="js/supabase-config.js?v=20260930045009"></script>
+<script src="js/banner-slider.js?v=20260930045009"></script>
+<script src="js/category-banners.js?v=20260930045009"></script>
+<script src="js/image-cropper.js?v=20260930045009"></script>
+<script src="js/hotel-data.js?v=20260930045009"></script>
+<script src="js/hotel.js?v=20260930045009"></script>
+<script src="js/hotel-submit.js?v=20260930045009"></script>
+<script src="js/hotel-lightbox.js?v=20260930045009"></script>
+<script>
+(function(){
+  function setH(){
+    var bar=document.querySelector('.list-back-topbar');
+    if(bar) document.documentElement.style.setProperty('--ht-topbar-h', bar.offsetHeight+'px');
+  }
+  setH();
+  window.addEventListener('load',setH);
+  window.addEventListener('resize',setH);
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(setH);
+})();
+</script>
+<script src="js/auto-update.js?v=20260930045009"></script>
+<script src="js/floating-buttons.js?v=20260930045009"></script>
 </body>
 </html>

@@ -39,6 +39,9 @@
     courier:   { icon: 'fa-truck-fast',     label: 'কুরিয়ার অফিস',    url: 'courier.html' },
     doctor:    { icon: 'fa-user-doctor',    label: 'ডাক্তার তালিকা',    url: 'doctors.html' },
     lawyer:    { icon: 'fa-scale-balanced', label: 'আইনজীবী তালিকা',    url: 'lawyer.html' },
+    technician:{ icon: 'fa-screwdriver-wrench', label: 'টেকনিশিয়ান', url: 'technician.html' },
+    viral:     { icon: 'fa-location-dot',   label: 'ভাইরাল প্লেস',      url: 'viral.html' },
+    nursery:   { icon: 'fa-seedling',      label: 'নার্সারি',           url: 'nursery.html' },
     matrimony: { icon: 'fa-heart',          label: 'পাত্র-পাত্রী',       url: 'matrimony.html' },
     post:      { icon: 'fa-image',          label: 'পোস্ট',             url: 'post-view.html' }
   };
@@ -75,6 +78,15 @@
       }),
       q('lawyer_entries', 'id,name,office_name,upazila,status,created_at', 'lawyer', function (r) {
         return { title: r.name, subtitle: [r.office_name, r.upazila].filter(Boolean).join(' · ') };
+      }),
+      q('technician_entries', 'id,name,type,upazila,status,created_at', 'technician', function (r) {
+        return { title: r.name, subtitle: [r.type, r.upazila].filter(Boolean).join(' · ') };
+      }),
+      q('viral_entries', 'id,name,type,upazila,status,created_at', 'viral', function (r) {
+        return { title: r.name, subtitle: [r.type, r.upazila].filter(Boolean).join(' · ') };
+      }),
+      q('nursery_entries', 'id,name,type,upazila,status,created_at', 'nursery', function (r) {
+        return { title: r.name, subtitle: [r.type, r.upazila].filter(Boolean).join(' · ') };
       }),
       q('matrimony_entries', 'id,name,type,upazila,status,created_at', 'matrimony', function (r) {
         return { title: r.name, subtitle: [r.type, r.upazila].filter(Boolean).join(' · ') };
@@ -134,7 +146,7 @@
         var a = document.createElement('a');
         a.className = 'ma-link';
         a.href = item.kind === 'market' ? (km.url + '?id=' + encodeURIComponent(item.id))
-          : item.kind === 'lawyer' ? (km.url + '#p-' + encodeURIComponent(item.id))
+          : (item.kind === 'lawyer' || item.kind === 'technician' || item.kind === 'viral' || item.kind === 'nursery') ? (km.url + '#p-' + encodeURIComponent(item.id))
           : item.kind === 'post' ? (km.url + '?id=' + encodeURIComponent(item.id))
           : km.url;
         a.textContent = 'দেখুন';

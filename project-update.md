@@ -1,3 +1,65 @@
+# Project Update — আবাসিক হোটেল Supabase গ্র্যান্ট ফিক্স (v248)
+
+সর্বশেষ অবস্থা: **সম্পন্ন — লাইভ সাইটে একটা হোটেল জমা দিয়ে অ্যাডমিন থেকে অনুমোদন করে ম্যানুয়ালি যাচাই বাকি।**
+ভার্সন: AABBV1-updated-v248.zip
+
+## এই সেশনে যা হলো
+`hotel_offices` টেবিলে anon/authenticated-এর কোনো SELECT/INSERT গ্র্যান্ট ছিল না — তাই হোটেল জমা, তালিকা লোড ও
+অ্যাডমিন প্যানেল সবই "permission denied" দিত। গ্র্যান্ট দেওয়া হয়েছে + `extra_photos` সর্বোচ্চ ৪টির চেক কনস্ট্রেইন্ট যোগ হয়েছে।
+
+### ডিপ্লয় করা হয়েছে (Supabase MCP): migration `hotel_offices_grants_and_extra_photos_check` ✅
+টেস্ট (anon রোল, রোলব্যাক সহ): পড়া ✅, pending + ৪ আরও ছবি ইনসার্ট ✅, approved ইনসার্ট ব্লক ✅, ৫টি আরও ছবি ব্লক ✅।
+Security advisor-এ hotel_offices-সংক্রান্ত কোনো সতর্কতা নেই।
+
+### পরিবর্তিত ফাইল
+- `supabase/hotel-extra-photos.sql` — গ্র্যান্ট + কলাম + কনস্ট্রেইন্ট (রেকর্ডের জন্য)
+
+---
+
+# Project Update — সব ফর্মে "আমার লোকেশন যোগ করুন" বাটন (v247)
+
+সর্বশেষ অবস্থা: **সম্পন্ন — আসল ফোনে লোকেশন অনুমতি সহ ম্যানুয়ালি যাচাই বাকি।**
+ভার্সন: AABBV1-updated-v247.zip
+
+## এই সেশনে যা হলো
+যেসব ফর্মে "Google Map লিংক" ঘর আছে, সবগুলোতে আবাসিক হোটেল ফর্মের মতো ঘরের নিচে এক ক্লিকের লোকেশন বাটন যোগ
+হয়েছে: কুরিয়ার, ডাক্তার, হাসপাতাল, আইনি সহায়তা, জনপ্রতিনিধি, দোকান যোগ (add-shop)। হোটেল আগে থেকেই ছিল।
+
+### নতুন ফাইল
+- `js/location-btn.js` — শেয়ার্ড স্ক্রিপ্ট: id-তে "map" থাকা `input[type=url]` খুঁজে বাটন+বার্তা বসায়; ডাইনামিক ফর্মের জন্য MutationObserver; বাটনের রং ফর্মের "জমা দিন" বাটন থেকে
+
+### পরিবর্তিত ফাইল
+- `css/style.css` — `.geo-loc-btn` / `.geo-loc-note`
+- `courier.html`, `doctors.html`, `hospital.html`, `lawyer.html`, `public-representative.html`, `add-shop.html` — স্ক্রিপ্ট ট্যাগ
+
+### নতুন ফর্মে ম্যাপ ঘর যোগ করলে
+ইনপুটের `type="url"` রাখুন ও id-তে "map" শব্দ রাখুন (যেমন `xxMap`) এবং পেজে `js/location-btn.js` যোগ করুন — বাটন নিজে বসে যাবে।
+
+---
+
+# Project Update — আবাসিক হোটেল ফর্মে ৫টি ছবি + জুম (v246)
+
+সর্বশেষ অবস্থা: **সম্পন্ন — লাইভ ব্রাউজারে ম্যানুয়ালি যাচাই বাকি।**
+ভার্সন: AABBV1-updated-v246.zip
+
+## এই সেশনে যা হলো
+hotel.html-এর "+" ফর্মে প্রধান ছবির পাশাপাশি আরও ৪টি আলাদা ছবির স্লট (মোট ৫টি) যোগ হয়েছে — নার্সারি/আইনি
+সহায়তা ইত্যাদির মতো একই প্যাটার্ন। কার্ডের ছবিতে ক্লিক করলে লাইটবক্স খোলে: জুম ইন/আউট (+ − বাটন, পিঞ্চ,
+ডাবল-ট্যাপ, মাউস হুইল), সোয়াইপ/◀ ▶/থাম্বনেইল দিয়ে ৫টি ছবি দেখা। একাধিক ছবি থাকলে কার্ডে ছোট ব্যাজ (যেমন ৫)।
+
+### নতুন ফাইল
+- `js/hotel-lightbox.js` — গ্যালারি + জুম লাইটবক্স (nursery-lightbox.js থেকে, `ht-` প্রিফিক্স)
+- `supabase/hotel-extra-photos.sql` — `hotel_offices.extra_photos text[]` (লাইভ DB-তে কলাম আগে থেকেই আছে, তাই নতুন করে চালানো লাগেনি)
+
+### পরিবর্তিত ফাইল
+- `hotel.html` — আরও ছবির ৪টি স্লট + লাইটবক্স স্ক্রিপ্ট
+- `js/hotel-submit.js` — স্লট লজিক (আগে প্রধান ছবি), কম্প্রেস+আপলোড, `extra_photos` সহ ইনসার্ট, তালিকা লোডে `extra_photos` (কলাম না থাকলে ছাড়া ফলব্যাক)
+- `js/hotel.js` — কার্ডের ছবিতে `data-extra` ও ব্যাজ
+- `css/hotel.css` — স্লট, ব্যাজ, লাইটবক্স গ্যালারির স্টাইল
+- `admin.html` — হোটেল প্যানেলে আরও ছবির প্রিভিউ; মুছলে স্টোরেজ থেকেও আরও ছবি মোছা হয়
+
+---
+
 # Project Update — স্প্যাম প্রতিরোধ / রেট-লিমিট (v130)
 
 সর্বশেষ অবস্থা: **সম্পন্ন — লাইভ সীমা সংখ্যা মনগড়া অনুমান, ব্যবহার দেখে টিউন করা লাগতে পারে।**
@@ -1075,3 +1137,14 @@ is_public=true অথবা নিজেই দেখলে), `matrimony_entries
 ## v183 (AABBV1-updated-v183.zip)
 - **Fix: profile page froze/hung ("প্রোফাইলে ক্লিক করার পরে স্ক্রিন হ্যাং").** Cause was my v175 phone-number masking script at the end of `profile.html`: its `MutationObserver` on `#updPhoneVal` re-wrote the same element on every callback, and the `busy` guard was reset before the (asynchronous) observer callback ran → infinite microtask loop → page never finished loading. Reproduced in headless Chromium (page.goto timed out), fixed by remembering the last text we wrote (`lastText`) and ignoring observer callbacks that only see our own write; also skip the write if the text is already identical. Verified: page loads, number masks (`016••••••54`), updates when the app fills a new number, eye button toggles show/hide.
 - Profile header brand badge: `<img src="assets/icons/icon-192.png">` now has `onerror` → hides itself instead of showing a broken-image icon. **Note:** `assets/icons/` is empty in this zip, so `icon-192.png` (also used by `manifest.json` and `sw.js`) is missing here — add the real app icon file if it isn't on the live site either.
+
+## v234 (AABBV1-updated-v234.zip) — জনপ্রতিনিধি + Supabase
+- **DB আগে থেকেই লাইভ ছিল** (`public_representatives` টেবিল, RLS, ডেমো-purge ট্রিগার, ৭টি নমুনা সারি) — নতুন টেবিল বানানো হয়নি। লাইভে শুধু সিকিউরিটি ছাঁটাই: anon/authenticated থেকে TRUNCATE/REFERENCES/TRIGGER তোলা, anon-এর UPDATE/DELETE তোলা, anon-এর SELECT কলাম-ভিত্তিক (`user_id` বন্ধ), ট্রিগার ফাংশনের EXECUTE বন্ধ। ডকুমেন্ট: `supabase/public-rep-schema.sql`।
+- **নতুন `js/public-rep-submit.js`**: approved সারি লোড (`status='approved'` ফিল্টারসহ) → `window.PR_ITEMS` + `pr:items-updated`; `window.PR_SUBMIT(data, photo)` ছবি `market-media/public-rep/`-এ আপলোড করে `status='pending'` insert করে (লগইন লাগে না, যেমন কুরিয়ার)।
+- `js/public-rep-form.js`: "TODO(supabase)" বাদ, আসল জমা + বাংলা ব্যর্থতার বার্তা। `js/public-rep.js`: স্ট্যাটিক PR_SAMPLES বাদ, "লোড হচ্ছে…"/"লোড করা যায়নি" অবস্থা, ফুটারের "সর্বশেষ আপডেট" আসল এন্ট্রির তারিখ থেকে। `js/public-rep-data.js`: নমুনা তালিকা মুছেছে। `public-representative.html`: নতুন স্ক্রিপ্ট যুক্ত + "তথ্য জমা হয়েছে" বার্তা।
+- **admin.html**: নতুন "জনপ্রতিনিধি" ট্যাব — পেন্ডিং/অনুমোদিত/বাতিল/ডেমো ফিল্টার, অনুমোদন/বাতিল/মুছুন (ছবিসহ), সব ডেমো মুছুন।
+- পরীক্ষা: নকল Supabase ক্লায়েন্টসহ headless Chromium-এ তালিকা রেন্ডার, নমুনা ব্যাজ, ফর্ম জমার row (type/seat/name/phone/address/status=pending) ঠিক; লাইভ DB-তে anon insert (রোলব্যাক) সফল, anon `user_id` পড়তে গেলে permission denied।
+- মনে রাখার বিষয়: অনুমোদনের পর ফোন নম্বর পাবলিক পেজে সবার কাছে দেখা যায় (ফর্মে ফোন বাধ্যতামূলক)। ডেমো-purge ট্রিগার **ধরন** অনুযায়ী (উপজেলা অনুযায়ী নয়) সব ডেমো মুছে — ধরনপ্রতি একটি করেই ডেমো আছে।
+
+## v235 (AABBV1-updated-v235.zip)
+- Deleted `nursery.html` (the page that opened from the homepage "নার্সারি" card) at the user's request. It had no dedicated CSS/JS, so nothing else broke. Homepage card, sitemap.html/xml, js/search-index.js, js/i18n.js, js/favorite-categories.js and the admin banner slug `nursery` were left untouched (same approach as transport.html in v140) — the card now points to a missing page (404) until a new `nursery.html` is added.

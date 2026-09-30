@@ -28,14 +28,32 @@
     return dd + '/' + mm + '/' + d.getFullYear();
   }
 
-  function donorCardHtml(d) {
+  function avatarHtml(d) {
+    if (/^https:\/\//.test(d.avatar_url || '')) {
+      return '<img src="' + escapeHtml(d.avatar_url) + '" alt="" loading="lazy">';
+    }
+    return '<i class="fa-solid fa-user" aria-hidden="true"></i>';
+  }
+
+  // মেসেজ বাটন: ডোনারের অ্যাকাউন্ট (user_id → username) থাকলে ওয়েবসাইটের নিজস্ব চ্যাট (chat.html) খুলবে;
+  // অ্যাকাউন্ট না থাকলে (অ্যাডমিন-যোগ করা ডোনার) আগের মতো SMS অপশন থাকবে।
+  function msgBtnHtml(d, usernameMap) {
+    var uname = d.user_id ? usernameMap[d.user_id] : null;
+    var phoneDigits = (d.phone || '').replace(/\D/g, '');
+    if (uname) {
+      return '<a class="msg-btn" href="chat.html?u=' + encodeURIComponent(uname) + '"><i class="fa-solid fa-comment" aria-hidden="true"></i> মেসেজ</a>';
+    }
+    return '<a class="msg-btn" href="sms:' + escapeHtml(phoneDigits) + '"><i class="fa-solid fa-comment" aria-hidden="true"></i> মেসেজ</a>';
+  }
+
+  function donorCardHtml(d, usernameMap) {
     var phoneDigits = (d.phone || '').replace(/\D/g, '');
     var locBits = [d.thana, d.address].filter(Boolean).join(' · ');
 
     return '' +
       '<div class="donor-card">' +
         '<div class="donor-card-top">' +
-          '<div class="donor-avatar"><i class="fa-solid fa-user" aria-hidden="true"></i></div>' +
+          '<div class="donor-avatar">' + avatarHtml(d) + '</div>' +
           '<div class="donor-info">' +
             '<div class="donor-name-row">' +
               '<h3 class="donor-name">' + escapeHtml(d.name) + '</h3>' +
@@ -51,7 +69,7 @@
         '</div>' +
         '<div class="donor-actions">' +
           '<a class="call-btn" href="tel:' + escapeHtml(phoneDigits) + '"><i class="fa-solid fa-phone" aria-hidden="true"></i> কল</a>' +
-          '<a class="msg-btn" href="sms:' + escapeHtml(phoneDigits) + '"><i class="fa-solid fa-comment" aria-hidden="true"></i> মেসেজ</a>' +
+          msgBtnHtml(d, usernameMap) +
         '</div>' +
       '</div>';
   }
@@ -84,6 +102,16 @@
       return;
     }
 
-    wrap.innerHTML = shown.map(donorCardHtml).join('');
+    // যাদের user_id আছে তাদের username এক ব্যাচে এনে ম্যাপ তৈরি করা হয়
+    var ids = shown.map(function (d) { return d.user_id; }).filter(Boolean);
+    if (!ids.length) {
+      wrap.innerHTML = shown.map(function (d) { return donorCardHtml(d, {}); }).join('');
+      return;
+    }
+    client.rpc('get_usernames_by_ids', { p_ids: ids }).then(function (pr) {
+      var usernameMap = {};
+      (pr.data || []).forEach(function (p) { if (p.username) usernameMap[p.id] = p.username; });
+      wrap.innerHTML = shown.map(function (d) { return donorCardHtml(d, usernameMap); }).join('');
+    });
   });
 })();

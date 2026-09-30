@@ -3,62 +3,29 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>নার্সারি — বিভাগ — টাঙ্গাইল জেলা</title>
-<meta name="description" content="ফুল, ফল ও শোভাবর্ধনকারী গাছের চারা বিক্রয়কারীর তথ্য।">
+<title>নার্সারি — টাঙ্গাইল জেলা</title>
+<meta name="description" content="টাঙ্গাইল জেলার ফুল, ফল, বনজ, ঔষধি, ইনডোর গাছ, সবজি চারা, ক্যাকটাস, অর্কিড ও বনসাইয়ের নার্সারি — উপজেলা অনুযায়ী খুঁজুন।">
 <meta property="og:title" content="নার্সারি — টাঙ্গাইল জেলা">
-<meta property="og:description" content="ফুল, ফল ও শোভাবর্ধনকারী গাছের চারা বিক্রয়কারীর তথ্য।">
+<meta property="og:description" content="টাঙ্গাইল জেলার ফুল, ফল, বনজ, ঔষধি, ইনডোর গাছ, সবজি চারা, ক্যাকটাস, অর্কিড ও বনসাইয়ের নার্সারি — উপজেলা অনুযায়ী খুঁজুন।">
 <meta property="og:type" content="website">
-<meta name="theme-color" content="#0E6B3A">
+<meta name="theme-color" content="#effaf3">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
 <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
 <link rel="manifest" href="manifest.json">
-<link rel="stylesheet" href="css/style.css?v=20260924073609">
+<link rel="stylesheet" href="css/style.css?v=20260930045009">
+<link rel="stylesheet" href="css/nursery.css?v=20260930045009">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
-<body data-banner-category="nursery">
+<body class="nr-page" data-banner-category="nursery">
 
-<header class="site-header app-header">
-  <div class="header-inner">
-    <button class="menu-toggle icon-btn" id="menuToggle" data-i18n-aria="menu.open" aria-label="মেনু খুলুন"><i class="fa-solid fa-bars" aria-hidden="true"></i></button>
-    <div class="brand-block">
-      <a href="index.html" class="brand app-brand">টাঙ্গাইল <span class="brand-accent">জেলা</span></a>
-    </div>
-    <div class="header-actions">
-      <a href="notifications.html" class="icon-btn" data-i18n-aria="menu.notifications" aria-label="বিজ্ঞপ্তি"><i class="fa-solid fa-bell" aria-hidden="true"></i></a>
-      <div class="more-menu-wrap">
-        <button type="button" class="icon-btn" id="moreMenuToggle" data-i18n-aria="menu.more" aria-label="আরও"><i class="fa-solid fa-ellipsis-vertical" aria-hidden="true"></i></button>
-        <div class="more-menu" id="moreMenu">
-          <div class="more-menu-section-title" data-i18n="menu.language">ভাষা</div>
-          <div class="lang-switcher">
-            <button type="button" class="lang-option" data-lang-choice="bn">বাংলা</button>
-            <button type="button" class="lang-option" data-lang-choice="en">English</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <nav class="main-nav" id="mainNav">
-      <a href="index.html" data-i18n="nav.home">হোম</a>
-      <a href="about.html" data-i18n="nav.about">পরিচিতি</a>
-      <a href="faq.html" data-i18n="nav.faq">সাধারণ প্রশ্ন</a>
-      <a href="contact.html" data-i18n="nav.contact">যোগাযোগ</a>
-    </nav>
-  </div>
-</header>
 <main>
-  <div class="wrap">
-    <div class="sticky-top-stack">
-    <div class="notice-bar app-notice">
-      <span class="notice-tag">তথ্য</span>
-      <span class="notice-text">প্রয়োজনীয় উপ-বিভাগ বেছে নিয়ে তালিকা দেখুন</span>
-    </div>
-    </div>
+  <div class="post-detail-topbar list-back-topbar">
+    <button type="button" class="post-detail-back" onclick="if(window.history.length>1){history.back();}else{window.location.href='index.html';}" aria-label="পেছনে যান"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i></button>
+    <span>নার্সারি</span>
+  </div>
 
-        <div class="post-detail-topbar list-back-topbar">
-      <button type="button" class="post-detail-back" onclick="if(window.history.length>1){history.back();}else{window.location.href='index.html';}" aria-label="পেছনে যান"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i></button>
-      <span>নার্সারি</span>
-    </div>
-
+  <div class="nr-top-area">
     <div class="banner-slider-wrap" id="catBannerWrap" style="display:none">
       <section class="banner-slider" id="catBannerSlider" aria-label="বিভাগ ব্যানার">
         <div class="banner-track" id="catBannerTrack"></div>
@@ -66,104 +33,158 @@
       <div class="banner-dots" id="catBannerDots"></div>
     </div>
 
-    <section class="cat-grid">
-      <a class="cat-card cat-nature" href="listing.html?cat=nursery-sadar&name=%E0%A6%9F%E0%A6%BE%E0%A6%99%E0%A7%8D%E0%A6%97%E0%A6%BE%E0%A6%87%E0%A6%B2%20%E0%A6%B8%E0%A6%A6%E0%A6%B0%20%E0%A6%A5%E0%A6%BE%E0%A6%A8%E0%A6%BE&icon=%F0%9F%8C%B1&back=nursery.html&backName=%E0%A6%A8%E0%A6%BE%E0%A6%B0%E0%A7%8D%E0%A6%B8%E0%A6%BE%E0%A6%B0%E0%A6%BF&bannerCat=nursery">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🌱</span></div>
-        <h3>টাঙ্গাইল সদর থানা</h3>
-      </a>
-      <a class="cat-card cat-nature" href="listing.html?cat=nursery-mirzapur&name=%E0%A6%AE%E0%A6%BF%E0%A6%B0%E0%A7%8D%E0%A6%9C%E0%A6%BE%E0%A6%AA%E0%A7%81%E0%A6%B0%20%E0%A6%A5%E0%A6%BE%E0%A6%A8%E0%A6%BE&icon=%F0%9F%8C%B1&back=nursery.html&backName=%E0%A6%A8%E0%A6%BE%E0%A6%B0%E0%A7%8D%E0%A6%B8%E0%A6%BE%E0%A6%B0%E0%A6%BF&bannerCat=nursery">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🌱</span></div>
-        <h3>মির্জাপুর থানা</h3>
-      </a>
-      <a class="cat-card cat-nature" href="listing.html?cat=nursery-delduar&name=%E0%A6%A6%E0%A7%87%E0%A6%B2%E0%A6%A6%E0%A7%81%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%B0%20%E0%A6%A5%E0%A6%BE%E0%A6%A8%E0%A6%BE&icon=%F0%9F%8C%B1&back=nursery.html&backName=%E0%A6%A8%E0%A6%BE%E0%A6%B0%E0%A7%8D%E0%A6%B8%E0%A6%BE%E0%A6%B0%E0%A6%BF&bannerCat=nursery">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🌱</span></div>
-        <h3>দেলদুয়ার থানা</h3>
-      </a>
-      <a class="cat-card cat-nature" href="listing.html?cat=nursery-basail&name=%E0%A6%AC%E0%A6%BE%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%B2%20%E0%A6%A5%E0%A6%BE%E0%A6%A8%E0%A6%BE&icon=%F0%9F%8C%B1&back=nursery.html&backName=%E0%A6%A8%E0%A6%BE%E0%A6%B0%E0%A7%8D%E0%A6%B8%E0%A6%BE%E0%A6%B0%E0%A6%BF&bannerCat=nursery">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🌱</span></div>
-        <h3>বাসাইল থানা</h3>
-      </a>
-      <a class="cat-card cat-nature" href="listing.html?cat=nursery-kalihati&name=%E0%A6%95%E0%A6%BE%E0%A6%B2%E0%A6%BF%E0%A6%B9%E0%A6%BE%E0%A6%A4%E0%A7%80%20%E0%A6%A5%E0%A6%BE%E0%A6%A8%E0%A6%BE&icon=%F0%9F%8C%B1&back=nursery.html&backName=%E0%A6%A8%E0%A6%BE%E0%A6%B0%E0%A7%8D%E0%A6%B8%E0%A6%BE%E0%A6%B0%E0%A6%BF&bannerCat=nursery">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🌱</span></div>
-        <h3>কালিহাতী থানা</h3>
-      </a>
-      <a class="cat-card cat-nature" href="listing.html?cat=nursery-ghatail&name=%E0%A6%98%E0%A6%BE%E0%A6%9F%E0%A6%BE%E0%A6%87%E0%A6%B2%20%E0%A6%A5%E0%A6%BE%E0%A6%A8%E0%A6%BE&icon=%F0%9F%8C%B1&back=nursery.html&backName=%E0%A6%A8%E0%A6%BE%E0%A6%B0%E0%A7%8D%E0%A6%B8%E0%A6%BE%E0%A6%B0%E0%A6%BF&bannerCat=nursery">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🌱</span></div>
-        <h3>ঘাটাইল থানা</h3>
-      </a>
-      <a class="cat-card cat-nature" href="listing.html?cat=nursery-gopalpur&name=%E0%A6%97%E0%A7%8B%E0%A6%AA%E0%A6%BE%E0%A6%B2%E0%A6%AA%E0%A7%81%E0%A6%B0%20%E0%A6%A5%E0%A6%BE%E0%A6%A8%E0%A6%BE&icon=%F0%9F%8C%B1&back=nursery.html&backName=%E0%A6%A8%E0%A6%BE%E0%A6%B0%E0%A7%8D%E0%A6%B8%E0%A6%BE%E0%A6%B0%E0%A6%BF&bannerCat=nursery">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🌱</span></div>
-        <h3>গোপালপুর থানা</h3>
-      </a>
-      <a class="cat-card cat-nature" href="listing.html?cat=nursery-madhupur&name=%E0%A6%AE%E0%A6%A7%E0%A7%81%E0%A6%AA%E0%A7%81%E0%A6%B0%20%E0%A6%A5%E0%A6%BE%E0%A6%A8%E0%A6%BE&icon=%F0%9F%8C%B1&back=nursery.html&backName=%E0%A6%A8%E0%A6%BE%E0%A6%B0%E0%A7%8D%E0%A6%B8%E0%A6%BE%E0%A6%B0%E0%A6%BF&bannerCat=nursery">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🌱</span></div>
-        <h3>মধুপুর থানা</h3>
-      </a>
-      <a class="cat-card cat-nature" href="listing.html?cat=nursery-dhanbari&name=%E0%A6%A7%E0%A6%A8%E0%A6%AC%E0%A6%BE%E0%A6%A1%E0%A6%BC%E0%A7%80%20%E0%A6%A5%E0%A6%BE%E0%A6%A8%E0%A6%BE&icon=%F0%9F%8C%B1&back=nursery.html&backName=%E0%A6%A8%E0%A6%BE%E0%A6%B0%E0%A7%8D%E0%A6%B8%E0%A6%BE%E0%A6%B0%E0%A6%BF&bannerCat=nursery">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🌱</span></div>
-        <h3>ধনবাড়ী থানা</h3>
-      </a>
-      <a class="cat-card cat-nature" href="listing.html?cat=nursery-bhuapur&name=%E0%A6%AD%E0%A7%82%E0%A6%9E%E0%A6%BE%E0%A6%AA%E0%A7%81%E0%A6%B0%20%E0%A6%A5%E0%A6%BE%E0%A6%A8%E0%A6%BE&icon=%F0%9F%8C%B1&back=nursery.html&backName=%E0%A6%A8%E0%A6%BE%E0%A6%B0%E0%A7%8D%E0%A6%B8%E0%A6%BE%E0%A6%B0%E0%A6%BF&bannerCat=nursery">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🌱</span></div>
-        <h3>ভূঞাপুর থানা</h3>
-      </a>
-      <a class="cat-card cat-nature" href="listing.html?cat=nursery-nagarpur&name=%E0%A6%A8%E0%A6%BE%E0%A6%97%E0%A6%B0%E0%A6%AA%E0%A7%81%E0%A6%B0%20%E0%A6%A5%E0%A6%BE%E0%A6%A8%E0%A6%BE&icon=%F0%9F%8C%B1&back=nursery.html&backName=%E0%A6%A8%E0%A6%BE%E0%A6%B0%E0%A7%8D%E0%A6%B8%E0%A6%BE%E0%A6%B0%E0%A6%BF&bannerCat=nursery">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🌱</span></div>
-        <h3>নাগরপুর থানা</h3>
-      </a>
-      <a class="cat-card cat-nature" href="listing.html?cat=nursery-sakhipur&name=%E0%A6%B8%E0%A6%96%E0%A7%80%E0%A6%AA%E0%A7%81%E0%A6%B0%20%E0%A6%A5%E0%A6%BE%E0%A6%A8%E0%A6%BE&icon=%F0%9F%8C%B1&back=nursery.html&backName=%E0%A6%A8%E0%A6%BE%E0%A6%B0%E0%A7%8D%E0%A6%B8%E0%A6%BE%E0%A6%B0%E0%A6%BF&bannerCat=nursery">
-        <div class="cat-icon"><span class="cat-emoji" aria-hidden="true">🌱</span></div>
-        <h3>সখীপুর থানা</h3>
-      </a>
+    <section class="nr-hero" aria-labelledby="nrTitle">
+      <svg class="nr-hero-art" viewBox="-70 0 590 200" preserveAspectRatio="xMaxYMax slice" aria-hidden="true" focusable="false">
+        <g fill="#fff" opacity=".85">
+          <ellipse cx="70" cy="46" rx="34" ry="11"/><ellipse cx="92" cy="40" rx="24" ry="10"/>
+          <ellipse cx="330" cy="40" rx="30" ry="9"/><ellipse cx="347" cy="35" rx="18" ry="8"/>
+        </g>
+        <path d="M-70 176 H0 C60 140 130 132 200 150 C260 164 300 140 360 138 C430 136 480 150 520 146 V190 H-70Z" fill="#b6e3bf"/>
+        <path d="M-70 184 H0 C70 162 150 160 230 174 C320 188 420 162 520 172 V200 H-70Z" fill="#7cc48a"/>
+        <!-- টবের চারা -->
+        <g transform="translate(150 160)">
+          <path d="M-22 0h44l-6 30h-32z" fill="#c9603c"/><rect x="-25" y="-6" width="50" height="9" rx="3" fill="#b5522f"/>
+          <path d="M0 -6V-46" stroke="#2f7d3c" stroke-width="4" stroke-linecap="round"/>
+          <path d="M0 -24c-20-2-26-16-24-26 16 0 26 10 24 26z" fill="#4fae66"/>
+          <path d="M0 -34c18-2 24-14 22-24-15 0-24 9-22 24z" fill="#3f9f5a"/>
+        </g>
+        <!-- ফুল -->
+        <g transform="translate(300 152)">
+          <path d="M0 0V-44" stroke="#2f7d3c" stroke-width="4" stroke-linecap="round"/>
+          <g fill="#e2603f"><circle cx="0" cy="-58" r="9"/><circle cx="-11" cy="-50" r="9"/><circle cx="11" cy="-50" r="9"/><circle cx="-7" cy="-40" r="9"/><circle cx="7" cy="-40" r="9"/></g>
+          <circle cx="0" cy="-49" r="6" fill="#f2b636"/>
+          <path d="M0 -18c-14 0-20-9-18-16 12 0 19 6 18 16z" fill="#4fae66"/>
+        </g>
+        <!-- বড় গাছ -->
+        <g>
+          <rect x="418" y="112" width="6" height="52" fill="#7a5a3a"/><circle cx="421" cy="100" r="28" fill="#3f9f5a"/><circle cx="401" cy="118" r="17" fill="#4fae66"/><circle cx="443" cy="116" r="18" fill="#4fae66"/>
+          <rect x="30" y="140" width="4" height="26" fill="#7a5a3a"/><circle cx="32" cy="134" r="17" fill="#3f9f5a"/><circle cx="20" cy="146" r="11" fill="#4fae66"/>
+        </g>
+      </svg>
+
+      <div class="nr-hero-inner">
+        <div class="nr-hero-body">
+          <svg class="nr-hero-pin" viewBox="0 0 48 44" aria-hidden="true" focusable="false"><circle cx="24" cy="22" r="20" fill="#0f8a52"/><path d="M24 34V20" stroke="#fff" stroke-width="3" stroke-linecap="round"/><path d="M24 24c-9 0-13-6-12-13 9 0 13 5 12 13z" fill="#fff" opacity=".95"/><path d="M24 20c8 0 12-5 11-11-8 0-12 4-11 11z" fill="#fff" opacity=".8"/></svg>
+          <div class="nr-hero-text">
+            <h1 id="nrTitle"><span class="nr-t1">টাঙ্গাইল জেলার</span> <span class="nr-t2">নার্সারি</span></h1>
+            <p>ফুল, ফল, ঔষধি ও ইনডোর গাছের চারা — এক জায়গায়</p>
+          </div>
+        </div>
+      </div>
     </section>
+  </div>
+
+  <div class="wrap nr-wrap">
+    <section class="nr-toolbar">
+      <div class="nr-filter-bar">
+        <label class="nr-filter-label nr-sr" for="nurseryUpazilaSelect">উপজেলা নির্বাচন করুন</label><!-- দৃশ্যমান লেখা বাদ; শুধু স্ক্রিন-রিডারের জন্য -->
+        <div class="nr-select-wrap">
+          <i class="fa-solid fa-location-dot nr-select-pin" aria-hidden="true"></i>
+          <select id="nurseryUpazilaSelect"></select>
+          <i class="fa-solid fa-chevron-down nr-select-caret" aria-hidden="true"></i>
+        </div>
+      </div>
+    </section>
+
+    <nav class="nr-cats" aria-label="নার্সারি সাব-ক্যাটাগরি">
+      <div class="nr-cats-scroll" id="nurseryCats" role="group"><!-- nursery.js এখানে চিপ রেন্ডার করে --></div>
+    </nav>
+
+    <section class="nr-grid" id="nurseryGrid" aria-label="নার্সারির তালিকা">
+      <!-- nursery.js এখানে কার্ডগুলো রেন্ডার করে -->
+    </section>
+
+    <footer class="nr-footer-strip">
+      <span class="nr-foot-updated"><i class="fa-regular fa-calendar-check" aria-hidden="true"></i><span>সর্বশেষ আপডেট: <b id="nrUpdatedFoot">—</b></span></span>
+      <a class="nr-report" href="contact.html"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i><span>তথ্য ভুল? রিপোর্ট করুন</span></a>
+    </footer>
   </div>
 </main>
 
-<footer class="site-footer">
-  <div class="footer-inner">
-    <div>
-      <h4>টাঙ্গাইল জেলা</h4>
-      <p>টাঙ্গাইল জেলার বাসিন্দা, নতুন আগন্তুক ও ব্যবসায়ীদের জন্য তৈরি একটি স্থানীয় সেবা প্ল্যাটফর্ম।</p>
+<!-- Floating "+" : নতুন নার্সারি যোগ (Pending Review) -->
+<button type="button" class="nr-fab" id="nrFab" aria-haspopup="dialog" aria-controls="nrSheet" aria-label="নতুন নার্সারি যোগ করুন"><i class="fa-solid fa-plus" aria-hidden="true"></i></button>
+
+<div class="nr-sheet-backdrop" id="nrSheetBackdrop" hidden>
+  <div class="nr-sheet" id="nrSheet" role="dialog" aria-modal="true" aria-labelledby="nrSheetTitle">
+    <div class="nr-sheet-grip" aria-hidden="true"></div>
+    <div class="nr-sheet-head">
+      <h2 id="nrSheetTitle">নতুন নার্সারি যোগ করুন</h2>
+      <p>জমা দেওয়া তথ্য অ্যাডমিন যাচাই করার পর প্রকাশিত হবে। মোবাইল নম্বর দিলে শুধু আপনার সম্মতি থাকলেই কার্ডে দেখা যাবে।</p>
     </div>
-    <div>
-      <h4>পেজ</h4>
-      <ul class="footer-links">
-        <li><a href="index.html">হোম</a></li>
-        <li><a href="about.html">পরিচিতি</a></li>
-        <li><a href="add-listing.html">তথ্য যোগ করুন</a></li>
-        <li><a href="faq.html">সাধারণ প্রশ্ন</a></li>
-        <li><a href="contact.html">যোগাযোগ</a></li>
-        <li><a href="sitemap.html">সাইটম্যাপ</a></li>
-        <li><a href="privacy-policy.html">প্রাইভেসি পলিসি</a></li>
-        <li><a href="terms.html">শর্তাবলী</a></li>
-      </ul>
+
+    <form id="nrForm" novalidate>
+      <div class="nr-field">
+        <label for="nrfType">ধরন <span class="nr-req" aria-hidden="true">*</span></label>
+        <select id="nrfType" required></select>
+      </div>
+
+      <div id="nrDynamicFields"><!-- nursery-submit.js এখানে নির্বাচিত ধরন অনুযায়ী ফিল্ড বসায় --></div>
+
+      <!-- স্প্যাম ফাঁদ: মানুষ এটা দেখবে না -->
+      <div class="nr-hp" aria-hidden="true"><label>Website <input type="text" id="nrfHp" tabindex="-1" autocomplete="off"></label></div>
+
+      <p class="nr-form-msg" id="nrFormMsg" role="alert" hidden></p>
+
+      <div class="nr-sheet-actions">
+        <button type="button" class="nr-btn-cancel" id="nrCancel">বাতিল</button>
+        <button type="submit" class="nr-btn-submit" id="nrSubmit">জমা দিন</button>
+      </div>
+    </form>
+
+    <div class="nr-sheet-done" id="nrDone" hidden>
+      <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+      <h3>ধন্যবাদ! আপনার তথ্য জমা হয়েছে</h3>
+      <p>অ্যাডমিন যাচাই করে অনুমোদন দিলে তথ্যটি এই পেজে দেখা যাবে।</p>
+      <button type="button" class="nr-btn-submit" id="nrDoneClose">ঠিক আছে</button>
     </div>
   </div>
-  <div class="footer-bottom">© ২০২৬ টাঙ্গাইল জেলা। সর্বস্বত্ব সংরক্ষিত।</div>
-</footer>
+</div>
 
-
-<nav class="bottom-nav">
-  <a href="index.html"><span class="bn-icon"><i class="fa-solid fa-house" aria-hidden="true"></i></span><span data-i18n="bottomnav.home">Home</span></a>
-  <a href="members.html"><span class="bn-icon"><i class="fa-solid fa-users" aria-hidden="true"></i></span><span data-i18n="bottomnav.members">Members</span></a>
-  <a href="posts.html"><span class="bn-icon"><i class="fa-solid fa-plus" aria-hidden="true"></i></span><span data-i18n="bottomnav.post">Post</span></a>
-  <a href="profile.html"><span class="bn-icon"><i class="fa-solid fa-user" aria-hidden="true"></i></span><span data-i18n="bottomnav.profile">Profile</span></a>
-</nav>
+<!-- ছবি বসানোর ধাপ: গ্যালারি থেকে ছবি বাছলে এখানে জুম ইন/আউট ও টেনে সরিয়ে ঠিক জায়গামতো বসানো যায় -->
+<div class="nr-sheet-backdrop nr-crop-backdrop" id="nrCropBackdrop" hidden>
+  <div class="nr-sheet nr-crop" id="nrCrop" role="dialog" aria-modal="true" aria-labelledby="nrCropTitle">
+    <div class="nr-sheet-grip" aria-hidden="true"></div>
+    <div class="nr-sheet-head">
+      <h2 id="nrCropTitle">ছবি ঠিকমতো বসান</h2>
+      <p>আঙুল দিয়ে টেনে ছবিটা সরান। জুম করতে স্লাইডার, + / − বাটন বা দুই আঙুল ব্যবহার করুন। কার্ডে ছবিটা ঠিক এভাবেই দেখাবে।</p>
+    </div>
+    <div class="nr-crop-viewport" id="nrCropViewport">
+      <img id="nrCropImg" alt="" draggable="false">
+    </div>
+    <div class="nr-crop-zoom">
+      <button type="button" class="nr-crop-zbtn" id="nrCropZoomOut" aria-label="জুম আউট"><i class="fa-solid fa-magnifying-glass-minus" aria-hidden="true"></i></button>
+      <input type="range" id="nrCropZoom" min="100" max="320" value="100" step="1" aria-label="জুম">
+      <button type="button" class="nr-crop-zbtn" id="nrCropZoomIn" aria-label="জুম ইন"><i class="fa-solid fa-magnifying-glass-plus" aria-hidden="true"></i></button>
+    </div>
+    <div class="nr-sheet-actions">
+      <button type="button" class="nr-btn-cancel" id="nrCropCancel">বাতিল</button>
+      <button type="button" class="nr-btn-submit" id="nrCropOk">ঠিক আছে</button>
+    </div>
+  </div>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-<script src="js/supabase-config.js?v=20260924073609"></script>
-    <script src="js/nav-avatar.js?v=20260924073609"></script>
-    <script src="js/call.js?v=20260924073609"></script>
-<script src="js/sticky-header.js?v=20260924073609"></script>
-<script src="js/banner-slider.js?v=20260924073609"></script>
-<script src="js/category-banners.js?v=20260924073609"></script>
-<script src="js/notice-bar.js?v=20260924073609"></script>
-<script src="js/i18n.js?v=20260924073609"></script>
-<script src="js/search-index.js?v=20260924073609"></script>
-<script src="js/smart-search.js?v=20260924073609"></script>
-<script src="js/search-ui.js?v=20260924073609"></script>
-<script src="js/script.js?v=20260924073609"></script>
-<script src="js/auto-update.js?v=20260924073609"></script>
-<script src="js/floating-buttons.js?v=20260924073609"></script>
+<script src="js/supabase-config.js?v=20260930045009"></script>
+<script src="js/banner-slider.js?v=20260930045009"></script>
+<script src="js/category-banners.js?v=20260930045009"></script>
+<script src="js/nursery-data.js?v=20260930045009"></script>
+<script src="js/nursery.js?v=20260930045009"></script>
+<script src="js/nursery-lightbox.js?v=20260930045009"></script>
+<script src="js/nursery-submit.js?v=20260930045009"></script>
+<script>
+/* ব্যাক-বারের প্রকৃত উচ্চতা মেপে ব্যানারের sticky top সেট করা */
+(function(){
+  function setH(){
+    var bar=document.querySelector('.list-back-topbar');
+    if(bar) document.documentElement.style.setProperty('--nr-topbar-h', bar.offsetHeight+'px');
+  }
+  setH();
+  window.addEventListener('load',setH);
+  window.addEventListener('resize',setH);
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(setH);
+})();
+</script>
+<script src="js/auto-update.js?v=20260930045009"></script>
+<script src="js/floating-buttons.js?v=20260930045009"></script>
 </body>
 </html>

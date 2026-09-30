@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>হাসপাতাল — টাঙ্গাইল জেলা</title>
+<meta name="description" content="টাঙ্গাইল জেলার সরকারি ও বেসরকারি হাসপাতাল, ক্লিনিক ও ডায়াগনস্টিক সেন্টারের যাচাইকৃত তথ্য — উপজেলা অনুযায়ী খুঁজুন।">
+<meta property="og:title" content="হাসপাতাল — টাঙ্গাইল জেলা">
+<meta property="og:description" content="টাঙ্গাইল জেলার সরকারি ও বেসরকারি হাসপাতাল, ক্লিনিক ও ডায়াগনস্টিক সেন্টারের যাচাইকৃত তথ্য — উপজেলা অনুযায়ী খুঁজুন।">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#A12B2B">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="css/style.css?v=20260930045009">
+<link rel="stylesheet" href="css/hospital.css?v=20260930045009">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body class="hp-page" data-banner-category="hospitals">
+
+<main>
+  <div class="post-detail-topbar list-back-topbar">
+    <button type="button" class="post-detail-back" onclick="if(window.history.length>1){history.back();}else{window.location.href='index.html';}" aria-label="পেছনে যান"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i></button>
+    <span>হাসপাতাল</span>
+  </div>
+
+  <div class="hp-top-area">
+    <div class="banner-slider-wrap" id="catBannerWrap" style="display:none">
+      <section class="banner-slider" id="catBannerSlider" aria-label="বিভাগ ব্যানার">
+        <div class="banner-track" id="catBannerTrack"></div>
+      </section>
+      <div class="banner-dots" id="catBannerDots"></div>
+    </div>
+
+    <section class="hp-hero" aria-labelledby="hpTitle">
+      <svg class="hp-hero-art" viewBox="-70 0 590 200" preserveAspectRatio="xMaxYMax slice" aria-hidden="true" focusable="false">
+        <!-- আকাশে ছড়ানো ছোট তারা -->
+        <g fill="#f7c9c9" opacity=".5">
+          <circle cx="30" cy="34" r="1.6"/><circle cx="96" cy="18" r="1.3"/><circle cx="212" cy="40" r="1.6"/>
+          <circle cx="268" cy="14" r="1.3"/><circle cx="330" cy="30" r="1.6"/><circle cx="486" cy="22" r="1.6"/><circle cx="510" cy="74" r="1.3"/>
+        </g>
+        <circle cx="370" cy="104" r="92" fill="#fff" opacity=".055"/>
+        <!-- মেঝে -->
+        <path d="M-70 178 H520 V200 H-70Z" fill="#210a0a"/>
+        <path d="M-70 178 H520" stroke="#6a2a2a" stroke-width="1.5" opacity=".6"/>
+
+        <!-- হাসপাতাল ভবন -->
+        <g>
+          <rect x="88" y="76" width="150" height="102" fill="#f3f6f8"/>
+          <rect x="88" y="76" width="150" height="10" fill="#dfe6ea"/>
+          <rect x="150" y="150" width="26" height="28" fill="#0E8A93"/>
+          <g fill="#0E8A93" opacity=".85">
+            <rect x="102" y="94" width="12" height="12"/><rect x="126" y="94" width="12" height="12"/>
+            <rect x="150" y="94" width="12" height="12"/><rect x="174" y="94" width="12" height="12"/><rect x="198" y="94" width="12" height="12"/>
+            <rect x="102" y="118" width="12" height="12"/><rect x="126" y="118" width="12" height="12"/>
+            <rect x="198" y="118" width="12" height="12"/><rect x="212" y="118" width="12" height="12"/>
+          </g>
+          <!-- রেড ক্রস ব্যাজ -->
+          <rect x="196" y="60" width="36" height="36" rx="4" fill="#fff"/>
+          <path d="M210 66H218V78H230V86H218V98H210V86H198V78H210Z" fill="#A12B2B"/>
+        </g>
+
+        <!-- ছোট অ্যাম্বুলেন্স/ক্লিনিক ভবন -->
+        <g>
+          <rect x="256" y="122" width="96" height="56" fill="#f3f6f8"/>
+          <rect x="256" y="122" width="96" height="8" fill="#dfe6ea"/>
+          <rect x="270" y="150" width="20" height="28" fill="#7A1F1F"/>
+          <rect x="300" y="136" width="18" height="18" fill="#fdecec"/>
+          <rect x="324" y="136" width="18" height="18" fill="#fdecec"/>
+        </g>
+
+        <!-- হার্টবিট পালস লাইন -->
+        <path d="M-40 150 H60 L74 118 L92 172 L108 150 L120 150 L134 130 L148 150 H360"
+              fill="none" stroke="#ff8a80" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/>
+      </svg>
+
+      <div class="hp-hero-inner">
+        <div class="hp-hero-body">
+          <svg class="hp-hero-pin" viewBox="0 0 48 44" aria-hidden="true" focusable="false">
+            <path d="M24 4C13 4 5 12 5 22c0 15 19 18 19 18s19-3 19-18C43 12 35 4 24 4Z" fill="#ff8a80" opacity=".2"/>
+            <path d="M24 34s-14-8-14-18a10 10 0 0 1 14-9 10 10 0 0 1 14 9c0 10-14 18-14 18Z" fill="#fff" stroke="#f3cf6a" stroke-width="2"/>
+            <path d="M12 22H18L21 15L25 29L28 22H36" stroke="#A12B2B" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <div class="hp-hero-text">
+            <h1 id="hpTitle"><span class="hp-t1">টাঙ্গাইল জেলার</span> <span class="hp-t2">হাসপাতাল</span></h1>
+            <p>হাসপাতাল, ক্লিনিক ও ডায়াগনস্টিক সেন্টারের যাচাইকৃত তথ্য</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="wrap hp-wrap">
+    <section class="hp-toolbar">
+      <div class="hp-filter-bar">
+        <label class="hp-filter-label hp-sr" for="hospitalUpazilaSelect">উপজেলা নির্বাচন করুন</label><!-- দৃশ্যমান লেখা বাদ; শুধু স্ক্রিন-রিডারের জন্য -->
+        <div class="hp-select-wrap">
+          <i class="fa-solid fa-location-dot hp-select-pin" aria-hidden="true"></i>
+          <select id="hospitalUpazilaSelect"></select>
+          <i class="fa-solid fa-chevron-down hp-select-caret" aria-hidden="true"></i>
+        </div>
+      </div>
+    </section>
+
+    <nav class="hp-cats" aria-label="হাসপাতালের ধরন">
+      <div class="hp-cats-scroll" id="hospitalCats" role="group"><!-- hospital.js এখানে চিপ রেন্ডার করে --></div>
+    </nav>
+
+    <section class="hp-grid" id="hospitalGrid" aria-label="হাসপাতাল ও ক্লিনিকের তালিকা">
+      <!-- hospital.js এখানে কার্ডগুলো রেন্ডার করে -->
+    </section>
+
+    <footer class="hp-footer-strip">
+      <span class="hp-foot-updated"><i class="fa-regular fa-calendar-check" aria-hidden="true"></i><span>সর্বশেষ আপডেট: <b id="hpUpdatedFoot">—</b></span></span>
+      <a class="hp-report" href="contact.html"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i><span>তথ্য ভুল? রিপোর্ট করুন</span></a>
+    </footer>
+  </div>
+</main>
+
+<!-- Floating "+" : নতুন তথ্য যোগ (Pending Review) -->
+<button type="button" class="hp-fab" id="hpFab" aria-haspopup="dialog" aria-controls="hpSheet" aria-label="নতুন তথ্য যোগ করুন"><i class="fa-solid fa-plus" aria-hidden="true"></i></button>
+
+<div class="hp-sheet-backdrop" id="hpSheetBackdrop" hidden>
+  <div class="hp-sheet" id="hpSheet" role="dialog" aria-modal="true" aria-labelledby="hpSheetTitle">
+    <div class="hp-sheet-grip" aria-hidden="true"></div>
+    <div class="hp-sheet-head">
+      <h2 id="hpSheetTitle">নতুন তথ্য যোগ করুন</h2>
+      <p>জমা দেওয়া তথ্য অ্যাডমিন যাচাই করার পর প্রকাশিত হবে। মোবাইল নম্বর শুধু আপনার সম্মতি থাকলেই কার্ডে দেখা যাবে।</p>
+    </div>
+
+    <form id="hpForm" novalidate>
+      <div class="hp-field">
+        <label for="hpfType">কোন ধরনের সেবা <span class="hp-req" aria-hidden="true">*</span></label>
+        <select id="hpfType" required></select>
+      </div>
+
+      <div id="hpDynamicFields"><!-- hospital-submit.js এখানে নির্বাচিত ধরন অনুযায়ী ফিল্ড বসায় --></div>
+
+      <!-- স্প্যাম ফাঁদ: মানুষ এটা দেখবে না -->
+      <div class="hp-hp" aria-hidden="true"><label>Website <input type="text" id="hpfHp" tabindex="-1" autocomplete="off"></label></div>
+
+      <p class="hp-form-msg" id="hpFormMsg" role="alert" hidden></p>
+
+      <div class="hp-sheet-actions">
+        <button type="button" class="hp-btn-cancel" id="hpCancel">বাতিল</button>
+        <button type="submit" class="hp-btn-submit" id="hpSubmit">জমা দিন</button>
+      </div>
+    </form>
+
+    <div class="hp-sheet-done" id="hpDone" hidden>
+      <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+      <h3>ধন্যবাদ! আপনার তথ্য জমা হয়েছে</h3>
+      <p>অ্যাডমিন যাচাই করে অনুমোদন দিলে তথ্যটি এই পেজে দেখা যাবে।</p>
+      <button type="button" class="hp-btn-submit" id="hpDoneClose">ঠিক আছে</button>
+    </div>
+  </div>
+</div>
+
+<!-- ছবি বসানোর ধাপ: গ্যালারি থেকে ছবি বাছলে এখানে জুম ইন/আউট ও টেনে সরিয়ে ঠিক জায়গামতো বসানো যায় -->
+<div class="hp-sheet-backdrop hp-crop-backdrop" id="hpCropBackdrop" hidden>
+  <div class="hp-sheet hp-crop" id="hpCrop" role="dialog" aria-modal="true" aria-labelledby="hpCropTitle">
+    <div class="hp-sheet-grip" aria-hidden="true"></div>
+    <div class="hp-sheet-head">
+      <h2 id="hpCropTitle">ছবি ঠিকমতো বসান</h2>
+      <p>আঙুল দিয়ে টেনে ছবিটা সরান। জুম করতে স্লাইডার, + / − বাটন বা দুই আঙুল ব্যবহার করুন। কার্ডে ছবিটা ঠিক এভাবেই দেখাবে।</p>
+    </div>
+    <div class="hp-crop-viewport" id="hpCropViewport">
+      <img id="hpCropImg" alt="" draggable="false">
+    </div>
+    <div class="hp-crop-zoom">
+      <button type="button" class="hp-crop-zbtn" id="hpCropZoomOut" aria-label="জুম আউট"><i class="fa-solid fa-magnifying-glass-minus" aria-hidden="true"></i></button>
+      <input type="range" id="hpCropZoom" min="100" max="320" value="100" step="1" aria-label="জুম">
+      <button type="button" class="hp-crop-zbtn" id="hpCropZoomIn" aria-label="জুম ইন"><i class="fa-solid fa-magnifying-glass-plus" aria-hidden="true"></i></button>
+    </div>
+    <div class="hp-sheet-actions">
+      <button type="button" class="hp-btn-cancel" id="hpCropCancel">বাতিল</button>
+      <button type="button" class="hp-btn-submit" id="hpCropOk">ঠিক আছে</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="js/supabase-config.js?v=20260930045009"></script>
+<script src="js/banner-slider.js?v=20260930045009"></script>
+<script src="js/category-banners.js?v=20260930045009"></script>
+<script src="js/hospital-data.js?v=20260930045009"></script>
+<script src="js/hospital.js?v=20260930045009"></script>
+<script src="js/hospital-lightbox.js?v=20260930045009"></script>
+<script src="js/hospital-submit.js?v=20260930045009"></script>
+<script src="js/location-btn.js?v=20260930045009"></script>
+<script>
+/* ব্যাক-বারের প্রকৃত উচ্চতা মেপে ব্যানারের sticky top সেট করা */
+(function(){
+  function setH(){
+    var bar=document.querySelector('.list-back-topbar');
+    if(bar) document.documentElement.style.setProperty('--hp-topbar-h', bar.offsetHeight+'px');
+  }
+  setH();
+  window.addEventListener('load',setH);
+  window.addEventListener('resize',setH);
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(setH);
+})();
+</script>
+<script src="js/auto-update.js?v=20260930045009"></script>
+<script src="js/floating-buttons.js?v=20260930045009"></script>
+</body>
+</html>

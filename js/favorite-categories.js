@@ -22,7 +22,7 @@
     { k: "cat.houseRent.title", h: "house-rent.html", c: "cat-property", i: "fa-house", n: "বাসা ভাড়া", g: "house-rent" },
     { k: "cat.flatLand.title", h: "flat-land.html", c: "cat-property", i: "fa-city", n: "ফ্ল্যাট ও জমি", g: "flat-land" },
     { k: "cat.carRent.title", h: "transport.html", c: "cat-transport", i: "fa-car", n: "গাড়ি ভাড়া", g: "car-rent" },
-    { k: "cat.mechanic.title", h: "mechanic.html", c: "cat-repair", i: "fa-screwdriver-wrench", n: "বুয়া", g: "maid" },
+    { k: "cat.mechanic.title", h: "technician.html", c: "cat-repair", i: "fa-screwdriver-wrench", n: "টেকনিশিয়ান", g: "maid" },
     { k: "cat.busSchedule.title", h: "bus-schedule.html", c: "cat-transport", i: "fa-bus", n: "বাসের সময়সূচি", g: "bus-schedule" },
     { k: "cat.trainSchedule.title", h: "train-schedule.html", c: "cat-transport", i: "fa-train", n: "ট্রেনের সময়সূচি", g: "train-schedule" },
     { k: "cat.parlourSalon.title", h: "parlour-salon.html", c: "cat-beauty", i: "fa-scissors", n: "পার্লার ও সেলুন", g: "parlour-salon" },
@@ -40,7 +40,7 @@
     { k: "cat.nursery.title", h: "nursery.html", c: "cat-nature", i: "fa-seedling", n: "নার্সারি", g: "nursery" },
     { k: "cat.publicRep.title", h: "public-representative.html", c: "cat-gov", i: "fa-landmark", n: "জনপ্রতিনিধি", g: "public-representative" },
     { k: "cat.websiteLinks.title", h: "website-links.html", c: "cat-web", i: "fa-globe", n: "নিউজ পেপার", g: "newspaper" },
-    { k: "cat.handloom.title", h: "handloom.html", c: "cat-heritage", i: "fa-shirt", n: "ভাইরাল প্লেস", g: "viral-places" }
+    { k: "cat.handloom.title", h: "viral.html", c: "cat-heritage", i: "fa-location-dot", n: "ভাইরাল প্লেস", g: "viral-places" }
   ];
   var BY_KEY = {};
   CATS.forEach(function (c) { BY_KEY[c.k] = c; });

@@ -1,0 +1,145 @@
+/* ==========================================================================
+   থানা-পুলিশ পেজ (police.html) — dedicated styles
+   সাইটের শেয়ার্ড টোকেন ব্যবহার করে (--maroon, --gold, --cream, --ink,
+   --shadow-*, --radius, --line) যাতে বাকি সাইটের সাথে মিলে যায়। গঠন
+   fire-service.html-এর প্যাটার্ন অনুসরণ করে: ব্যাক বাটন → থানা চিপ রো → কার্ড।
+   ========================================================================== */
+
+.ps-chip-row{
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  scroll-snap-type: none;
+  padding: 4px 2px 12px;
+  margin: 4px 0 4px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.ps-chip-row::-webkit-scrollbar{ display: none; }
+
+.ps-chip{
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  border: 1.5px solid var(--maroon);
+  background: #fff;
+  color: var(--maroon-dark);
+  font-family: 'Hind Siliguri', sans-serif;
+  font-weight: 600;
+  font-size: 0.92rem;
+  padding: 9px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s ease, color 0.15s ease, transform 0.12s ease, box-shadow 0.15s ease;
+}
+.ps-chip:hover{ box-shadow: var(--shadow-sm); }
+.ps-chip:active{ transform: scale(0.96); }
+.ps-chip.is-active{
+  background: var(--maroon);
+  color: #fff;
+  box-shadow: var(--shadow-sm);
+}
+
+.ps-card{
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  padding: 0 0 16px;
+  margin-top: 6px;
+  overflow: hidden;
+}
+
+/* ---------- হেডার (ব্যাজ + বাংলাদেশ পুলিশ + থানার নাম) ---------- */
+.ps-head{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 18px 14px;
+  background: linear-gradient(135deg, #1c3a5e 0%, #0f2438 100%);
+  color: #fff;
+}
+.ps-badge{
+  flex: 0 0 auto;
+  width: 46px; height: 46px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.16);
+  border: 2px solid rgba(255,255,255,0.5);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem;
+  color: var(--gold);
+}
+.ps-org{
+  display: block;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: rgba(255,255,255,0.82);
+  margin-bottom: 2px;
+}
+.ps-headtext h3{
+  margin: 0;
+  font-size: 1.1rem;
+  color: #fff;
+  transition: opacity 0.15s ease;
+}
+.ps-card-fade{ opacity: 0; }
+
+/* ---------- কর্মকর্তাদের যোগাযোগ তালিকা ---------- */
+.ps-contact-list{ padding: 10px 16px 0; }
+.ps-contact-row{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px dashed var(--line);
+}
+.ps-contact-row:last-child{ border-bottom: none; }
+.ps-contact-icon{
+  flex: 0 0 auto;
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff;
+  font-size: 0.92rem;
+  background: #1c3a5e;
+}
+.ps-contact-text{ flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; }
+.ps-contact-label{ font-size: 0.8rem; color: var(--ink-soft); font-weight: 600; line-height: 1.35; }
+.ps-contact-num{
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: 0.01em;
+}
+.ps-call-round{
+  flex: 0 0 auto;
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: #3a2b06;
+  display: flex; align-items: center; justify-content: center;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: transform 0.12s ease;
+}
+.ps-call-round:active{ transform: scale(0.92); }
+
+/* ---------- যে থানার তথ্য এখনো যোগ হয়নি তার খালি-অবস্থা ---------- */
+.ps-empty{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+  padding: 30px 20px 20px;
+  color: var(--ink-soft);
+}
+.ps-empty i{ font-size: 1.6rem; color: var(--gold); }
+.ps-empty p{ margin: 0; font-size: 0.9rem; }
+
+@media (min-width: 640px){
+  .ps-chip{ font-size: 0.98rem; padding: 10px 18px; }
+  .ps-head{ padding: 20px 24px 18px; }
+  .ps-contact-list{ padding: 12px 24px 0; }
+}

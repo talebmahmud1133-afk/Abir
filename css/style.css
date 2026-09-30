@@ -1145,7 +1145,7 @@ img{ max-width: 100%; display: block; }
    and all links, IDs, and JS behaviour are untouched. */
 #homeCatGrid.cat-grid{
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  padding: 16px 16px 90px;
+  padding: 16px 16px 6px;
   gap: 16px;
 }
 #homeCatGrid .cat-card{
@@ -1824,7 +1824,6 @@ body:has(.amb-float-top) .global-fab-top{ display: none; }
   text-align: center;
   line-height: 1.2;
 }
-.cat-chip-icon{ font-size: 1.3rem; }
 .cat-chip.active{ background: var(--maroon); border-color: var(--maroon); color: #fff; }
 .cat-chip:hover{ border-color: var(--maroon); }
 
@@ -1909,122 +1908,194 @@ body[data-banner-category] .banner-slider-wrap{ margin-top: 0; }
   .banner-form{ grid-template-columns: 1fr; }
 }
 
-/* ---------- auth pages (লগইন / রেজিস্ট্রেশন) ---------- */
+/* ---------- auth pages (লগইন / রেজিস্ট্রেশন) — প্রিমিয়াম রিডিজাইন ---------- */
 .auth-body{
-  background: linear-gradient(160deg, var(--maroon) 0%, var(--maroon-dark) 55%, var(--indigo) 100%);
   min-height: 100vh;
+  min-height: 100dvh;
+  background-color: #062E1A;
+  background-image:
+    radial-gradient(120% 60% at 50% -10%, rgba(201,150,46,0.22) 0%, rgba(201,150,46,0) 55%),
+    radial-gradient(90% 50% at 100% 100%, rgba(20,128,63,0.45) 0%, rgba(20,128,63,0) 60%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56' viewBox='0 0 56 56'%3E%3Cg fill='none' stroke='%23F3E9D2' stroke-opacity='.05' stroke-width='1'%3E%3Cpath d='M28 4l24 24-24 24L4 28z'/%3E%3Cpath d='M28 16l12 12-12 12-12-12z'/%3E%3C/g%3E%3C/svg%3E"),
+    linear-gradient(165deg, #0E6B3A 0%, #084F2A 45%, #062E1A 100%);
+  background-attachment: fixed;
 }
 .auth-wrap{
   min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 30px 18px 24px;
+  padding: 32px 18px 28px;
 }
 .auth-logo{
-  width: 100px;
-  height: 100px;
+  position: relative;
+  width: 104px;
+  height: 104px;
   border-radius: 50%;
-  background: radial-gradient(circle at 30% 25%, #14803F 0%, var(--indigo) 72%);
-  border: 4px solid rgba(255,255,255,0.9);
+  background: radial-gradient(circle at 30% 22%, #1B9450 0%, #0A3D24 75%);
+  border: 3px solid #E9D9A6;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.28), 0 0 0 3px rgba(201,150,46,0.6);
-  margin-bottom: 22px;
+  box-shadow: 0 0 0 6px rgba(233,217,166,0.14), 0 14px 34px rgba(0,0,0,0.38), inset 0 2px 6px rgba(255,255,255,0.18);
+  margin-bottom: 14px;
+}
+.auth-logo::after{
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border-radius: 50%;
+  border: 1px solid rgba(243,233,210,0.35);
+  pointer-events: none;
 }
 .auth-logo .mark{
   font-family: 'Tiro Bangla', serif;
   color: #fff;
-  font-size: 1.65rem;
+  font-size: 1.85rem;
   line-height: 1;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
 .auth-logo .mark-sub{
-  color: var(--gold-soft);
-  font-size: 0.52rem;
-  letter-spacing: 1px;
-  margin-top: 3px;
+  color: #E9D9A6;
+  font-size: 0.5rem;
+  letter-spacing: 1.6px;
+  margin-top: 5px;
   white-space: nowrap;
 }
+.auth-tagline{
+  color: rgba(243,233,210,0.86);
+  font-size: 0.92rem;
+  text-align: center;
+  margin: 0 0 20px;
+  letter-spacing: 0.2px;
+}
 .auth-card{
+  position: relative;
   width: 100%;
-  max-width: 400px;
+  max-width: 410px;
   background: #fff;
-  border-radius: 18px;
-  padding: 20px 22px 18px;
-  box-shadow: 0 18px 40px rgba(0,0,0,0.22);
+  border-radius: 24px;
+  padding: 28px 24px 22px;
+  box-shadow: 0 30px 60px -12px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.6) inset;
+  overflow: hidden;
+}
+.auth-card::before{
+  content: "";
+  position: absolute;
+  left: 0; right: 0; top: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #C9962E 0%, #EBD592 50%, #C9962E 100%);
 }
 .auth-card h1{
   font-family: 'Tiro Bangla', serif;
-  font-size: 1.15rem;
+  font-size: 1.28rem;
+  font-weight: 400;
   text-align: center;
-  margin: 0 0 16px;
-  color: var(--ink);
+  margin: 0 0 22px;
+  color: #0A3D24;
+  line-height: 1.4;
 }
 .auth-field{
   display: flex;
   align-items: center;
-  gap: 10px;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  padding: 10px 14px;
-  margin-bottom: 11px;
-  background: #fff;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  gap: 12px;
+  border: 1.5px solid transparent;
+  border-radius: 14px;
+  padding: 6px 14px 6px 6px;
+  margin-bottom: 13px;
+  background: #F3F6F1;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
 }
+.auth-field:hover{ background: #EEF3EB; }
 .auth-field:focus-within{
-  border-color: var(--gold);
-  box-shadow: 0 0 0 3px rgba(201,150,46,0.14);
+  background: #fff;
+  border-color: var(--maroon);
+  box-shadow: 0 0 0 4px rgba(14,107,58,0.12);
 }
-.auth-field .auth-icon{ font-size: 1.1rem; color: var(--ink-soft); flex-shrink: 0; }
+.auth-field .auth-icon{
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  color: var(--maroon);
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(10,61,36,0.1);
+  flex-shrink: 0;
+  transition: background 0.18s ease, color 0.18s ease;
+}
+.auth-field:focus-within .auth-icon{ background: var(--maroon); color: #fff; }
 .auth-field input{
   border: none;
   outline: none;
   flex: 1;
   min-width: 0;
+  height: 40px;
   font-family: 'Hind Siliguri', sans-serif;
   font-size: 1rem;
   color: var(--ink);
   background: transparent;
 }
-.auth-field input::placeholder{ color: #9a8f86; }
+.auth-field input:focus-visible{ outline: none; }
+.auth-field input::placeholder{ color: #8d9a92; }
 .auth-field .auth-eye{
   border: none;
   background: none;
   cursor: pointer;
-  font-size: 1.1rem;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  font-size: 1rem;
   color: var(--ink-soft);
   padding: 0;
   flex-shrink: 0;
 }
+.auth-field .auth-eye:hover{ background: rgba(14,107,58,0.08); color: var(--maroon); }
 .auth-forgot{
   display: block;
   text-align: right;
-  font-size: 0.84rem;
+  font-size: 0.86rem;
+  font-weight: 500;
   color: var(--maroon);
-  margin: -2px 0 14px;
+  margin: 0 2px 18px;
   text-decoration: none;
 }
-.auth-forgot:hover{ text-decoration: underline; }
+.auth-forgot:hover{ text-decoration: underline; text-underline-offset: 3px; }
 .auth-btn{
   display: block;
   width: 100%;
   border: none;
-  border-radius: 12px;
-  padding: 13px;
+  border-radius: 14px;
+  padding: 15px;
   font-family: 'Hind Siliguri', sans-serif;
-  font-size: 1.02rem;
+  font-size: 1.06rem;
   font-weight: 600;
+  letter-spacing: 0.2px;
   color: #fff;
   cursor: pointer;
-  background: linear-gradient(90deg, var(--maroon) 0%, var(--indigo) 100%);
-  margin-bottom: 12px;
-  box-shadow: var(--shadow-sm);
+  background: linear-gradient(135deg, #14803F 0%, #0A3D24 100%);
+  margin-bottom: 14px;
+  box-shadow: 0 10px 22px -6px rgba(10,61,36,0.55), inset 0 1px 0 rgba(255,255,255,0.22);
+  transition: transform 0.12s ease, box-shadow 0.2s ease, filter 0.2s ease;
 }
-.auth-btn:hover{ filter: brightness(1.06); box-shadow: var(--shadow-md); }
+.auth-btn:hover{ filter: brightness(1.08); box-shadow: 0 14px 26px -6px rgba(10,61,36,0.6), inset 0 1px 0 rgba(255,255,255,0.22); }
+.auth-btn:active{ transform: translateY(1px) scale(0.99); }
 .auth-btn:disabled{ opacity: 0.6; cursor: not-allowed; }
+.auth-divider{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 4px 0 14px;
+  color: #8d9a92;
+  font-size: 0.8rem;
+}
+.auth-divider::before,
+.auth-divider::after{ content: ""; flex: 1; height: 1px; background: rgba(34,48,58,0.12); }
 .auth-btn-outline{
   display: flex;
   align-items: center;
@@ -2032,94 +2103,95 @@ body[data-banner-category] .banner-slider-wrap{ margin-top: 0; }
   gap: 6px;
   flex-wrap: wrap;
   width: 100%;
-  border: 1.5px solid var(--maroon);
-  border-radius: 12px;
-  padding: 11px;
+  border: 1.5px solid rgba(14,107,58,0.35);
+  border-radius: 14px;
+  padding: 13px;
   background: #fff;
   color: var(--ink);
   font-family: 'Hind Siliguri', sans-serif;
-  font-size: 0.95rem;
+  font-size: 0.96rem;
   text-decoration: none;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   cursor: pointer;
-  transition: background 0.15s ease, transform 0.12s ease;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.12s ease;
 }
-.auth-btn-outline:hover{ background: var(--cream); }
+.auth-btn-outline:hover{ background: #F3F6F1; border-color: var(--maroon); }
 .auth-btn-outline:active{ transform: scale(0.98); }
-.auth-btn-outline strong{ color: var(--maroon); }
+.auth-btn-outline strong{ color: var(--maroon); font-weight: 700; }
 .auth-btn-guest{
   display: block;
   width: 100%;
   text-align: center;
   border: none;
-  border-radius: 12px;
-  padding: 13px;
+  border-radius: 14px;
+  padding: 12px;
   font-family: 'Hind Siliguri', sans-serif;
-  font-size: 1rem;
-  color: #fff;
+  font-size: 0.95rem;
+  color: var(--ink-soft);
   text-decoration: none;
   cursor: pointer;
-  background: linear-gradient(90deg, var(--indigo) 0%, var(--maroon) 100%);
-  transition: filter 0.15s ease, transform 0.12s ease;
+  background: transparent;
+  transition: color 0.15s ease, background 0.15s ease, transform 0.12s ease;
 }
-.auth-btn-guest:hover{ filter: brightness(1.06); }
+.auth-btn-guest:hover{ color: var(--maroon); background: rgba(14,107,58,0.06); }
 .auth-btn-guest:active{ transform: scale(0.98); }
 .auth-msg{
   text-align: center;
   font-size: 0.88rem;
-  min-height: 1.2em;
-  margin: -4px 0 10px;
-  color: #c0392b;
-  border-radius: 10px;
-  transition: background-color 0.2s ease, box-shadow 0.2s ease, padding 0.2s ease;
+  min-height: 0;
+  margin: 0 0 12px;
+  color: #b3261e;
+  border-radius: 12px;
 }
 .auth-msg:not(:empty){
-  padding: 9px 14px;
+  padding: 10px 14px;
   background: #fdecec;
-  border: 1px solid rgba(192,57,43,0.18);
-  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(179,38,30,0.18);
   animation: authMsgIn 0.25s ease;
 }
 .auth-msg.ok{ color: var(--maroon-dark); }
 .auth-msg.ok:not(:empty){
   background: #e7f7ef;
-  border-color: rgba(14,107,58,0.18);
+  border-color: rgba(14,107,58,0.2);
 }
 @keyframes authMsgIn{
   from{ opacity: 0; transform: translateY(-4px); }
   to{ opacity: 1; transform: translateY(0); }
 }
-@media (max-width: 380px){
-  .auth-card{ padding: 18px 16px 16px; }
+@media (prefers-reduced-motion: reduce){
+  .auth-msg:not(:empty){ animation: none; }
+  .auth-btn, .auth-btn-outline, .auth-btn-guest, .auth-field{ transition: none; }
 }
-@media (max-height: 700px) and (max-width: 600px){
+@media (max-width: 380px){
+  .auth-card{ padding: 24px 16px 18px; border-radius: 20px; }
+}
+@media (max-height: 720px) and (max-width: 600px){
   .auth-wrap{ justify-content: flex-start; padding-top: 22px; }
 }
-
-/* ট্যাবলেট: মাঝারি আকারে বড় করা */
 @media (min-width: 601px) and (max-width: 1024px){
   .auth-wrap{ padding: 48px 24px; }
-  .auth-logo{ width: 120px; height: 120px; margin-bottom: 26px; }
-  .auth-logo .mark{ font-size: 2rem; }
-  .auth-logo .mark-sub{ font-size: 0.62rem; letter-spacing: 1.5px; }
-  .auth-card{ max-width: 440px; padding: 30px 30px 26px; }
-  .auth-card h1{ font-size: 1.3rem; margin-bottom: 20px; }
-  .auth-field{ padding: 13px 16px; }
-  .auth-btn, .auth-btn-outline, .auth-btn-guest{ padding: 14px; }
+  .auth-logo{ width: 118px; height: 118px; }
+  .auth-logo .mark{ font-size: 2.1rem; }
+  .auth-card{ max-width: 450px; padding: 34px 32px 26px; }
+  .auth-card h1{ font-size: 1.4rem; }
 }
-
-/* ডেস্কটপ: আরও বড় ও প্রশস্ত, স্ক্রিনের মাঝখানে সুন্দরভাবে বসানো */
 @media (min-width: 1025px){
   .auth-wrap{ padding: 60px 24px; }
-  .auth-logo{ width: 132px; height: 132px; border-width: 5px; margin-bottom: 30px; }
-  .auth-logo .mark{ font-size: 2.2rem; }
-  .auth-logo .mark-sub{ font-size: 0.68rem; letter-spacing: 2px; }
-  .auth-card{ max-width: 460px; padding: 36px 34px 30px; }
-  .auth-card h1{ font-size: 1.45rem; margin-bottom: 24px; }
-  .auth-field{ padding: 14px 18px; margin-bottom: 14px; }
-  .auth-field input{ font-size: 1.02rem; }
-  .auth-btn, .auth-btn-outline, .auth-btn-guest{ padding: 15px; font-size: 1.02rem; }
+  .auth-logo{ width: 128px; height: 128px; }
+  .auth-logo .mark{ font-size: 2.3rem; }
+  .auth-logo .mark-sub{ font-size: 0.6rem; }
+  .auth-card{ max-width: 460px; padding: 38px 36px 30px; }
+  .auth-card h1{ font-size: 1.5rem; margin-bottom: 26px; }
 }
+
+
+/* Canva লোগো: assets/logo/tangail-logo.png থাকলে সেটাই দেখাবে, না থাকলে আগের ব্যাজ */
+.auth-logo .auth-logo-img{ display: none; }
+.auth-logo.logo-ok{ background: none; border: none; box-shadow: none; }
+.auth-logo.logo-ok::after{ display: none; }
+.auth-logo.logo-ok .mark, .auth-logo.logo-ok .mark-sub{ display: none; }
+.auth-logo.logo-ok .auth-logo-img{ display: block; width: 100%; height: 100%; border-radius: 50%; object-fit: cover; box-shadow: 0 14px 34px rgba(0,0,0,0.38); }
+.auth-logo.logo-ok{ width: 116px; height: 116px; }
 
 /* ---------- রক্তদাতা বিভাগ পেজ (blood-donors.html) ---------- */
 .donor-all-link-wrap{ padding: 14px 0 0; }
@@ -2708,7 +2780,7 @@ body[data-banner-category="blood-donors"] .list-back-topbar{
 }
 
 /* ================= হোমপেজে সাম্প্রতিক পোস্ট প্রিভিউ ================= */
-.home-posts-section{ margin-top: 30px; padding-bottom: 20px; }
+.home-posts-section{ margin-top: 14px; padding-bottom: 20px; }
 .home-posts-head{ display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
 .home-posts-head h2{ font-size: 1.15rem; margin: 0; display: flex; align-items: center; gap: 8px; }
 .home-posts-viewall{ font-size: 0.88rem; color: var(--maroon-dark); font-weight: 600; white-space: nowrap; }
@@ -3775,3 +3847,97 @@ body.home-page .app-header .icon-btn[href="notifications.html"]{
 .tz-order-reset{ background: #fff; color: var(--maroon); }
 .tz-order-done{ background: var(--maroon); color: #fff; }
 @media (prefers-reduced-motion: reduce){ #homeCatGrid.is-arranging .cat-card{ animation: none; } }
+
+/* ---- ক্যাটাগরি কার্ড (v201) ----
+   ছবি যেমন ছিল তেমনই (উপর থেকে শুরু, বর্গাকার)। লেখা ছবির ঠিক নিচেই উপরে
+   বসে; কার্ডের নিচে বাড়তি ফাঁকা জায়গা নেই — কার্ডের উচ্চতা = ছবি + লেখা + অল্প প্যাডিং।
+   একই সারির কার্ডগুলো পাশাপাশি সমান উচ্চতার থাকে (grid stretch), সারিগুলো নিজের মাপে। */
+#homeCatGrid.cat-grid,
+.pf-fav-grid{
+  align-items: stretch;
+  grid-auto-rows: auto;
+}
+#homeCatGrid .cat-card,
+.pf-fav-grid .cat-card{
+  justify-content: flex-start;
+  align-self: stretch;
+  height: auto;
+  padding: 0 0 10px;
+}
+#homeCatGrid .cat-card .cat-thumb,
+.pf-fav-grid .cat-card .cat-thumb{
+  flex: 0 0 auto;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  margin: 0;
+}
+#homeCatGrid .cat-card .cat-thumb img,
+.pf-fav-grid .cat-card .cat-thumb img{
+  object-fit: cover;
+  object-position: center;
+}
+#homeCatGrid .cat-card h3,
+.pf-fav-grid .cat-card h3{
+  flex: 0 0 auto;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 0;
+  margin: 0;
+  padding: 8px 8px 0;
+  display: block;
+  text-align: center;
+  overflow: visible;
+  -webkit-line-clamp: unset;
+  text-wrap: balance;
+}
+
+/* প্রোফাইল বায়ো: ২ লাইন + "বিস্তারিত" (js/bio-clamp.js) */
+.bio-more{
+  display: inline; margin: 0; padding: 0 2px; border: 0; background: none;
+  font: inherit; font-weight: 700; color: var(--maroon);
+  white-space: nowrap; cursor: pointer; -webkit-tap-highlight-color: transparent;
+}
+.bio-more:focus-visible{ outline: 2px solid var(--maroon); outline-offset: 2px; border-radius: 3px; }
+
+/* ---- ডেস্কটপ সারিবদ্ধতা (v228) ----
+   ৬৪১px-এর উপরে হোমপেজের ক্যাটাগরি গ্রিড, সার্চ ও সাম্প্রতিক পোস্ট আর 100vw ফুল-ব্লিড নয় —
+   .wrap-এর কন্টেন্ট প্রস্থেই থাকে, তাই "ক্যাটাগরি"/"সাম্প্রতিক পোস্ট" শিরোনাম, কার্ডের গ্রিড,
+   "নতুন পোস্ট করুন" বক্স ও ফুটারের বাম-ডান কিনারা একই সরলরেখায় মেলে। ব্যানার ও নোটিশ বার আগের মতো ফুল-ব্লিড। */
+@media (min-width: 641px){
+  body.home-page #homeCatGrid.cat-grid,
+  body.home-page .compact-search,
+  body.home-page .home-posts-preview{
+    width: 100%;
+    max-width: 100%;
+    left: 0;
+    transform: none;
+  }
+  body.home-page #homeCatGrid.cat-grid{ padding-left: 0; padding-right: 0; }
+  body.home-page .compact-search{ padding-left: 0; padding-right: 0; }
+  body.home-page .home-posts-preview{ border-radius: 14px; padding: 14px; }
+}
+
+/* ---- ফুটার তৃতীয় কলাম: যোগাযোগ (v228) ---- */
+.footer-contact{ list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+.footer-contact li{ display: flex; align-items: flex-start; gap: 10px; color: #c7c4bc; font-size: 0.92rem; }
+.footer-contact i{ color: var(--gold-soft); width: 16px; margin-top: 4px; text-align: center; flex-shrink: 0; }
+.footer-contact a{ color: #c7c4bc; transition: color 0.15s ease; }
+.footer-contact a:hover{ color: #fff; }
+
+
+/* ---------- ফর্মে "আমার লোকেশন যোগ করুন" বাটন (js/location-btn.js) — রং আসে --geo-accent থেকে ---------- */
+.geo-loc-btn{
+  --geo-accent: #0B6B8C;
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  margin-top: 8px; min-height: 42px; padding: 8px 14px;
+  border: 1.5px solid var(--geo-accent); border-radius: 10px;
+  background: #fff; color: var(--geo-accent);
+  font-family: inherit; font-size: 0.92rem; font-weight: 700; cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.geo-loc-btn:hover{ filter: brightness(0.96); }
+.geo-loc-btn:active{ transform: scale(0.98); }
+.geo-loc-btn:disabled{ opacity: 0.65; cursor: default; }
+.geo-loc-note{ margin: 6px 0 0; font-size: 0.82rem; color: #1a7f37; line-height: 1.4; }
+.geo-loc-note[hidden]{ display: none; }
+.geo-loc-note.is-err{ color: #b42318; }
